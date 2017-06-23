@@ -1,0 +1,30 @@
+﻿#Race three information
+track,txSquare
+laps,10
+#car info,startx, starty, maxspeed, skid offset left/right, skid distance
+car,1310,120,480,37,120
+car,1310,200,410,37,120
+car,1210,120,480,37,120
+car,1210,200,410,37,120
+car,1110,120,480,37,120
+car,1110,200,410,37,120
+#end of line  #abort processing file at this point please - look for #with end straight after it in loader loop
+car,1010,120,480,37,120
+car,1010,200,410,37,120
+car,910,120,480,37,120
+car,910,200,410,37,120
+car,810,120,480,37,120
+car,810,200,410,37,120
+car,710,120,480,37,120
+car,710,200,410,37,120
+car,610,120,480,37,120
+car,610,200,410,37,120
+car,510,120,480,37,120
+car,510,200,410,37,120
+car,410,120,480,37,120
+car,410,200,410,37,120
+car,310,120,480,37,120
+car,310,200,410,37,120
+car,210,120,480,37,120
+car,210,200,410,37,120
+end of line  #abort processing file at this point please

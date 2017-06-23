@@ -1,0 +1,39 @@
+H:\1213\0 templates\Engine7Template\Template\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\0Eric\1213 Applied ICT and Computing\G056 - U17\Engine7Template\Template\Content\obj\x86\Debug\Content.contentprojResolveAssemblyReference.cache
+D:\0Eric\1213 Applied ICT and Computing\Engine Development\Linked to latest\Template\Content\obj\x86\Debug\Content.contentprojResolveAssemblyReference.cache
+D:\0Eric\1314\Engine Development\Linked to latest\Template\Content\obj\x86\Debug\Content.contentprojResolveAssemblyReference.cache
+D:\0Eric\1314\Engine Development\templates\XNA Engine start template\Template\Content\obj\x86\Debug\Content.contentprojResolveAssemblyReference.cache
+D:\0Eric\DropBox\Engine Development\hot link XNA Engine start template July 2013\Template\Content\obj\x86\Debug\Content.contentprojResolveAssemblyReference.cache
+C:\Users\ebarwell\Dropbox\Engine Development\hot link XNA Engine start template July 2013\Template\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\0Eric\DropBox\Engine Development\Dungeon work\Template\Content\obj\x86\Debug\Content.contentprojResolveAssemblyReference.cache
+C:\Users\ebarwell\Dropbox\Engine Development\Dungeon work\Template\Content\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\0Eric\DropBox\Engine Development\Tilemap work\Template\Content\obj\x86\Debug\Content.contentprojResolveAssemblyReference.cache
+D:\0Eric\DropBox\Engine Development\NewTemplateFeb2014\Template\Content\obj\x86\Debug\Content.contentprojResolveAssemblyReference.cache
+D:\0Eric\DropBox\Engine Development\Asteroids Sample game\Template\Content\obj\x86\Debug\Content.contentprojResolveAssemblyReference.cache
+D:\0Eric\DropBox\2014-2015\Code development\Base template July 2014\Template\Content\obj\x86\Debug\Content.contentprojResolveAssemblyReference.cache
+D:\0Eric\DropBox\2014-2015\Code development\Sept2014 template\Template\Content\obj\x86\Debug\Content.contentprojResolveAssemblyReference.cache
+D:\0Eric\DropBox\2014-2015\Code development\October2014 template\Template\Content\obj\x86\Debug\Content.contentprojResolveAssemblyReference.cache
+D:\0Eric\Dropbox\2014-2015\Code development\video development\October2014 template\Template\Content\obj\x86\Debug\Content.contentprojResolveAssemblyReference.cache
+D:\0Eric\Dropbox\2014-2015\Code development\video development\October2014 template - Simple work\Template\Content\obj\x86\Debug\Content.contentprojResolveAssemblyReference.cache
+D:\0Eric\DropBox\2014-2015\Code development\Plotting template\Template\Content\obj\x86\Debug\Content.contentprojResolveAssemblyReference.cache
+D:\0Eric\DropBox\2014-2015\Code development\Overlay Engine Work 24\Template\Content\obj\x86\Debug\Content.contentprojResolveAssemblyReference.cache
+D:\OneDrive\WORK\2014-2015\Code development\Overlay Engine Work 24\Template\Content\obj\x86\Debug\Content.contentprojResolveAssemblyReference.cache
+D:\OneDrive\Coding general\New template\Template\Content\obj\x86\Debug\Content.contentprojResolveAssemblyReference.cache
+D:\OneDrive\Coding general\Nibblerish\Template\Content\obj\x86\Debug\Content.contentprojResolveAssemblyReference.cache
+D:\Nibblerish\Template\Content\obj\x86\Debug\Content.contentprojResolveAssemblyReference.cache
+H:\1415\Nibblerish\Template\Content\obj\x86\Debug\Content.contentprojResolveAssemblyReference.cache
+D:\OneDrive\Coding general\VAC THANX\Template\Content\obj\x86\Debug\Content.contentprojResolveAssemblyReference.cache
+D:\OneDrive\Coding general\PixelMapRacer\Template\Content\obj\x86\Debug\Content.contentprojResolveAssemblyReference.cache
+D:\OneDrive\Coding general\PacDizzytesting\Template\Content\obj\x86\Debug\Content.contentprojResolveAssemblyReference.cache
+D:\OneDrive\Coding general\SpinPacDizzy\Template\Content\obj\x86\Debug\Content.contentprojResolveAssemblyReference.cache
+H:\1415\CODING GENERAL\SpinPacDizzy\Template\Content\obj\x86\Debug\Content.contentprojResolveAssemblyReference.cache
+D:\OneDrive\Coding general\SpinPacDizzyWorkOne\Template\Content\obj\x86\Debug\Content.contentprojResolveAssemblyReference.cache
+D:\OneDrive\Coding general\SpinPacDizzy Top down renderer\Template\Content\obj\x86\Debug\Content.contentprojResolveAssemblyReference.cache
+D:\OneDrive\Coding general\Template June 2015\Template\Content\obj\x86\Debug\Content.contentprojResolveAssemblyReference.cache
+D:\OneDrive\Coding general\Pixel map racer in template\Template\Content\obj\x86\Debug\Content.contentprojResolveAssemblyReference.cache
+D:\OneDrive\Coding general\0working with new Engine 7-3\PAC-MAN\Template\Content\obj\x86\Debug\Content.contentprojResolveAssemblyReference.cache
+D:\OneDrive\Coding general\0working with new Engine 7-3\TemplateJuly2016\Template\Content\obj\x86\Debug\Content.contentprojResolveAssemblyReference.cache
+D:\OneDrive\Coding general\0working with new Engine 7-3\BTEC Shooter\Template\Content\obj\x86\Debug\Content.contentprojResolveAssemblyReference.cache
+D:\OneDrive\Coding general\0working with new Engine 7-3\Template OCT 2016\Template\Content\obj\x86\Debug\Content.contentprojResolveAssemblyReference.cache
+V:\!!Computer Science AND Game programming\Game Resources\Template OCT 2016\Template\Content\obj\x86\Debug\Content.contentprojResolveAssemblyReference.cache
+H:\GitHubVisualStudio\Ships\Template\Content\obj\x86\Debug\Content.contentprojResolveAssemblyReference.cache

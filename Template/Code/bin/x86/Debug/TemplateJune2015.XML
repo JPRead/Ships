@@ -1,0 +1,413 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TemplateJune2015</name>
+    </assembly>
+    <members>
+        <member name="T:Template.ScoreEntry">
+            <summary>
+            generates the score entry menu and associated controls
+            </summary>
+        </member>
+        <member name="F:Template.ScoreEntry.evControl">
+            <summary>
+            event for controller
+            </summary>
+        </member>
+        <member name="F:Template.ScoreEntry.tiDelay">
+            <summary>
+            input delay timer
+            </summary>
+        </member>
+        <member name="F:Template.ScoreEntry.initials">
+            <summary>
+            storage for intials
+            </summary>
+        </member>
+        <member name="M:Template.ScoreEntry.#ctor">
+            <summary>
+            constructor
+            </summary>
+        </member>
+        <member name="M:Template.ScoreEntry.Controls">
+            <summary>
+            input controls for the menu
+            </summary>
+        </member>
+        <member name="M:Template.ScoreEntry.ChoiceMade">
+            <summary>
+            activated if selection is activated
+            </summary>
+        </member>
+        <member name="T:Template.GM">
+            <summary>
+            holds all game assets and code to set up those assets
+            </summary>
+            <summary>
+            Contains the code that setsup and closes the system
+            </summary>
+            <summary>
+            This is the main type for your game
+            </summary>
+        </member>
+        <member name="F:Template.GM.fileM">
+            <summary>
+            organises and saves files in the given folder
+            </summary>
+        </member>
+        <member name="F:Template.GM.THROTTLE">
+            <summary>
+            determines if game is being throttled (DEFAULT), 
+            this links rendering to the refresh rate of the monitor (which prevents tearing)
+            </summary>
+        </member>
+        <member name="F:Template.GM.UPDATE_RATE">
+            <summary>
+            how many times a second do you want the internal clocks and logic to operate at defaults to 100
+            </summary>
+        </member>
+        <member name="F:Template.GM.screenSize">
+            <summary>
+            reference to screen size - smaller is better as this will be quickler
+            </summary>
+        </member>
+        <member name="F:Template.GM.scoring">
+            <summary>
+            holds scores
+            </summary>
+        </member>
+        <member name="F:Template.GM.active">
+            <summary>
+            holds currently active container
+            </summary>
+        </member>
+        <member name="F:Template.GM.txSprite">
+            <summary>
+            holds the example sprite
+            </summary>
+        </member>
+        <member name="M:Template.GM.StartPreLoader">
+            <summary>
+            specifies what assets are being loaded
+            </summary>
+        </member>
+        <member name="M:Template.GM.Setup">
+            <summary>
+            deals with creation of other assets once all textures and sounds are loaded
+            run after all assets have been loaded
+            </summary>
+        </member>
+        <member name="M:Template.GM.CreateTracks">
+            <summary>
+            create any track definitions for the game
+            </summary>
+        </member>
+        <member name="M:Template.GM.StartSystem">
+            <summary>
+            starts the game off with the title screen
+            </summary>
+        </member>
+        <member name="M:Template.GM.Start">
+            <summary>
+            start the system now everything is loaded
+            </summary>
+        </member>
+        <member name="M:Template.GM.LoadScore(Engine7.ReadHelper)">
+            <summary>
+            load score table when system retrieves file
+            </summary>
+            <param name="r">helper with file data</param>
+        </member>
+        <member name="M:Template.GM.ShutDown">
+            <summary>
+            cleanly exits the game saving data to files
+            </summary>
+        </member>
+        <member name="F:Template.GM.graphics">
+            <summary>
+            Creates reference to the graphics device
+            </summary>
+        </member>
+        <member name="F:Template.GM.engineM">
+            <summary>
+            the engine manager
+            </summary>
+        </member>
+        <member name="F:Template.GM.tileMapM">
+            <summary>
+            the tilemap manager
+            </summary>
+        </member>
+        <member name="F:Template.GM.menuM">
+            <summary>
+            handles menu display and activation
+            </summary>
+        </member>
+        <member name="F:Template.GM.eventM">
+            <summary>
+            the event manager
+            </summary>
+        </member>
+        <member name="F:Template.GM.textM">
+            <summary>
+            the text manager
+            </summary>
+        </member>
+        <member name="F:Template.GM.audioM">
+            <summary>
+            the audio manager
+            </summary>
+        </member>
+        <member name="F:Template.GM.inputM">
+            <summary>
+            the input manager
+            </summary>
+        </member>
+        <member name="F:Template.GM.loadM">
+            <summary>
+            handles loading assets in the background
+            </summary>
+        </member>
+        <member name="M:Template.GM.#ctor">
+            <summary>
+            constructs the basic game elements
+            </summary>
+        </member>
+        <member name="M:Template.GM.CheckAssemblyDetails">
+            <summary>
+            determines if basic template settings have been changed or not
+            throwing exceptions if they have not
+            </summary>
+        </member>
+        <member name="M:Template.GM.Initialize">
+            <summary>
+            Allows the game to perform any initialization it needs to before starting to run.
+            This is where it can query for any required services and load any non-graphic
+            related content.  Calling base.Initialize will enumerate through any components
+            and initialize them as well.
+            </summary>
+        </member>
+        <member name="M:Template.GM.GM_Exiting(System.Object,System.EventArgs)">
+            <summary>
+            called when game is shutting down
+            </summary>
+            <param name="sender">the sender of the exit request</param>
+            <param name="e">arguments to go along with the closing event</param>
+        </member>
+        <member name="M:Template.GM.CloseSystem">
+            <summary>
+            closes the system down formally
+            </summary>
+        </member>
+        <member name="F:Template.GM.gameState">
+            <summary>
+            holds current state of game, starts with LOAD_UP
+            </summary>
+        </member>
+        <member name="F:Template.GM.r">
+            <summary>
+            a random number generator
+            </summary>
+        </member>
+        <member name="F:Template.GM.startThisState">
+            <summary>
+            holds the state the game is in
+            </summary>
+        </member>
+        <member name="M:Template.GM.GameLoop">
+            <summary>
+            perform general logic actions
+            </summary>
+        </member>
+        <member name="M:Template.GM.ProcessStateChange">
+            <summary>
+            processes game state change requests
+            </summary>
+        </member>
+        <member name="M:Template.GM.LoadingLogic">
+            <summary>
+            performs logic while loading assets
+            </summary>
+        </member>
+        <member name="M:Template.GM.ClearAllButSprites">
+            <summary>
+            removes/disables or stops all managed assets except sprites
+            </summary>
+        </member>
+        <member name="M:Template.GM.ClearAllManagedObjects">
+            <summary>
+            removes/disables or stops all managed assets
+            </summary>
+        </member>
+        <member name="M:Template.GM.ClearSounds">
+            <summary>
+            stops all sounds playing
+            </summary>
+        </member>
+        <member name="M:Template.GM.ClearAllButSound">
+            <summary>
+            removes/disables everything but music and sound effects
+            </summary>
+        </member>
+        <member name="M:Template.GM.ClearAllButMusic">
+            <summary>
+            removes/disables everything but the current music playing
+            </summary>
+        </member>
+        <member name="M:Template.GM.LoadContent">
+            <summary>
+            LoadContent will be called once per game and is the place to load
+            all of your content.
+            </summary>
+        </member>
+        <member name="M:Template.GM.UnloadContent">
+            <summary>
+            UnloadContent will be called once per game and is the place to unload
+            all content.
+            </summary>
+        </member>
+        <member name="M:Template.GM.Update(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            Allows the game to run logic such as updating the world,
+            checking for collisions, gathering input, and playing audio.
+            </summary>
+            <param name="gameTime">Provides a snapshot of timing values.</param>
+        </member>
+        <member name="M:Template.GM.Draw(Microsoft.Xna.Framework.GameTime)">
+            <summary>
+            This is called when the game should draw itself.
+            </summary>
+            <param name="gameTime">Provides a snapshot of timing values.</param>
+        </member>
+        <member name="T:Template.BasicSetup">
+            <summary>
+            hold base settings here for items needed during all containers
+            </summary>=
+        </member>
+        <member name="F:Template.BasicSetup.evLogic">
+            <summary>
+            holds the logic event
+            </summary>
+        </member>
+        <member name="M:Template.BasicSetup.#ctor(System.Boolean)">
+            <summary>
+            contains items that all containers need to activate
+            </summary>
+        </member>
+        <member name="M:Template.BasicSetup.Logic">
+            <summary>
+            default logic for the container. You need to override this method
+            </summary>
+        </member>
+        <member name="T:Template.ScoreSystem">
+            <summary>
+            holds highscores
+            </summary>
+        </member>
+        <member name="M:Template.ScoreSystem.#ctor">
+            <summary>
+            holds the high score table
+            </summary>
+        </member>
+        <member name="M:Template.ScoreSystem.Default">
+            <summary>
+            returns a default set of scores
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Template.ScoreSystem.NewScore(System.Int32,System.String)">
+            <summary>
+            adds a new score to the score table
+            </summary>
+            <param name="score">time to add</param>
+            <param name="name">name of player</param>
+        </member>
+        <member name="M:Template.ScoreSystem.ShowScores">
+            <summary>
+            displays the scores using sprites
+            </summary>
+        </member>
+        <member name="T:Template.Cursor">
+            <summary>
+            defines a cursor sprite
+            </summary>
+        </member>
+        <member name="F:Template.Cursor.evLogic">
+            <summary>
+            an event to control operational logic for this sprite
+            </summary>
+        </member>
+        <member name="F:Template.Cursor.mode">
+            <summary>
+            0 for default
+            </summary>
+        </member>
+        <member name="M:Template.Cursor.CleanUp">
+            <summary>
+            make sure the event is removed when this object is destroyed
+            </summary>
+        </member>
+        <member name="M:Template.Cursor.#ctor(Microsoft.Xna.Framework.Point)">
+            <summary>
+            allows a starting position to be specified
+            </summary>
+            <param name="start">the start position</param>
+        </member>
+        <member name="M:Template.Cursor.Logic">
+            <summary>
+            update logic that needs to be performed
+            </summary>
+        </member>
+        <member name="M:Template.Cursor.Reset(Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            set the new position of the cursor
+            </summary>
+            <param name="newPosition">position to set cursor</param>
+        </member>
+        <member name="T:Template.ExtraMessageTypes">
+            <summary>
+            defines a message types
+            </summary>
+        </member>
+        <member name="F:Template.ExtraMessageTypes.BulletDestroyed">
+            <summary>
+            no message data sent when a player bullet is destroyed
+            </summary>
+        </member>
+        <member name="F:Template.ExtraMessageTypes.PlayerDestroyed">
+            <summary>
+            no message data sent when player is destroyed
+            </summary>
+        </member>
+        <member name="F:Template.ExtraMessageTypes.EnemyDestroyed">
+            <summary>
+            object value contains an integer for score value of enemy
+            </summary>
+        </member>
+        <member name="F:Template.ExtraMessageTypes.NameEntryComplete">
+            <summary>
+            when score is finished, initials are stored in Object which needs casting to (string)
+            </summary>
+        </member>
+        <member name="M:Template.Program.Main(System.String[])">
+            <summary>
+            The main entry point for the application.
+            </summary>
+        </member>
+        <member name="T:Template.Title.TitleSetup">
+            <summary>
+            generates graphs for display
+            </summary>
+        </member>
+        <member name="M:Template.Title.TitleSetup.#ctor">
+            <summary>
+            constructor
+            </summary>
+        </member>
+        <member name="M:Template.Title.TitleSetup.Logic">
+            <summary>
+            
+            </summary>
+        </member>
+    </members>
+</doc>

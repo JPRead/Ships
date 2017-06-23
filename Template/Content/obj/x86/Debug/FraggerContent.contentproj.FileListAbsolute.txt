@@ -1,0 +1,4 @@
+C:\0eric\1213 Applied ICT and Computing\Development walkthroughs\Fragger\Fragger\FraggerContent\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\0eric\1213 Applied ICT and Computing\Development walkthroughs\Fragger - START TEMPLATE\Fragger\FraggerContent\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\0Eric\1213 Applied ICT and Computing\Development walkthroughs\Tester\Fragger\FraggerContent\obj\x86\Debug\FraggerContent.contentprojResolveAssemblyReference.cache
+D:\0Eric\1213 Applied ICT and Computing\Engine Development\Tester\Fragger\FraggerContent\obj\x86\Debug\FraggerContent.contentprojResolveAssemblyReference.cache

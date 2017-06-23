@@ -1,0 +1,15 @@
+H:\GitHubVisualStudio\Ships\Template\Code\bin\x86\Debug\LevelData\Race3 example data file.txt
+H:\GitHubVisualStudio\Ships\Template\Code\bin\x86\Debug\Content\Graphics\Sprites.xnb
+H:\GitHubVisualStudio\Ships\Template\Code\bin\x86\Debug\Content\Audio\explode.xnb
+H:\GitHubVisualStudio\Ships\Template\Code\bin\x86\Debug\Content\Audio\extra man.xnb
+H:\GitHubVisualStudio\Ships\Template\Code\bin\x86\Debug\Content\Audio\fire.xnb
+H:\GitHubVisualStudio\Ships\Template\Code\bin\x86\Debug\Content\Audio\fruit.xnb
+H:\GitHubVisualStudio\Ships\Template\Code\bin\x86\Debug\TemplateJune2015.XML
+H:\GitHubVisualStudio\Ships\Template\Code\bin\x86\Debug\TemplateJune2015.exe
+H:\GitHubVisualStudio\Ships\Template\Code\bin\x86\Debug\TemplateJune2015.pdb
+H:\GitHubVisualStudio\Ships\Template\Code\bin\x86\Debug\Engine7.dll
+H:\GitHubVisualStudio\Ships\Template\Code\bin\x86\Debug\Engine7.xml
+H:\GitHubVisualStudio\Ships\Template\Code\obj\x86\Debug\Code.csprojResolveAssemblyReference.cache
+H:\GitHubVisualStudio\Ships\Template\Code\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+H:\GitHubVisualStudio\Ships\Template\Code\obj\x86\Debug\TemplateJune2015.exe
+H:\GitHubVisualStudio\Ships\Template\Code\obj\x86\Debug\TemplateJune2015.pdb

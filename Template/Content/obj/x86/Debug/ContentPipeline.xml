@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<XnaContent xmlns:Pipeline="Microsoft.Xna.Framework.Content.Pipeline">
+  <Asset Type="Pipeline:BuildItemCollection">
+    <Item>
+      <Source>Graphics\BaseTextures.png</Source>
+      <Name>Graphics\BaseTextures</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\0eric\1213 Applied ICT and Computing\Development walkthroughs\Fragger - START TEMPLATE\Fragger\Fragger\bin\x86\Debug\Content\Graphics\BaseTextures.xnb</Output>
+      <Time>2012-06-11T16:07:52.0907585+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Audio\fire.wav</Source>
+      <Name>Audio\fire</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\0eric\1213 Applied ICT and Computing\Development walkthroughs\Fragger - START TEMPLATE\Fragger\Fragger\bin\x86\Debug\Content\Audio\fire.xnb</Output>
+      <Time>2012-06-11T16:08:05.2061349+01:00</Time>
+    </Item>
+    <Item>
+      <Source>Audio\hit.wav</Source>
+      <Name>Audio\hit</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\0eric\1213 Applied ICT and Computing\Development walkthroughs\Fragger - START TEMPLATE\Fragger\Fragger\bin\x86\Debug\Content\Audio\hit.xnb</Output>
+      <Time>2012-06-11T16:08:05.2711219+01:00</Time>
+    </Item>
+    <BuildSuccessful>true</BuildSuccessful>
+    <Settings>
+      <TargetPlatform>Windows</TargetPlatform>
+      <TargetProfile>HiDef</TargetProfile>
+      <BuildConfiguration>Debug</BuildConfiguration>
+      <CompressContent>false</CompressContent>
+      <RootDirectory>C:\0eric\1213 Applied ICT and Computing\Development walkthroughs\Fragger - START TEMPLATE\Fragger\FraggerContent\</RootDirectory>
+      <LoggerRootDirectory>C:\0eric\1213 Applied ICT and Computing\Development walkthroughs\Fragger - START TEMPLATE\Fragger\Fragger\</LoggerRootDirectory>
+      <IntermediateDirectory>C:\0eric\1213 Applied ICT and Computing\Development walkthroughs\Fragger - START TEMPLATE\Fragger\FraggerContent\obj\x86\Debug\</IntermediateDirectory>
+      <OutputDirectory>C:\0eric\1213 Applied ICT and Computing\Development walkthroughs\Fragger - START TEMPLATE\Fragger\Fragger\bin\x86\Debug\Content\</OutputDirectory>
+    </Settings>
+    <Assemblies>
+      <Assembly>
+        <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.XImporter.dll</Key>
+        <Value>2010-08-23T13:41:18+01:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.VideoImporters.dll</Key>
+        <Value>2010-08-23T13:41:18+01:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.TextureImporter.dll</Key>
+        <Value>2010-08-23T13:41:18+01:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.FBXImporter.dll</Key>
+        <Value>2010-08-23T13:41:18+01:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.EffectImporter.dll</Key>
+        <Value>2010-08-23T13:41:18+01:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Program Files\Microsoft XNA\XNA Game Studio\v4.0\References\Windows\x86\Microsoft.Xna.Framework.Content.Pipeline.AudioImporters.dll</Key>
+        <Value>2010-08-23T13:41:18+01:00</Value>
+      </Assembly>
+      <Assembly>
+        <Key>C:\Windows\Microsoft.Net\assembly\GAC_32\Microsoft.Xna.Framework.Content.Pipeline\v4.0_4.0.0.0__842cf8be1de50553\Microsoft.Xna.Framework.Content.Pipeline.dll</Key>
+        <Value>2010-11-07T14:53:31.3066923+00:00</Value>
+      </Assembly>
+    </Assemblies>
+  </Asset>
+</XnaContent>
