@@ -19,9 +19,9 @@ namespace Template
     /// </summary>
     internal class Opponent : Ship
     {
-        public Opponent()
+        public Opponent(Vector2 startPos)
         {
-            throw new System.NotImplementedException();
+            Position2D = startPos;
         }
     }
 }

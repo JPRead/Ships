@@ -114,8 +114,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Game\CannonBall.cs" />
     <Compile Include="Game\Opponent.cs" />
     <Compile Include="Game\Player.cs" />
+    <Compile Include="Game\SmokeParticle.cs" />
     <Compile Include="Scoring\Marker.cs" />
     <Compile Include="Scoring\MenuInitial.cs" />
     <Compile Include="Scoring\ScoreEntry.cs" />

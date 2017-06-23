@@ -19,9 +19,9 @@ namespace Template
     /// </summary>
     internal class Player : Ship
     {
-        public Player()
+        public Player(Vector2 startPos)
         {
-            throw new System.NotImplementedException();
+            Position2D = startPos;
         }
     }
 }

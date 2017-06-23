@@ -21,7 +21,16 @@ namespace Template
     {
         public Ship()
         {
-            throw new System.NotImplementedException();
+            GM.engineM.AddSprite(this);
+            GM.eventM.DelayCall(0.5f, setup);
+        }
+
+        private void setup()
+        {
+            Visible = true;
+            Frame.Define(Tex.SingleWhitePixel);
+            SY = 100;
+            SX = 40;
         }
     }
 }

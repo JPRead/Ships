@@ -20,6 +20,7 @@ namespace Template.Game
         {
             GM.engineM.DebugDisplay = Debug.fps | Debug.version;
             GM.engineM.ScreenColour = Color.Black;
+            Player player = new Player(new Vector2(400, 400)); 
         }
 
         public override void Logic()

@@ -4,6 +4,16 @@
         <name>TemplateJune2015</name>
     </assembly>
     <members>
+        <member name="T:Template.Opponent">
+            <summary>
+            Ship for the AI
+            </summary>
+        </member>
+        <member name="T:Template.Player">
+            <summary>
+            Ship for the player
+            </summary>
+        </member>
         <member name="T:Template.ScoreEntry">
             <summary>
             generates the score entry menu and associated controls
@@ -387,6 +397,11 @@
         <member name="F:Template.ExtraMessageTypes.NameEntryComplete">
             <summary>
             when score is finished, initials are stored in Object which needs casting to (string)
+            </summary>
+        </member>
+        <member name="T:Template.Ship">
+            <summary>
+            Ship used as a base for the player and AI
             </summary>
         </member>
         <member name="M:Template.Program.Main(System.String[])">
