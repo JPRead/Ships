@@ -95,6 +95,5 @@ namespace Template
         {
             GM.inputM.MouseReset(newPosition);
         }
-
     }
 }
