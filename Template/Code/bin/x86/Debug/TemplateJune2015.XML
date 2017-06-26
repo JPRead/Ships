@@ -4,6 +4,15 @@
         <name>TemplateJune2015</name>
     </assembly>
     <members>
+        <member name="M:Template.Game.CannonBall.#ctor(Engine7.Sprite,Microsoft.Xna.Framework.Vector2,System.Int32,System.Int32)">
+            <summary>
+            Constructor for bullet class
+            </summary>
+            <param name="player">The object that fired the bullet</param>
+            <param name="fireTowards">2D vector to travel towards</param>
+            <param name="bulletDamage">Damage on hit</param>
+            /// <param name="type">Type of shot to use - 0 ball shot, 1 chain shot, 2 grape shot, 3 carcass shot</param>
+        </member>
         <member name="T:Template.Opponent">
             <summary>
             Ship for the AI
@@ -349,7 +358,7 @@
         </member>
         <member name="F:Template.Cursor.mode">
             <summary>
-            0 for default
+            0 for default, 1 for movement
             </summary>
         </member>
         <member name="M:Template.Cursor.CleanUp">
@@ -402,6 +411,11 @@
         <member name="T:Template.Ship">
             <summary>
             Ship used as a base for the player and AI
+            </summary>
+        </member>
+        <member name="F:Template.Ship.sailAmount">
+            <summary>
+            0 stopped, 1 half speed, 2 full speed
             </summary>
         </member>
         <member name="M:Template.Program.Main(System.String[])">

@@ -23,7 +23,7 @@ namespace Template
         /// </summary>
         private Event evLogic;
         /// <summary>
-        /// 0 for default
+        /// 0 for default, 1 for movement
         /// </summary>
         private int mode;
 
@@ -39,16 +39,13 @@ namespace Template
                 mode = value;
             }
         }
-
         
         public Cursor()
         {
             mode = 0;
 
             GM.engineM.AddSprite(this);
-
-            Frame.Define(Tex.Triangle);
-            RotationAngle = -35;
+            Frame.Define(GM.txSprite, new Rectangle(34, 160, 22, 40));
             Align = Engine7.Align.topLeft;
             Layer = RenderLayer.hud;
             Position2D = PointHelper.Vector2FromPoint(GM.screenSize.Center);
@@ -80,10 +77,6 @@ namespace Template
         /// </summary>
         private void Logic()
         {
-            if (mode == 0)
-            {
-                Frame.Define(Tex.Triangle);
-            }
             //add on mouse movement to sprites position
             Position2D += GM.inputM.MouseDistance;
         }

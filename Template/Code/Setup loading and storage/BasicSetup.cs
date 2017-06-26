@@ -22,7 +22,7 @@ namespace Template
         /// holds the logic event
         /// </summary>
         private Event evLogic;
-        Cursor cursor;
+        private Cursor cursor;
 
         internal Cursor Cursor
         {
@@ -42,9 +42,8 @@ namespace Template
         /// </summary>
         public BasicSetup(bool cursoron)
         {
-            //all modes need a cursor?
-            if (cursoron) { Cursor = new Cursor(GM.screenSize.Center); };
-            
+            ////all modes need a cursor?
+            //if (cursoron) { cursor = new Cursor(GM.screenSize.Center); };
             GM.eventM.AddEvent(evLogic = new Event(GM.eventM.MaximumRate, "container logic", Logic));
         }
         /// <summary>

@@ -14,13 +14,43 @@ using Template.Title;
 
 namespace Template.Game
 {
-    class GameSetup : BasicSetup
+    internal class GameSetup : BasicSetup
     {
+        private static Player player;
+        private static Opponent opponent;
+
+        internal static Player Player
+        {
+            get
+            {
+                return player;
+            }
+
+            set
+            {
+                player = value;
+            }
+        }
+
+        internal static Opponent Opponent
+        {
+            get
+            {
+                return opponent;
+            }
+
+            set
+            {
+                opponent = value;
+            }
+        }
+
         public GameSetup() : base(true)
         {
             GM.engineM.DebugDisplay = Debug.fps | Debug.version;
             GM.engineM.ScreenColour = Color.Black;
-            Player player = new Player(new Vector2(400, 400)); 
+            player = new Player(new Vector2(400, 400));
+            opponent = new Opponent(new Vector2(GM.screenSize.X - 400, GM.screenSize.Y - 400));
         }
 
         public override void Logic()

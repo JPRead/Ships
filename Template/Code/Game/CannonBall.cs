@@ -36,7 +36,7 @@ namespace Template.Game
             this.player = player;
             GM.engineM.AddSprite(this);
             Frame.Define(Tex.Circle16by16);
-
+            
             //Sound effects
             GM.audioM.PlayEffect("shoot");
 
