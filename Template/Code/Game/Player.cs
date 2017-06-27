@@ -21,6 +21,7 @@ namespace Template
     {
         private Cursor cursor;
         private Point moveTo;
+        private Button speedButton;
 
         internal Cursor Cursor
         {
@@ -41,6 +42,9 @@ namespace Template
             UpdateCallBack += Move;
             cursor = new Cursor(GM.screenSize.Center);
             moveTo = PointHelper.PointFromVector2(Position2D);
+
+            speedButton = new Button(new Rectangle(200, 100, 200, 100));
+
         }
 
         private void Move()
@@ -66,6 +70,20 @@ namespace Template
             if (GM.inputM.KeyPressed(Keys.Up))
             {
                 if (sailAmount < 2) sailAmount++;
+            }
+
+            if (speedButton.PressedLeft())
+            {
+                if (sailAmount == 0)
+                {
+                    sailAmount++;
+                    speedButton.SetDisplay(new Rectangle(68, 159, 40, 40));
+                }
+                if(sailAmount == 1)
+                {
+                    sailAmount++;
+                    speedButton.SetDisplay(new Rectangle(68, 159, 40, 40));
+                }
             }
 
             moveToPoint(moveTo);

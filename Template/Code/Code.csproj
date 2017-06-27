@@ -114,6 +114,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Game\Button.cs" />
     <Compile Include="Game\CannonBall.cs" />
     <Compile Include="Game\Opponent.cs" />
     <Compile Include="Game\Player.cs" />

@@ -45,7 +45,7 @@ namespace Template
             mode = 0;
 
             GM.engineM.AddSprite(this);
-            Frame.Define(GM.txSprite, new Rectangle(34, 160, 22, 40));
+            Frame.Define(GM.txSprite, new Rectangle(34, 159, 22, 40));
             Align = Engine7.Align.topLeft;
             Layer = RenderLayer.hud;
             Position2D = PointHelper.Vector2FromPoint(GM.screenSize.Center);
