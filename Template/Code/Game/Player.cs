@@ -22,6 +22,10 @@ namespace Template
         private Cursor cursor;
         private Point moveTo;
         private Button speedButton;
+        /// <summary>
+        /// This must be set to true if a button has been pressed during a tick, else button presses could be interpreted as movement orders
+        /// </summary>
+        private bool buttonPressed;
 
         internal Cursor Cursor
         {
@@ -36,6 +40,19 @@ namespace Template
             }
         }
 
+        public bool ButtonPressed
+        {
+            get
+            {
+                return buttonPressed;
+            }
+
+            set
+            {
+                buttonPressed = value;
+            }
+        }
+
         public Player(Vector2 startPos)
         {
             Position2D = startPos;
@@ -44,47 +61,68 @@ namespace Template
             moveTo = PointHelper.PointFromVector2(Position2D);
 
             speedButton = new Button(new Rectangle(200, 100, 200, 100));
-
+            speedButton.SetDisplay(new Rectangle(75, 159, 6, 40));
         }
 
         private void Move()
         {
+            ////Mouse inputs
+            ////Movement
+            //if (GM.inputM.MouseRightButtonHeld())
+            //{
+            //    cursor.Mode = 1;
+            //    moveTo = PointHelper.PointFromVector2(cursor.Position2D);
+            //}
+            ////Default
+            //else
+            //{
+            //    cursor.Mode = 0;
+            //}
+
             //Mouse inputs
-            //Movement
-            if (GM.inputM.MouseRightButtonHeld())
-            {
-                cursor.Mode = 1;
-                moveTo = PointHelper.PointFromVector2(cursor.Position2D);
-            }
-            //Default
-            else
-            {
-                cursor.Mode = 0;
-            }
-
             //Sail amount
-            if (GM.inputM.KeyPressed(Keys.Down))
-            {
-                if (sailAmount > 0) sailAmount--;
-            }
-            if (GM.inputM.KeyPressed(Keys.Up))
-            {
-                if (sailAmount < 2) sailAmount++;
-            }
-
             if (speedButton.PressedLeft())
             {
                 if (sailAmount == 0)
                 {
                     sailAmount++;
-                    speedButton.SetDisplay(new Rectangle(68, 159, 40, 40));
+                    speedButton.SetDisplay(new Rectangle(82, 159, 12, 40));
                 }
-                if(sailAmount == 1)
+                else if(sailAmount == 1)
                 {
                     sailAmount++;
-                    speedButton.SetDisplay(new Rectangle(68, 159, 40, 40));
+                    speedButton.SetDisplay(new Rectangle(95, 159, 12, 40));
                 }
             }
+            else if (speedButton.PressedRight())
+            {
+                if (sailAmount == 1)
+                {
+                    sailAmount--;
+                    speedButton.SetDisplay(new Rectangle(75, 159, 6, 40));
+                }
+                else if(sailAmount == 2)
+                {
+                    sailAmount--;
+                    speedButton.SetDisplay(new Rectangle(82, 159, 12, 40));
+                }
+            }
+
+            //Movement orders
+            if (buttonPressed == false)
+            {
+                if (GM.inputM.MouseRightButtonPressed())
+                {
+                    cursor.Mode = 1;
+                    moveTo = PointHelper.PointFromVector2(cursor.Position2D);
+                }
+                //Default
+                else
+                {
+                    cursor.Mode = 0;
+                }
+            }
+            else buttonPressed = false;
 
             moveToPoint(moveTo);
         }

@@ -52,7 +52,7 @@ namespace Template.Game
 
         private void Tick()
         {
-            if (PressedLeft())
+            if (HeldLeft() || HeldRight())
             {
                 Wash = Color.Red;
             }
@@ -68,7 +68,7 @@ namespace Template.Game
         /// <returns></returns>
         internal bool PressedLeft()
         {
-            if (GM.inputM.MouseLeftButtonHeld())
+            if (GM.inputM.MouseLeftButtonPressed())
             {
                 Vector2 mouseLoc = GM.inputM.MouseLocation;
                 
@@ -82,10 +82,50 @@ namespace Template.Game
         }
 
         /// <summary>
+        /// Returns true if left held
+        /// </summary>
+        /// <returns></returns>
+        internal bool HeldLeft()
+        {
+            if (GM.inputM.MouseLeftButtonHeld())
+            {
+                Vector2 mouseLoc = GM.inputM.MouseLocation;
+
+                if (mouseLoc.X > Sides.X && mouseLoc.X < Sides.Y &&
+                    mouseLoc.Y > Sides.Z && mouseLoc.Y < Sides.W)
+                {
+                    GameSetup.Player.ButtonPressed = true;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
         /// Returns true if right clicked
         /// </summary>
         /// <returns></returns>
         internal bool PressedRight()
+        {
+            if (GM.inputM.MouseRightButtonPressed())
+            {
+                Vector2 mouseLoc = GM.inputM.MouseLocation;
+
+                if (mouseLoc.X > Sides.X && mouseLoc.X < Sides.Y &&
+                    mouseLoc.Y > Sides.Z && mouseLoc.Y < Sides.W)
+                {
+                    GameSetup.Player.ButtonPressed = true;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Returns true if right held
+        /// </summary>
+        /// <returns></returns>
+        internal bool HeldRight()
         {
             if (GM.inputM.MouseRightButtonHeld())
             {
@@ -94,6 +134,7 @@ namespace Template.Game
                 if (mouseLoc.X > Sides.X && mouseLoc.X < Sides.Y &&
                     mouseLoc.Y > Sides.Z && mouseLoc.Y < Sides.W)
                 {
+                    GameSetup.Player.ButtonPressed = true;
                     return true;
                 }
             }
@@ -102,11 +143,11 @@ namespace Template.Game
 
         internal void SetDisplay(Rectangle tile)
         {
+            display.Kill();
             display = new Sprite();
             GM.engineM.AddSprite(display);
             display.Frame.Define(GM.txSprite, tile);
             display.Position2D = Centre2D;
-            
         }
     }
 }

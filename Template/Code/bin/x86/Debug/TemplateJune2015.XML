@@ -4,6 +4,30 @@
         <name>TemplateJune2015</name>
     </assembly>
     <members>
+        <member name="M:Template.Game.Button.PressedLeft">
+            <summary>
+            Returns true if left clicked
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Template.Game.Button.HeldLeft">
+            <summary>
+            Returns true if left held
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Template.Game.Button.PressedRight">
+            <summary>
+            Returns true if right clicked
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Template.Game.Button.HeldRight">
+            <summary>
+            Returns true if right held
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Template.Game.CannonBall.#ctor(Engine7.Sprite,Microsoft.Xna.Framework.Vector2,System.Int32,System.Int32)">
             <summary>
             Constructor for bullet class
@@ -21,6 +45,11 @@
         <member name="T:Template.Player">
             <summary>
             Ship for the player
+            </summary>
+        </member>
+        <member name="F:Template.Player.buttonPressed">
+            <summary>
+            This must be set to true if a button has been pressed during a tick, else button presses could be interpreted as movement orders
             </summary>
         </member>
         <member name="T:Template.ScoreEntry">
