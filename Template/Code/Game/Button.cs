@@ -18,6 +18,8 @@ namespace Template.Game
     internal class Button : Sprite
     {
         private Sprite display;
+        private bool enabled;
+
         public Sprite Display
         {
             get
@@ -31,8 +33,14 @@ namespace Template.Game
             }
         }
 
-        public Button(Rectangle rect)
+        /// <summary>
+        /// Constructor for button
+        /// </summary>
+        /// <param name="rect">Dimensions for button</param>
+        /// <param name="startEnabled">Is the button enabled to begin with - set to false for UI backgrounds</param>
+        public Button(Rectangle rect, bool startEnabled)
         {
+            enabled = startEnabled;
             GM.engineM.AddSprite(this);
             WorldCoordinates = false;
             Frame.Define(Tex.SingleWhitePixel);
@@ -41,24 +49,33 @@ namespace Template.Game
             SpriteHelper.ScaleToThisSize(this, rect);
             X = rect.X;
             Y = rect.Y;
-
+            
             display = new Sprite();
             GM.engineM.AddSprite(display);
             display.Frame.Define(GM.txSprite, new Rectangle(1,1,1,1));
             display.Position2D = Centre2D;
+
+            if (enabled)
+            {
+                Layer++;
+                display.Layer++;
+            }
 
             UpdateCallBack += Tick;
         }
 
         private void Tick()
         {
-            if (HeldLeft() || HeldRight())
+            if (enabled)
             {
-                Wash = Color.Red;
-            }
-            else
-            {
-                Wash = Color.Blue;
+                if (HeldLeft() || HeldRight())
+                {
+                    Wash = Color.Red;
+                }
+                else
+                {
+                    Wash = Color.Blue;
+                }
             }
         }
 
@@ -75,6 +92,7 @@ namespace Template.Game
                 if(mouseLoc.X > Sides.X && mouseLoc.X < Sides.Y &&
                     mouseLoc.Y > Sides.Z && mouseLoc.Y < Sides.W)
                 {
+                    GameSetup.Player.ButtonPressed = true;
                     return true;
                 }
             }
@@ -148,6 +166,10 @@ namespace Template.Game
             GM.engineM.AddSprite(display);
             display.Frame.Define(GM.txSprite, tile);
             display.Position2D = Centre2D;
+            if (enabled)
+            {
+                display.Layer++;
+            }
         }
     }
 }

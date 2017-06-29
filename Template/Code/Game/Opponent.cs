@@ -21,6 +21,7 @@ namespace Template
     {
         public Opponent(Vector2 startPos)
         {
+            moveLocSprite.Visible = false;
             Position2D = startPos;
         }
     }

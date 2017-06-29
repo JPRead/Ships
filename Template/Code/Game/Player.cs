@@ -22,6 +22,10 @@ namespace Template
         private Cursor cursor;
         private Point moveTo;
         private Button speedButton;
+        private Button fireLeftButton;
+        private Button fireRightButton;
+        private Button userInterfaceBackground;
+        private bool moveTargetReached;
         /// <summary>
         /// This must be set to true if a button has been pressed during a tick, else button presses could be interpreted as movement orders
         /// </summary>
@@ -53,32 +57,39 @@ namespace Template
             }
         }
 
+        public bool MoveTargetReached
+        {
+            get
+            {
+                return moveTargetReached;
+            }
+
+            set
+            {
+                moveTargetReached = value;
+            }
+        }
+
         public Player(Vector2 startPos)
         {
+            isPlayer = true;
             Position2D = startPos;
             UpdateCallBack += Move;
             cursor = new Cursor(GM.screenSize.Center);
             moveTo = PointHelper.PointFromVector2(Position2D);
 
-            speedButton = new Button(new Rectangle(200, 100, 200, 100));
+            //User interface setup
+            speedButton = new Button(new Rectangle(GM.screenSize.Center.X, GM.screenSize.Bottom - 150, 50, 50), true);
             speedButton.SetDisplay(new Rectangle(75, 159, 6, 40));
+
+            fireLeftButton = new Button(new Rectangle(GM.screenSize.Center.X - 75, GM.screenSize.Bottom - 150, 50, 50), true);
+            fireRightButton = new Button(new Rectangle(GM.screenSize.Center.X + 75, GM.screenSize.Bottom - 150, 50, 50), true);
+
+            userInterfaceBackground = new Button(new Rectangle(GM.screenSize.Center.X, GM.screenSize.Bottom - 100, 250, 200), false);
         }
 
         private void Move()
         {
-            ////Mouse inputs
-            ////Movement
-            //if (GM.inputM.MouseRightButtonHeld())
-            //{
-            //    cursor.Mode = 1;
-            //    moveTo = PointHelper.PointFromVector2(cursor.Position2D);
-            //}
-            ////Default
-            //else
-            //{
-            //    cursor.Mode = 0;
-            //}
-
             //Mouse inputs
             //Sail amount
             if (speedButton.PressedLeft())
@@ -109,12 +120,15 @@ namespace Template
             }
 
             //Movement orders
+            //Check that no clicks are made on UI background
+            if (userInterfaceBackground.PressedLeft() || userInterfaceBackground.PressedRight() || userInterfaceBackground.HeldLeft() || userInterfaceBackground.HeldRight()){ }
             if (buttonPressed == false)
             {
                 if (GM.inputM.MouseRightButtonPressed())
                 {
                     cursor.Mode = 1;
                     moveTo = PointHelper.PointFromVector2(cursor.Position2D);
+                    moveTargetReached = false;
                 }
                 //Default
                 else
@@ -124,7 +138,8 @@ namespace Template
             }
             else buttonPressed = false;
 
-            moveToPoint(moveTo);
+            if (moveTargetReached == false)
+                moveToPoint(moveTo);
         }
     }
 }

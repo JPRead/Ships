@@ -4,6 +4,13 @@
         <name>TemplateJune2015</name>
     </assembly>
     <members>
+        <member name="M:Template.Game.Button.#ctor(Microsoft.Xna.Framework.Rectangle,System.Boolean)">
+            <summary>
+            Constructor for button
+            </summary>
+            <param name="rect">Dimensions for button</param>
+            <param name="startEnabled">Is the button enabled to begin with - set to false for UI backgrounds</param>
+        </member>
         <member name="M:Template.Game.Button.PressedLeft">
             <summary>
             Returns true if left clicked
