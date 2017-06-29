@@ -66,32 +66,11 @@ namespace Template
                 int dirMul = (int)RotationHelper.AngularDirectionTo(this, new Vector3(movePos, 0), 0, false);
                 RotationVelocity = 10 * dirMul;
 
-                //Wind multiplier - WIP
-                Vector3 velMul;
-                RotationHelper.Direction2DFromAngle(GameSetup.WindDir, 0);
+
 
                 if (sailAmount == 0)
                 {
                     //Velocity = Vector3.Zero;
-                }
-                else if (sailAmount == 1)
-                {
-
-                    
-
-                    Vector3 currentVel = Velocity;
-                    currentVel.Normalize();
-                    float velAngle = RotationHelper.AngleFromDirection(currentVel);
-                    //Negative for travelling left of current direction
-                    float velOffsetAngle = velAngle - RotationAngle;
-
-                    Velocity += RotationHelper.MyDirection(this, 0) * 0.1f;
-
-                    if(velOffsetAngle > 0)
-                        Velocity += RotationHelper.MyDirection(this, -90) * 0.1f;
-
-                    if(velOffsetAngle < 0)
-                        Velocity += RotationHelper.MyDirection(this, 90) * 0.1f;
                 }
                 else
                 {
@@ -99,15 +78,52 @@ namespace Template
                     currentVel.Normalize();
                     float velAngle = RotationHelper.AngleFromDirection(currentVel);
                     //Negative for travelling left of current direction
-                    float velOffsetAngle = velAngle - RotationAngle;
+                    float velOffsetAngle = 0;
+                    if(velAngle > RotationAngle)
+                    {
+                        velOffsetAngle = -1;
+                    }
+                    else
+                    {
+                        velOffsetAngle = 1;
+                    }
 
-                    Velocity += RotationHelper.MyDirection(this, 0) * 0.2f;
+                    //Calculations for wind speed multiplier
+                    float velFromWindAngle = (RotationAngle - GameSetup.WindDir) % 360;
+                    if(velFromWindAngle < 0) //Absolute value
+                        velFromWindAngle = -velFromWindAngle;
+                    if(velFromWindAngle > 180) //Keep between 0 and 180
+                    {
+                        velFromWindAngle = 360 - velFromWindAngle;
+                    }//Create multiplier that is <1
+                    velFromWindAngle = (1/(velFromWindAngle+100)*100);
 
-                    if (velOffsetAngle > 0)
-                        Velocity += RotationHelper.MyDirection(this, -90) * 0.1f;
+                    GM.textM.Draw(FontBank.arcadePixel, Convert.ToString(velOffsetAngle), 100, 100);
 
-                    if (velOffsetAngle < 0)
-                        Velocity += RotationHelper.MyDirection(this, 90) * 0.1f;
+                    if (sailAmount == 1)
+                    {
+                        //Velocity = RotationHelper.MyDirection(this, 0) * 10f * velFromWindAngle;
+
+                        Velocity += RotationHelper.MyDirection(this, 0) * 0.1f * velFromWindAngle;
+
+                        if (velOffsetAngle > 0)
+                            Velocity += RotationHelper.MyDirection(this, 90) * 2f;
+
+                        if (velOffsetAngle < 0)
+                            Velocity += RotationHelper.MyDirection(this, -90) * 2f;
+                    }
+                    if (sailAmount == 2)
+                    {
+                        //Velocity = RotationHelper.MyDirection(this, 0) * 20f * velFromWindAngle;
+
+                        Velocity += RotationHelper.MyDirection(this, 0) * 0.2f * velFromWindAngle;
+
+                        if (velOffsetAngle > 0)
+                            Velocity += RotationHelper.MyDirection(this, 90) * 2f;
+
+                        if (velOffsetAngle < 0)
+                            Velocity += RotationHelper.MyDirection(this, -90) * 2f;
+                    }
                 }
             }
             else

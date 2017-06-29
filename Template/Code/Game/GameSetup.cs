@@ -68,7 +68,7 @@ namespace Template.Game
             Sprite windDirSprite = new Sprite();
             GM.engineM.AddSprite(windDirSprite);
             windDirSprite.Frame.Define(Tex.Triangle);
-            windDirSprite.SY = 1.5;
+            windDirSprite.SY = 1.5f;
             windDirSprite.Position2D = new Vector2(GM.screenSize.Center.X, 50);
             windDirSprite.RotationAngle = windDir;
 
