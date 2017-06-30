@@ -53,6 +53,36 @@ namespace Template
             SX = 40;
         }
 
+        /// <summary>
+        /// Fire cannons
+        /// </summary>
+        /// <param name="left">If true fire from port side else starboard side</param>
+        internal void fire(bool left)
+        {
+            Vector3 fireDir;
+            float leftMul;
+            if (left)
+                leftMul = 1;
+            else
+                leftMul = -1;
+
+            fireDir = Position + RotationHelper.MyDirection(this, leftMul * 90);
+
+            Vector3 offsetAlongDeck = Vector3.Zero;
+
+            offsetAlongDeck -= RotationHelper.MyDirection(this, 0) * 5;
+            for (int i = 0; i <= 20; i++)
+            {
+
+                new CannonBall(this, 
+                    new Vector2(Position2D.X - (Width) * RotationHelper.MyDirection(this, 0).X + offsetAlongDeck.X, Position2D.Y - (Width) * RotationHelper.MyDirection(this, 0).Y + offsetAlongDeck.Y), 
+                    new Vector2(fireDir.X - (Width) * RotationHelper.MyDirection(this, 0).X + offsetAlongDeck.X, fireDir.Y - (Width) * RotationHelper.MyDirection(this, 0).Y + offsetAlongDeck.Y), 
+                    1, 0);
+
+                offsetAlongDeck += RotationHelper.MyDirection(this, 0) * 5;
+            }
+        }
+
         internal void moveToPoint(Point point)
         {
             Vector2 movePos = PointHelper.Vector2FromPoint(point);
@@ -74,19 +104,24 @@ namespace Template
                 }
                 else
                 {
+                    //Vector3 currentVel = Velocity;
+                    //currentVel.Normalize();
+                    //float velAngle = RotationHelper.AngleFromDirection(currentVel);
+                    ////Negative for travelling left of current direction
+                    //float velOffsetAngle = 0;
+                    //if (RotationAngle - velAngle > 0)
+                    //{
+                    //    velOffsetAngle = 1;
+                    //}
+                    //if (RotationAngle - velAngle < 0)
+                    //{
+                    //    velOffsetAngle = -1;
+                    //}
+
                     Vector3 currentVel = Velocity;
                     currentVel.Normalize();
-                    float velAngle = RotationHelper.AngleFromDirection(currentVel);
-                    //Negative for travelling left of current direction
-                    float velOffsetAngle = 0;
-                    if(velAngle > RotationAngle)
-                    {
-                        velOffsetAngle = -1;
-                    }
-                    else
-                    {
-                        velOffsetAngle = 1;
-                    }
+                    currentVel = Position + currentVel;
+                    float velOffsetAngle = RotationHelper.AngularDirectionTo(this, currentVel, 0, false);
 
                     //Calculations for wind speed multiplier
                     float velFromWindAngle = (RotationAngle - GameSetup.WindDir) % 360;
@@ -100,35 +135,32 @@ namespace Template
 
                     GM.textM.Draw(FontBank.arcadePixel, Convert.ToString(velOffsetAngle), 100, 100);
 
+                    if (velOffsetAngle > 0)
+                    {
+                        Velocity += RotationHelper.MyDirection(this, -90) * 0.5f;
+                    }
+                    else
+                    {
+                        Velocity += RotationHelper.MyDirection(this, 90) * 0.5f;
+                    }
+
                     if (sailAmount == 1)
                     {
                         //Velocity = RotationHelper.MyDirection(this, 0) * 10f * velFromWindAngle;
 
                         Velocity += RotationHelper.MyDirection(this, 0) * 0.1f * velFromWindAngle;
-
-                        if (velOffsetAngle > 0)
-                            Velocity += RotationHelper.MyDirection(this, 90) * 2f;
-
-                        if (velOffsetAngle < 0)
-                            Velocity += RotationHelper.MyDirection(this, -90) * 2f;
                     }
                     if (sailAmount == 2)
                     {
                         //Velocity = RotationHelper.MyDirection(this, 0) * 20f * velFromWindAngle;
 
                         Velocity += RotationHelper.MyDirection(this, 0) * 0.2f * velFromWindAngle;
-
-                        if (velOffsetAngle > 0)
-                            Velocity += RotationHelper.MyDirection(this, 90) * 2f;
-
-                        if (velOffsetAngle < 0)
-                            Velocity += RotationHelper.MyDirection(this, -90) * 2f;
+                        
                     }
                 }
             }
             else
             {
-                //Velocity = Vector3.Zero;
                 GameSetup.Player.MoveTargetReached = true;
                 moveLocSprite.Visible = false;
                 RotationVelocity = 0;

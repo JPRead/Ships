@@ -35,7 +35,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Template.Game.CannonBall.#ctor(Engine7.Sprite,Microsoft.Xna.Framework.Vector2,System.Int32,System.Int32)">
+        <member name="M:Template.Game.CannonBall.#ctor(Engine7.Sprite,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,System.Int32,System.Int32)">
             <summary>
             Constructor for bullet class
             </summary>
@@ -453,6 +453,12 @@
             <summary>
             0 stopped, 1 half speed, 2 full speed
             </summary>
+        </member>
+        <member name="M:Template.Ship.fire(System.Boolean)">
+            <summary>
+            Fire cannons
+            </summary>
+            <param name="left">If true fire from port side else starboard side</param>
         </member>
         <member name="M:Template.Program.Main(System.String[])">
             <summary>

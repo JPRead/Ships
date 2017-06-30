@@ -22,8 +22,8 @@ namespace Template
         private Cursor cursor;
         private Point moveTo;
         private Button speedButton;
-        private Button fireLeftButton;
-        private Button fireRightButton;
+        private Button fireRight;
+        private Button fireLeft;
         private Button userInterfaceBackground;
         private bool moveTargetReached;
         /// <summary>
@@ -82,8 +82,8 @@ namespace Template
             speedButton = new Button(new Rectangle(GM.screenSize.Center.X, GM.screenSize.Bottom - 150, 50, 50), true);
             speedButton.SetDisplay(new Rectangle(75, 159, 6, 40));
 
-            fireLeftButton = new Button(new Rectangle(GM.screenSize.Center.X - 75, GM.screenSize.Bottom - 150, 50, 50), true);
-            fireRightButton = new Button(new Rectangle(GM.screenSize.Center.X + 75, GM.screenSize.Bottom - 150, 50, 50), true);
+            fireRight = new Button(new Rectangle(GM.screenSize.Center.X - 75, GM.screenSize.Bottom - 150, 50, 50), true);
+            fireLeft = new Button(new Rectangle(GM.screenSize.Center.X + 75, GM.screenSize.Bottom - 150, 50, 50), true);
 
             userInterfaceBackground = new Button(new Rectangle(GM.screenSize.Center.X, GM.screenSize.Bottom - 100, 250, 200), false);
         }
@@ -117,6 +117,14 @@ namespace Template
                     sailAmount--;
                     speedButton.SetDisplay(new Rectangle(82, 159, 12, 40));
                 }
+            }
+            if (fireRight.PressedLeft())
+            {
+                fire(false);
+            }
+            if (fireLeft.PressedLeft())
+            {
+                fire(true);
             }
 
             //Movement orders

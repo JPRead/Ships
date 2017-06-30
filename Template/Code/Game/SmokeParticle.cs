@@ -22,14 +22,17 @@ namespace Template
             ScaleBoth = 10;
             Wash = Color.WhiteSmoke;
 
-            float xRan = GM.r.FloatBetween(-10, 10);
-            float yRan = GM.r.FloatBetween(-10, 10);
-            RotationHelper.VelocityInThisDirection(this, new Vector3(spawnVel.X + xRan, spawnVel.Y + yRan, 0), 100);
 
-            float rotRan = GM.r.FloatBetween(-10, 10);
+            //RotationHelper.VelocityInThisDirection(this, new Vector3(spawnVel.X + xRan, spawnVel.Y + yRan, 0), 100);
+            Velocity = spawnVel;
+
+            float rotRan = GM.r.FloatBetween(-10f, 10f);
             RotationHelper.FaceDirection(this, spawnRot, DirectionAccuracy.free, rotRan);
 
             Position2D = spawnPos;
+            float xRan = GM.r.FloatBetween(-10f, 10f);
+            float yRan = GM.r.FloatBetween(-10f, 10f);
+            Position2D += new Vector2(xRan, yRan);
 
             UpdateCallBack += LifeCountdown;
         }
