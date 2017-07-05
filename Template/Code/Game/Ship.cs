@@ -96,28 +96,11 @@ namespace Template
                 int dirMul = (int)RotationHelper.AngularDirectionTo(this, new Vector3(movePos, 0), 0, false);
                 RotationVelocity = 10 * dirMul;
 
-
-
                 if (sailAmount == 0)
                 {
-                    //Velocity = Vector3.Zero;
                 }
                 else
                 {
-                    //Vector3 currentVel = Velocity;
-                    //currentVel.Normalize();
-                    //float velAngle = RotationHelper.AngleFromDirection(currentVel);
-                    ////Negative for travelling left of current direction
-                    //float velOffsetAngle = 0;
-                    //if (RotationAngle - velAngle > 0)
-                    //{
-                    //    velOffsetAngle = 1;
-                    //}
-                    //if (RotationAngle - velAngle < 0)
-                    //{
-                    //    velOffsetAngle = -1;
-                    //}
-
                     Vector3 currentVel = Velocity;
                     currentVel.Normalize();
                     currentVel = Position + currentVel;
@@ -135,6 +118,7 @@ namespace Template
 
                     GM.textM.Draw(FontBank.arcadePixel, Convert.ToString(velOffsetAngle), 100, 100);
 
+                    //Keep travelling forward
                     if (velOffsetAngle > 0)
                     {
                         Velocity += RotationHelper.MyDirection(this, -90) * 0.5f;
@@ -144,18 +128,14 @@ namespace Template
                         Velocity += RotationHelper.MyDirection(this, 90) * 0.5f;
                     }
 
+                    //Add velocity
                     if (sailAmount == 1)
                     {
-                        //Velocity = RotationHelper.MyDirection(this, 0) * 10f * velFromWindAngle;
-
                         Velocity += RotationHelper.MyDirection(this, 0) * 0.1f * velFromWindAngle;
                     }
                     if (sailAmount == 2)
                     {
-                        //Velocity = RotationHelper.MyDirection(this, 0) * 20f * velFromWindAngle;
-
                         Velocity += RotationHelper.MyDirection(this, 0) * 0.2f * velFromWindAngle;
-                        
                     }
                 }
             }

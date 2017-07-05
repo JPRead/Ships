@@ -8,6 +8,9 @@ namespace Template.Game
     {
         private Sprite player;
         private int damage;
+        private float fireDelay;
+        bool velApplied;
+        bool splash;
 
         internal Sprite Player
         {
@@ -39,24 +42,14 @@ namespace Template.Game
             Frame.Define(Tex.Circle4by4);
             Wash = Color.DarkGray;
 
-            //Sound effects
-            GM.audioM.PlayEffect("shoot");
-
-            //set postion of bullet and give velocity
-            //X = player.Centre.X;
-            //Y = player.Centre.Y;
-
-            //Set rotation at player
-            //Position2D = RotationHelper.RotateAround(player.Centre2D, player.Centre2D, 0);
-
             //Create direction vector and normalise
             Vector2 direction = fireTowards - Position2D;
             direction = Vector2.Normalize(direction);
 
             //Face direction vector
             RotationHelper.FaceDirection(this, direction, DirectionAccuracy.free, 0);
-            RotationHelper.VelocityInCurrentDirection(this, 750, 0);
-            Velocity += new Vector3(GM.r.FloatBetween(-20, 20), GM.r.FloatBetween(-20, 20), 0);
+            //RotationHelper.VelocityInCurrentDirection(this, 750, 0);
+            //Velocity += new Vector3(GM.r.FloatBetween(-20, 20), GM.r.FloatBetween(-20, 20), 0);
             Position += RotationHelper.MyDirection(this, 0) * 32;
 
             //collision setup
@@ -65,17 +58,48 @@ namespace Template.Game
             PrologueCallBack += Hit;
             EpilogueCallBack += AfterHit;
             Moving = true;
-
-            //Release smoke
-            int rAmount = (int)GM.r.FloatBetween(5, 10);
-            for(int i = 0; i < rAmount; i++)
-            {
-                new SmokeParticle(Position2D, Velocity/100, new Vector2(RotationHelper.MyDirection(this, 0).X, RotationHelper.MyDirection(this, 0).Y), 5);
-            }
-
-            //kill after 5 seconds
+            
+            //kill after 5 seconds and delay firing
             TimerInitialise();
-            Timer.KillAfter(5f);
+            fireDelay = GM.r.FloatBetween(0, 0.5f);
+            //Timer.KillAfter(5f + fireDelay);
+            Timer.ShowAfterKillAfter(fireDelay, GM.r.FloatBetween(0.5f, 1f));
+
+            velApplied = false;
+            UpdateCallBack += Move;
+
+            splash = true;
+            FuneralCallBack += Death;
+        }
+
+        private void Death()
+        {
+            if (splash)
+            {
+                //Splash particle
+            }
+        }
+
+        private void Move()
+        {
+            if (Visible && velApplied == false)
+            {
+                //Add velocity
+                RotationHelper.VelocityInCurrentDirection(this, 750, 0);
+                Velocity += new Vector3(GM.r.FloatBetween(-20, 20), GM.r.FloatBetween(-20, 20), 0);
+
+                //Play sound effect
+                GM.audioM.PlayEffect("shoot");
+
+                //Release smoke
+                int rAmount = (int)GM.r.FloatBetween(2, 4);
+                for(int i = 0; i < rAmount; i++)
+                {
+                    new SmokeParticle(Position2D, Velocity/100, new Vector2(RotationHelper.MyDirection(this, 0).X, RotationHelper.MyDirection(this, 0).Y), 5);
+                }
+
+                velApplied = true;
+            }
         }
 
         private void Hit(Sprite hit)
@@ -86,6 +110,7 @@ namespace Template.Game
         private void AfterHit(Sprite hit)
         {
             RotationHelper.FaceVelocity(this, DirectionAccuracy.free, false, 0f);
+            splash = false;
         }
     }
 }
