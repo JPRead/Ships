@@ -36,8 +36,18 @@ namespace Template
             moveLocSprite = new Sprite();
             GM.engineM.AddSprite(moveLocSprite);
             moveLocSprite.Frame.Define(Tex.Circle8by8);
+            CollisionActive = true;
 
             Friction = 0.25f;
+
+            Visible = true;
+            Frame.Define(Tex.SingleWhitePixel);
+            SY = 100;
+            SX = 40;
+            RotationAngle = 0;
+
+            //Hitboxes
+            new HitBox(this, new Vector2(0, 1), new Vector2(Width + 10, Height + 10));
         }
 
         private void Move()
@@ -47,10 +57,7 @@ namespace Template
 
         private void setup()
         {
-            Visible = true;
-            Frame.Define(Tex.SingleWhitePixel);
-            SY = 100;
-            SX = 40;
+
         }
 
         /// <summary>

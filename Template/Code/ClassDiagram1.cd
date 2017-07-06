@@ -3,21 +3,21 @@
   <Class Name="Template.Game.Button">
     <Position X="10.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAQAAAAAAAAAAAIAACAAQAAAAEAAAEAgQABAAAAQAA=</HashCode>
       <FileName>Game\Button.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Template.Game.CannonBall" Collapsed="true">
     <Position X="7" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAACgAAAAAIAAAAAAAAAAAABAAAAAQAAAAA=</HashCode>
+      <HashCode>AAAAAAACAIACgCAAAAIAAAAAAAAAAAAhAAAAAQAAAAA=</HashCode>
       <FileName>Game\CannonBall.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Template.Game.GameSetup" Collapsed="true">
     <Position X="2.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAEAAAABAAAEAAAAAAAABACAAAQAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAEAAAABQAAEAEAAAAAABACAAAQAAAAA=</HashCode>
       <FileName>Game\GameSetup.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -31,14 +31,14 @@
   <Class Name="Template.Player" Collapsed="true">
     <Position X="2.75" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAYAAAAEAAAAAAAAAAAAAAAAACAAAAAAAAAA=</HashCode>
+      <HashCode>gABAAAAAIYAAAAEAAQAAAIAAAAAAAAAACAACEAAIQAA=</HashCode>
       <FileName>Game\Player.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Template.Ship" Collapsed="true">
     <Position X="1.75" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAIAAAAgAAAAAAAAAAgAAAAAAAAAQAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAIAAAAgAAAAAAAAAAgAEAAAABAAQAAAAAAg=</HashCode>
       <FileName>Game\Ship.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -117,6 +117,13 @@
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAACAAAAAAAAA=</HashCode>
       <FileName>Title\TitleSetup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Template.HitBox">
+    <Position X="8.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Game\HitZone.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

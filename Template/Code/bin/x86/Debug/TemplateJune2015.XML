@@ -35,6 +35,12 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Template.Game.Button.Hover">
+            <summary>
+            Returns true if mouse is hovered over button
+            </summary>
+            <returns></returns>
+        </member>
         <member name="M:Template.Game.CannonBall.#ctor(Engine7.Sprite,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,System.Int32,System.Int32)">
             <summary>
             Constructor for bullet class
@@ -58,6 +64,14 @@
             <summary>
             This must be set to true if a button has been pressed during a tick, else button presses could be interpreted as movement orders
             </summary>
+        </member>
+        <member name="M:Template.HitBox.#ctor(Template.Ship,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Constructor for hitbox
+            </summary>
+            <param name="owner">Parent of the hitbox</param>
+            <param name="offsetFromPlayer">Offset from player centre when facing up - this can never be zero!</param>
+            <param name="dimensions">Height and Width of hitbox</param>
         </member>
         <member name="T:Template.ScoreEntry">
             <summary>

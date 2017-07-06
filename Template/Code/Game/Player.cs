@@ -26,6 +26,8 @@ namespace Template
         private Button fireLeft;
         private Button userInterfaceBackground;
         private bool moveTargetReached;
+        private Sprite fireZone;
+
         /// <summary>
         /// This must be set to true if a button has been pressed during a tick, else button presses could be interpreted as movement orders
         /// </summary>
@@ -74,7 +76,6 @@ namespace Template
         {
             isPlayer = true;
             Position2D = startPos;
-            UpdateCallBack += Move;
             cursor = new Cursor(GM.screenSize.Center);
             moveTo = PointHelper.PointFromVector2(Position2D);
 
@@ -84,8 +85,17 @@ namespace Template
 
             fireRight = new Button(new Rectangle(GM.screenSize.Center.X - 75, GM.screenSize.Bottom - 150, 50, 50), true);
             fireLeft = new Button(new Rectangle(GM.screenSize.Center.X + 75, GM.screenSize.Bottom - 150, 50, 50), true);
+            fireZone = new Sprite();
+            GM.engineM.AddSprite(fireZone);
+            fireZone.Frame.Define(Tex.SingleWhitePixel);
+            fireZone.SY = 100;
+            fireZone.SX = 400;
+            fireZone.Wash = Color.Beige;
+            fireZone.Alpha = 0.5f;
 
             userInterfaceBackground = new Button(new Rectangle(GM.screenSize.Center.X, GM.screenSize.Bottom - 100, 250, 200), false);
+
+            UpdateCallBack += Move;
         }
 
         private void Move()
@@ -126,6 +136,24 @@ namespace Template
             {
                 fire(true);
             }
+
+            if (fireRight.Hover())
+            {
+                fireZone.Visible = true;
+                fireZone.Position2D = Position2D - RotationHelper.Direction2DFromAngle(RotationAngle, 90) * 200;
+                fireZone.RotationAngle = RotationAngle;
+            }
+            else if (fireLeft.Hover())
+            {
+                fireZone.Visible = true;
+                fireZone.Position2D = Position2D +RotationHelper.Direction2DFromAngle(RotationAngle, 90) * 200;
+                fireZone.RotationAngle = RotationAngle;
+            }
+            else
+            {
+                fireZone.Visible = false;
+            }
+
 
             //Movement orders
             //Check that no clicks are made on UI background

@@ -159,6 +159,22 @@ namespace Template.Game
             return false;
         }
 
+        /// <summary>
+        /// Returns true if mouse is hovered over button
+        /// </summary>
+        /// <returns></returns>
+        internal bool Hover()
+        {
+            Vector2 mouseLoc = GM.inputM.MouseLocation;
+
+            if (mouseLoc.X > Sides.X && mouseLoc.X < Sides.Y &&
+                mouseLoc.Y > Sides.Z && mouseLoc.Y < Sides.W)
+            {
+                return true;
+            }
+            return false;
+        }
+
         internal void SetDisplay(Rectangle tile)
         {
             display.Kill();

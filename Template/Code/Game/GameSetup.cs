@@ -73,7 +73,7 @@ namespace Template.Game
             windDirSprite.RotationAngle = windDir;
 
             player = new Player(new Vector2(400, 400));
-            opponent = new Opponent(new Vector2(GM.screenSize.X - 400, GM.screenSize.Y - 400));
+            opponent = new Opponent(new Vector2(1600 - 400, 900 - 400));
         }
 
         public override void Logic()

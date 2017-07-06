@@ -41,6 +41,7 @@ namespace Template.Game
             GM.engineM.AddSprite(this);
             Frame.Define(Tex.Circle4by4);
             Wash = Color.DarkGray;
+            Friction = 0.25f;
 
             //Create direction vector and normalise
             Vector2 direction = fireTowards - Position2D;
@@ -48,8 +49,6 @@ namespace Template.Game
 
             //Face direction vector
             RotationHelper.FaceDirection(this, direction, DirectionAccuracy.free, 0);
-            //RotationHelper.VelocityInCurrentDirection(this, 750, 0);
-            //Velocity += new Vector3(GM.r.FloatBetween(-20, 20), GM.r.FloatBetween(-20, 20), 0);
             Position += RotationHelper.MyDirection(this, 0) * 32;
 
             //collision setup
@@ -62,7 +61,6 @@ namespace Template.Game
             //kill after 5 seconds and delay firing
             TimerInitialise();
             fireDelay = GM.r.FloatBetween(0, 0.5f);
-            //Timer.KillAfter(5f + fireDelay);
             Timer.ShowAfterKillAfter(fireDelay, GM.r.FloatBetween(0.5f, 1f));
 
             velApplied = false;
@@ -76,7 +74,27 @@ namespace Template.Game
         {
             if (splash)
             {
-                //Splash particle
+                for (int i = 0; i <= GM.r.FloatBetween(5, 10); i++)
+                {
+                    float spawnRot = RotationAngle + GM.r.FloatBetween(-15, 15);
+
+                    Vector3 spawnVel = RotationHelper.Direction3DFromAngle(spawnRot, 0) * 200;
+                    SmokeParticle splash = new SmokeParticle(Position2D, spawnVel, spawnRot, 0.5f);
+                    splash.Wash = Color.Aqua;
+                    splash.SX = 1f;
+                    splash.SY = 5f;
+                }
+
+                for (int i = 0; i <= GM.r.FloatBetween(0, 5); i++)
+                {
+                    float spawnRot = -RotationAngle + GM.r.FloatBetween(-20, 20);
+
+                    Vector3 spawnVel = RotationHelper.Direction3DFromAngle(spawnRot, 0) * -10;
+                    SmokeParticle splash = new SmokeParticle(Position2D, spawnVel, spawnRot, 0.5f);
+                    splash.Wash = Color.Aqua;
+                    splash.SX = 1f;
+                    splash.SY = 2.5f;
+                }
             }
         }
 
@@ -86,6 +104,7 @@ namespace Template.Game
             {
                 //Add velocity
                 RotationHelper.VelocityInCurrentDirection(this, 750, 0);
+
                 Velocity += new Vector3(GM.r.FloatBetween(-20, 20), GM.r.FloatBetween(-20, 20), 0);
 
                 //Play sound effect
@@ -95,7 +114,8 @@ namespace Template.Game
                 int rAmount = (int)GM.r.FloatBetween(2, 4);
                 for(int i = 0; i < rAmount; i++)
                 {
-                    new SmokeParticle(Position2D, Velocity/100, new Vector2(RotationHelper.MyDirection(this, 0).X, RotationHelper.MyDirection(this, 0).Y), 5);
+                    
+                    new SmokeParticle(Position2D, Velocity/100, RotationAngle, 5);
                 }
 
                 velApplied = true;
@@ -104,13 +124,31 @@ namespace Template.Game
 
         private void Hit(Sprite hit)
         {
+            if(hit == player)
+            {
+                CollisionAbandonResponse = true;
+            }
+            if(hit is HitBox)
+            {
+                HitBox hitbox = (HitBox)hit;
 
+                if(hitbox.Parent == player)
+                {
+                    CollisionAbandonResponse = true;
+                }
+                else
+                {
+                    //Checking for damage type
+                }
+            }
         }
 
         private void AfterHit(Sprite hit)
         {
+            Velocity = Velocity / 10;
             RotationHelper.FaceVelocity(this, DirectionAccuracy.free, false, 0f);
             splash = false;
+            Kill();
         }
     }
 }

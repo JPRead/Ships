@@ -13,7 +13,7 @@ namespace Template
     {
         Event tiLifetime;
 
-        public SmokeParticle(Vector2 spawnPos, Vector3 spawnVel, Vector2 spawnRot, float lifetime)
+        public SmokeParticle(Vector2 spawnPos, Vector3 spawnVel, float spawnAngle, float lifetime)
         {
             GM.eventM.AddEvent(tiLifetime = new Event(lifetime, "Lifetime Counter"));
 
@@ -22,11 +22,12 @@ namespace Template
             ScaleBoth = 10;
             Wash = Color.WhiteSmoke;
 
-
             //RotationHelper.VelocityInThisDirection(this, new Vector3(spawnVel.X + xRan, spawnVel.Y + yRan, 0), 100);
             Velocity = spawnVel;
 
             float rotRan = GM.r.FloatBetween(-10f, 10f);
+
+            Vector3 spawnRot = RotationHelper.Direction3DFromAngle(spawnAngle, 0);
             RotationHelper.FaceDirection(this, spawnRot, DirectionAccuracy.free, rotRan);
 
             Position2D = spawnPos;
