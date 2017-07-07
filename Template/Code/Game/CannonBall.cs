@@ -8,6 +8,7 @@ namespace Template.Game
     {
         private Sprite player;
         private int damage;
+        private int shotType;
         private float fireDelay;
         bool velApplied;
         bool splash;
@@ -36,6 +37,7 @@ namespace Template.Game
         {
             damage = bulletDamage;
             Position2D = fireFrom;
+            shotType = type;
             
             this.player = player;
             GM.engineM.AddSprite(this);
@@ -138,7 +140,37 @@ namespace Template.Game
                 }
                 else
                 {
-                    //Checking for damage type
+                    if(hitbox.DamageType == 0)//Hull
+                    {
+                        if(shotType == 0)//Ball
+                        {
+                            hitbox.Health -= 10;
+                        }
+                        else if(shotType == 3)//Carcass
+                        {
+                            //Damage over time
+                        }
+                        else
+                        {
+                            hitbox.Health -= 1;
+                        }
+                    }
+                    else if(hitbox.DamageType == 1)//Sail
+                    {
+                        if (shotType == 1)//Chain
+                        {
+                            hitbox.Health -= 10;
+                        }
+                        else if (shotType == 3)//Carcass
+                        {
+                            //Damage over time
+                        }
+                        else
+                        {
+                            CollisionAbandonResponse = true;
+                            //hitbox.Health -= 1;
+                        }
+                    }
                 }
             }
         }

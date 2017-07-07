@@ -100,6 +100,11 @@ namespace Template
 
         private void Move()
         {
+            //Debug text
+            GM.textM.Draw(FontBank.arcadePixel, "Hull Front  " + hitBoxHullFront.Health + "~Hull Back   " + hitBoxHullBack.Health +
+                "~Hull Left   " + hitBoxHullLeft.Health + "~Hull Right  " + hitBoxHullRight.Health +
+                "~Sail Front  " + hitBoxSailFront.Health + "~Sail Middle " + hitBoxSailMiddle.Health + "~Sail Back   " + hitBoxSailBack.Health, 100, 100, TextAtt.TopLeft);
+
             //Mouse inputs
             //Sail amount
             if (speedButton.PressedLeft())
@@ -140,13 +145,13 @@ namespace Template
             if (fireRight.Hover())
             {
                 fireZone.Visible = true;
-                fireZone.Position2D = Position2D - RotationHelper.Direction2DFromAngle(RotationAngle, 90) * 200;
+                fireZone.Position2D = Position2D - RotationHelper.Direction2DFromAngle(RotationAngle, 90) * 220;
                 fireZone.RotationAngle = RotationAngle;
             }
             else if (fireLeft.Hover())
             {
                 fireZone.Visible = true;
-                fireZone.Position2D = Position2D +RotationHelper.Direction2DFromAngle(RotationAngle, 90) * 200;
+                fireZone.Position2D = Position2D +RotationHelper.Direction2DFromAngle(RotationAngle, 90) * 220;
                 fireZone.RotationAngle = RotationAngle;
             }
             else

@@ -18,8 +18,10 @@ namespace Template
     {
         private Ship parent;
         private Vector2 offset;
+        private int damageType;
         private float offsetMagnitude;
         private float offsetAngle;
+        private int health;
 
         internal Ship Parent
         {
@@ -34,28 +36,60 @@ namespace Template
             //}
         }
 
+        internal int Health
+        {
+            get
+            {
+                return health;
+            }
+
+            set
+            {
+                health = value;
+            }
+        }
+
+        public int DamageType
+        {
+            get
+            {
+                return damageType;
+            }
+
+            //set
+            //{
+            //    damageType = value;
+            //}
+        }
+
         /// <summary>
         /// Constructor for hitbox
         /// </summary>
         /// <param name="owner">Parent of the hitbox</param>
         /// <param name="offsetFromPlayer">Offset from player centre when facing up - this can never be zero!</param>
         /// <param name="dimensions">Height and Width of hitbox</param>
-        public HitBox(Ship owner, Vector2 offsetFromPlayer, Vector2 dimensions)
+        /// <param name="type">Type of damage taken by hitbox - 0 hull, 1 sail</param>
+        public HitBox(Ship owner, Vector2 offsetFromPlayer, Vector2 dimensions, int type)
         {
+            damageType = type;
+            health = 100;
             parent = owner;
-            offset = offsetFromPlayer;
+
+            offset = new Vector2(offsetFromPlayer.X, -offsetFromPlayer.Y);
             offsetMagnitude = offset.Length();
             offset.Normalize();
             offsetAngle = RotationHelper.AngleFromDirection(offset);
+
             GM.engineM.AddSprite(this);
             Frame.Define(Tex.SingleWhitePixel);
-            //CollisionBoxVisible = true;
+            CollisionBoxVisible = true;
             CollisionActive = true;
             Wash = Color.Red;
             Alpha = 0.25f;
             WashCollision = Color.Red;
             SpriteHelper.ScaleToThisSize(this, dimensions.X, dimensions.Y);
             Visible = true;
+
             UpdateCallBack += Move;
         }
 

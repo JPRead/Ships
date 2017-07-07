@@ -65,13 +65,23 @@
             This must be set to true if a button has been pressed during a tick, else button presses could be interpreted as movement orders
             </summary>
         </member>
-        <member name="M:Template.HitBox.#ctor(Template.Ship,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2)">
+        <member name="M:Template.SmokeParticle.#ctor(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector3,System.Single,System.Single)">
+            <summary>
+            Constructor for smoke particle
+            </summary>
+            <param name="spawnPos"></param>
+            <param name="spawnVel"></param>
+            <param name="spawnAngle"></param>
+            <param name="lifetime">Minimum lifetime for particle in seconds</param>
+        </member>
+        <member name="M:Template.HitBox.#ctor(Template.Ship,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,System.Int32)">
             <summary>
             Constructor for hitbox
             </summary>
             <param name="owner">Parent of the hitbox</param>
             <param name="offsetFromPlayer">Offset from player centre when facing up - this can never be zero!</param>
             <param name="dimensions">Height and Width of hitbox</param>
+            <param name="type">Type of damage taken by hitbox - 0 hull, 1 sail</param>
         </member>
         <member name="T:Template.ScoreEntry">
             <summary>

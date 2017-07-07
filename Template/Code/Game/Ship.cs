@@ -25,6 +25,13 @@ namespace Template
         internal int sailAmount;
         internal bool isPlayer;
         internal Sprite moveLocSprite;
+        internal HitBox hitBoxHullLeft;
+        internal HitBox hitBoxHullRight;
+        internal HitBox hitBoxHullFront;
+        internal HitBox hitBoxHullBack;
+        internal HitBox hitBoxSailFront;
+        internal HitBox hitBoxSailMiddle;
+        internal HitBox hitBoxSailBack;
 
         public Ship()
         {
@@ -47,7 +54,20 @@ namespace Template
             RotationAngle = 0;
 
             //Hitboxes
-            new HitBox(this, new Vector2(0, 1), new Vector2(Width + 10, Height + 10));
+            hitBoxHullLeft = new HitBox(this, new Vector2(-10, 0), new Vector2(25, 70), 0);
+            hitBoxHullLeft.Wash = Color.Red;
+            hitBoxHullRight = new HitBox(this, new Vector2(10, 0), new Vector2(25, 70), 0);
+            hitBoxHullRight.Wash = Color.Blue;
+            hitBoxHullFront = new HitBox(this, new Vector2(0, 40), new Vector2(45, 25), 0);
+            hitBoxHullFront.Wash = Color.Green;
+            hitBoxHullBack = new HitBox(this, new Vector2(0, -40), new Vector2(45, 25), 0);
+            hitBoxHullBack.Wash = Color.Yellow;
+            hitBoxSailFront = new HitBox(this, new Vector2(0, 25), new Vector2(60, 5), 1);
+            hitBoxSailFront.Wash = Color.Violet;
+            hitBoxSailMiddle = new HitBox(this, new Vector2(0, 1), new Vector2(70, 5), 1);
+            hitBoxSailMiddle.Wash = Color.Violet;
+            hitBoxSailBack = new HitBox(this, new Vector2(0, -30), new Vector2(65, 5), 1);
+            hitBoxSailBack.Wash = Color.Violet;
         }
 
         private void Move()
@@ -80,7 +100,6 @@ namespace Template
             offsetAlongDeck -= RotationHelper.MyDirection(this, 0) * 5;
             for (int i = 0; i <= 20; i++)
             {
-
                 new CannonBall(this, 
                     new Vector2(Position2D.X - (Width) * RotationHelper.MyDirection(this, 0).X + offsetAlongDeck.X, Position2D.Y - (Width) * RotationHelper.MyDirection(this, 0).Y + offsetAlongDeck.Y), 
                     new Vector2(fireDir.X - (Width) * RotationHelper.MyDirection(this, 0).X + offsetAlongDeck.X, fireDir.Y - (Width) * RotationHelper.MyDirection(this, 0).Y + offsetAlongDeck.Y), 
@@ -123,7 +142,7 @@ namespace Template
                     }//Create multiplier that is <1
                     velFromWindAngle = (1/(velFromWindAngle+100)*100);
 
-                    GM.textM.Draw(FontBank.arcadePixel, Convert.ToString(velOffsetAngle), 100, 100);
+                    //GM.textM.Draw(FontBank.arcadePixel, Convert.ToString(velOffsetAngle), 100, 100);
 
                     //Keep travelling forward
                     if (velOffsetAngle > 0)

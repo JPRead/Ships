@@ -23,6 +23,17 @@ namespace Template
         {
             moveLocSprite.Visible = false;
             Position2D = startPos;
+            RotationAngle = 45;
+
+            UpdateCallBack += Move;
+        }
+
+        private void Move()
+        {
+            //Debug text
+            GM.textM.Draw(FontBank.arcadePixel, "Hull Front  " + hitBoxHullFront.Health + "~Hull Back   " + hitBoxHullBack.Health +
+                "~Hull Left   " + hitBoxHullLeft.Health + "~Hull Right  " + hitBoxHullRight.Health +
+                "~Sail Front  " + hitBoxSailFront.Health + "~Sail Middle " + hitBoxSailMiddle.Health + "~Sail Back   " + hitBoxSailBack.Health, GM.screenSize.Width - 100, 100, TextAtt.TopRight);
         }
     }
 }
