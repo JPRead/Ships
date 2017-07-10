@@ -83,7 +83,7 @@ namespace Template
             GM.engineM.AddSprite(this);
             Frame.Define(Tex.SingleWhitePixel);
             CollisionBoxVisible = true;
-            CollisionActive = true;
+            //CollisionActive = true;
             Wash = Color.Red;
             Alpha = 0.25f;
             WashCollision = Color.Red;

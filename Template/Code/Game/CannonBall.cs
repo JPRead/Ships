@@ -7,6 +7,7 @@ namespace Template.Game
     internal class CannonBall : Sprite
     {
         private Sprite player;
+        private HitBox collided;
         private int damage;
         private int shotType;
         private float fireDelay;
@@ -79,7 +80,6 @@ namespace Template.Game
                 for (int i = 0; i <= GM.r.FloatBetween(5, 10); i++)
                 {
                     float spawnRot = RotationAngle + GM.r.FloatBetween(-15, 15);
-
                     Vector3 spawnVel = RotationHelper.Direction3DFromAngle(spawnRot, 0) * 200;
                     SmokeParticle splash = new SmokeParticle(Position2D, spawnVel, spawnRot, 0.5f);
                     splash.Wash = Color.Aqua;
@@ -90,7 +90,6 @@ namespace Template.Game
                 for (int i = 0; i <= GM.r.FloatBetween(0, 5); i++)
                 {
                     float spawnRot = -RotationAngle + GM.r.FloatBetween(-20, 20);
-
                     Vector3 spawnVel = RotationHelper.Direction3DFromAngle(spawnRot, 0) * -10;
                     SmokeParticle splash = new SmokeParticle(Position2D, spawnVel, spawnRot, 0.5f);
                     splash.Wash = Color.Aqua;
@@ -116,70 +115,86 @@ namespace Template.Game
                 int rAmount = (int)GM.r.FloatBetween(2, 4);
                 for(int i = 0; i < rAmount; i++)
                 {
-                    
                     new SmokeParticle(Position2D, Velocity/100, RotationAngle, 5);
                 }
 
                 velApplied = true;
             }
+
+            foreach (Sprite s in GM.engineM.SpriteList)
+            {
+                if (s is HitBox)
+                {
+                    collided = (HitBox)s;
+                    Point colPoint = PointHelper.PointFromVector2(Position2D);
+                    PointInCallBack += ColFound;
+                    BoundingBox thisColBox = new BoundingBox(new Vector3(Position2D - Scale / 2, -1), new Vector3(Position2D + Scale / 2, 1));
+                }
+            }
+        }
+
+        private void ColFound(Vector2 location)
+        {
+            if (collided.Parent == player)
+            {
+                CollisionAbandonResponse = true;
+            }
+            else
+            {
+                if (collided.DamageType == 0)//Hull
+                {
+                    if (shotType == 0)//Ball
+                    {
+                        collided.Health -= 10;
+                    }
+                    else if (shotType == 3)//Carcass
+                    {
+                        //Damage over time
+                    }
+                    else
+                    {
+                        collided.Health -= 1;
+                    }
+                }
+                else if (collided.DamageType == 1)//Sail
+                {
+                    if (shotType == 1)//Chain
+                    {
+                        collided.Health -= 10;
+                    }
+                    else if (shotType == 3)//Carcass
+                    {
+                        //Damage over time
+                    }
+                    else
+                    {
+                        CollisionAbandonResponse = true;
+                        //hitbox.Health -= 1;
+                    }
+                }
+            }
         }
 
         private void Hit(Sprite hit)
         {
-            if(hit == player)
-            {
-                CollisionAbandonResponse = true;
-            }
-            if(hit is HitBox)
-            {
-                HitBox hitbox = (HitBox)hit;
 
-                if(hitbox.Parent == player)
-                {
-                    CollisionAbandonResponse = true;
-                }
-                else
-                {
-                    if(hitbox.DamageType == 0)//Hull
-                    {
-                        if(shotType == 0)//Ball
-                        {
-                            hitbox.Health -= 10;
-                        }
-                        else if(shotType == 3)//Carcass
-                        {
-                            //Damage over time
-                        }
-                        else
-                        {
-                            hitbox.Health -= 1;
-                        }
-                    }
-                    else if(hitbox.DamageType == 1)//Sail
-                    {
-                        if (shotType == 1)//Chain
-                        {
-                            hitbox.Health -= 10;
-                        }
-                        else if (shotType == 3)//Carcass
-                        {
-                            //Damage over time
-                        }
-                        else
-                        {
-                            CollisionAbandonResponse = true;
-                            //hitbox.Health -= 1;
-                        }
-                    }
-                }
-            }
         }
 
         private void AfterHit(Sprite hit)
         {
-            Velocity = Velocity / 10;
-            RotationHelper.FaceVelocity(this, DirectionAccuracy.free, false, 0f);
             splash = false;
+
+            //Debris
+            for (int i = 0; i <= GM.r.FloatBetween(0, 5); i++)
+            {
+                float spawnRot = -RotationAngle - 90 + GM.r.FloatBetween(-20, 20);
+                Vector3 spawnVel = RotationHelper.Direction3DFromAngle(spawnRot, 0) * -300;
+                SmokeParticle splash = new SmokeParticle(Position2D, spawnVel, spawnRot, 0.25f);
+                splash.Wash = Color.Brown;
+                splash.SX = 1f + GM.r.FloatBetween(-0.5f, 1f);
+                splash.SY = 4f + GM.r.FloatBetween(-3.5f, 1f);
+            }
+
             Kill();
         }
     }
