@@ -77,6 +77,7 @@ namespace Template.Game
         {
             if (splash)
             {
+                //Splash
                 for (int i = 0; i <= GM.r.FloatBetween(5, 10); i++)
                 {
                     float spawnRot = RotationAngle + GM.r.FloatBetween(-15, 15);
@@ -126,28 +127,34 @@ namespace Template.Game
         {
             if (hit is HitBox)
             {
-                HitBox collidedChild = (HitBox)hit;
-
-                if (collidedChild.IsParent = false)
+                HitBox hitBox = (HitBox)hit;
+                if (hitBox.Owner is HitBox)
                 {
-                    HitBox collided = (HitBox)collidedChild.Owner;
+                    hitBox = (HitBox)hitBox.Owner;
                 }
-                else
-                {
-                    HitBox collided = collidedChild;
-                }
-
-                if (collided.Owner == player)
+                if (hitBox.Owner == player)
                 {
                     CollisionAbandonResponse = true;
                 }
                 else
                 {
-                    if (collided.DamageType == 0)//Hull
+                    //Debris
+                    for (int i = 0; i <= GM.r.FloatBetween(0, 5); i++)
+                    {
+                        //float spawnRot = RotationAngle + 90 + GM.r.FloatBetween(-20, 20);
+                        float spawnRot = RotationHelper.AngleFromDirection(RotationHelper.MyDirection(this, 0)) + GM.r.FloatBetween(-20, 20);
+                        Vector3 spawnVel = RotationHelper.Direction3DFromAngle(spawnRot, 0) * -200;
+                        SmokeParticle debris = new SmokeParticle(Position2D, spawnVel, spawnRot, 0.25f);
+                        debris.Wash = Color.Brown;
+                        debris.SX = 1f + GM.r.FloatBetween(-0.5f, 1f);
+                        debris.SY = 4f + GM.r.FloatBetween(-3.5f, 1f);
+                    }
+
+                    if (hitBox.DamageType == 0)//Hull
                     {
                         if (shotType == 0)//Ball
                         {
-                            collided.Health -= 10;
+                            hitBox.Health -= 10;
                         }
                         else if (shotType == 3)//Carcass
                         {
@@ -155,14 +162,14 @@ namespace Template.Game
                         }
                         else
                         {
-                            collided.Health -= 1;
+                            hitBox.Health -= 1;
                         }
                     }
-                    else if (collided.DamageType == 1)//Sail
+                    else if (hitBox.DamageType == 1)//Sail
                     {
                         if (shotType == 1)//Chain
                         {
-                            collided.Health -= 10;
+                            hitBox.Health -= 10;
                         }
                         else if (shotType == 3)//Carcass
                         {
@@ -171,7 +178,7 @@ namespace Template.Game
                         else
                         {
                             CollisionAbandonResponse = true;
-                            //hitbox.Health -= 1;
+                            hitBox.Health -= 1;
                         }
                     }
                 }
@@ -181,17 +188,16 @@ namespace Template.Game
         private void AfterHit(Sprite hit)
         {
             splash = false;
-
-            //Debris
-            for (int i = 0; i <= GM.r.FloatBetween(0, 5); i++)
-            {
-                float spawnRot = -RotationAngle - 90 + GM.r.FloatBetween(-20, 20);
-                Vector3 spawnVel = RotationHelper.Direction3DFromAngle(spawnRot, 0) * -300;
-                SmokeParticle splash = new SmokeParticle(Position2D, spawnVel, spawnRot, 0.25f);
-                splash.Wash = Color.Brown;
-                splash.SX = 1f + GM.r.FloatBetween(-0.5f, 1f);
-                splash.SY = 4f + GM.r.FloatBetween(-3.5f, 1f);
-            }
+            ////Debris
+            //for (int i = 0; i <= GM.r.FloatBetween(0, 5); i++)
+            //{
+            //    float spawnRot = -RotationAngle - 90 + GM.r.FloatBetween(-20, 20);
+            //    Vector3 spawnVel = RotationHelper.Direction3DFromAngle(spawnRot, 0) * -300;
+            //    SmokeParticle splash = new SmokeParticle(Position2D, spawnVel, spawnRot, 0.25f);
+            //    splash.Wash = Color.Brown;
+            //    splash.SX = 1f + GM.r.FloatBetween(-0.5f, 1f);
+            //    splash.SY = 4f + GM.r.FloatBetween(-3.5f, 1f);
+            //}
 
             Kill();
         }
