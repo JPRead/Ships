@@ -28,8 +28,7 @@ namespace Template
             Frame.Define(Tex.SingleWhitePixel);
             ScaleBoth = 10;
             Wash = Color.WhiteSmoke;
-
-            //RotationHelper.VelocityInThisDirection(this, new Vector3(spawnVel.X + xRan, spawnVel.Y + yRan, 0), 100);
+            
             Velocity = spawnVel;
 
             float rotRan = GM.r.FloatBetween(-10f, 10f);

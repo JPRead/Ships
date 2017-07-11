@@ -30,11 +30,6 @@ namespace Template
             {
                 return owner;
             }
-
-            //set
-            //{
-            //    owner = value;
-            //}
         }
 
         internal int Health
@@ -56,11 +51,6 @@ namespace Template
             {
                 return damageType;
             }
-
-            //set
-            //{
-            //    damageType = value;
-            //}
         }
 
         public bool IsParent
@@ -143,7 +133,6 @@ namespace Template
             offset = offset * offsetMagnitude;
             Position2D = owner.Position2D + offset;
             RotationAngle = owner.RotationAngle;
-            //RotationHelper.FaceDirection(this, RotationHelper.MyDirection(parent, 0), DirectionAccuracy.free, 0);
         }
     }
 }

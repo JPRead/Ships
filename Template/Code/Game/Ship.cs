@@ -142,8 +142,6 @@ namespace Template
                     }//Create multiplier that is <1
                     velFromWindAngle = (1/(velFromWindAngle+100)*100);
 
-                    //GM.textM.Draw(FontBank.arcadePixel, Convert.ToString(velOffsetAngle), 100, 100);
-
                     //Keep travelling forward
                     if (velOffsetAngle > 0)
                     {

@@ -7,7 +7,6 @@ namespace Template.Game
     internal class CannonBall : Sprite
     {
         private Sprite player;
-        private HitBox collided;
         private int damage;
         private int shotType;
         private float fireDelay;
@@ -20,11 +19,6 @@ namespace Template.Game
             {
                 return player;
             }
-
-            //set
-            //{
-            //    player = value;
-            //}
         }
 
         /// <summary>
@@ -188,17 +182,6 @@ namespace Template.Game
         private void AfterHit(Sprite hit)
         {
             splash = false;
-            ////Debris
-            //for (int i = 0; i <= GM.r.FloatBetween(0, 5); i++)
-            //{
-            //    float spawnRot = -RotationAngle - 90 + GM.r.FloatBetween(-20, 20);
-            //    Vector3 spawnVel = RotationHelper.Direction3DFromAngle(spawnRot, 0) * -300;
-            //    SmokeParticle splash = new SmokeParticle(Position2D, spawnVel, spawnRot, 0.25f);
-            //    splash.Wash = Color.Brown;
-            //    splash.SX = 1f + GM.r.FloatBetween(-0.5f, 1f);
-            //    splash.SY = 4f + GM.r.FloatBetween(-3.5f, 1f);
-            //}
-
             Kill();
         }
     }

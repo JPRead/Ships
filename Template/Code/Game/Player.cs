@@ -105,14 +105,6 @@ namespace Template
                 "~Hull Left   " + hitBoxHullLeft.Health + "~Hull Right  " + hitBoxHullRight.Health +
                 "~Sail Front  " + hitBoxSailFront.Health + "~Sail Middle " + hitBoxSailMiddle.Health + "~Sail Back   " + hitBoxSailBack.Health, 100, 100, TextAtt.TopLeft);
 
-            //Sprite debugHitBox = new Sprite();
-            //GM.engineM.AddSprite(debugHitBox);
-            //debugHitBox.Position2D = new Vector2(200, 200);
-            //debugHitBox.Frame.Define(Tex.SingleWhitePixel);
-            //debugHitBox.SX = hitBoxSailFront.Right - hitBoxSailFront.Left;
-            //debugHitBox.SY = hitBoxSailFront.Bottom - hitBoxSailFront.Top;
-            //hitBoxSailFront.
-
             //Mouse inputs
             //Sail amount
             if (speedButton.PressedLeft())
