@@ -74,14 +74,20 @@
             <param name="spawnAngle"></param>
             <param name="lifetime">Minimum lifetime for particle in seconds</param>
         </member>
-        <member name="M:Template.HitBox.#ctor(Template.Ship,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,System.Int32)">
+        <member name="M:Template.HitBox.#ctor(Engine7.Sprite,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,System.Int32)">
             <summary>
             Constructor for hitbox
             </summary>
-            <param name="owner">Parent of the hitbox</param>
+            <param name="hitBoxOwner">Parent of the hitbox</param>
             <param name="offsetFromPlayer">Offset from player centre when facing up - this can never be zero!</param>
             <param name="dimensions">Height and Width of hitbox</param>
             <param name="type">Type of damage taken by hitbox - 0 hull, 1 sail</param>
+        </member>
+        <member name="M:Template.HitBox.CreateCollisionArea(System.Single)">
+            <summary>
+            Creates collisions for hitbox that can effectively rotate
+            </summary>
+            <param name="colResolution"></param>
         </member>
         <member name="T:Template.ScoreEntry">
             <summary>

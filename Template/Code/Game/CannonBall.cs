@@ -120,64 +120,62 @@ namespace Template.Game
 
                 velApplied = true;
             }
-
-            foreach (Sprite s in GM.engineM.SpriteList)
-            {
-                if (s is HitBox)
-                {
-                    collided = (HitBox)s;
-                    Point colPoint = PointHelper.PointFromVector2(Position2D);
-                    PointInCallBack += ColFound;
-                    BoundingBox thisColBox = new BoundingBox(new Vector3(Position2D - Scale / 2, -1), new Vector3(Position2D + Scale / 2, 1));
-                }
-            }
-        }
-
-        private void ColFound(Vector2 location)
-        {
-            if (collided.Parent == player)
-            {
-                CollisionAbandonResponse = true;
-            }
-            else
-            {
-                if (collided.DamageType == 0)//Hull
-                {
-                    if (shotType == 0)//Ball
-                    {
-                        collided.Health -= 10;
-                    }
-                    else if (shotType == 3)//Carcass
-                    {
-                        //Damage over time
-                    }
-                    else
-                    {
-                        collided.Health -= 1;
-                    }
-                }
-                else if (collided.DamageType == 1)//Sail
-                {
-                    if (shotType == 1)//Chain
-                    {
-                        collided.Health -= 10;
-                    }
-                    else if (shotType == 3)//Carcass
-                    {
-                        //Damage over time
-                    }
-                    else
-                    {
-                        CollisionAbandonResponse = true;
-                        //hitbox.Health -= 1;
-                    }
-                }
-            }
         }
 
         private void Hit(Sprite hit)
         {
+            if (hit is HitBox)
+            {
+                HitBox collidedChild = (HitBox)hit;
 
+                if (collidedChild.IsParent = false)
+                {
+                    HitBox collided = (HitBox)collidedChild.Owner;
+                }
+                else
+                {
+                    HitBox collided = collidedChild;
+                }
+
+                if (collided.Owner == player)
+                {
+                    CollisionAbandonResponse = true;
+                }
+                else
+                {
+                    if (collided.DamageType == 0)//Hull
+                    {
+                        if (shotType == 0)//Ball
+                        {
+                            collided.Health -= 10;
+                        }
+                        else if (shotType == 3)//Carcass
+                        {
+                            //Damage over time
+                        }
+                        else
+                        {
+                            collided.Health -= 1;
+                        }
+                    }
+                    else if (collided.DamageType == 1)//Sail
+                    {
+                        if (shotType == 1)//Chain
+                        {
+                            collided.Health -= 10;
+                        }
+                        else if (shotType == 3)//Carcass
+                        {
+                            //Damage over time
+                        }
+                        else
+                        {
+                            CollisionAbandonResponse = true;
+                            //hitbox.Health -= 1;
+                        }
+                    }
+                }
+            }
         }
 
         private void AfterHit(Sprite hit)
