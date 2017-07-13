@@ -73,11 +73,6 @@ namespace Template
             {
                 return damageMul;
             }
-
-            set
-            {
-                damageMul = value;
-            }
         }
 
         /// <summary>

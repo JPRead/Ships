@@ -10,7 +10,7 @@
   <Class Name="Template.Game.CannonBall" Collapsed="true">
     <Position X="7" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAACAIACgCAAAAIAAAAAAAAAAAAhAAAAAQAAAAA=</HashCode>
+      <HashCode>BAAAAAACAIACgCAAAAIAAAAAAAAAAAAhAAAAAQAAAAA=</HashCode>
       <FileName>Game\CannonBall.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -24,21 +24,21 @@
   <Class Name="Template.Opponent" Collapsed="true">
     <Position X="0.5" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Game\Opponent.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Template.Player" Collapsed="true">
     <Position X="2.75" Y="5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gABAAAAAIYAAAAEAAQAAAIAAAAAAAAAACAACEAAIQAA=</HashCode>
+      <HashCode>gABAAAIIMcAAAAEAAQAAAAQAAAACAAgACAACEAAYQIE=</HashCode>
       <FileName>Game\Player.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Template.Ship" Collapsed="true">
     <Position X="1.75" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAIAAAAgAAAAAAAAAAgAEAAAABAAQAAAAAAg=</HashCode>
+      <HashCode>AAAAAAAEAIAAAAgAAAAAAAABCgAEgAAABAAQAUAAACg=</HashCode>
       <FileName>Game\Ship.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -122,8 +122,15 @@
   <Class Name="Template.HitBox">
     <Position X="8.75" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Game\HitZone.cs</FileName>
+      <HashCode>AACICiCgAIAAgAAAAAAAgAAgAAAAAAAAIAAgAAAACAg=</HashCode>
+      <FileName>Game\HitBox.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Template.DamageSprite">
+    <Position X="6.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Game\DamageSprite.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

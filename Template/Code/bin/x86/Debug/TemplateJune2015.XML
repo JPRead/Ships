@@ -4,6 +4,14 @@
         <name>TemplateJune2015</name>
     </assembly>
     <members>
+        <member name="M:Template.DamageSprite.#ctor(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,Template.HitBox)">
+            <summary>
+            Constructor for damageSprite
+            </summary>
+            <param name="startPos">Coordinates of centre of sprite</param>
+            <param name="dimensions">X and Y scale</param>
+            <param name="hitbox">Hitbox to target</param>
+        </member>
         <member name="M:Template.Game.Button.#ctor(Microsoft.Xna.Framework.Rectangle,System.Boolean)">
             <summary>
             Constructor for button

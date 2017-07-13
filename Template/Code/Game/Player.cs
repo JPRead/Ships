@@ -24,9 +24,19 @@ namespace Template
         private Button speedButton;
         private Button fireRight;
         private Button fireLeft;
-        private Button userInterfaceBackground;
+        private Button UIButtonsBackground;
+        private Button UIDamageBackground;
+        private Button[] UIBackgroundElements;
         private bool moveTargetReached;
         private Sprite fireZone;
+        //Use Z values for health
+        private DamageSprite damageHullFront;
+        private DamageSprite damageHullBack;
+        private DamageSprite damageHullLeft;
+        private DamageSprite damageHullRight;
+        private DamageSprite damageSailFront;
+        private DamageSprite damageSailMiddle;
+        private DamageSprite damageSailBack;
 
         /// <summary>
         /// This must be set to true if a button has been pressed during a tick, else button presses could be interpreted as movement orders
@@ -92,8 +102,18 @@ namespace Template
             fireZone.SX = 400;
             fireZone.Wash = Color.Beige;
             fireZone.Alpha = 0.5f;
+            
+            UIButtonsBackground = new Button(new Rectangle(GM.screenSize.Center.X, GM.screenSize.Bottom - 100, 250, 200), false);
+            UIDamageBackground = new Button(new Rectangle(GM.screenSize.Left + 75, GM.screenSize.Bottom - 75, 150, 150), false);
+            UIBackgroundElements = new Button[] { UIButtonsBackground, UIDamageBackground };
 
-            userInterfaceBackground = new Button(new Rectangle(GM.screenSize.Center.X, GM.screenSize.Bottom - 100, 250, 200), false);
+            damageHullLeft = new DamageSprite(UIDamageBackground.Position2D + new Vector2(-10, 0), new Vector2(20, 65), hitBoxHullLeft);
+            damageHullRight = new DamageSprite(UIDamageBackground.Position2D + new Vector2(10, 0), new Vector2(20, 65), hitBoxHullRight);
+            damageHullFront = new DamageSprite(UIDamageBackground.Position2D + new Vector2(0, -40), new Vector2(40, 25), hitBoxHullFront);
+            damageHullBack = new DamageSprite(UIDamageBackground.Position2D + new Vector2(0, 40), new Vector2(40, 25), hitBoxHullBack);
+            damageSailFront = new DamageSprite(UIDamageBackground.Position2D + new Vector2(0, -25), new Vector2(60, 5), hitBoxSailFront);
+            damageSailMiddle = new DamageSprite(UIDamageBackground.Position2D + new Vector2(0, -1), new Vector2(70, 5), hitBoxSailMiddle);
+            damageSailBack = new DamageSprite(UIDamageBackground.Position2D + new Vector2(0, 30), new Vector2(65, 5), hitBoxSailBack);
 
             UpdateCallBack += Move;
         }
@@ -162,7 +182,11 @@ namespace Template
 
             //Movement orders
             //Check that no clicks are made on UI background
-            if (userInterfaceBackground.PressedLeft() || userInterfaceBackground.PressedRight() || userInterfaceBackground.HeldLeft() || userInterfaceBackground.HeldRight()){ }
+            for(int i = 0; i < UIBackgroundElements.Length; i++)
+            {
+                if (UIBackgroundElements[i].PressedLeft() || UIBackgroundElements[i].PressedRight() || UIBackgroundElements[i].HeldLeft() || UIBackgroundElements[i].HeldRight()) { }
+            }
+            
             if (buttonPressed == false)
             {
                 if (GM.inputM.MouseRightButtonPressed())
