@@ -54,19 +54,19 @@ namespace Template
             RotationAngle = 0;
 
             //Hitboxes
-            hitBoxHullLeft = new HitBox(this, new Vector2(-10, 0), new Vector2(25, 70), 0);
+            hitBoxHullLeft = new HitBox(this, new Vector2(-10, 0), new Vector2(25, 70), 1, 0);
             hitBoxHullLeft.Wash = Color.Red;
-            hitBoxHullRight = new HitBox(this, new Vector2(10, 0), new Vector2(25, 70), 0);
+            hitBoxHullRight = new HitBox(this, new Vector2(10, 0), new Vector2(25, 70), 1, 0);
             hitBoxHullRight.Wash = Color.Blue;
-            hitBoxHullFront = new HitBox(this, new Vector2(0, 40), new Vector2(45, 25), 0);
+            hitBoxHullFront = new HitBox(this, new Vector2(0, 40), new Vector2(45, 25), 0.2f, 0);
             hitBoxHullFront.Wash = Color.Green;
-            hitBoxHullBack = new HitBox(this, new Vector2(0, -40), new Vector2(45, 25), 0);
+            hitBoxHullBack = new HitBox(this, new Vector2(0, -40), new Vector2(45, 25), 0.2f, 0);
             hitBoxHullBack.Wash = Color.Yellow;
-            hitBoxSailFront = new HitBox(this, new Vector2(0, 25), new Vector2(60, 5), 1);
+            hitBoxSailFront = new HitBox(this, new Vector2(0, 25), new Vector2(60, 5), 1, 1);
             hitBoxSailFront.Wash = Color.Violet;
-            hitBoxSailMiddle = new HitBox(this, new Vector2(0, 1), new Vector2(70, 5), 1);
+            hitBoxSailMiddle = new HitBox(this, new Vector2(0, 1), new Vector2(70, 5), 1, 1);
             hitBoxSailMiddle.Wash = Color.Violet;
-            hitBoxSailBack = new HitBox(this, new Vector2(0, -30), new Vector2(65, 5), 1);
+            hitBoxSailBack = new HitBox(this, new Vector2(0, -30), new Vector2(65, 5), 1, 1);
             hitBoxSailBack.Wash = Color.Violet;
         }
 

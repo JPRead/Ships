@@ -74,7 +74,7 @@
             <param name="spawnAngle"></param>
             <param name="lifetime">Minimum lifetime for particle in seconds</param>
         </member>
-        <member name="M:Template.HitBox.#ctor(Engine7.Sprite,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,System.Int32)">
+        <member name="M:Template.HitBox.#ctor(Engine7.Sprite,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,System.Single,System.Int32)">
             <summary>
             Constructor for hitbox
             </summary>

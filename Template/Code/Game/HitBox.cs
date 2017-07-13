@@ -23,6 +23,7 @@ namespace Template
         private float offsetMagnitude;
         private float offsetAngle;
         private int health;
+        private float damageMul;
 
         internal Sprite Owner
         {
@@ -66,6 +67,19 @@ namespace Template
             }
         }
 
+        public float DamageMul
+        {
+            get
+            {
+                return damageMul;
+            }
+
+            set
+            {
+                damageMul = value;
+            }
+        }
+
         /// <summary>
         /// Constructor for hitbox
         /// </summary>
@@ -73,9 +87,9 @@ namespace Template
         /// <param name="offsetFromPlayer">Offset from player centre when facing up - this can never be zero!</param>
         /// <param name="dimensions">Height and Width of hitbox</param>
         /// <param name="type">Type of damage taken by hitbox - 0 hull, 1 sail</param>
-        public HitBox(Sprite hitBoxOwner, Vector2 offsetFromPlayer, Vector2 dimensions, int type)
+        public HitBox(Sprite hitBoxOwner, Vector2 offsetFromPlayer, Vector2 dimensions, float damageMultiplier, int type)
         {
-
+            damageMul = damageMultiplier;
             damageType = type;
             health = 100;
             owner = hitBoxOwner;
@@ -122,7 +136,7 @@ namespace Template
             {
                 for (int yOffset = 0; yOffset <= SY; yOffset += (int)colResolution)
                 {
-                    new HitBox(this, new Vector2(Position2D.X - SX / 2 + xOffset, Position2D.Y - SY / 2 + yOffset), new Vector2(colResolution, colResolution), damageType);
+                    new HitBox(this, new Vector2(Position2D.X - SX / 2 + xOffset, Position2D.Y - SY / 2 + yOffset), new Vector2(colResolution, colResolution), damageMul,  damageType);
                 }
             }
         }

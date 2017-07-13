@@ -76,7 +76,7 @@ namespace Template.Game
                 {
                     float spawnRot = RotationAngle + GM.r.FloatBetween(-15, 15);
                     Vector3 spawnVel = RotationHelper.Direction3DFromAngle(spawnRot, 0) * 200;
-                    SmokeParticle splash = new SmokeParticle(Position2D, spawnVel, spawnRot, 0.5f);
+                    SmokeParticle splash = new SmokeParticle(Position2D, spawnVel, spawnRot, 0.25f);
                     splash.Wash = Color.Aqua;
                     splash.SX = 1f;
                     splash.SY = 5f;
@@ -86,7 +86,7 @@ namespace Template.Game
                 {
                     float spawnRot = -RotationAngle + GM.r.FloatBetween(-20, 20);
                     Vector3 spawnVel = RotationHelper.Direction3DFromAngle(spawnRot, 0) * -10;
-                    SmokeParticle splash = new SmokeParticle(Position2D, spawnVel, spawnRot, 0.5f);
+                    SmokeParticle splash = new SmokeParticle(Position2D, spawnVel, spawnRot, 0.1f);
                     splash.Wash = Color.Aqua;
                     splash.SX = 1f;
                     splash.SY = 2.5f;
@@ -136,19 +136,19 @@ namespace Template.Game
                     for (int i = 0; i <= GM.r.FloatBetween(0, 5); i++)
                     {
                         //float spawnRot = RotationAngle + 90 + GM.r.FloatBetween(-20, 20);
-                        float spawnRot = RotationHelper.AngleFromDirection(RotationHelper.MyDirection(this, 0)) + GM.r.FloatBetween(-20, 20);
+                        float spawnRot = RotationHelper.AngleFromDirection(RotationHelper.MyDirection(this, 0)) + GM.r.FloatBetween(-40, 40);
                         Vector3 spawnVel = RotationHelper.Direction3DFromAngle(spawnRot, 0) * -200;
-                        SmokeParticle debris = new SmokeParticle(Position2D, spawnVel, spawnRot, 0.25f);
+                        SmokeParticle debris = new SmokeParticle(Position2D, spawnVel, spawnRot, 0.1f);
                         debris.Wash = Color.Brown;
-                        debris.SX = 1f + GM.r.FloatBetween(-0.5f, 1f);
-                        debris.SY = 4f + GM.r.FloatBetween(-3.5f, 1f);
+                        debris.SX = 3f + GM.r.FloatBetween(-2f, 2f);
+                        debris.SY = 3f + GM.r.FloatBetween(-2f, 2f);
                     }
 
                     if (hitBox.DamageType == 0)//Hull
                     {
                         if (shotType == 0)//Ball
                         {
-                            hitBox.Health -= 10;
+                            hitBox.Health -= (int)(10 * hitBox.DamageMul);
                         }
                         else if (shotType == 3)//Carcass
                         {

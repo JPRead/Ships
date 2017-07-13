@@ -22,7 +22,7 @@ namespace Template
         /// <param name="lifetime">Minimum lifetime for particle in seconds</param>
         public SmokeParticle(Vector2 spawnPos, Vector3 spawnVel, float spawnAngle, float lifetime)
         {
-            GM.eventM.AddEvent(tiLifetime = new Event(lifetime + GM.r.FloatBetween(0,2), "Lifetime Counter"));
+            GM.eventM.AddEvent(tiLifetime = new Event(lifetime + GM.r.FloatBetween(0,0.1f), "Lifetime Counter"));
 
             GM.engineM.AddSprite(this);
             Frame.Define(Tex.SingleWhitePixel);
