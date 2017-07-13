@@ -9,7 +9,7 @@ using Template.Game;
 
 namespace Template
 {
-    internal class SmokeParticle : Sprite
+    internal class FadingParticle : Sprite
     {
         Event tiLifetime;
 
@@ -20,7 +20,7 @@ namespace Template
         /// <param name="spawnVel"></param>
         /// <param name="spawnAngle"></param>
         /// <param name="lifetime">Minimum lifetime for particle in seconds</param>
-        public SmokeParticle(Vector2 spawnPos, Vector3 spawnVel, float spawnAngle, float lifetime)
+        public FadingParticle(Vector2 spawnPos, Vector3 spawnVel, float spawnAngle, float lifetime)
         {
             GM.eventM.AddEvent(tiLifetime = new Event(lifetime + GM.r.FloatBetween(0,0.1f), "Lifetime Counter"));
 

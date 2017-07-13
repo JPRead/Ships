@@ -10,6 +10,5 @@ namespace Template
             boss.Frame.Define(Tex.Rectangle50by50);
             Align = Align.centre;
         }
-
     }
 }

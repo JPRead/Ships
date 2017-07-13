@@ -56,7 +56,7 @@
             <param name="player">The object that fired the bullet</param>
             <param name="fireTowards">2D vector to travel towards</param>
             <param name="bulletDamage">Damage on hit</param>
-            /// <param name="type">Type of shot to use - 0 ball shot, 1 chain shot, 2 grape shot, 3 carcass shot</param>
+            /// <param name="type">Type of shot to use - 0 ball shot, 1 bar shot, 2 grape shot, 3 carcass shot</param>
         </member>
         <member name="T:Template.Opponent">
             <summary>
@@ -73,7 +73,7 @@
             This must be set to true if a button has been pressed during a tick, else button presses could be interpreted as movement orders
             </summary>
         </member>
-        <member name="M:Template.SmokeParticle.#ctor(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector3,System.Single,System.Single)">
+        <member name="M:Template.FadingParticle.#ctor(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector3,System.Single,System.Single)">
             <summary>
             Constructor for smoke particle
             </summary>

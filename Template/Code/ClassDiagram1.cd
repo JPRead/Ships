@@ -1,24 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="Template.Game.Button">
-    <Position X="10.5" Y="2.5" Width="1.5" />
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="Template.Game.Button" Collapsed="true">
+    <Position X="5.25" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAQAAAAAAAAAAAIAACAAQAAAAEAAAEAgQABAAAAQAA=</HashCode>
       <FileName>Game\Button.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Template.Game.CannonBall" Collapsed="true">
-    <Position X="7" Y="0.5" Width="1.5" />
+    <Position X="5.25" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>BAAAAAACAIACgCAAAAIAAAAAAAAAAAAhAAAAAQAAAAA=</HashCode>
       <FileName>Game\CannonBall.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Template.Game.GameSetup" Collapsed="true">
-    <Position X="2.75" Y="1.75" Width="1.5" />
+    <Position X="0.5" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAEAAAABQAAEAEAAAAAABACAAAQAAAAA=</HashCode>
       <FileName>Game\GameSetup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Template.DamageSprite" Collapsed="true">
+    <Position X="5.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
+      <FileName>Game\DamageSprite.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Template.HitBox" Collapsed="true">
+    <Position X="7" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACICiCgAIAAgAAAAAAAgAAgAAAAAAAAIAAgAAAACAg=</HashCode>
+      <FileName>Game\HitBox.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Template.Opponent" Collapsed="true">
@@ -42,43 +56,43 @@
       <FileName>Game\Ship.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Template.SmokeParticle" Collapsed="true">
-    <Position X="8.75" Y="2.5" Width="1.5" />
+  <Class Name="Template.FadingParticle" Collapsed="true">
+    <Position X="7" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAEAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Game\SmokeParticle.cs</FileName>
+      <FileName>Game\FadingParticle.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Template.Marker" Collapsed="true">
-    <Position X="7" Y="1.5" Width="1.5" />
+    <Position X="10.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Scoring\Marker.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Template.MenuInitial" Collapsed="true">
-    <Position X="8.75" Y="1.5" Width="1.5" />
+    <Position X="5.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAABAAAAAAAAAAQAAAAAA=</HashCode>
       <FileName>Scoring\MenuInitial.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Template.ScoreEntry" Collapsed="true">
-    <Position X="5.25" Y="2.5" Width="1.5" />
+    <Position X="8.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAIAAAAAgAAAQAAAAAAgAAAACAA=</HashCode>
       <FileName>Scoring\ScoreEntry.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Template.ScoreSystem" Collapsed="true">
-    <Position X="7" Y="2.5" Width="1.5" />
+    <Position X="10.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAABAAAAIgAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Scoring\ScoreSystem.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Template.GM" Collapsed="true">
-    <Position X="5.25" Y="1.5" Width="1.5" />
+    <Position X="7" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>MQYBFAAACKAIAwAoAQAFSgQBAAAECB4iAoAhJQAAIAU=</HashCode>
       <FileName>Setup loading and storage\Assets.cs</FileName>
@@ -92,45 +106,31 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Template.Cursor" Collapsed="true">
-    <Position X="8.75" Y="0.5" Width="1.5" />
+    <Position X="8.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAIAABACAAAAAAAAAAAAAAAAAACAAAEAAAQA=</HashCode>
       <FileName>Setup loading and storage\Cursor.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Template.ExtraMessageTypes" Collapsed="true">
-    <Position X="10.5" Y="0.5" Width="1.5" />
+    <Position X="5.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAABCAAAAA=</HashCode>
       <FileName>Setup loading and storage\ExtraMessageTypes.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Template.Program" Collapsed="true">
-    <Position X="10.5" Y="1.5" Width="1.5" />
+    <Position X="7" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>Template Initialisation\Program.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Template.Title.TitleSetup" Collapsed="true">
-    <Position X="0.5" Y="1.75" Width="1.5" />
+    <Position X="2.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAACAAAAAAAAA=</HashCode>
       <FileName>Title\TitleSetup.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Template.HitBox">
-    <Position X="8.75" Y="3.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AACICiCgAIAAgAAAAAAAgAAgAAAAAAAAIAAgAAAACAg=</HashCode>
-      <FileName>Game\HitBox.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Template.DamageSprite">
-    <Position X="6.25" Y="4" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAQAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAg=</HashCode>
-      <FileName>Game\DamageSprite.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

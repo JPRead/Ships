@@ -26,11 +26,6 @@ namespace Template.Game
             {
                 return player;
             }
-
-            set
-            {
-                player = value;
-            }
         }
 
         internal static Opponent Opponent
@@ -39,11 +34,6 @@ namespace Template.Game
             {
                 return opponent;
             }
-
-            set
-            {
-                opponent = value;
-            }
         }
 
         public static float WindDir
@@ -51,11 +41,6 @@ namespace Template.Game
             get
             {
                 return windDir;
-            }
-
-            set
-            {
-                windDir = value;
             }
         }
 

@@ -119,7 +119,7 @@
     <Compile Include="Game\CannonBall.cs" />
     <Compile Include="Game\Opponent.cs" />
     <Compile Include="Game\Player.cs" />
-    <Compile Include="Game\SmokeParticle.cs" />
+    <Compile Include="Game\FadingParticle.cs" />
     <Compile Include="Game\HitBox.cs" />
     <Compile Include="Scoring\Marker.cs" />
     <Compile Include="Scoring\MenuInitial.cs" />
