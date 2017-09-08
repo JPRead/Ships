@@ -37,6 +37,8 @@ namespace Template
         private DamageSprite damageSailFront;
         private DamageSprite damageSailMiddle;
         private DamageSprite damageSailBack;
+        private Sprite UIReloadLeft;
+        private Sprite UIReloadRight;
 
         /// <summary>
         /// This must be set to true if a button has been pressed during a tick, else button presses could be interpreted as movement orders
@@ -101,8 +103,30 @@ namespace Template
             fireZone.SY = 100;
             fireZone.SX = 400;
             fireZone.Wash = Color.Beige;
-            fireZone.Alpha = 0.5f;
-            
+            fireZone.Alpha = 0.25f;
+
+            UIReloadLeft = new Sprite();
+            UIReloadLeft.Frame.Define(Tex.SingleWhitePixel);
+            UIReloadLeft.SX = 50;
+            UIReloadLeft.SY = 50;
+            UIReloadLeft.Align = Align.bottom;
+            UIReloadLeft.Position2D = new Vector2(fireLeft.Position2D.X, fireLeft.Bottom);
+            UIReloadLeft.Alpha = 0.5f;
+            UIReloadLeft.Wash = Color.Beige;
+            UIReloadLeft.Layer += 2;
+            GM.engineM.AddSprite(UIReloadLeft);
+
+            UIReloadRight = new Sprite();
+            UIReloadRight.Frame.Define(Tex.SingleWhitePixel);
+            UIReloadRight.SX = 50;
+            UIReloadRight.SY = 50;
+            UIReloadRight.Align = Align.bottom;
+            UIReloadRight.Position2D = new Vector2(fireRight.Position2D.X, fireRight.Bottom);
+            UIReloadRight.Alpha = 0.5f;
+            UIReloadRight.Wash = Color.Beige;
+            UIReloadRight.Layer += 2;
+            GM.engineM.AddSprite(UIReloadRight);
+
             UIButtonsBackground = new Button(new Rectangle(GM.screenSize.Center.X, GM.screenSize.Bottom - 100, 250, 200), false);
             UIDamageBackground = new Button(new Rectangle(GM.screenSize.Left + 75, GM.screenSize.Bottom - 75, 150, 150), false);
             UIBackgroundElements = new Button[] { UIButtonsBackground, UIDamageBackground };
@@ -121,9 +145,30 @@ namespace Template
         private void Move()
         {
             //Debug text
-            GM.textM.Draw(FontBank.arcadePixel, "Hull Front  " + hitBoxHullFront.Health + "~Hull Back   " + hitBoxHullBack.Health +
-                "~Hull Left   " + hitBoxHullLeft.Health + "~Hull Right  " + hitBoxHullRight.Health +
-                "~Sail Front  " + hitBoxSailFront.Health + "~Sail Middle " + hitBoxSailMiddle.Health + "~Sail Back   " + hitBoxSailBack.Health, 100, 100, TextAtt.TopLeft);
+            //GM.textM.Draw(FontBank.arcadePixel, "Hull Front  " + hitBoxHullFront.Health + "~Hull Back   " + hitBoxHullBack.Health +
+            //    "~Hull Left   " + hitBoxHullLeft.Health + "~Hull Right  " + hitBoxHullRight.Health +
+            //    "~Sail Front  " + hitBoxSailFront.Health + "~Sail Middle " + hitBoxSailMiddle.Health + "~Sail Back   " + hitBoxSailBack.Health, 100, 100, TextAtt.TopLeft);
+
+            //UI updates
+            if (GM.eventM.Elapsed(tiReloadLeft))
+            {
+                UIReloadLeft.Visible = false;
+            }
+            else
+            {
+                float heightMul = (tiReloadLeft.Interval - tiReloadLeft.ElapsedSoFar) / tiReloadLeft.Interval ;
+                UIReloadLeft.SY = 50 * heightMul;
+            }
+
+            if (GM.eventM.Elapsed(tiReloadRight))
+            {
+                UIReloadRight.Visible = false;
+            }
+            else
+            {
+                float heightMul = (tiReloadRight.Interval - tiReloadRight.ElapsedSoFar) / tiReloadRight.Interval ;
+                UIReloadRight.SY = 50 * heightMul;
+            }
 
             //Mouse inputs
             //Sail amount
@@ -155,11 +200,11 @@ namespace Template
             }
             if (fireRight.PressedLeft())
             {
-                fire(false);
+                fire(false, shotType);
             }
             if (fireLeft.PressedLeft())
             {
-                fire(true);
+                fire(true, shotType);
             }
 
             if (fireRight.Hover())

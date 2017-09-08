@@ -105,8 +105,8 @@ namespace Template
                 Visible = false;
 
                 //Debug
-                CollisionBoxVisible = true;
-                Visible = true;
+                //CollisionBoxVisible = true;
+                //Visible = true;
             }
             else
             {
@@ -114,7 +114,7 @@ namespace Template
                 CollisionActive = false;
                 Visible = true;
                 Wash = Color.Red;
-                Alpha = 0.25f;
+                Alpha = 0.75f;
                 WashCollision = Color.Red;
                 CreateCollisionArea(5);
             }

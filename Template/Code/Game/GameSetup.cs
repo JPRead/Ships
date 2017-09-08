@@ -47,7 +47,7 @@ namespace Template.Game
         public GameSetup() : base(true)
         {
             GM.engineM.DebugDisplay = Debug.fps | Debug.version;
-            GM.engineM.ScreenColour = Color.Black;
+            GM.engineM.ScreenColour = Color.LightSkyBlue;
 
             windDir = GM.r.FloatBetween(0, 360);
             Sprite windDirSprite = new Sprite();

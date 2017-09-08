@@ -36,8 +36,26 @@ namespace Template.Game
             
             this.player = player;
             GM.engineM.AddSprite(this);
-            Frame.Define(Tex.Circle4by4);
-            Wash = Color.DarkGray;
+            
+            switch (type)
+            {
+                case 0:
+                    Frame.Define(GM.txSprite, new Rectangle(110, 159, 5, 5));
+                    break;
+                case 1:
+                    Frame.Define(GM.txSprite, new Rectangle(122, 158, 3, 7));
+                    break;
+                case 3:
+                    Frame.Define(GM.txSprite, new Rectangle(130, 159, 7, 5));
+                    break;
+                case 2:
+                    Frame.Define(GM.txSprite, new Rectangle(143, 159, 1, 1));
+                    break;
+                default:
+                    Frame.Define(Tex.Circle4by4);
+                    Wash = Color.DarkGray;
+                    break;
+            }
             Friction = 0.25f;
 
             //Create direction vector and normalise
@@ -58,7 +76,13 @@ namespace Template.Game
             //kill after 5 seconds and delay firing
             TimerInitialise();
             fireDelay = GM.r.FloatBetween(0, 0.5f);
-            Timer.ShowAfterKillAfter(fireDelay, GM.r.FloatBetween(0.5f, 1f));
+            if (type != 3)
+            {
+                Timer.ShowAfterKillAfter(fireDelay, GM.r.FloatBetween(0.5f, 1f));
+            }
+            else {
+                Timer.ShowAfterKillAfter(fireDelay, GM.r.FloatBetween(0.2f, 0.4f));
+            }
 
             velApplied = false;
             UpdateCallBack += Move;
@@ -72,7 +96,12 @@ namespace Template.Game
             if (splash)
             {
                 //Splash
-                for (int i = 0; i <= GM.r.FloatBetween(5, 10); i++)
+                int maxParts = 10;
+                int minParts = 5;
+
+                if(shotType == 3) { maxParts = 2; minParts = 1; }
+                
+                for (int i = 0; i <= GM.r.FloatBetween(minParts, maxParts); i++)
                 {
                     float spawnRot = RotationAngle + GM.r.FloatBetween(-15, 15);
                     Vector3 spawnVel = RotationHelper.Direction3DFromAngle(spawnRot, 0) * 200;
@@ -156,7 +185,11 @@ namespace Template.Game
                         }
                         else
                         {
-                            hitBox.Health -= 1;
+                            hitBox.Health -= (int)(1 * hitBox.DamageMul);
+                        }
+                        if (shotType == 2) //Grape
+                        {
+                            //Crew damage
                         }
                     }
                     else if (hitBox.DamageType == 1)//Sail
@@ -164,6 +197,10 @@ namespace Template.Game
                         if (shotType == 1)//Bar
                         {
                             hitBox.Health -= 10;
+                        }
+                        else if(shotType == 0) //Ball
+                        {
+                            hitBox.Health -= (int)(1 * hitBox.DamageMul);
                         }
                         else if (shotType == 3)//Carcass
                         {

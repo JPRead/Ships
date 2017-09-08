@@ -492,11 +492,11 @@
             0 stopped, 1 half speed, 2 full speed
             </summary>
         </member>
-        <member name="M:Template.Ship.fire(System.Boolean)">
+        <member name="M:Template.Ship.fire(System.Boolean,System.Int32)">
             <summary>
             Fire cannons
             </summary>
-            <param name="left">If true fire from port side else starboard side</param>
+            <param name="left">If true fire from port side else starboard side</param><param name="type">Type of shot to use - 0 ball shot, 1 bar shot, 2 grape shot, 3 carcass shot</param>
         </member>
         <member name="M:Template.Program.Main(System.String[])">
             <summary>

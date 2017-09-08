@@ -23,6 +23,7 @@ namespace Template
         /// 0 stopped, 1 half speed, 2 full speed
         /// </summary>
         internal int sailAmount;
+        internal int shotType;
         internal bool isPlayer;
         internal Sprite moveLocSprite;
         internal HitBox hitBoxHullLeft;
@@ -32,13 +33,20 @@ namespace Template
         internal HitBox hitBoxSailFront;
         internal HitBox hitBoxSailMiddle;
         internal HitBox hitBoxSailBack;
+        internal Event tiReloadLeft;
+        internal Event tiReloadRight;
 
         public Ship()
         {
             sailAmount = 0;
+
+            shotType = 0;
             GM.engineM.AddSprite(this);
             GM.eventM.DelayCall(0.5f, setup);
             UpdateCallBack += Move;
+
+            GM.eventM.AddTimer(tiReloadLeft = new Event(5 + GM.r.FloatBetween(-1, 1), "Reload Cooldown Left"));
+            GM.eventM.AddTimer(tiReloadRight = new Event(5 + GM.r.FloatBetween(-1, 1), "Reload Cooldown Right"));
 
             moveLocSprite = new Sprite();
             GM.engineM.AddSprite(moveLocSprite);
@@ -83,29 +91,48 @@ namespace Template
         /// <summary>
         /// Fire cannons
         /// </summary>
-        /// <param name="left">If true fire from port side else starboard side</param>
-        internal void fire(bool left)
+        /// <param name="left">If true fire from port side else starboard side</param><param name="type">Type of shot to use - 0 ball shot, 1 bar shot, 2 grape shot, 3 carcass shot</param>
+        internal void fire(bool left, int type)
         {
-            Vector3 fireDir;
-            float leftMul;
-            if (left)
-                leftMul = 1;
-            else
-                leftMul = -1;
-
-            fireDir = Position + RotationHelper.MyDirection(this, leftMul * 90);
-
-            Vector3 offsetAlongDeck = Vector3.Zero;
-
-            offsetAlongDeck -= RotationHelper.MyDirection(this, 0) * 5;
-            for (int i = 0; i <= 20; i++)
+            if (left == true && GM.eventM.Elapsed(tiReloadLeft) || left == false && GM.eventM.Elapsed(tiReloadRight))
             {
-                new CannonBall(this, 
-                    new Vector2(Position2D.X - (Width) * RotationHelper.MyDirection(this, 0).X + offsetAlongDeck.X, Position2D.Y - (Width) * RotationHelper.MyDirection(this, 0).Y + offsetAlongDeck.Y), 
-                    new Vector2(fireDir.X - (Width) * RotationHelper.MyDirection(this, 0).X + offsetAlongDeck.X, fireDir.Y - (Width) * RotationHelper.MyDirection(this, 0).Y + offsetAlongDeck.Y), 
-                    1, 0);
+                Vector3 fireDir;
+                float leftMul;
+                if (left)
+                    leftMul = 1;
+                else
+                    leftMul = -1;
 
-                offsetAlongDeck += RotationHelper.MyDirection(this, 0) * 5;
+                fireDir = Position + RotationHelper.MyDirection(this, leftMul * 90);
+
+                Vector3 offsetAlongDeck = Vector3.Zero;
+
+                offsetAlongDeck -= RotationHelper.MyDirection(this, 0) * 5;
+
+                int multiply = 1;
+                if (type == 3) { multiply = 4; }
+
+                for (int i = 0; i <= 20; i++)
+                {
+                    for (int i2 = 0; i2 <= multiply; i2++)
+                    {
+                        new CannonBall(this,
+                            new Vector2(Position2D.X - (Width) * RotationHelper.MyDirection(this, 0).X + offsetAlongDeck.X, Position2D.Y - (Width) * RotationHelper.MyDirection(this, 0).Y + offsetAlongDeck.Y),
+                            new Vector2(fireDir.X - (Width) * RotationHelper.MyDirection(this, 0).X + offsetAlongDeck.X, fireDir.Y - (Width) * RotationHelper.MyDirection(this, 0).Y + offsetAlongDeck.Y),
+                            1, type);
+                    }
+
+                    offsetAlongDeck += RotationHelper.MyDirection(this, 0) * 5;
+                }
+
+                if (left == true)
+                {
+                    GM.eventM.AddTimer(tiReloadLeft = new Event(5 + GM.r.FloatBetween(-1, 1), "Reload Cooldown Left"));
+                }
+                else
+                {
+                    GM.eventM.AddTimer(tiReloadRight = new Event(5 + GM.r.FloatBetween(-1, 1), "Reload Cooldown Right"));
+                }
             }
         }
 
