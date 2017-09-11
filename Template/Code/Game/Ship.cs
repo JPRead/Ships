@@ -38,15 +38,19 @@ namespace Template
 
         public Ship()
         {
+            //Init values
             sailAmount = 0;
-
             shotType = 0;
+
             GM.engineM.AddSprite(this);
             GM.eventM.DelayCall(0.5f, setup);
             UpdateCallBack += Move;
 
             GM.eventM.AddTimer(tiReloadLeft = new Event(5 + GM.r.FloatBetween(-1, 1), "Reload Cooldown Left"));
+            //tiReloadLeft.raiseOnce = true;
             GM.eventM.AddTimer(tiReloadRight = new Event(5 + GM.r.FloatBetween(-1, 1), "Reload Cooldown Right"));
+            //tiReloadRight.raiseOnce = true;
+
 
             moveLocSprite = new Sprite();
             GM.engineM.AddSprite(moveLocSprite);
@@ -94,7 +98,8 @@ namespace Template
         /// <param name="left">If true fire from port side else starboard side</param><param name="type">Type of shot to use - 0 ball shot, 1 bar shot, 2 grape shot, 3 carcass shot</param>
         internal void fire(bool left, int type)
         {
-            if (left == true && GM.eventM.Elapsed(tiReloadLeft) || left == false && GM.eventM.Elapsed(tiReloadRight))
+            //This statement must be fixed
+            if ((left == true && GM.eventM.Elapsed(tiReloadLeft)) || (left == false && GM.eventM.Elapsed(tiReloadRight)))
             {
                 Vector3 fireDir;
                 float leftMul;
