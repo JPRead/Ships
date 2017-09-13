@@ -33,8 +33,8 @@ namespace Template
         internal HitBox hitBoxSailFront;
         internal HitBox hitBoxSailMiddle;
         internal HitBox hitBoxSailBack;
-        internal Event tiReloadLeft;
         internal Event tiReloadRight;
+        internal Event tiReloadLeft;
 
         public Ship()
         {
@@ -46,10 +46,8 @@ namespace Template
             GM.eventM.DelayCall(0.5f, setup);
             UpdateCallBack += Move;
 
-            GM.eventM.AddTimer(tiReloadLeft = new Event(5 + GM.r.FloatBetween(-1, 1), "Reload Cooldown Left"));
-            //tiReloadLeft.raiseOnce = true;
-            GM.eventM.AddTimer(tiReloadRight = new Event(5 + GM.r.FloatBetween(-1, 1), "Reload Cooldown Right"));
-            //tiReloadRight.raiseOnce = true;
+            GM.eventM.AddTimer(tiReloadRight = new Event(5, "Reload Cooldown Left"));
+            GM.eventM.AddTimer(tiReloadLeft = new Event(5, "Reload Cooldown Right"));
 
 
             moveLocSprite = new Sprite();
@@ -84,7 +82,15 @@ namespace Template
 
         private void Move()
         {
-
+            //Stop reload timers once reload is complete
+            if(GM.eventM.Elapsed(tiReloadRight))
+            {
+                tiReloadRight.Paused = true;
+            }
+            if (GM.eventM.Elapsed(tiReloadLeft))
+            {
+                tiReloadLeft.Paused = true;
+            }
         }
 
         private void setup()
@@ -95,27 +101,26 @@ namespace Template
         /// <summary>
         /// Fire cannons
         /// </summary>
-        /// <param name="left">If true fire from port side else starboard side</param><param name="type">Type of shot to use - 0 ball shot, 1 bar shot, 2 grape shot, 3 carcass shot</param>
-        internal void fire(bool left, int type)
+        /// <param name="right">If true fire from right side else left side</param><param name="type">Type of shot to use - 0 ball shot, 1 bar shot, 2 grape shot, 3 carcass shot</param>
+        internal void fire(bool right, int type)
         {
-            //This statement must be fixed
-            if ((left == true && GM.eventM.Elapsed(tiReloadLeft)) || (left == false && GM.eventM.Elapsed(tiReloadRight)))
+            if ((right && tiReloadRight.Paused) || (right == false && tiReloadLeft.Paused))
             {
                 Vector3 fireDir;
-                float leftMul;
-                if (left)
-                    leftMul = 1;
+                float rightMul;
+                if (right)
+                    rightMul = 1;
                 else
-                    leftMul = -1;
+                    rightMul = -1;
 
-                fireDir = Position + RotationHelper.MyDirection(this, leftMul * 90);
+                fireDir = Position + RotationHelper.MyDirection(this, rightMul * 90);
 
                 Vector3 offsetAlongDeck = Vector3.Zero;
 
                 offsetAlongDeck -= RotationHelper.MyDirection(this, 0) * 5;
 
-                int multiply = 1;
-                if (type == 3) { multiply = 4; }
+                int multiply = 2;
+                if (type == 3) { multiply = 4; } //Cannons fire multiple times - for use with grape shot
 
                 for (int i = 0; i <= 20; i++)
                 {
@@ -130,13 +135,13 @@ namespace Template
                     offsetAlongDeck += RotationHelper.MyDirection(this, 0) * 5;
                 }
 
-                if (left == true)
+                if (right == true)
                 {
-                    GM.eventM.AddTimer(tiReloadLeft = new Event(5 + GM.r.FloatBetween(-1, 1), "Reload Cooldown Left"));
+                    tiReloadRight.Paused = false;
                 }
                 else
                 {
-                    GM.eventM.AddTimer(tiReloadRight = new Event(5 + GM.r.FloatBetween(-1, 1), "Reload Cooldown Right"));
+                    tiReloadLeft.Paused = false;
                 }
             }
         }
