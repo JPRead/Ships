@@ -26,11 +26,9 @@ namespace Template.Game
         /// </summary>
         /// <param name="player">The object that fired the bullet</param>
         /// <param name="fireTowards">2D vector to travel towards</param>
-        /// <param name="bulletDamage">Damage on hit</param>
-        /// /// <param name="type">Type of shot to use - 0 ball shot, 1 bar shot, 2 grape shot, 3 carcass shot</param>
-        public CannonBall(Sprite player, Vector2 fireFrom, Vector2 fireTowards, int bulletDamage, int type)
+        /// <param name="type">Type of shot to use - 0 ball shot, 1 bar shot, 2 carcass shot, 3 grape shot</param>
+        public CannonBall(Sprite player, Vector2 fireFrom, Vector2 fireTowards, int type)
         {
-            damage = bulletDamage;
             Position2D = fireFrom;
             shotType = type;
             
@@ -40,16 +38,19 @@ namespace Template.Game
             switch (type)
             {
                 case 0:
-                    Frame.Define(GM.txSprite, new Rectangle(110, 159, 5, 5));
+                    Frame.Define(GM.txSprite, new Rectangle(111, 160, 5, 5));
                     break;
                 case 1:
-                    Frame.Define(GM.txSprite, new Rectangle(122, 158, 3, 7));
-                    break;
-                case 3:
-                    Frame.Define(GM.txSprite, new Rectangle(130, 159, 7, 5));
+                    Frame.Define(GM.txSprite, new Rectangle(121, 161, 7, 3));
+                    ScaleBoth = 1.25f;
                     break;
                 case 2:
-                    Frame.Define(GM.txSprite, new Rectangle(143, 159, 1, 1));
+                    Frame.Define(GM.txSprite, new Rectangle(133, 160, 5, 7));
+                    ScaleBoth = 1.25f;
+                    break;
+                case 3:
+                    Frame.Define(GM.txSprite, new Rectangle(143, 159, 2, 2));
+                    ScaleBoth = 2;
                     break;
                 default:
                     Frame.Define(Tex.Circle4by4);
@@ -150,11 +151,12 @@ namespace Template.Game
         {
             if (hit is HitBox)
             {
-                HitBox hitBox = (HitBox)hit;
+                HitBox hitBox = (HitBox)hit; //Get owner of hitbox
                 if (hitBox.Owner is HitBox)
                 {
                     hitBox = (HitBox)hitBox.Owner;
                 }
+
                 if (hitBox.Owner == player)
                 {
                     CollisionAbandonResponse = true;
@@ -196,7 +198,7 @@ namespace Template.Game
                     {
                         if (shotType == 1)//Bar
                         {
-                            hitBox.Health -= 10;
+                            hitBox.Health -= (int)(10 * hitBox.DamageMul);
                         }
                         else if(shotType == 0) //Ball
                         {

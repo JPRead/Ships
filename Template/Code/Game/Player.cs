@@ -96,7 +96,11 @@ namespace Template
             speedButton.SetDisplay(new Rectangle(75, 159, 6, 40));
 
             fireRight = new Button(new Rectangle(GM.screenSize.Center.X - 75, GM.screenSize.Bottom - 150, 50, 50), true);
+            fireRight.SetDisplay(new Rectangle(150, 160, 20, 20));
+
             fireLeft = new Button(new Rectangle(GM.screenSize.Center.X + 75, GM.screenSize.Bottom - 150, 50, 50), true);
+            fireLeft.SetDisplay(new Rectangle(150, 160, 20, 20));
+
             fireZone = new Sprite();
             GM.engineM.AddSprite(fireZone);
             fireZone.Frame.Define(Tex.SingleWhitePixel);
@@ -127,9 +131,10 @@ namespace Template
             UIReloadLeft.Layer += 2;
             GM.engineM.AddSprite(UIReloadLeft);
 
+            //Set up UI background
             UIButtonsBackground = new Button(new Rectangle(GM.screenSize.Center.X, GM.screenSize.Bottom - 100, 250, 200), false);
             UIDamageBackground = new Button(new Rectangle(GM.screenSize.Left + 75, GM.screenSize.Bottom - 75, 150, 150), false);
-            UIBackgroundElements = new Button[] { UIButtonsBackground, UIDamageBackground };
+            UIBackgroundElements = new Button[] { UIButtonsBackground, UIDamageBackground };//Background elements must be in this array
 
             damageHullLeft = new DamageSprite(UIDamageBackground.Position2D + new Vector2(-10, 0), new Vector2(20, 65), hitBoxHullLeft);
             damageHullRight = new DamageSprite(UIDamageBackground.Position2D + new Vector2(10, 0), new Vector2(20, 65), hitBoxHullRight);
@@ -173,7 +178,7 @@ namespace Template
             }
 
             //Mouse inputs
-            //Sail amount
+            //Set sail amount
             if (speedButton.PressedLeft())
             {
                 if (sailAmount == 0)
@@ -200,13 +205,63 @@ namespace Template
                     speedButton.SetDisplay(new Rectangle(82, 159, 12, 40));
                 }
             }
+
+            //Set shot type
+            if (fireRight.PressedRight())
+            {
+                GM.eventM.AddTimer(tiReloadLeft = new Event(5, "Reload Cooldown Right"));
+                switch (shotTypeRight)
+                {
+                    case 0:
+                        shotTypeRight = 1;
+                        fireRight.SetDisplay(new Rectangle(190, 164, 28, 12));
+                        break;
+                    case 1:
+                        shotTypeRight = 2;
+                        fireRight.SetDisplay(new Rectangle(238, 152, 20, 28));
+                        break;
+                    case 2:
+                        shotTypeRight = 3;
+                        fireRight.SetDisplay(new Rectangle(278, 156, 28, 28));
+                        break;
+                    case 3:
+                        shotTypeRight = 0;
+                        fireRight.SetDisplay(new Rectangle(150, 160, 20, 20));
+                        break;
+                }
+            }
+            if (fireLeft.PressedRight())
+            {
+                GM.eventM.AddTimer(tiReloadRight = new Event(5, "Reload Cooldown Left"));
+                switch (shotTypeLeft)
+                {
+                    case 0:
+                        shotTypeLeft = 1;
+                        fireLeft.SetDisplay(new Rectangle(190, 164, 28, 12));
+                        break;
+                    case 1:
+                        shotTypeLeft = 2;
+                        fireLeft.SetDisplay(new Rectangle(238, 152, 20, 28));
+                        break;
+                    case 2:
+                        shotTypeLeft = 3;
+                        fireLeft.SetDisplay(new Rectangle(278, 156, 28, 28));
+                        break;
+                    case 3:
+                        shotTypeLeft = 0;
+                        fireLeft.SetDisplay(new Rectangle(150, 160, 20, 20));
+                        break;
+                }
+            }
+
+            //Fire cannons
             if (fireRight.PressedLeft())
             {
-                fire(false, shotType);
+                fire(false, shotTypeRight);
             }
             if (fireLeft.PressedLeft())
             {
-                fire(true, shotType);
+                fire(true, shotTypeLeft);
             }
 
             if (fireRight.Hover())
@@ -225,7 +280,6 @@ namespace Template
             {
                 fireZone.Visible = false;
             }
-
 
             //Movement orders
             //Check that no clicks are made on UI background

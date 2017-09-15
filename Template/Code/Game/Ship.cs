@@ -23,7 +23,8 @@ namespace Template
         /// 0 stopped, 1 half speed, 2 full speed
         /// </summary>
         internal int sailAmount;
-        internal int shotType;
+        internal int shotTypeLeft;
+        internal int shotTypeRight;
         internal bool isPlayer;
         internal Sprite moveLocSprite;
         internal HitBox hitBoxHullLeft;
@@ -40,7 +41,8 @@ namespace Template
         {
             //Init values
             sailAmount = 0;
-            shotType = 0;
+            shotTypeLeft = 0;
+            shotTypeRight = 0;
 
             GM.engineM.AddSprite(this);
             GM.eventM.DelayCall(0.5f, setup);
@@ -120,7 +122,7 @@ namespace Template
                 offsetAlongDeck -= RotationHelper.MyDirection(this, 0) * 5;
 
                 int multiply = 2;
-                if (type == 3) { multiply = 4; } //Cannons fire multiple times - for use with grape shot
+                if (type == 3) { multiply = 5; } //Cannons fire multiple times - for use with grape shot
 
                 for (int i = 0; i <= 20; i++)
                 {
@@ -129,7 +131,7 @@ namespace Template
                         new CannonBall(this,
                             new Vector2(Position2D.X - (Width) * RotationHelper.MyDirection(this, 0).X + offsetAlongDeck.X, Position2D.Y - (Width) * RotationHelper.MyDirection(this, 0).Y + offsetAlongDeck.Y),
                             new Vector2(fireDir.X - (Width) * RotationHelper.MyDirection(this, 0).X + offsetAlongDeck.X, fireDir.Y - (Width) * RotationHelper.MyDirection(this, 0).Y + offsetAlongDeck.Y),
-                            1, type);
+                            type);
                     }
 
                     offsetAlongDeck += RotationHelper.MyDirection(this, 0) * 5;

@@ -49,14 +49,13 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:Template.Game.CannonBall.#ctor(Engine7.Sprite,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,System.Int32,System.Int32)">
+        <member name="M:Template.Game.CannonBall.#ctor(Engine7.Sprite,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,System.Int32)">
             <summary>
             Constructor for bullet class
             </summary>
             <param name="player">The object that fired the bullet</param>
             <param name="fireTowards">2D vector to travel towards</param>
-            <param name="bulletDamage">Damage on hit</param>
-            /// <param name="type">Type of shot to use - 0 ball shot, 1 bar shot, 2 grape shot, 3 carcass shot</param>
+            <param name="type">Type of shot to use - 0 ball shot, 1 bar shot, 2 carcass shot, 3 grape shot</param>
         </member>
         <member name="T:Template.Opponent">
             <summary>
