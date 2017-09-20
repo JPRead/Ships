@@ -22,8 +22,9 @@ namespace Template
         private Cursor cursor;
         private Point moveTo;
         private Button speedButton;
-        private Button fireRight;
-        private Button fireLeft;
+        private Button fireRightButton;
+        private Button fireLeftButton;
+        private Button repairButton;
         private Button UIButtonsBackground;
         private Button UIDamageBackground;
         private Button[] UIBackgroundElements;
@@ -92,14 +93,16 @@ namespace Template
             moveTo = PointHelper.PointFromVector2(Position2D);
 
             //User interface setup
-            speedButton = new Button(new Rectangle(GM.screenSize.Center.X, GM.screenSize.Bottom - 150, 50, 50), true);
+            speedButton = new Button(new Rectangle(GM.screenSize.Center.X, GM.screenSize.Bottom - 125, 50, 50), true);
             speedButton.SetDisplay(new Rectangle(75, 159, 6, 40));
 
-            fireRight = new Button(new Rectangle(GM.screenSize.Center.X - 75, GM.screenSize.Bottom - 150, 50, 50), true);
-            fireRight.SetDisplay(new Rectangle(150, 160, 20, 20));
+            repairButton = new Button(new Rectangle(GM.screenSize.Center.X, GM.screenSize.Bottom - 50, 50, 50), true);
 
-            fireLeft = new Button(new Rectangle(GM.screenSize.Center.X + 75, GM.screenSize.Bottom - 150, 50, 50), true);
-            fireLeft.SetDisplay(new Rectangle(150, 160, 20, 20));
+            fireRightButton = new Button(new Rectangle(GM.screenSize.Center.X - 75, GM.screenSize.Bottom - 125, 50, 50), true);
+            fireRightButton.SetDisplay(new Rectangle(150, 160, 20, 20));
+
+            fireLeftButton = new Button(new Rectangle(GM.screenSize.Center.X + 75, GM.screenSize.Bottom - 125, 50, 50), true);
+            fireLeftButton.SetDisplay(new Rectangle(150, 160, 20, 20));
 
             fireZone = new Sprite();
             GM.engineM.AddSprite(fireZone);
@@ -114,7 +117,7 @@ namespace Template
             UIReloadRight.SX = 50;
             UIReloadRight.SY = 50;
             UIReloadRight.Align = Align.bottom;
-            UIReloadRight.Position2D = new Vector2(fireLeft.Position2D.X, fireLeft.Bottom);
+            UIReloadRight.Position2D = new Vector2(fireLeftButton.Position2D.X, fireLeftButton.Bottom);
             UIReloadRight.Alpha = 0.5f;
             UIReloadRight.Wash = Color.Beige;
             UIReloadRight.Layer += 2;
@@ -125,14 +128,14 @@ namespace Template
             UIReloadLeft.SX = 50;
             UIReloadLeft.SY = 50;
             UIReloadLeft.Align = Align.bottom;
-            UIReloadLeft.Position2D = new Vector2(fireRight.Position2D.X, fireRight.Bottom);
+            UIReloadLeft.Position2D = new Vector2(fireRightButton.Position2D.X, fireRightButton.Bottom);
             UIReloadLeft.Alpha = 0.5f;
             UIReloadLeft.Wash = Color.Beige;
             UIReloadLeft.Layer += 2;
             GM.engineM.AddSprite(UIReloadLeft);
 
             //Set up UI background
-            UIButtonsBackground = new Button(new Rectangle(GM.screenSize.Center.X, GM.screenSize.Bottom - 100, 250, 200), false);
+            UIButtonsBackground = new Button(new Rectangle(GM.screenSize.Center.X, GM.screenSize.Bottom - 87, 250, 175), false);
             UIDamageBackground = new Button(new Rectangle(GM.screenSize.Left + 75, GM.screenSize.Bottom - 75, 150, 150), false);
             UIBackgroundElements = new Button[] { UIButtonsBackground, UIDamageBackground };//Background elements must be in this array
 
@@ -207,70 +210,70 @@ namespace Template
             }
 
             //Set shot type
-            if (fireRight.PressedRight())
+            if (fireRightButton.PressedRight())
             {
                 GM.eventM.AddTimer(tiReloadLeft = new Event(5, "Reload Cooldown Right"));
                 switch (shotTypeRight)
                 {
                     case 0:
                         shotTypeRight = 1;
-                        fireRight.SetDisplay(new Rectangle(190, 164, 28, 12));
+                        fireRightButton.SetDisplay(new Rectangle(190, 164, 28, 12));
                         break;
                     case 1:
                         shotTypeRight = 2;
-                        fireRight.SetDisplay(new Rectangle(238, 152, 20, 28));
+                        fireRightButton.SetDisplay(new Rectangle(238, 152, 20, 28));
                         break;
                     case 2:
                         shotTypeRight = 3;
-                        fireRight.SetDisplay(new Rectangle(278, 156, 28, 28));
+                        fireRightButton.SetDisplay(new Rectangle(278, 156, 28, 28));
                         break;
                     case 3:
                         shotTypeRight = 0;
-                        fireRight.SetDisplay(new Rectangle(150, 160, 20, 20));
+                        fireRightButton.SetDisplay(new Rectangle(150, 160, 20, 20));
                         break;
                 }
             }
-            if (fireLeft.PressedRight())
+            if (fireLeftButton.PressedRight())
             {
                 GM.eventM.AddTimer(tiReloadRight = new Event(5, "Reload Cooldown Left"));
                 switch (shotTypeLeft)
                 {
                     case 0:
                         shotTypeLeft = 1;
-                        fireLeft.SetDisplay(new Rectangle(190, 164, 28, 12));
+                        fireLeftButton.SetDisplay(new Rectangle(190, 164, 28, 12));
                         break;
                     case 1:
                         shotTypeLeft = 2;
-                        fireLeft.SetDisplay(new Rectangle(238, 152, 20, 28));
+                        fireLeftButton.SetDisplay(new Rectangle(238, 152, 20, 28));
                         break;
                     case 2:
                         shotTypeLeft = 3;
-                        fireLeft.SetDisplay(new Rectangle(278, 156, 28, 28));
+                        fireLeftButton.SetDisplay(new Rectangle(278, 156, 28, 28));
                         break;
                     case 3:
                         shotTypeLeft = 0;
-                        fireLeft.SetDisplay(new Rectangle(150, 160, 20, 20));
+                        fireLeftButton.SetDisplay(new Rectangle(150, 160, 20, 20));
                         break;
                 }
             }
 
             //Fire cannons
-            if (fireRight.PressedLeft())
+            if (fireRightButton.PressedLeft())
             {
                 fire(false, shotTypeRight);
             }
-            if (fireLeft.PressedLeft())
+            if (fireLeftButton.PressedLeft())
             {
                 fire(true, shotTypeLeft);
             }
 
-            if (fireRight.Hover())
+            if (fireRightButton.Hover())
             {
                 fireZone.Visible = true;
                 fireZone.Position2D = Position2D - RotationHelper.Direction2DFromAngle(RotationAngle, 90) * 220;
                 fireZone.RotationAngle = RotationAngle;
             }
-            else if (fireLeft.Hover())
+            else if (fireLeftButton.Hover())
             {
                 fireZone.Visible = true;
                 fireZone.Position2D = Position2D +RotationHelper.Direction2DFromAngle(RotationAngle, 90) * 220;

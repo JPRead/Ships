@@ -163,6 +163,8 @@ namespace Template.Game
                 }
                 else
                 {
+                    Ship ship = (Ship)hitBox.Owner;
+
                     //Debris
                     for (int i = 0; i <= GM.r.FloatBetween(0, 5); i++)
                     {
@@ -180,18 +182,26 @@ namespace Template.Game
                         if (shotType == 0)//Ball
                         {
                             hitBox.Health -= (int)(10 * hitBox.DamageMul);
+                            if(GM.r.FloatBetween(0, 1) > 0.90f)
+                            {
+                                ship.CrewNum -= 1;
+                            }
                         }
-                        else if (shotType == 3)//Carcass
+                        else if (shotType == 2)//Carcass
                         {
-                            //Damage over time
+                            hitBox.Health -= (int)(2 * hitBox.DamageMul);
+                            if (GM.r.FloatBetween(0, 1) > 0.95)
+                            {
+                                hitBox.IsBurning = true;
+                            }
                         }
                         else
                         {
                             hitBox.Health -= (int)(1 * hitBox.DamageMul);
                         }
-                        if (shotType == 2) //Grape
+                        if (shotType == 3 && GM.r.FloatBetween(0,1) > 0.95) //Grape
                         {
-                            //Crew damage
+                            ship.CrewNum -= (int)GM.r.FloatBetween(1, 5);
                         }
                     }
                     else if (hitBox.DamageType == 1)//Sail
@@ -204,9 +214,12 @@ namespace Template.Game
                         {
                             hitBox.Health -= (int)(1 * hitBox.DamageMul);
                         }
-                        else if (shotType == 3)//Carcass
+                        else if (shotType == 2)//Carcass
                         {
-                            //Damage over time
+                            if(GM.r.FloatBetween(0,1) > 0.90)
+                            {
+                                hitBox.IsBurning = true;
+                            }
                         }
                         else
                         {

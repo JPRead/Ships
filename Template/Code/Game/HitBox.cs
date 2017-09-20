@@ -17,6 +17,7 @@ namespace Template
     internal class HitBox : Sprite
     {
         bool isParent;
+        bool isBurning;
         private Sprite owner;
         private Vector2 offset;
         private int damageType;
@@ -24,6 +25,8 @@ namespace Template
         private float offsetAngle;
         private int health;
         private float damageMul;
+        private Event tiBurnTick;
+        
 
         internal Sprite Owner
         {
@@ -75,6 +78,19 @@ namespace Template
             }
         }
 
+        public bool IsBurning
+        {
+            get
+            {
+                return isBurning;
+            }
+
+            set
+            {
+                isBurning = value;
+            }
+        }
+
         /// <summary>
         /// Constructor for hitbox
         /// </summary>
@@ -118,6 +134,8 @@ namespace Template
                 WashCollision = Color.Red;
                 CreateCollisionArea(5);
             }
+
+            GM.eventM.AddTimer(tiBurnTick = new Event(1, "Burn Tick"));
             UpdateCallBack += Move;
         }
 
@@ -142,6 +160,19 @@ namespace Template
             offset = offset * offsetMagnitude;
             Position2D = owner.Position2D + offset;
             RotationAngle = owner.RotationAngle;
+
+            //Burn damage
+            if(isParent && isBurning && GM.eventM.Elapsed(tiBurnTick))
+            {
+                health--;
+                for(int i = 0; i < GM.r.FloatBetween(1,2); i++)
+                {
+                    FadingParticle smokeParticle = new FadingParticle(new Vector2(Centre2D.X + GM.r.FloatBetween(-2, 2), Centre2D.Y + GM.r.FloatBetween(-2, 2)),
+                        new Vector3(GM.r.FloatBetween(-4, 4), GM.r.FloatBetween(-4, 4), 0),
+                        GM.r.FloatBetween(0, 360), GM.r.FloatBetween(5, 10));
+                    smokeParticle.Wash = Color.DarkSlateGray;
+                }
+            }
         }
     }
 }

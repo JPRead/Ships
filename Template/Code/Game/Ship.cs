@@ -25,6 +25,7 @@ namespace Template
         internal int sailAmount;
         internal int shotTypeLeft;
         internal int shotTypeRight;
+        private int crewNum;
         internal bool isPlayer;
         internal Sprite moveLocSprite;
         internal HitBox hitBoxHullLeft;
@@ -37,12 +38,26 @@ namespace Template
         internal Event tiReloadRight;
         internal Event tiReloadLeft;
 
+        internal int CrewNum
+        {
+            get
+            {
+                return crewNum;
+            }
+
+            set
+            {
+                crewNum = value;
+            }
+        }
+
         public Ship()
         {
             //Init values
             sailAmount = 0;
             shotTypeLeft = 0;
             shotTypeRight = 0;
+            crewNum = 100;
 
             GM.engineM.AddSprite(this);
             GM.eventM.DelayCall(0.5f, setup);
@@ -70,9 +85,9 @@ namespace Template
             hitBoxHullLeft.Wash = Color.Red;
             hitBoxHullRight = new HitBox(this, new Vector2(10, 0), new Vector2(25, 70), 1, 0);
             hitBoxHullRight.Wash = Color.Blue;
-            hitBoxHullFront = new HitBox(this, new Vector2(0, 40), new Vector2(45, 25), 0.2f, 0);
+            hitBoxHullFront = new HitBox(this, new Vector2(0, 40), new Vector2(45, 25), 0.5f, 0);
             hitBoxHullFront.Wash = Color.Green;
-            hitBoxHullBack = new HitBox(this, new Vector2(0, -40), new Vector2(45, 25), 0.2f, 0);
+            hitBoxHullBack = new HitBox(this, new Vector2(0, -40), new Vector2(45, 25), 0.5f, 0);
             hitBoxHullBack.Wash = Color.Yellow;
             hitBoxSailFront = new HitBox(this, new Vector2(0, 25), new Vector2(60, 5), 1, 1);
             hitBoxSailFront.Wash = Color.Violet;
