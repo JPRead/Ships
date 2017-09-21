@@ -182,7 +182,7 @@ namespace Template.Game
                         if (shotType == 0)//Ball
                         {
                             hitBox.Health -= (int)(10 * hitBox.DamageMul);
-                            if(GM.r.FloatBetween(0, 1) > 0.90f)
+                            if(GM.r.FloatBetween(0, 1) > 0.90)
                             {
                                 ship.CrewNum -= 1;
                             }
@@ -193,6 +193,10 @@ namespace Template.Game
                             if (GM.r.FloatBetween(0, 1) > 0.95)
                             {
                                 hitBox.IsBurning = true;
+                            }
+                            if (GM.r.FloatBetween(0, 1) > 0.90)
+                            {
+                                ship.CrewNum -= 1;
                             }
                         }
                         else

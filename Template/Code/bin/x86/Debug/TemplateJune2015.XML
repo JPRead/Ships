@@ -491,7 +491,7 @@
             0 stopped, 1 half speed, 2 full speed
             </summary>
         </member>
-        <member name="M:Template.Ship.fire(System.Boolean,System.Int32)">
+        <member name="M:Template.Ship.Fire(System.Boolean,System.Int32)">
             <summary>
             Fire cannons
             </summary>

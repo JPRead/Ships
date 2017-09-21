@@ -63,9 +63,8 @@ namespace Template
             GM.eventM.DelayCall(0.5f, setup);
             UpdateCallBack += Move;
 
-            GM.eventM.AddTimer(tiReloadRight = new Event(5, "Reload Cooldown Left"));
-            GM.eventM.AddTimer(tiReloadLeft = new Event(5, "Reload Cooldown Right"));
-
+            GM.eventM.AddTimer(tiReloadRight = new Event(10, "Reload Cooldown Left"));
+            GM.eventM.AddTimer(tiReloadLeft = new Event(10, "Reload Cooldown Right"));
 
             moveLocSprite = new Sprite();
             GM.engineM.AddSprite(moveLocSprite);
@@ -119,7 +118,7 @@ namespace Template
         /// Fire cannons
         /// </summary>
         /// <param name="right">If true fire from right side else left side</param><param name="type">Type of shot to use - 0 ball shot, 1 bar shot, 2 grape shot, 3 carcass shot</param>
-        internal void fire(bool right, int type)
+        internal void Fire(bool right, int type)
         {
             if ((right && tiReloadRight.Paused) || (right == false && tiReloadLeft.Paused))
             {
@@ -163,7 +162,7 @@ namespace Template
             }
         }
 
-        internal void moveToPoint(Point point)
+        internal void MoveToPoint(Point point)
         {
             Vector2 movePos = PointHelper.Vector2FromPoint(point);
 

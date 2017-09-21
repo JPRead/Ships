@@ -212,7 +212,7 @@ namespace Template
             //Set shot type
             if (fireRightButton.PressedRight())
             {
-                GM.eventM.AddTimer(tiReloadLeft = new Event(5, "Reload Cooldown Right"));
+                GM.eventM.AddTimer(tiReloadLeft = new Event(10, "Reload Cooldown Right"));
                 switch (shotTypeRight)
                 {
                     case 0:
@@ -235,7 +235,7 @@ namespace Template
             }
             if (fireLeftButton.PressedRight())
             {
-                GM.eventM.AddTimer(tiReloadRight = new Event(5, "Reload Cooldown Left"));
+                GM.eventM.AddTimer(tiReloadRight = new Event(10, "Reload Cooldown Left"));
                 switch (shotTypeLeft)
                 {
                     case 0:
@@ -260,11 +260,11 @@ namespace Template
             //Fire cannons
             if (fireRightButton.PressedLeft())
             {
-                fire(false, shotTypeRight);
+                Fire(false, shotTypeRight);
             }
             if (fireLeftButton.PressedLeft())
             {
-                fire(true, shotTypeLeft);
+                Fire(true, shotTypeLeft);
             }
 
             if (fireRightButton.Hover())
@@ -308,7 +308,7 @@ namespace Template
             else buttonPressed = false;
 
             if (moveTargetReached == false)
-                moveToPoint(moveTo);
+                MoveToPoint(moveTo);
         }
     }
 }

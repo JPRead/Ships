@@ -172,6 +172,11 @@ namespace Template
                         GM.r.FloatBetween(0, 360), GM.r.FloatBetween(5, 10));
                     smokeParticle.Wash = Color.DarkSlateGray;
                 }
+                if (GM.r.FloatBetween(0, 1) > 0.90)
+                {
+                    Ship ship = (Ship)owner;
+                    ship.CrewNum -= 1;
+                }
             }
         }
     }
