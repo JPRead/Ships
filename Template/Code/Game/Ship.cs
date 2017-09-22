@@ -60,8 +60,7 @@ namespace Template
             crewNum = 100;
 
             GM.engineM.AddSprite(this);
-            GM.eventM.DelayCall(0.5f, setup);
-            UpdateCallBack += Move;
+            UpdateCallBack += Tick;
 
             GM.eventM.AddTimer(tiReloadRight = new Event(10, "Reload Cooldown Left"));
             GM.eventM.AddTimer(tiReloadLeft = new Event(10, "Reload Cooldown Right"));
@@ -96,7 +95,7 @@ namespace Template
             hitBoxSailBack.Wash = Color.Violet;
         }
 
-        private void Move()
+        private void Tick()
         {
             //Stop reload timers once reload is complete
             if(GM.eventM.Elapsed(tiReloadRight))
@@ -107,11 +106,6 @@ namespace Template
             {
                 tiReloadLeft.Paused = true;
             }
-        }
-
-        private void setup()
-        {
-
         }
 
         /// <summary>
@@ -138,7 +132,7 @@ namespace Template
                 int multiply = 2;
                 if (type == 3) { multiply = 5; } //Cannons fire multiple times - for use with grape shot
 
-                for (int i = 0; i <= 20; i++)
+                for (int i = 0; i <= (crewNum/5); i++)
                 {
                     for (int i2 = 0; i2 <= multiply; i2++)
                     {
@@ -148,7 +142,7 @@ namespace Template
                             type);
                     }
 
-                    offsetAlongDeck += RotationHelper.MyDirection(this, 0) * 5;
+                    offsetAlongDeck += RotationHelper.MyDirection(this, 0) * 5 * (100/crewNum);
                 }
 
                 if (right == true)

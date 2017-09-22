@@ -7,7 +7,6 @@ namespace Template.Game
     internal class CannonBall : Sprite
     {
         private Sprite player;
-        private int damage;
         private int shotType;
         private float fireDelay;
         bool velApplied;

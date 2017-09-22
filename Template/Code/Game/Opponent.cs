@@ -25,10 +25,10 @@ namespace Template
             Position2D = startPos;
             RotationAngle = 45;
 
-            UpdateCallBack += Move;
+            UpdateCallBack += Tick;
         }
 
-        private void Move()
+        private void Tick()
         {
             //Debug text
             GM.textM.Draw(FontBank.arcadePixel, "Hull Front  " + hitBoxHullFront.Health + "~Hull Back   " + hitBoxHullBack.Health +

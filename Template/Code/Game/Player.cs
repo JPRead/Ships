@@ -147,10 +147,10 @@ namespace Template
             damageSailMiddle = new DamageSprite(UIDamageBackground.Position2D + new Vector2(0, -1), new Vector2(70, 5), hitBoxSailMiddle);
             damageSailBack = new DamageSprite(UIDamageBackground.Position2D + new Vector2(0, 30), new Vector2(65, 5), hitBoxSailBack);
 
-            UpdateCallBack += Move;
+            UpdateCallBack += Tick;
         }
 
-        private void Move()
+        private void Tick()
         {
             //Debug text
             //GM.textM.Draw(FontBank.arcadePixel, "Hull Front  " + hitBoxHullFront.Health + "~Hull Back   " + hitBoxHullBack.Health +
