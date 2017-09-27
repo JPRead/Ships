@@ -27,6 +27,9 @@ namespace Template
         internal int shotTypeRight;
         private int crewNum;
         internal bool isPlayer;
+        internal bool isRepairing;
+        bool rightLoaded;
+        bool leftLoaded;
         internal Sprite moveLocSprite;
         internal HitBox hitBoxHullLeft;
         internal HitBox hitBoxHullRight;
@@ -37,6 +40,8 @@ namespace Template
         internal HitBox hitBoxSailBack;
         internal Event tiReloadRight;
         internal Event tiReloadLeft;
+        internal Event tiRepairTimer;
+        internal HitBox[] hitBoxArray;
 
         internal int CrewNum
         {
@@ -58,12 +63,17 @@ namespace Template
             shotTypeLeft = 0;
             shotTypeRight = 0;
             crewNum = 100;
+            isRepairing = false;
+            hitBoxArray = new HitBox[7];
+            leftLoaded = false;
+            rightLoaded = false;
 
             GM.engineM.AddSprite(this);
             UpdateCallBack += Tick;
 
             GM.eventM.AddTimer(tiReloadRight = new Event(10, "Reload Cooldown Left"));
             GM.eventM.AddTimer(tiReloadLeft = new Event(10, "Reload Cooldown Right"));
+            GM.eventM.AddTimer(tiRepairTimer = new Event(1, "Repair Tick"));
 
             moveLocSprite = new Sprite();
             GM.engineM.AddSprite(moveLocSprite);
@@ -81,30 +91,81 @@ namespace Template
             //Hitboxes
             hitBoxHullLeft = new HitBox(this, new Vector2(-10, 0), new Vector2(25, 70), 1, 0);
             hitBoxHullLeft.Wash = Color.Red;
+            hitBoxArray[0] = hitBoxHullLeft;
             hitBoxHullRight = new HitBox(this, new Vector2(10, 0), new Vector2(25, 70), 1, 0);
             hitBoxHullRight.Wash = Color.Blue;
+            hitBoxArray[1] = hitBoxHullRight;
             hitBoxHullFront = new HitBox(this, new Vector2(0, 40), new Vector2(45, 25), 0.5f, 0);
             hitBoxHullFront.Wash = Color.Green;
+            hitBoxArray[2] = hitBoxHullFront;
             hitBoxHullBack = new HitBox(this, new Vector2(0, -40), new Vector2(45, 25), 0.5f, 0);
             hitBoxHullBack.Wash = Color.Yellow;
+            hitBoxArray[3] = hitBoxHullBack;
             hitBoxSailFront = new HitBox(this, new Vector2(0, 25), new Vector2(60, 5), 1, 1);
             hitBoxSailFront.Wash = Color.Violet;
+            hitBoxArray[4] = hitBoxSailFront;
             hitBoxSailMiddle = new HitBox(this, new Vector2(0, 1), new Vector2(70, 5), 1, 1);
             hitBoxSailMiddle.Wash = Color.Violet;
+            hitBoxArray[5] = hitBoxSailMiddle;
             hitBoxSailBack = new HitBox(this, new Vector2(0, -30), new Vector2(65, 5), 1, 1);
             hitBoxSailBack.Wash = Color.Violet;
+            hitBoxArray[6] = hitBoxSailBack;
         }
 
         private void Tick()
         {
-            //Stop reload timers once reload is complete
-            if(GM.eventM.Elapsed(tiReloadRight))
+            //Stop reload timers once reload is complete or if repairing
+            if(GM.eventM.Elapsed(tiReloadRight) || isRepairing)
             {
                 tiReloadRight.Paused = true;
+                if(!isRepairing)
+                    rightLoaded = true;
             }
-            if (GM.eventM.Elapsed(tiReloadLeft))
+            if (GM.eventM.Elapsed(tiReloadLeft) || isRepairing)
             {
                 tiReloadLeft.Paused = true;
+                if (!isRepairing)
+                    leftLoaded = true;
+            }
+
+            //Repairing
+            if (isRepairing && GM.eventM.Elapsed(tiRepairTimer))
+            {
+                float repairAmount = (crewNum / 25);
+                //Spread repair amount amongst each part
+                HitBox[] repairArray = new HitBox[7];
+                int repairNum = 0;
+                for(int i = 0; i <= 6; i++)
+                {
+                    if(hitBoxArray[i].Health < 100)
+                    {
+                        repairArray[repairNum] = hitBoxArray[i];
+                        repairNum++;
+                    }
+                }
+                if(repairNum == 0)
+                {
+                    if (!rightLoaded)
+                    {
+                        tiReloadRight.Paused = false;
+                    }
+                    if (!leftLoaded)
+                    {
+                        tiReloadLeft.Paused = false;
+                    }
+
+                    isRepairing = false;
+                }
+                else
+                {
+                    float repairPerPart = repairAmount / repairNum;
+                    for(int i = 0; i < repairNum; i++)
+                    {
+                        repairArray[i].Health += ((int)repairPerPart);
+                        if (repairArray[i].Health > 100)
+                            repairArray[i].Health = 100;
+                    }
+                }
             }
         }
 
@@ -114,7 +175,7 @@ namespace Template
         /// <param name="right">If true fire from right side else left side</param><param name="type">Type of shot to use - 0 ball shot, 1 bar shot, 2 grape shot, 3 carcass shot</param>
         internal void Fire(bool right, int type)
         {
-            if ((right && tiReloadRight.Paused) || (right == false && tiReloadLeft.Paused))
+            if ((right && tiReloadRight.Paused) || (right == false && tiReloadLeft.Paused) && isRepairing == false)
             {
                 Vector3 fireDir;
                 float rightMul;
@@ -148,10 +209,12 @@ namespace Template
                 if (right == true)
                 {
                     tiReloadRight.Paused = false;
+                    rightLoaded = false;
                 }
                 else
                 {
                     tiReloadLeft.Paused = false;
+                    leftLoaded = false;
                 }
             }
         }

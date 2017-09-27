@@ -147,33 +147,32 @@ namespace Template
             damageSailMiddle = new DamageSprite(UIDamageBackground.Position2D + new Vector2(0, -1), new Vector2(70, 5), hitBoxSailMiddle);
             damageSailBack = new DamageSprite(UIDamageBackground.Position2D + new Vector2(0, 30), new Vector2(65, 5), hitBoxSailBack);
 
+            //DEBUG
+            hitBoxHullBack.Health -= 10;
+            hitBoxHullLeft.Health -= 20;
+            hitBoxHullRight.Health -= 40;
+            hitBoxHullFront.Health -= 90;
+
             UpdateCallBack += Tick;
         }
 
         private void Tick()
         {
-            //Debug text
-            //GM.textM.Draw(FontBank.arcadePixel, "Hull Front  " + hitBoxHullFront.Health + "~Hull Back   " + hitBoxHullBack.Health +
-            //    "~Hull Left   " + hitBoxHullLeft.Health + "~Hull Right  " + hitBoxHullRight.Health +
-            //    "~Sail Front  " + hitBoxSailFront.Health + "~Sail Middle " + hitBoxSailMiddle.Health + "~Sail Back   " + hitBoxSailBack.Health, 100, 100, TextAtt.TopLeft);
+            //DEBUG
+            GM.textM.Draw(FontBank.arcadePixel, "Hull Front  " + hitBoxHullFront.Health + "~Hull Back   " + hitBoxHullBack.Health +
+                "~Hull Left   " + hitBoxHullLeft.Health + "~Hull Right  " + hitBoxHullRight.Health +
+                "~Sail Front  " + hitBoxSailFront.Health + "~Sail Middle " + hitBoxSailMiddle.Health + "~Sail Back   " + hitBoxSailBack.Health, 100, 100, TextAtt.TopLeft);
+            GM.textM.Draw(FontBank.arcadePixel, Convert.ToString(isRepairing), 200, 200);
 
             //UI updates
-            if (tiReloadRight.Paused)
-            {
-                UIReloadRight.Visible = false;
-            }
-            else
+            if (!tiReloadRight.Paused)
             {
                 UIReloadRight.Visible = true;
                 float heightMul = (tiReloadRight.Interval - tiReloadRight.ElapsedSoFar) / tiReloadRight.Interval ;
                 UIReloadRight.SY = 50 * heightMul;
             }
 
-            if (tiReloadLeft.Paused)
-            {
-                UIReloadLeft.Visible = false;
-            }
-            else
+            if (!tiReloadLeft.Paused)
             {
                 UIReloadLeft.Visible = true;
                 float heightMul = (tiReloadLeft.Interval - tiReloadLeft.ElapsedSoFar) / tiReloadLeft.Interval ;
@@ -284,9 +283,19 @@ namespace Template
                 fireZone.Visible = false;
             }
 
+            //Repair ship
+            if (repairButton.PressedLeft())
+            {
+                isRepairing = true;
+            }
+            if (repairButton.PressedRight())
+            {
+                isRepairing = false;
+            }
+
             //Movement orders
             //Check that no clicks are made on UI background
-            for(int i = 0; i < UIBackgroundElements.Length; i++)
+            for (int i = 0; i < UIBackgroundElements.Length; i++)
             {
                 if (UIBackgroundElements[i].PressedLeft() || UIBackgroundElements[i].PressedRight() || UIBackgroundElements[i].HeldLeft() || UIBackgroundElements[i].HeldRight()) { }
             }
