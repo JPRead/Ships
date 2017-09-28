@@ -19,6 +19,10 @@ namespace Template
     /// </summary>
     internal class Opponent : Ship
     {
+        /// <summary>
+        /// Contains state machine for the AI
+        /// </summary>
+        /// <param name="startPos">Position to spawn at</param>
         public Opponent(Vector2 startPos)
         {
             moveLocSprite.Visible = false;
@@ -28,6 +32,9 @@ namespace Template
             UpdateCallBack += Tick;
         }
 
+        /// <summary>
+        /// Code to run each tick
+        /// </summary>
         private void Tick()
         {
             //Debug text

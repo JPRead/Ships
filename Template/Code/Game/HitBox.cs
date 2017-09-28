@@ -16,15 +16,45 @@ namespace Template
 {
     internal class HitBox : Sprite
     {
+        /// <summary>
+        /// True if HitBox is parent of other HitBoxes
+        /// </summary>
         bool isParent;
+        /// <summary>
+        /// True if HitBox is burning, causing damage over time
+        /// </summary>
         bool isBurning;
+        /// <summary>
+        /// Owner of HitBox, for child HitBoxes this is the parent HitBox, for parent HitBoxes this is the Ship it is created by
+        /// </summary>
         private Sprite owner;
-        private Vector2 offset;
+        /// <summary>
+        /// Type of damage taken by hitbox - 0 hull, 1 sai
+        /// </summary>
         private int damageType;
+        /// /// <summary>
+        /// Normalised offset vector from centre of owner
+        /// </summary>
+        private Vector2 offsetVector;
+        /// <summary>
+        /// Value to multiply offsetVector by to get a position
+        /// </summary>
         private float offsetMagnitude;
+        /// <summary>
+        /// Extra rotation for offsetVector to account for owner turning
+        /// </summary>
         private float offsetAngle;
+        /// <summary>
+        /// Health of HitBox
+        /// </summary>
         private int health;
+        /// <summary>
+        /// Value to multiply damage by when subtracting from health
+        /// </summary>
         private float damageMul;
+        /// <summary>
+        /// Delay for damage over time when burning
+        /// </summary>
         private Event tiBurnTick;
         
 
@@ -97,6 +127,7 @@ namespace Template
         /// <param name="hitBoxOwner">Parent of the hitbox</param>
         /// <param name="offsetFromPlayer">Offset from player centre when facing up - this can never be zero!</param>
         /// <param name="dimensions">Height and Width of hitbox</param>
+        /// <param name="damageMultiplier">Damage taken is multiplied by this amount</param>
         /// <param name="type">Type of damage taken by hitbox - 0 hull, 1 sail</param>
         public HitBox(Sprite hitBoxOwner, Vector2 offsetFromPlayer, Vector2 dimensions, float damageMultiplier, int type)
         {
@@ -105,10 +136,10 @@ namespace Template
             health = 100;
             owner = hitBoxOwner;
 
-            offset = new Vector2(offsetFromPlayer.X, -offsetFromPlayer.Y);
-            offsetMagnitude = offset.Length();
-            offset.Normalize();
-            offsetAngle = RotationHelper.AngleFromDirection(offset);
+            offsetVector = new Vector2(offsetFromPlayer.X, -offsetFromPlayer.Y);
+            offsetMagnitude = offsetVector.Length();
+            offsetVector.Normalize();
+            offsetAngle = RotationHelper.AngleFromDirection(offsetVector);
 
             GM.engineM.AddSprite(this);
             Frame.Define(Tex.SingleWhitePixel);
@@ -136,13 +167,13 @@ namespace Template
             }
 
             GM.eventM.AddTimer(tiBurnTick = new Event(1, "Burn Tick"));
-            UpdateCallBack += Move;
+            UpdateCallBack += Tick;
         }
 
         /// <summary>
-        /// Creates collisions for hitbox that can effectively rotate
+        /// Creates collisions for HitBox that can approximate a rotation using smaller HitBoxes
         /// </summary>
-        /// <param name="colResolution"></param>
+        /// <param name="colResolution">Resolution of HitBoxes, higher values are more accurate but slower</param>
         private void CreateCollisionArea(float colResolution)
         {
             for(int xOffset = 0; xOffset <= SX; xOffset += (int)colResolution)
@@ -154,11 +185,14 @@ namespace Template
             }
         }
 
-        private void Move()
+        /// <summary>
+        /// Code to run each tick
+        /// </summary>
+        private void Tick()
         {
-            offset = RotationHelper.Direction2DFromAngle(offsetAngle, owner.RotationAngle);
-            offset = offset * offsetMagnitude;
-            Position2D = owner.Position2D + offset;
+            offsetVector = RotationHelper.Direction2DFromAngle(offsetAngle, owner.RotationAngle);
+            offsetVector = offsetVector * offsetMagnitude;
+            Position2D = owner.Position2D + offsetVector;
             RotationAngle = owner.RotationAngle;
 
             //Burn damage

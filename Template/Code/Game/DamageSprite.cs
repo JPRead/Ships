@@ -16,8 +16,15 @@ namespace Template
 {
     internal class DamageSprite : Sprite
     {
+        /// <summary>
+        /// HitBox to represent
+        /// </summary>
         private HitBox target;
+        /// <summary>
+        /// Variable used to store target's health
+        /// </summary>
         private int health;
+
         /// <summary>
         /// Constructor for damageSprite
         /// </summary>
@@ -36,10 +43,13 @@ namespace Template
             Wash = new Color(0, 255, 0);
             TimerInitialise();
 
-            UpdateCallBack += Update;
+            UpdateCallBack += Tick;
         }
 
-        private void Update()
+        /// <summary>
+        /// Code to run each tick
+        /// </summary>
+        private void Tick()
         {
             health = target.Health;
 

@@ -17,7 +17,13 @@ namespace Template.Game
 {
     internal class Button : Sprite
     {
+        /// <summary>
+        /// Sprite to display within the button
+        /// </summary>
         private Sprite display;
+        /// <summary>
+        /// True if UI element can be clicked
+        /// </summary>
         private bool enabled;
 
         public Sprite Display
@@ -34,14 +40,16 @@ namespace Template.Game
         }
 
         /// <summary>
-        /// Constructor for button
+        /// Button is used as a UI element that can be interacted with using the mouse
         /// </summary>
         /// <param name="rect">Dimensions for button</param>
         /// <param name="startEnabled">Is the button enabled to begin with - set to false for UI backgrounds</param>
         public Button(Rectangle rect, bool startEnabled)
         {
-            enabled = startEnabled;
             GM.engineM.AddSprite(this);
+
+            //Init values
+            enabled = startEnabled;
             WorldCoordinates = false;
             Frame.Define(Tex.SingleWhitePixel);
             CollisionBoxVisible = true;
@@ -49,7 +57,6 @@ namespace Template.Game
             SpriteHelper.ScaleToThisSize(this, rect);
             X = rect.X;
             Y = rect.Y;
-            
             display = new Sprite();
             GM.engineM.AddSprite(display);
             display.Frame.Define(GM.txSprite, new Rectangle(1,1,1,1));
@@ -64,6 +71,9 @@ namespace Template.Game
             UpdateCallBack += Tick;
         }
 
+        /// <summary>
+        /// Code to run each tick
+        /// </summary>
         private void Tick()
         {
             if (enabled)
@@ -175,6 +185,10 @@ namespace Template.Game
             return false;
         }
 
+        /// <summary>
+        /// Displays a rectangle in Sprites.png within the button
+        /// </summary>
+        /// <param name="tile">Rectangle to select from tilemap</param>
         internal void SetDisplay(Rectangle tile)
         {
             display.Kill();

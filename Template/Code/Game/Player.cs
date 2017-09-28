@@ -19,28 +19,86 @@ namespace Template
     /// </summary>
     internal class Player : Ship
     {
+        /// <summary>
+        /// Player's cursor
+        /// </summary>
         private Cursor cursor;
+        /// <summary>
+        /// Point to move towards
+        /// </summary>
         private Point moveTo;
+        /// <summary>
+        /// Button for setting speed
+        /// </summary>
         private Button speedButton;
+        /// <summary>
+        /// Button to fire and load right cannon
+        /// </summary>
         private Button fireRightButton;
+        /// <summary>
+        /// Button to fire and load left cannon
+        /// </summary>
         private Button fireLeftButton;
+        /// <summary>
+        /// Button to start and stop repairing
+        /// </summary>
         private Button repairButton;
+        /// <summary>
+        /// Background element for Buttons, used to stop player giving move orders behind the Buttons
+        /// </summary>
         private Button UIButtonsBackground;
+        /// <summary>
+        /// Background element for DamageSprites, used to stop player giving move orders behind the DamageSprites
+        /// </summary>
         private Button UIDamageBackground;
+        /// <summary>
+        /// Array for UI background elements
+        /// </summary>
         private Button[] UIBackgroundElements;
+        /// <summary>
+        /// Returns true if ship is close enough the the moveTo point
+        /// </summary>
         private bool moveTargetReached;
+        /// <summary>
+        /// Sprite used to display the range and firing angles of the cannons
+        /// </summary>
         private Sprite fireZone;
-        //Use Z values for health
+        /// <summary>
+        /// DamageSprite used to display the health of the front hull HitBox
+        /// </summary>
         private DamageSprite damageHullFront;
+        /// <summary>
+        /// DamageSprite used to display the health of the back hull HitBox
+        /// </summary>
         private DamageSprite damageHullBack;
+        /// <summary>
+        /// DamageSprite used to display the health of the left hull HitBox
+        /// </summary>
         private DamageSprite damageHullLeft;
+        /// <summary>
+        /// DamageSprite used to display the health of the right hull HitBox
+        /// </summary>
         private DamageSprite damageHullRight;
+        /// <summary>
+        /// DamageSprite used to display the health of the front sail HitBox
+        /// </summary>
         private DamageSprite damageSailFront;
+        /// <summary>
+        /// DamageSprite used to display the health of the middle sail HitBox
+        /// </summary>
         private DamageSprite damageSailMiddle;
+        /// <summary>
+        /// DamageSprite used to display the health of the back sail HitBox
+        /// </summary>
         private DamageSprite damageSailBack;
+        /// <summary>
+        /// Sprite used to represent right cannons reloading
+        /// </summary>
         private Sprite UIReloadRight;
+        /// <summary>
+        /// Sprite used to represent left cannons reloading
+        /// </summary>
         private Sprite UIReloadLeft;
-
         /// <summary>
         /// This must be set to true if a button has been pressed during a tick, else button presses could be interpreted as movement orders
         /// </summary>
@@ -85,14 +143,19 @@ namespace Template
             }
         }
 
+        /// <summary>
+        /// Contains functions for the player to give orders
+        /// </summary>
+        /// <param name="startPos">Position to spawn at</param>
         public Player(Vector2 startPos)
         {
+            //Init values
             isPlayer = true;
             Position2D = startPos;
             cursor = new Cursor(GM.screenSize.Center);
             moveTo = PointHelper.PointFromVector2(Position2D);
 
-            //User interface setup
+            //UI setup
             speedButton = new Button(new Rectangle(GM.screenSize.Center.X, GM.screenSize.Bottom - 125, 50, 50), true);
             speedButton.SetDisplay(new Rectangle(75, 159, 6, 40));
 
@@ -133,8 +196,7 @@ namespace Template
             UIReloadLeft.Wash = Color.Beige;
             UIReloadLeft.Layer += 2;
             GM.engineM.AddSprite(UIReloadLeft);
-
-            //Set up UI background
+            
             UIButtonsBackground = new Button(new Rectangle(GM.screenSize.Center.X, GM.screenSize.Bottom - 87, 250, 175), false);
             UIDamageBackground = new Button(new Rectangle(GM.screenSize.Left + 75, GM.screenSize.Bottom - 75, 150, 150), false);
             UIBackgroundElements = new Button[] { UIButtonsBackground, UIDamageBackground };//Background elements must be in this array
@@ -148,14 +210,14 @@ namespace Template
             damageSailBack = new DamageSprite(UIDamageBackground.Position2D + new Vector2(0, 30), new Vector2(65, 5), hitBoxSailBack);
 
             //DEBUG
-            hitBoxHullBack.Health -= 10;
-            hitBoxHullLeft.Health -= 20;
-            hitBoxHullRight.Health -= 40;
-            hitBoxHullFront.Health -= 90;
+            hitBoxHullBack.IsBurning = true;
 
             UpdateCallBack += Tick;
         }
 
+        /// <summary>
+        /// Code to run each tick
+        /// </summary>
         private void Tick()
         {
             //DEBUG

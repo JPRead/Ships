@@ -16,8 +16,17 @@ namespace Template.Game
 {
     internal class GameSetup : BasicSetup
     {
+        /// <summary>
+        /// The player's ship
+        /// </summary>
         private static Player player;
+        /// <summary>
+        /// The AI's ship
+        /// </summary>
         private static Opponent opponent;
+        /// <summary>
+        /// The wind direction
+        /// </summary>
         private static float windDir;
 
         internal static Player Player
@@ -44,11 +53,14 @@ namespace Template.Game
             }
         }
 
+        /// <summary>
+        /// Sets up all the initial values for the game
+        /// </summary>
         public GameSetup() : base(true)
         {
+            //Init values
             GM.engineM.DebugDisplay = Debug.fps | Debug.version;
             GM.engineM.ScreenColour = Color.LightSkyBlue;
-
             windDir = GM.r.FloatBetween(0, 360);
             Sprite windDirSprite = new Sprite();
             GM.engineM.AddSprite(windDirSprite);
@@ -56,11 +68,13 @@ namespace Template.Game
             windDirSprite.SY = 1.5f;
             windDirSprite.Position2D = new Vector2(GM.screenSize.Center.X, 50);
             windDirSprite.RotationAngle = windDir;
-
             player = new Player(new Vector2(400, 400));
             opponent = new Opponent(new Vector2(1600 - 400, 900 - 400));
         }
 
+        /// <summary>
+        /// Check for keypresses used to end game
+        /// </summary>
         public override void Logic()
         {
             //display code
@@ -72,7 +86,9 @@ namespace Template.Game
             }
         }
 
-
+        /// <summary>
+        /// Resets game to title screen
+        /// </summary>
         private static void BackToTitle()
         {
             GM.ClearAllManagedObjects();

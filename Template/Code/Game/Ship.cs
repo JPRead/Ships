@@ -14,34 +14,88 @@ using Template.Game;
 
 namespace Template
 {
-    /// <summary>
-    /// Ship used as a base for the player and AI
-    /// </summary>
     internal class Ship : Sprite
     {
         /// <summary>
         /// 0 stopped, 1 half speed, 2 full speed
         /// </summary>
         internal int sailAmount;
+        /// <summary>
+        /// Type of shot to be fired from left cannons
+        /// </summary>
         internal int shotTypeLeft;
+        /// <summary>
+        /// Type of shot to be fired from right cannons
+        /// </summary>
         internal int shotTypeRight;
+        /// <summary>
+        /// Number of crew remaining
+        /// </summary>
         private int crewNum;
+        /// <summary>
+        /// True if ship is player
+        /// </summary>
         internal bool isPlayer;
+        /// <summary>
+        /// True if ship is repairing
+        /// </summary>
         internal bool isRepairing;
+        /// <summary>
+        /// True if right cannons are loaded
+        /// </summary>
         bool rightLoaded;
+        /// <summary>
+        /// True if left cannons are loaded
+        /// </summary>
         bool leftLoaded;
+        /// <summary>
+        /// Sprite used to display player's move orders
+        /// </summary>
         internal Sprite moveLocSprite;
-        internal HitBox hitBoxHullLeft;
-        internal HitBox hitBoxHullRight;
-        internal HitBox hitBoxHullFront;
-        internal HitBox hitBoxHullBack;
-        internal HitBox hitBoxSailFront;
-        internal HitBox hitBoxSailMiddle;
-        internal HitBox hitBoxSailBack;
-        internal Event tiReloadRight;
-        internal Event tiReloadLeft;
-        internal Event tiRepairTimer;
+        /// <summary>
+        /// Array of the ship's HitBoxes, maximum index is 7.
+        /// </summary>
         internal HitBox[] hitBoxArray;
+        /// <summary>
+        /// HitBox for the left hull
+        /// </summary>
+        internal HitBox hitBoxHullLeft;
+        /// <summary>
+        /// HitBox for the right hull
+        /// </summary>
+        internal HitBox hitBoxHullRight;
+        /// <summary>
+        /// HitBox for the front hull
+        /// </summary>
+        internal HitBox hitBoxHullFront;
+        /// <summary>
+        /// HitBox for the back hull
+        /// </summary>
+        internal HitBox hitBoxHullBack;
+        /// <summary>
+        /// HitBox for the front sail
+        /// </summary>
+        internal HitBox hitBoxSailFront;
+        /// <summary>
+        /// Hitbox for the middle sail
+        /// </summary>
+        internal HitBox hitBoxSailMiddle;
+        /// <summary>
+        /// Hitbox for the back sail
+        /// </summary>
+        internal HitBox hitBoxSailBack;
+        /// <summary>
+        /// Timer for right cannon reload
+        /// </summary>
+        internal Event tiReloadRight;
+        /// <summary>
+        /// Timer for left cannon reload
+        /// </summary>
+        internal Event tiReloadLeft;
+        /// <summary>
+        /// Timer for delay between repairs
+        /// </summary>
+        internal Event tiRepairTimer;
 
         internal int CrewNum
         {
@@ -56,6 +110,9 @@ namespace Template
             }
         }
 
+        /// <summary>
+        /// Ship contains all the functions used by both the player and the AI
+        /// </summary>
         public Ship()
         {
             //Init values
@@ -132,12 +189,13 @@ namespace Template
             if (isRepairing && GM.eventM.Elapsed(tiRepairTimer))
             {
                 float repairAmount = (crewNum / 25);
+
                 //Spread repair amount amongst each part
                 HitBox[] repairArray = new HitBox[7];
                 int repairNum = 0;
                 for(int i = 0; i <= 6; i++)
                 {
-                    if(hitBoxArray[i].Health < 100)
+                    if(hitBoxArray[i].Health < 100 || hitBoxArray[i].IsBurning)
                     {
                         repairArray[repairNum] = hitBoxArray[i];
                         repairNum++;
@@ -164,6 +222,11 @@ namespace Template
                         repairArray[i].Health += ((int)repairPerPart);
                         if (repairArray[i].Health > 100)
                             repairArray[i].Health = 100;
+
+                        if (repairArray[i].IsBurning && GM.r.FloatBetween(0,1) > 0.9)
+                        {
+                            repairArray[i].IsBurning = false;
+                        }
                     }
                 }
             }
@@ -175,7 +238,7 @@ namespace Template
         /// <param name="right">If true fire from right side else left side</param><param name="type">Type of shot to use - 0 ball shot, 1 bar shot, 2 grape shot, 3 carcass shot</param>
         internal void Fire(bool right, int type)
         {
-            if ((right && tiReloadRight.Paused) || (right == false && tiReloadLeft.Paused) && isRepairing == false)
+            if (((right && tiReloadRight.Paused) || (!right && tiReloadLeft.Paused)) && !isRepairing)
             {
                 Vector3 fireDir;
                 float rightMul;
@@ -197,6 +260,7 @@ namespace Template
                 {
                     for (int i2 = 0; i2 <= multiply; i2++)
                     {
+                        //Travelling along the deck of the ship
                         new CannonBall(this,
                             new Vector2(Position2D.X - (Width) * RotationHelper.MyDirection(this, 0).X + offsetAlongDeck.X, Position2D.Y - (Width) * RotationHelper.MyDirection(this, 0).Y + offsetAlongDeck.Y),
                             new Vector2(fireDir.X - (Width) * RotationHelper.MyDirection(this, 0).X + offsetAlongDeck.X, fireDir.Y - (Width) * RotationHelper.MyDirection(this, 0).Y + offsetAlongDeck.Y),

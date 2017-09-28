@@ -6,34 +6,51 @@ namespace Template.Game
 {
     internal class CannonBall : Sprite
     {
-        private Sprite player;
+        /// <summary>
+        /// Ship that fired the CannonBall
+        /// </summary>
+        private Sprite owner;
+        /// <summary>
+        /// Type of this CannonBall - 0 ball shot, 1 bar shot, 2 carcass shot, 3 grape shot
+        /// </summary>
         private int shotType;
+        /// <summary>
+        /// Time to wait before firing
+        /// </summary>
         private float fireDelay;
+        /// <summary>
+        /// True if velocity has been added after spawning
+        /// </summary>
         bool velApplied;
+        /// <summary>
+        /// True if CannonBall doesnt hit anything and needs to splash as though it landed in water
+        /// </summary>
         bool splash;
 
-        internal Sprite Player
+        internal Sprite Owner
         {
             get
             {
-                return player;
+                return owner;
             }
         }
 
         /// <summary>
         /// Constructor for bullet class
         /// </summary>
-        /// <param name="player">The object that fired the bullet</param>
-        /// <param name="fireTowards">2D vector to travel towards</param>
+        /// <param name="owner">The ship that fired the CannonBall</param>
+        /// <param name="fireFrom">2D position to fire from</param>
+        /// <param name="fireTowards">2D position to fire towards</param>
         /// <param name="type">Type of shot to use - 0 ball shot, 1 bar shot, 2 carcass shot, 3 grape shot</param>
-        public CannonBall(Sprite player, Vector2 fireFrom, Vector2 fireTowards, int type)
+        public CannonBall(Sprite owner, Vector2 fireFrom, Vector2 fireTowards, int type)
         {
+            //Init values
             Position2D = fireFrom;
             shotType = type;
-            
-            this.player = player;
+            this.owner = owner;
+
+            //Find sprite to render
             GM.engineM.AddSprite(this);
-            
             switch (type)
             {
                 case 0:
@@ -58,29 +75,28 @@ namespace Template.Game
             }
             Friction = 0.25f;
 
-            //Create direction vector and normalise
+            //Face a normalised vector created from fireFrom
             Vector2 direction = fireTowards - Position2D;
             direction = Vector2.Normalize(direction);
-
-            //Face direction vector
             RotationHelper.FaceDirection(this, direction, DirectionAccuracy.free, 0);
             Position += RotationHelper.MyDirection(this, 0) * 32;
 
-            //collision setup
+            //Collision setup
             CollisionActive = true;
             CollisionPrimary = true;
             PrologueCallBack += Hit;
             EpilogueCallBack += AfterHit;
             Moving = true;
             
-            //kill after 5 seconds and delay firing
+            //kill after a random time and delay firing
             TimerInitialise();
             fireDelay = GM.r.FloatBetween(0, 0.5f);
             if (type != 3)
             {
                 Timer.ShowAfterKillAfter(fireDelay, GM.r.FloatBetween(0.5f, 1f));
             }
-            else {
+            else
+            {
                 Timer.ShowAfterKillAfter(fireDelay, GM.r.FloatBetween(0.2f, 0.4f));
             }
 
@@ -91,6 +107,9 @@ namespace Template.Game
             FuneralCallBack += Death;
         }
 
+        /// <summary>
+        /// Creates particles when deleted
+        /// </summary>
         private void Death()
         {
             if (splash)
@@ -123,6 +142,9 @@ namespace Template.Game
             }
         }
 
+        /// <summary>
+        /// Code to run each tick
+        /// </summary>
         private void Move()
         {
             if (Visible && velApplied == false)
@@ -146,9 +168,13 @@ namespace Template.Game
             }
         }
 
+        /// <summary>
+        /// Code to run upon hitting a sprite
+        /// </summary>
+        /// <param name="hit">Sprite that was hit</param>
         private void Hit(Sprite hit)
         {
-            if (hit is HitBox)
+            if (hit is HitBox && GM.r.FloatBetween(0,1) > 0.75)
             {
                 HitBox hitBox = (HitBox)hit; //Get owner of hitbox
                 if (hitBox.Owner is HitBox)
@@ -156,7 +182,7 @@ namespace Template.Game
                     hitBox = (HitBox)hitBox.Owner;
                 }
 
-                if (hitBox.Owner == player)
+                if (hitBox.Owner == owner)
                 {
                     CollisionAbandonResponse = true;
                 }
@@ -234,6 +260,10 @@ namespace Template.Game
             }
         }
 
+        /// <summary>
+        /// Code to run after resolving hit
+        /// </summary>
+        /// <param name="hit">Sprite that was hit</param>
         private void AfterHit(Sprite hit)
         {
             splash = false;

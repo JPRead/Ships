@@ -12,12 +12,27 @@
             <param name="dimensions">X and Y scale</param>
             <param name="hitbox">Hitbox to target</param>
         </member>
+        <member name="F:Template.Game.Button.display">
+            <summary>
+            Sprite to display within the button
+            </summary>
+        </member>
+        <member name="F:Template.Game.Button.enabled">
+            <summary>
+            True if UI element can be clicked
+            </summary>
+        </member>
         <member name="M:Template.Game.Button.#ctor(Microsoft.Xna.Framework.Rectangle,System.Boolean)">
             <summary>
             Constructor for button
             </summary>
             <param name="rect">Dimensions for button</param>
             <param name="startEnabled">Is the button enabled to begin with - set to false for UI backgrounds</param>
+        </member>
+        <member name="M:Template.Game.Button.Tick">
+            <summary>
+            Code runs each tick
+            </summary>
         </member>
         <member name="M:Template.Game.Button.PressedLeft">
             <summary>
@@ -49,11 +64,22 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:Template.Game.Button.SetDisplay(Microsoft.Xna.Framework.Rectangle)">
+            <summary>
+            Displays a rectangle in Sprites.png within the button
+            </summary>
+            <param name="tile">Rectangle to select from tilemap</param>
+        </member>
+        <member name="F:Template.Game.CannonBall.owner">
+            <summary>
+            Ship that fired the CannonBall
+            </summary>
+        </member>
         <member name="M:Template.Game.CannonBall.#ctor(Engine7.Sprite,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,System.Int32)">
             <summary>
             Constructor for bullet class
             </summary>
-            <param name="player">The object that fired the bullet</param>
+            <param name="owner">The ship that fired the Cannon</param>
             <param name="fireTowards">2D vector to travel towards</param>
             <param name="type">Type of shot to use - 0 ball shot, 1 bar shot, 2 carcass shot, 3 grape shot</param>
         </member>
@@ -483,12 +509,107 @@
         </member>
         <member name="T:Template.Ship">
             <summary>
-            Ship used as a base for the player and AI
+            Ship used as base for player and AI
             </summary>
         </member>
         <member name="F:Template.Ship.sailAmount">
             <summary>
             0 stopped, 1 half speed, 2 full speed
+            </summary>
+        </member>
+        <member name="F:Template.Ship.shotTypeLeft">
+            <summary>
+            Type of shot to be fired from left cannons
+            </summary>
+        </member>
+        <member name="F:Template.Ship.shotTypeRight">
+            <summary>
+            Type of shot to be fired from right cannons
+            </summary>
+        </member>
+        <member name="F:Template.Ship.crewNum">
+            <summary>
+            Number of crew remaining
+            </summary>
+        </member>
+        <member name="F:Template.Ship.isPlayer">
+            <summary>
+            True if ship is player
+            </summary>
+        </member>
+        <member name="F:Template.Ship.isRepairing">
+            <summary>
+            True if ship is repairing
+            </summary>
+        </member>
+        <member name="F:Template.Ship.rightLoaded">
+            <summary>
+            True if right cannons are loaded
+            </summary>
+        </member>
+        <member name="F:Template.Ship.leftLoaded">
+            <summary>
+            True if left cannons are loaded
+            </summary>
+        </member>
+        <member name="F:Template.Ship.moveLocSprite">
+            <summary>
+            Sprite used to display player's move orders
+            </summary>
+        </member>
+        <member name="F:Template.Ship.hitBoxArray">
+            <summary>
+            Array of the ship's HitBoxes, maximum index is 7.
+            </summary>
+        </member>
+        <member name="F:Template.Ship.hitBoxHullLeft">
+            <summary>
+            HitBox for the left hull
+            </summary>
+        </member>
+        <member name="F:Template.Ship.hitBoxHullRight">
+            <summary>
+            HitBox for the right hull
+            </summary>
+        </member>
+        <member name="F:Template.Ship.hitBoxHullFront">
+            <summary>
+            HitBox for the front hull
+            </summary>
+        </member>
+        <member name="F:Template.Ship.hitBoxHullBack">
+            <summary>
+            HitBox for the back hull
+            </summary>
+        </member>
+        <member name="F:Template.Ship.hitBoxSailFront">
+            <summary>
+            HitBox for the front sail
+            </summary>
+        </member>
+        <member name="F:Template.Ship.hitBoxSailMiddle">
+            <summary>
+            Hitbox for the middle sail
+            </summary>
+        </member>
+        <member name="F:Template.Ship.hitBoxSailBack">
+            <summary>
+            Hitbox for the back sail
+            </summary>
+        </member>
+        <member name="F:Template.Ship.tiReloadRight">
+            <summary>
+            Timer for right cannon reload
+            </summary>
+        </member>
+        <member name="F:Template.Ship.tiReloadLeft">
+            <summary>
+            Timer for left cannon reload
+            </summary>
+        </member>
+        <member name="F:Template.Ship.tiRepairTimer">
+            <summary>
+            Timer for delay between repairs
             </summary>
         </member>
         <member name="M:Template.Ship.Fire(System.Boolean,System.Int32)">
