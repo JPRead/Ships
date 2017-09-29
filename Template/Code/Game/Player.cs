@@ -224,17 +224,16 @@ namespace Template
             GM.textM.Draw(FontBank.arcadePixel, "Hull Front  " + hitBoxHullFront.Health + "~Hull Back   " + hitBoxHullBack.Health +
                 "~Hull Left   " + hitBoxHullLeft.Health + "~Hull Right  " + hitBoxHullRight.Health +
                 "~Sail Front  " + hitBoxSailFront.Health + "~Sail Middle " + hitBoxSailMiddle.Health + "~Sail Back   " + hitBoxSailBack.Health, 100, 100, TextAtt.TopLeft);
-            GM.textM.Draw(FontBank.arcadePixel, Convert.ToString(isRepairing), 200, 200);
+            GM.textM.Draw(FontBank.arcadePixel, Convert.ToString(hasCollided), 200, 200);
 
             //UI updates
-            if (!tiReloadRight.Paused)
+            if (!tiReloadRight.Paused && !isRepairing)
             {
                 UIReloadRight.Visible = true;
                 float heightMul = (tiReloadRight.Interval - tiReloadRight.ElapsedSoFar) / tiReloadRight.Interval ;
                 UIReloadRight.SY = 50 * heightMul;
             }
-
-            if (!tiReloadLeft.Paused)
+            if (!tiReloadLeft.Paused && !isRepairing)
             {
                 UIReloadLeft.Visible = true;
                 float heightMul = (tiReloadLeft.Interval - tiReloadLeft.ElapsedSoFar) / tiReloadLeft.Interval ;
@@ -353,6 +352,14 @@ namespace Template
             if (repairButton.PressedRight())
             {
                 isRepairing = false;
+                if (!leftLoaded)
+                {
+                    tiReloadLeft.Paused = false;
+                }
+                if (!rightLoaded)
+                {
+                    tiReloadRight.Paused = false;
+                }
             }
 
             //Movement orders

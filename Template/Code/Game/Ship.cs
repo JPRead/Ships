@@ -33,6 +33,10 @@ namespace Template
         /// </summary>
         private int crewNum;
         /// <summary>
+        /// True if ship has collided in the last tick
+        /// </summary>
+        internal bool hasCollided;
+        /// <summary>
         /// True if ship is player
         /// </summary>
         internal bool isPlayer;
@@ -43,11 +47,11 @@ namespace Template
         /// <summary>
         /// True if right cannons are loaded
         /// </summary>
-        bool rightLoaded;
+        internal bool rightLoaded;
         /// <summary>
         /// True if left cannons are loaded
         /// </summary>
-        bool leftLoaded;
+        internal bool leftLoaded;
         /// <summary>
         /// Sprite used to display player's move orders
         /// </summary>
@@ -230,6 +234,27 @@ namespace Template
                     }
                 }
             }
+
+            //Checking for collisions
+            if (hasCollided)
+            {
+                hasCollided = false;
+                Ship otherShip;
+                if (isPlayer)
+                {
+                    otherShip = GameSetup.Opponent;
+                }
+                else
+                {
+                    otherShip = GameSetup.Player;
+                }
+                Vector2 velVector = Position2D - otherShip.Position2D;
+                velVector.Normalize();
+                //Multiply based on angle to velVector (reduce if sideways)
+
+                Velocity2D += (velVector * 2);
+                otherShip.Velocity2D -= (velVector * 2);
+            }
         }
 
         /// <summary>
@@ -283,6 +308,10 @@ namespace Template
             }
         }
 
+        /// <summary>
+        /// Accelerates the ship towards point and keeps the ship from sliding sideways
+        /// </summary>
+        /// <param name="point">Point to move towards</param>
         internal void MoveToPoint(Point point)
         {
             Vector2 movePos = PointHelper.Vector2FromPoint(point);

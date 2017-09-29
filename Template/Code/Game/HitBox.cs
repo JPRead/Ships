@@ -125,18 +125,18 @@ namespace Template
         /// Constructor for hitbox
         /// </summary>
         /// <param name="hitBoxOwner">Parent of the hitbox</param>
-        /// <param name="offsetFromPlayer">Offset from player centre when facing up - this can never be zero!</param>
+        /// <param name="offsetFromOwner">Offset from owner centre when facing up - this can never be zero!</param>
         /// <param name="dimensions">Height and Width of hitbox</param>
         /// <param name="damageMultiplier">Damage taken is multiplied by this amount</param>
         /// <param name="type">Type of damage taken by hitbox - 0 hull, 1 sail</param>
-        public HitBox(Sprite hitBoxOwner, Vector2 offsetFromPlayer, Vector2 dimensions, float damageMultiplier, int type)
+        public HitBox(Sprite hitBoxOwner, Vector2 offsetFromOwner, Vector2 dimensions, float damageMultiplier, int type)
         {
             damageMul = damageMultiplier;
             damageType = type;
             health = 100;
             owner = hitBoxOwner;
 
-            offsetVector = new Vector2(offsetFromPlayer.X, -offsetFromPlayer.Y);
+            offsetVector = new Vector2(offsetFromOwner.X, -offsetFromOwner.Y);
             offsetMagnitude = offsetVector.Length();
             offsetVector.Normalize();
             offsetAngle = RotationHelper.AngleFromDirection(offsetVector);
@@ -149,25 +149,53 @@ namespace Template
             {
                 isParent = false;
                 CollisionActive = true;
+                CollisionPrimary = true;
                 Visible = false;
 
                 //Debug
-                //CollisionBoxVisible = true;
-                //Visible = true;
+                CollisionBoxVisible = true;
+                Visible = true;
             }
             else
             {
                 isParent = true;
                 CollisionActive = false;
+                CollisionPrimary = false;
                 Visible = true;
                 Wash = Color.Red;
                 Alpha = 0.75f;
                 WashCollision = Color.Red;
-                CreateCollisionArea(5);
+                CreateCollisionArea(10);
             }
 
             GM.eventM.AddTimer(tiBurnTick = new Event(1, "Burn Tick"));
+            PrologueCallBack += Hit;
             UpdateCallBack += Tick;
+        }
+
+        private void Hit(Sprite hit)
+        {
+            if (hit is HitBox)
+            {
+                //Get Ship of collided HitBox, then Ship of this HitBox
+                HitBox hitBox = (HitBox)hit;
+                HitBox hitBoxOwner = (HitBox)hitBox.Owner;
+                Ship hitShip = (Ship)hitBoxOwner.Owner;
+                hitBoxOwner = (HitBox)owner;
+                Ship thisShip = (Ship)hitBoxOwner.Owner;
+                if (thisShip == hitShip)
+                {
+                    CollisionAbandonResponse = true;
+                }
+                else
+                {
+                    thisShip.hasCollided = true;
+                }
+            }
+            else
+            {
+                CollisionAbandonResponse = true;
+            }
         }
 
         /// <summary>

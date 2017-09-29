@@ -4,6 +4,16 @@
         <name>TemplateJune2015</name>
     </assembly>
     <members>
+        <member name="F:Template.DamageSprite.target">
+            <summary>
+            HitBox to represent
+            </summary>
+        </member>
+        <member name="F:Template.DamageSprite.health">
+            <summary>
+            Variable used to store target's health
+            </summary>
+        </member>
         <member name="M:Template.DamageSprite.#ctor(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,Template.HitBox)">
             <summary>
             Constructor for damageSprite
@@ -11,6 +21,11 @@
             <param name="startPos">Coordinates of centre of sprite</param>
             <param name="dimensions">X and Y scale</param>
             <param name="hitbox">Hitbox to target</param>
+        </member>
+        <member name="M:Template.DamageSprite.Tick">
+            <summary>
+            Code to run each tick
+            </summary>
         </member>
         <member name="F:Template.Game.Button.display">
             <summary>
@@ -24,14 +39,14 @@
         </member>
         <member name="M:Template.Game.Button.#ctor(Microsoft.Xna.Framework.Rectangle,System.Boolean)">
             <summary>
-            Constructor for button
+            Button is used as a UI element that can be interacted with using the mouse
             </summary>
             <param name="rect">Dimensions for button</param>
             <param name="startEnabled">Is the button enabled to begin with - set to false for UI backgrounds</param>
         </member>
         <member name="M:Template.Game.Button.Tick">
             <summary>
-            Code runs each tick
+            Code to run each tick
             </summary>
         </member>
         <member name="M:Template.Game.Button.PressedLeft">
@@ -75,17 +90,101 @@
             Ship that fired the CannonBall
             </summary>
         </member>
+        <member name="F:Template.Game.CannonBall.shotType">
+            <summary>
+            Type of this CannonBall - 0 ball shot, 1 bar shot, 2 carcass shot, 3 grape shot
+            </summary>
+        </member>
+        <member name="F:Template.Game.CannonBall.fireDelay">
+            <summary>
+            Time to wait before firing
+            </summary>
+        </member>
+        <member name="F:Template.Game.CannonBall.velApplied">
+            <summary>
+            True if velocity has been added after spawning
+            </summary>
+        </member>
+        <member name="F:Template.Game.CannonBall.splash">
+            <summary>
+            True if CannonBall doesnt hit anything and needs to splash as though it landed in water
+            </summary>
+        </member>
         <member name="M:Template.Game.CannonBall.#ctor(Engine7.Sprite,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,System.Int32)">
             <summary>
             Constructor for bullet class
             </summary>
-            <param name="owner">The ship that fired the Cannon</param>
-            <param name="fireTowards">2D vector to travel towards</param>
+            <param name="owner">The ship that fired the CannonBall</param>
+            <param name="fireFrom">2D position to fire from</param>
+            <param name="fireTowards">2D position to fire towards</param>
             <param name="type">Type of shot to use - 0 ball shot, 1 bar shot, 2 carcass shot, 3 grape shot</param>
+        </member>
+        <member name="M:Template.Game.CannonBall.Death">
+            <summary>
+            Creates particles when deleted
+            </summary>
+        </member>
+        <member name="M:Template.Game.CannonBall.Move">
+            <summary>
+            Code to run each tick
+            </summary>
+        </member>
+        <member name="M:Template.Game.CannonBall.Hit(Engine7.Sprite)">
+            <summary>
+            Code to run upon hitting a sprite
+            </summary>
+            <param name="hit">Sprite that was hit</param>
+        </member>
+        <member name="M:Template.Game.CannonBall.AfterHit(Engine7.Sprite)">
+            <summary>
+            Code to run after resolving hit
+            </summary>
+            <param name="hit">Sprite that was hit</param>
+        </member>
+        <member name="F:Template.Game.GameSetup.player">
+            <summary>
+            The player's ship
+            </summary>
+        </member>
+        <member name="F:Template.Game.GameSetup.opponent">
+            <summary>
+            The AI's ship
+            </summary>
+        </member>
+        <member name="F:Template.Game.GameSetup.windDir">
+            <summary>
+            The wind direction
+            </summary>
+        </member>
+        <member name="M:Template.Game.GameSetup.#ctor">
+            <summary>
+            Sets up all the initial values for the game
+            </summary>
+        </member>
+        <member name="M:Template.Game.GameSetup.Logic">
+            <summary>
+            Check for keypresses used to end game
+            </summary>
+        </member>
+        <member name="M:Template.Game.GameSetup.BackToTitle">
+            <summary>
+            Resets game to title screen
+            </summary>
         </member>
         <member name="T:Template.Opponent">
             <summary>
             Ship for the AI
+            </summary>
+        </member>
+        <member name="M:Template.Opponent.#ctor(Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Contains state machine for the AI
+            </summary>
+            <param name="startPos">Position to spawn at</param>
+        </member>
+        <member name="M:Template.Opponent.Tick">
+            <summary>
+            Code to run each tick
             </summary>
         </member>
         <member name="T:Template.Player">
@@ -93,9 +192,125 @@
             Ship for the player
             </summary>
         </member>
+        <member name="F:Template.Player.cursor">
+            <summary>
+            Player's cursor
+            </summary>
+        </member>
+        <member name="F:Template.Player.moveTo">
+            <summary>
+            Point to move towards
+            </summary>
+        </member>
+        <member name="F:Template.Player.speedButton">
+            <summary>
+            Button for setting speed
+            </summary>
+        </member>
+        <member name="F:Template.Player.fireRightButton">
+            <summary>
+            Button to fire and load right cannon
+            </summary>
+        </member>
+        <member name="F:Template.Player.fireLeftButton">
+            <summary>
+            Button to fire and load left cannon
+            </summary>
+        </member>
+        <member name="F:Template.Player.repairButton">
+            <summary>
+            Button to start and stop repairing
+            </summary>
+        </member>
+        <member name="F:Template.Player.UIButtonsBackground">
+            <summary>
+            Background element for Buttons, used to stop player giving move orders behind the Buttons
+            </summary>
+        </member>
+        <member name="F:Template.Player.UIDamageBackground">
+            <summary>
+            Background element for DamageSprites, used to stop player giving move orders behind the DamageSprites
+            </summary>
+        </member>
+        <member name="F:Template.Player.UIBackgroundElements">
+            <summary>
+            Array for UI background elements
+            </summary>
+        </member>
+        <member name="F:Template.Player.moveTargetReached">
+            <summary>
+            Returns true if ship is close enough the the moveTo point
+            </summary>
+        </member>
+        <member name="F:Template.Player.fireZone">
+            <summary>
+            Sprite used to display the range and firing angles of the cannons
+            </summary>
+        </member>
+        <member name="F:Template.Player.damageHullFront">
+            <summary>
+            DamageSprite used to display the health of the front hull HitBox
+            </summary>
+        </member>
+        <member name="F:Template.Player.damageHullBack">
+            <summary>
+            DamageSprite used to display the health of the back hull HitBox
+            </summary>
+        </member>
+        <member name="F:Template.Player.damageHullLeft">
+            <summary>
+            DamageSprite used to display the health of the left hull HitBox
+            </summary>
+        </member>
+        <member name="F:Template.Player.damageHullRight">
+            <summary>
+            DamageSprite used to display the health of the right hull HitBox
+            </summary>
+        </member>
+        <member name="F:Template.Player.damageSailFront">
+            <summary>
+            DamageSprite used to display the health of the front sail HitBox
+            </summary>
+        </member>
+        <member name="F:Template.Player.damageSailMiddle">
+            <summary>
+            DamageSprite used to display the health of the middle sail HitBox
+            </summary>
+        </member>
+        <member name="F:Template.Player.damageSailBack">
+            <summary>
+            DamageSprite used to display the health of the back sail HitBox
+            </summary>
+        </member>
+        <member name="F:Template.Player.UIReloadRight">
+            <summary>
+            Sprite used to represent right cannons reloading
+            </summary>
+        </member>
+        <member name="F:Template.Player.UIReloadLeft">
+            <summary>
+            Sprite used to represent left cannons reloading
+            </summary>
+        </member>
         <member name="F:Template.Player.buttonPressed">
             <summary>
             This must be set to true if a button has been pressed during a tick, else button presses could be interpreted as movement orders
+            </summary>
+        </member>
+        <member name="M:Template.Player.#ctor(Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Contains functions for the player to give orders
+            </summary>
+            <param name="startPos">Position to spawn at</param>
+        </member>
+        <member name="M:Template.Player.Tick">
+            <summary>
+            Code to run each tick
+            </summary>
+        </member>
+        <member name="F:Template.FadingParticle.tiLifetime">
+            <summary>
+            Time until particle fades
             </summary>
         </member>
         <member name="M:Template.FadingParticle.#ctor(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector3,System.Single,System.Single)">
@@ -107,20 +322,81 @@
             <param name="spawnAngle"></param>
             <param name="lifetime">Minimum lifetime for particle in seconds</param>
         </member>
+        <member name="M:Template.FadingParticle.LifeCountdown">
+            <summary>
+            Code to run each tick until tiLifetime elapses
+            </summary>
+        </member>
+        <member name="F:Template.HitBox.isParent">
+            <summary>
+            True if HitBox is parent of other HitBoxes
+            </summary>
+        </member>
+        <member name="F:Template.HitBox.isBurning">
+            <summary>
+            True if HitBox is burning, causing damage over time
+            </summary>
+        </member>
+        <member name="F:Template.HitBox.owner">
+            <summary>
+            Owner of HitBox, for child HitBoxes this is the parent HitBox, for parent HitBoxes this is the Ship it is created by
+            </summary>
+        </member>
+        <member name="F:Template.HitBox.damageType">
+            <summary>
+            Type of damage taken by hitbox - 0 hull, 1 sai
+            </summary>
+        </member>
+        <member name="F:Template.HitBox.offsetVector">
+            /// <summary>
+            Normalised offset vector from centre of owner
+            </summary>
+        </member>
+        <member name="F:Template.HitBox.offsetMagnitude">
+            <summary>
+            Value to multiply offsetVector by to get a position
+            </summary>
+        </member>
+        <member name="F:Template.HitBox.offsetAngle">
+            <summary>
+            Extra rotation for offsetVector to account for owner turning
+            </summary>
+        </member>
+        <member name="F:Template.HitBox.health">
+            <summary>
+            Health of HitBox
+            </summary>
+        </member>
+        <member name="F:Template.HitBox.damageMul">
+            <summary>
+            Value to multiply damage by when subtracting from health
+            </summary>
+        </member>
+        <member name="F:Template.HitBox.tiBurnTick">
+            <summary>
+            Delay for damage over time when burning
+            </summary>
+        </member>
         <member name="M:Template.HitBox.#ctor(Engine7.Sprite,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,System.Single,System.Int32)">
             <summary>
             Constructor for hitbox
             </summary>
             <param name="hitBoxOwner">Parent of the hitbox</param>
-            <param name="offsetFromPlayer">Offset from player centre when facing up - this can never be zero!</param>
+            <param name="offsetFromOwner">Offset from owner centre when facing up - this can never be zero!</param>
             <param name="dimensions">Height and Width of hitbox</param>
+            <param name="damageMultiplier">Damage taken is multiplied by this amount</param>
             <param name="type">Type of damage taken by hitbox - 0 hull, 1 sail</param>
         </member>
         <member name="M:Template.HitBox.CreateCollisionArea(System.Single)">
             <summary>
-            Creates collisions for hitbox that can effectively rotate
+            Creates collisions for HitBox that can approximate a rotation using smaller HitBoxes
             </summary>
-            <param name="colResolution"></param>
+            <param name="colResolution">Resolution of HitBoxes, higher values are more accurate but slower</param>
+        </member>
+        <member name="M:Template.HitBox.Tick">
+            <summary>
+            Code to run each tick
+            </summary>
         </member>
         <member name="T:Template.ScoreEntry">
             <summary>
@@ -507,11 +783,6 @@
             when score is finished, initials are stored in Object which needs casting to (string)
             </summary>
         </member>
-        <member name="T:Template.Ship">
-            <summary>
-            Ship used as base for player and AI
-            </summary>
-        </member>
         <member name="F:Template.Ship.sailAmount">
             <summary>
             0 stopped, 1 half speed, 2 full speed
@@ -530,6 +801,11 @@
         <member name="F:Template.Ship.crewNum">
             <summary>
             Number of crew remaining
+            </summary>
+        </member>
+        <member name="F:Template.Ship.hasCollided">
+            <summary>
+            True if ship has collided in the last tick
             </summary>
         </member>
         <member name="F:Template.Ship.isPlayer">
@@ -612,11 +888,22 @@
             Timer for delay between repairs
             </summary>
         </member>
+        <member name="M:Template.Ship.#ctor">
+            <summary>
+            Ship contains all the functions used by both the player and the AI
+            </summary>
+        </member>
         <member name="M:Template.Ship.Fire(System.Boolean,System.Int32)">
             <summary>
             Fire cannons
             </summary>
             <param name="right">If true fire from right side else left side</param><param name="type">Type of shot to use - 0 ball shot, 1 bar shot, 2 grape shot, 3 carcass shot</param>
+        </member>
+        <member name="M:Template.Ship.MoveToPoint(Microsoft.Xna.Framework.Point)">
+            <summary>
+            Accelerates the ship towards point and keeps the ship from sliding sideways
+            </summary>
+            <param name="point">Point to move towards</param>
         </member>
         <member name="M:Template.Program.Main(System.String[])">
             <summary>

@@ -245,7 +245,8 @@ namespace Template.Game
                         }
                         else if (shotType == 2)//Carcass
                         {
-                            if(GM.r.FloatBetween(0,1) > 0.90)
+                            hitBox.Health -= (int)(5 * hitBox.DamageMul);
+                            if (GM.r.FloatBetween(0,1) > 0.5)
                             {
                                 hitBox.IsBurning = true;
                             }
