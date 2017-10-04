@@ -888,6 +888,11 @@
             Timer for delay between repairs
             </summary>
         </member>
+        <member name="F:Template.Ship.smoothRotationVelocity">
+            <summary>
+            Used to keep track of and smooth out RotationVelocity, since RotationVelocity only applies for a single tick
+            </summary>
+        </member>
         <member name="M:Template.Ship.#ctor">
             <summary>
             Ship contains all the functions used by both the player and the AI

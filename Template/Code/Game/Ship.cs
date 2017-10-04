@@ -100,6 +100,10 @@ namespace Template
         /// Timer for delay between repairs
         /// </summary>
         internal Event tiRepairTimer;
+        /// <summary>
+        /// Used to keep track of and smooth out RotationVelocity, since RotationVelocity only applies for a single tick
+        /// </summary>
+        private float smoothRotationVelocity;
 
         internal int CrewNum
         {
@@ -251,9 +255,11 @@ namespace Template
                 Vector2 velVector = Position2D - otherShip.Position2D;
                 velVector.Normalize();
                 //Multiply based on angle to velVector (reduce if sideways)
+                float angleDifference = Math.Abs(RotationHelper.AngleFromDirection(velVector) - RotationAngle + 90);
+                velVector = (360*velVector) / angleDifference;
 
                 Velocity2D += (velVector * 2);
-                otherShip.Velocity2D -= (velVector * 2);
+                //otherShip.Velocity2D -= (velVector * 2);
             }
         }
 
@@ -316,20 +322,35 @@ namespace Template
         {
             Vector2 movePos = PointHelper.Vector2FromPoint(point);
 
+            //Stop moving once close enough to movePos
             if(Vector2.DistanceSquared(Position2D, movePos) + 5000 > Height * Height)
             {
                 if (isPlayer)
                     moveLocSprite.Visible = true;
                     moveLocSprite.Position2D = movePos;
-
-                int dirMul = (int)RotationHelper.AngularDirectionTo(this, new Vector3(movePos, 0), 0, false);
-                RotationVelocity = 10 * dirMul;
-
+                
                 if (sailAmount == 0)
                 {
+                    if(smoothRotationVelocity > 0)
+                    {
+                        smoothRotationVelocity -= 0.1f;
+                        RotationVelocity = smoothRotationVelocity;                        
+                    }
+                    if(smoothRotationVelocity < 0)
+                    {
+                        smoothRotationVelocity += 0.1f;
+                        RotationVelocity = smoothRotationVelocity;
+                    }
                 }
                 else
                 {
+                    int dirMul = (int)RotationHelper.AngularDirectionTo(this, new Vector3(movePos, 0), 0, false);
+                    RotationVelocity = 10 * dirMul;
+                    smoothRotationVelocity += 10 * dirMul;
+                    if ((dirMul > 0 && smoothRotationVelocity > 10 * dirMul)||(dirMul < 0 && smoothRotationVelocity < 10 * dirMul))
+                    {
+                        smoothRotationVelocity = 10 * dirMul;
+                    }
                     Vector3 currentVel = Velocity;
                     currentVel.Normalize();
                     currentVel = Position + currentVel;
