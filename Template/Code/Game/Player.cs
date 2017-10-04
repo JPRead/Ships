@@ -209,9 +209,6 @@ namespace Template
             damageSailMiddle = new DamageSprite(UIDamageBackground.Position2D + new Vector2(0, -1), new Vector2(70, 5), hitBoxSailMiddle);
             damageSailBack = new DamageSprite(UIDamageBackground.Position2D + new Vector2(0, 30), new Vector2(65, 5), hitBoxSailBack);
 
-            //DEBUG
-            hitBoxHullBack.IsBurning = true;
-
             UpdateCallBack += Tick;
         }
 
@@ -224,7 +221,7 @@ namespace Template
             GM.textM.Draw(FontBank.arcadePixel, "Hull Front  " + hitBoxHullFront.Health + "~Hull Back   " + hitBoxHullBack.Health +
                 "~Hull Left   " + hitBoxHullLeft.Health + "~Hull Right  " + hitBoxHullRight.Health +
                 "~Sail Front  " + hitBoxSailFront.Health + "~Sail Middle " + hitBoxSailMiddle.Health + "~Sail Back   " + hitBoxSailBack.Health, 100, 100, TextAtt.TopLeft);
-            GM.textM.Draw(FontBank.arcadePixel, Convert.ToString(hasCollided), 200, 200);
+            //GM.textM.Draw(FontBank.arcadePixel, Convert.ToString(hasCollided), 200, 200);
 
             //UI updates
             if (!tiReloadRight.Paused && !isRepairing)
@@ -336,7 +333,7 @@ namespace Template
             else if (fireLeftButton.Hover())
             {
                 fireZone.Visible = true;
-                fireZone.Position2D = Position2D +RotationHelper.Direction2DFromAngle(RotationAngle, 90) * 220;
+                fireZone.Position2D = Position2D + RotationHelper.Direction2DFromAngle(RotationAngle, 90) * 220;
                 fireZone.RotationAngle = RotationAngle;
             }
             else

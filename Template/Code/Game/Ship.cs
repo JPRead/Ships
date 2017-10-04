@@ -344,13 +344,15 @@ namespace Template
                 }
                 else
                 {
+                    //Calculations for turning
                     int dirMul = (int)RotationHelper.AngularDirectionTo(this, new Vector3(movePos, 0), 0, false);
-                    RotationVelocity = 10 * dirMul;
-                    smoothRotationVelocity += 10 * dirMul;
-                    if ((dirMul > 0 && smoothRotationVelocity > 10 * dirMul)||(dirMul < 0 && smoothRotationVelocity < 10 * dirMul))
+                    smoothRotationVelocity += 0.1f * dirMul;
+                    if ((dirMul > 0 && smoothRotationVelocity > 10 * dirMul) || (dirMul < 0 && smoothRotationVelocity < 10 * dirMul))
                     {
                         smoothRotationVelocity = 10 * dirMul;
                     }
+                    RotationVelocity = smoothRotationVelocity;
+
                     Vector3 currentVel = Velocity;
                     currentVel.Normalize();
                     currentVel = Position + currentVel;
@@ -363,10 +365,10 @@ namespace Template
                     if(velFromWindAngle > 180) //Keep between 0 and 180
                     {
                         velFromWindAngle = 360 - velFromWindAngle;
-                    }//Create multiplier that is <1
+                    }//Create multiplier that's <1
                     velFromWindAngle = (1/(velFromWindAngle+100)*100);
 
-                    //Keep travelling forward
+                    //Keep from sliding to the side
                     if (velOffsetAngle > 0)
                     {
                         Velocity += RotationHelper.MyDirection(this, -90) * 0.5f;
