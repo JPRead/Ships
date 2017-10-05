@@ -29,6 +29,8 @@ namespace Template.Game
         /// </summary>
         private static float windDir;
 
+        private static PlayerView playerView;
+
         internal static Player Player
         {
             get
@@ -53,6 +55,19 @@ namespace Template.Game
             }
         }
 
+        public static PlayerView PlayerView
+        {
+            get
+            {
+                return playerView;
+            }
+
+            set
+            {
+                playerView = value;
+            }
+        }
+
         /// <summary>
         /// Sets up all the initial values for the game
         /// </summary>
@@ -61,15 +76,28 @@ namespace Template.Game
             //Init values
             GM.engineM.DebugDisplay = Debug.fps | Debug.version;
             GM.engineM.ScreenColour = Color.LightSkyBlue;
+
             windDir = GM.r.FloatBetween(0, 360);
             Sprite windDirSprite = new Sprite();
             GM.engineM.AddSprite(windDirSprite);
             windDirSprite.Frame.Define(Tex.Triangle);
             windDirSprite.SY = 1.5f;
+            windDirSprite.WorldCoordinates = false;
+            windDirSprite.Layer++;
             windDirSprite.Position2D = new Vector2(GM.screenSize.Center.X, 50);
             windDirSprite.RotationAngle = windDir;
+
+            Viewport viewPort = new Viewport(0, 0, 1600, 900);
+            playerView = new PlayerView(viewPort, 0, 0);
+            playerView.ViewerPositionManual = true;
+            playerView.Clamp = false;
+            GM.engineM.viewport.Clear();
+            GM.engineM.viewport.Add(playerView);
+
             player = new Player(new Vector2(400, 400));
             opponent = new Opponent(new Vector2(1600 - 400, 900 - 400));
+
+
         }
 
         /// <summary>

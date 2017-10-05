@@ -133,7 +133,7 @@
             <summary>
             Code to run upon hitting a sprite
             </summary>
-            <param name="hit">Sprite that was hit</param>
+            <param name="hit">The sprite collided with</param>
         </member>
         <member name="M:Template.Game.CannonBall.AfterHit(Engine7.Sprite)">
             <summary>
@@ -386,6 +386,12 @@
             <param name="dimensions">Height and Width of hitbox</param>
             <param name="damageMultiplier">Damage taken is multiplied by this amount</param>
             <param name="type">Type of damage taken by hitbox - 0 hull, 1 sail</param>
+        </member>
+        <member name="M:Template.HitBox.Hit(Engine7.Sprite)">
+            <summary>
+            Code to run upon hitting a sprite
+            </summary>
+            <param name="hit">The sprite collided with</param>
         </member>
         <member name="M:Template.HitBox.CreateCollisionArea(System.Single)">
             <summary>

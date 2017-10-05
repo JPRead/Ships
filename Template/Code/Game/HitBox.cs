@@ -173,6 +173,10 @@ namespace Template
             UpdateCallBack += Tick;
         }
 
+        /// <summary>
+        /// Code to run upon hitting a sprite
+        /// </summary>
+        /// <param name="hit">The sprite collided with</param>
         private void Hit(Sprite hit)
         {
             if (hit is HitBox)
@@ -190,7 +194,7 @@ namespace Template
                 else if(damageType == hitBox.DamageType)
                 {
                     thisShip.hasCollided = true;
-                    health -= 10;
+                    hitBoxOwner.Health-= 1;
                 }
             }
             else

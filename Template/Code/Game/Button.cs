@@ -195,6 +195,7 @@ namespace Template.Game
             display = new Sprite();
             GM.engineM.AddSprite(display);
             display.Frame.Define(GM.txSprite, tile);
+            display.WorldCoordinates = false;
             display.Position2D = Centre2D;
             if (enabled)
             {

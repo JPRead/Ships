@@ -180,6 +180,7 @@ namespace Template
             UIReloadRight.SX = 50;
             UIReloadRight.SY = 50;
             UIReloadRight.Align = Align.bottom;
+            UIReloadRight.WorldCoordinates = false;
             UIReloadRight.Position2D = new Vector2(fireLeftButton.Position2D.X, fireLeftButton.Bottom);
             UIReloadRight.Alpha = 0.5f;
             UIReloadRight.Wash = Color.Beige;
@@ -191,6 +192,7 @@ namespace Template
             UIReloadLeft.SX = 50;
             UIReloadLeft.SY = 50;
             UIReloadLeft.Align = Align.bottom;
+            UIReloadLeft.WorldCoordinates = false;
             UIReloadLeft.Position2D = new Vector2(fireRightButton.Position2D.X, fireRightButton.Bottom);
             UIReloadLeft.Alpha = 0.5f;
             UIReloadLeft.Wash = Color.Beige;
@@ -202,12 +204,19 @@ namespace Template
             UIBackgroundElements = new Button[] { UIButtonsBackground, UIDamageBackground };//Background elements must be in this array
 
             damageHullLeft = new DamageSprite(UIDamageBackground.Position2D + new Vector2(-10, 0), new Vector2(20, 65), hitBoxHullLeft);
+            damageHullLeft.WorldCoordinates = false;
             damageHullRight = new DamageSprite(UIDamageBackground.Position2D + new Vector2(10, 0), new Vector2(20, 65), hitBoxHullRight);
+            damageHullRight.WorldCoordinates = false;
             damageHullFront = new DamageSprite(UIDamageBackground.Position2D + new Vector2(0, -40), new Vector2(40, 25), hitBoxHullFront);
+            damageHullFront.WorldCoordinates = false;
             damageHullBack = new DamageSprite(UIDamageBackground.Position2D + new Vector2(0, 40), new Vector2(40, 25), hitBoxHullBack);
+            damageHullBack.WorldCoordinates = false;
             damageSailFront = new DamageSprite(UIDamageBackground.Position2D + new Vector2(0, -25), new Vector2(60, 5), hitBoxSailFront);
+            damageSailFront.WorldCoordinates = false;
             damageSailMiddle = new DamageSprite(UIDamageBackground.Position2D + new Vector2(0, -1), new Vector2(70, 5), hitBoxSailMiddle);
+            damageSailMiddle.WorldCoordinates = false;
             damageSailBack = new DamageSprite(UIDamageBackground.Position2D + new Vector2(0, 30), new Vector2(65, 5), hitBoxSailBack);
+            damageSailBack.WorldCoordinates = false;
 
             UpdateCallBack += Tick;
         }
@@ -222,6 +231,9 @@ namespace Template
                 "~Hull Left   " + hitBoxHullLeft.Health + "~Hull Right  " + hitBoxHullRight.Health +
                 "~Sail Front  " + hitBoxSailFront.Health + "~Sail Middle " + hitBoxSailMiddle.Health + "~Sail Back   " + hitBoxSailBack.Health, 100, 100, TextAtt.TopLeft);
             //GM.textM.Draw(FontBank.arcadePixel, Convert.ToString(hasCollided), 200, 200);
+
+            //Make camera follow player
+            GameSetup.PlayerView.Position = Position - new Vector3(GM.screenSize.Center.X, GM.screenSize.Center.Y - 100, 0);
 
             //UI updates
             if (!tiReloadRight.Paused && !isRepairing)

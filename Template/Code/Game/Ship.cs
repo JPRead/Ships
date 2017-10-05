@@ -143,6 +143,7 @@ namespace Template
             moveLocSprite = new Sprite();
             GM.engineM.AddSprite(moveLocSprite);
             moveLocSprite.Frame.Define(Tex.Circle8by8);
+            //moveLocSprite.WorldCoordinates = false;
             CollisionActive = true;
 
             Friction = 0.25f;
@@ -258,7 +259,7 @@ namespace Template
                 float angleDifference = Math.Abs(RotationHelper.AngleFromDirection(velVector) - RotationAngle + 90);
                 velVector = (360*velVector) / angleDifference;
 
-                Velocity2D += (velVector * 2);
+                Velocity2D += velVector;
                 //otherShip.Velocity2D -= (velVector * 2);
             }
         }
@@ -327,7 +328,7 @@ namespace Template
             {
                 if (isPlayer)
                     moveLocSprite.Visible = true;
-                    moveLocSprite.Position2D = movePos;
+                moveLocSprite.Position2D = movePos;
                 
                 if (sailAmount == 0)
                 {
@@ -346,10 +347,10 @@ namespace Template
                 {
                     //Calculations for turning
                     int dirMul = (int)RotationHelper.AngularDirectionTo(this, new Vector3(movePos, 0), 0, false);
-                    smoothRotationVelocity += 0.1f * dirMul;
-                    if ((dirMul > 0 && smoothRotationVelocity > 10 * dirMul) || (dirMul < 0 && smoothRotationVelocity < 10 * dirMul))
+                    smoothRotationVelocity += 0.05f * dirMul;
+                    if ((dirMul > 0 && smoothRotationVelocity > 5 * dirMul) || (dirMul < 0 && smoothRotationVelocity < 5 * dirMul))
                     {
-                        smoothRotationVelocity = 10 * dirMul;
+                        smoothRotationVelocity = 5 * dirMul;
                     }
                     RotationVelocity = smoothRotationVelocity;
 

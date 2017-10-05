@@ -171,7 +171,7 @@ namespace Template.Game
         /// <summary>
         /// Code to run upon hitting a sprite
         /// </summary>
-        /// <param name="hit">Sprite that was hit</param>
+        /// <param name="hit">The sprite collided with</param>
         private void Hit(Sprite hit)
         {
             if (hit is HitBox && GM.r.FloatBetween(0,1) > 0.75)
