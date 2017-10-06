@@ -197,7 +197,7 @@ namespace Template
             //Repairing
             if (isRepairing && GM.eventM.Elapsed(tiRepairTimer))
             {
-                float repairAmount = (crewNum / 25);
+                float repairAmount = (crewNum * 0.04);
 
                 //Spread repair amount amongst each part
                 HitBox[] repairArray = new HitBox[7];
@@ -288,7 +288,7 @@ namespace Template
                 int multiply = 2;
                 if (type == 3) { multiply = 5; } //Cannons fire multiple times - for use with grape shot
 
-                for (int i = 0; i <= (crewNum/5); i++)
+                for (int i = 0; i <= (crewNum * 0.2); i++)
                 {
                     for (int i2 = 0; i2 <= multiply; i2++)
                     {

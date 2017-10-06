@@ -29,6 +29,8 @@ namespace Template.Game
         /// </summary>
         private static float windDir;
 
+        private static Sprite opponentArrow;
+
         private static PlayerView playerView;
 
         internal static Player Player
@@ -87,6 +89,15 @@ namespace Template.Game
             windDirSprite.Position2D = new Vector2(GM.screenSize.Center.X, 50);
             windDirSprite.RotationAngle = windDir;
 
+            opponentArrow = new Sprite();
+            GM.engineM.AddSprite(opponentArrow);
+            opponentArrow.Frame.Define(Tex.Triangle);
+            opponentArrow.Wash = Color.Beige;
+            opponentArrow.Alpha = 0.5f;
+            opponentArrow.SY = 1.5f;
+            opponentArrow.Layer++;
+            opponentArrow.Visible = false;
+
             Viewport viewPort = new Viewport(0, 0, 1600, 900);
             playerView = new PlayerView(viewPort, 0, 0);
             playerView.ViewerPositionManual = true;
@@ -96,8 +107,6 @@ namespace Template.Game
 
             player = new Player(new Vector2(400, 400));
             opponent = new Opponent(new Vector2(1600 - 400, 900 - 400));
-
-
         }
 
         /// <summary>
@@ -107,6 +116,25 @@ namespace Template.Game
         {
             //display code
             //GM.textM.Draw(FontBank.gradius, "HI SCORE~" + GM.scoring.TopScore, GM.screenSize.Center.X, 30, TextAtt.Top);
+
+            //Point to opponent if off screen
+            if (opponent.Position2D.X < playerView.ViewPortOutline.Left || opponent.Position2D.X > playerView.ViewPortOutline.Right || opponent.Position2D.Y < playerView.ViewPortOutline.Top || opponent.Position2D.Y > playerView.ViewPortOutline.Bottom)
+            {
+                Vector2 arrowDir = opponent.Position2D - player.Position2D;
+                arrowDir.Normalize();
+
+                opponentArrow.Visible = true;
+                opponentArrow.Position2D = arrowDir * 200 + player.Position2D;
+                opponentArrow.RotationAngle = RotationHelper.AngleFromDirection(arrowDir);
+                GM.textM.Draw(FontBank.arcadePixel, 
+                    Convert.ToString((int)(Vector2.Distance(opponent.Position2D, player.Position2D))) + "m", 
+                    (PointHelper.Vector2FromPoint(GM.screenSize.Center) + arrowDir * 200).X - 50, 
+                    (PointHelper.Vector2FromPoint(GM.screenSize.Center) + arrowDir * 200).Y - 50);
+            }
+            else
+            {
+                opponentArrow.Visible = false;
+            }
 
             if (GM.inputM.KeyPressed(Keys.Escape))
             {

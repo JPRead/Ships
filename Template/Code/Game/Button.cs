@@ -61,11 +61,12 @@ namespace Template.Game
             GM.engineM.AddSprite(display);
             display.Frame.Define(GM.txSprite, new Rectangle(1,1,1,1));
             display.Position2D = Centre2D;
+            Layer++;
 
             if (enabled)
             {
                 Layer++;
-                display.Layer++;
+                display.Layer += 2 ;
             }
 
             UpdateCallBack += Tick;
@@ -199,7 +200,7 @@ namespace Template.Game
             display.Position2D = Centre2D;
             if (enabled)
             {
-                display.Layer++;
+                display.Layer += 2;
             }
         }
     }

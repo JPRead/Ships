@@ -161,7 +161,7 @@ namespace Template.Game
                 int rAmount = (int)GM.r.FloatBetween(2, 4);
                 for(int i = 0; i < rAmount; i++)
                 {
-                    new FadingParticle(Position2D, Velocity/100, RotationAngle, 5);
+                    new FadingParticle(Position2D, Velocity * 0.01f, RotationAngle, 5);
                 }
 
                 velApplied = true;
@@ -174,7 +174,7 @@ namespace Template.Game
         /// <param name="hit">The sprite collided with</param>
         private void Hit(Sprite hit)
         {
-            if (hit is HitBox && GM.r.FloatBetween(0,1) > 0.75)
+            if (hit is HitBox && GM.r.FloatBetween(0, 1) > 0.75 || shotType == 1)
             {
                 HitBox hitBox = (HitBox)hit; //Get owner of hitbox
                 if (hitBox.Owner is HitBox)

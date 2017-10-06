@@ -41,6 +41,7 @@ namespace Template
             SX = dimensions.X;
             SY = dimensions.Y;
             Wash = new Color(0, 255, 0);
+            Layer += 2;
             TimerInitialise();
 
             UpdateCallBack += Tick;

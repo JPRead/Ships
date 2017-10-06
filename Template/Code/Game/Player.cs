@@ -153,6 +153,7 @@ namespace Template
             isPlayer = true;
             Position2D = startPos;
             cursor = new Cursor(GM.screenSize.Center);
+            //cursor.WorldCoordinates = false;
             moveTo = PointHelper.PointFromVector2(Position2D);
 
             //UI setup
@@ -200,6 +201,7 @@ namespace Template
             GM.engineM.AddSprite(UIReloadLeft);
             
             UIButtonsBackground = new Button(new Rectangle(GM.screenSize.Center.X, GM.screenSize.Bottom - 87, 250, 175), false);
+            
             UIDamageBackground = new Button(new Rectangle(GM.screenSize.Left + 75, GM.screenSize.Bottom - 75, 150, 150), false);
             UIBackgroundElements = new Button[] { UIButtonsBackground, UIDamageBackground };//Background elements must be in this array
 
@@ -383,7 +385,7 @@ namespace Template
                 if (GM.inputM.MouseRightButtonPressed())
                 {
                     cursor.Mode = 1;
-                    moveTo = PointHelper.PointFromVector2(cursor.Position2D);
+                    moveTo = PointHelper.PointFromVector2(cursor.Position2D + Position2D + new Vector2(-800, -350));
                     moveTargetReached = false;
                 }
                 //Default
