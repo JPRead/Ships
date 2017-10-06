@@ -197,7 +197,7 @@ namespace Template
             //Repairing
             if (isRepairing && GM.eventM.Elapsed(tiRepairTimer))
             {
-                float repairAmount = (crewNum * 0.04);
+                float repairAmount = (crewNum * 0.04f);
 
                 //Spread repair amount amongst each part
                 HitBox[] repairArray = new HitBox[7];
