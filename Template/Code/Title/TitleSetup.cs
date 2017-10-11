@@ -36,7 +36,7 @@ namespace Template.Title
         /// <summary>
         /// 
         /// </summary>
-        public override void Logic()
+        public override void Tick()
         {
             GM.textM.Draw(FontBank.arcadeLarge, "Press 1 to start.", GM.screenSize.Center.X, GM.screenSize.Center.Y, TextAtt.Centred);
 

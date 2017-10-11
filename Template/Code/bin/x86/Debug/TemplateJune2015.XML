@@ -124,7 +124,7 @@
             Creates particles when deleted
             </summary>
         </member>
-        <member name="M:Template.Game.CannonBall.Move">
+        <member name="M:Template.Game.CannonBall.Tick">
             <summary>
             Code to run each tick
             </summary>
@@ -156,12 +156,22 @@
             The wind direction
             </summary>
         </member>
+        <member name="F:Template.Game.GameSetup.opponentArrow">
+            <summary>
+            Sprite used to point to enemy when out of view
+            </summary>
+        </member>
+        <member name="F:Template.Game.GameSetup.playerView">
+            <summary>
+            Viewport for the player
+            </summary>
+        </member>
         <member name="M:Template.Game.GameSetup.#ctor">
             <summary>
             Sets up all the initial values for the game
             </summary>
         </member>
-        <member name="M:Template.Game.GameSetup.Logic">
+        <member name="M:Template.Game.GameSetup.Tick">
             <summary>
             Check for keypresses used to end game
             </summary>
@@ -235,11 +245,6 @@
         <member name="F:Template.Player.UIBackgroundElements">
             <summary>
             Array for UI background elements
-            </summary>
-        </member>
-        <member name="F:Template.Player.moveTargetReached">
-            <summary>
-            Returns true if ship is close enough the the moveTo point
             </summary>
         </member>
         <member name="F:Template.Player.fireZone">
@@ -694,7 +699,7 @@
             contains items that all containers need to activate
             </summary>
         </member>
-        <member name="M:Template.BasicSetup.Logic">
+        <member name="M:Template.BasicSetup.Tick">
             <summary>
             default logic for the container. You need to override this method
             </summary>
@@ -899,6 +904,11 @@
             Used to keep track of and smooth out RotationVelocity, since RotationVelocity only applies for a single tick
             </summary>
         </member>
+        <member name="F:Template.Ship.moveTargetReached">
+            <summary>
+            Returns true if ship is close enough the the moveTo point
+            </summary>
+        </member>
         <member name="M:Template.Ship.#ctor">
             <summary>
             Ship contains all the functions used by both the player and the AI
@@ -931,7 +941,7 @@
             constructor
             </summary>
         </member>
-        <member name="M:Template.Title.TitleSetup.Logic">
+        <member name="M:Template.Title.TitleSetup.Tick">
             <summary>
             
             </summary>

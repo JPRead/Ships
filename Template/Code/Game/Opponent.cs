@@ -25,7 +25,6 @@ namespace Template
         /// <param name="startPos">Position to spawn at</param>
         public Opponent(Vector2 startPos)
         {
-            moveLocSprite.Visible = false;
             Position2D = startPos;
             RotationAngle = 45;
 

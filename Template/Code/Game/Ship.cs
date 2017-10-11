@@ -55,7 +55,7 @@ namespace Template
         /// <summary>
         /// Sprite used to display player's move orders
         /// </summary>
-        internal Sprite moveLocSprite;
+        private Sprite moveLocSprite;
         /// <summary>
         /// Array of the ship's HitBoxes, maximum index is 7.
         /// </summary>
@@ -104,6 +104,10 @@ namespace Template
         /// Used to keep track of and smooth out RotationVelocity, since RotationVelocity only applies for a single tick
         /// </summary>
         private float smoothRotationVelocity;
+        /// <summary>
+        /// Returns true if ship is close enough the the moveTo point
+        /// </summary>
+        internal bool moveTargetReached;
 
         internal int CrewNum
         {
@@ -132,6 +136,7 @@ namespace Template
             hitBoxArray = new HitBox[7];
             leftLoaded = false;
             rightLoaded = false;
+            
 
             GM.engineM.AddSprite(this);
             UpdateCallBack += Tick;
@@ -143,7 +148,7 @@ namespace Template
             moveLocSprite = new Sprite();
             GM.engineM.AddSprite(moveLocSprite);
             moveLocSprite.Frame.Define(Tex.Circle8by8);
-            //moveLocSprite.WorldCoordinates = false;
+            moveLocSprite.Visible = false;
             CollisionActive = true;
 
             Friction = 0.25f;
@@ -392,7 +397,7 @@ namespace Template
             }
             else
             {
-                GameSetup.Player.MoveTargetReached = true;
+                moveTargetReached = true;
                 moveLocSprite.Visible = false;
                 RotationVelocity = 0;
             }

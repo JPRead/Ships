@@ -56,10 +56,6 @@ namespace Template
         /// </summary>
         private Button[] UIBackgroundElements;
         /// <summary>
-        /// Returns true if ship is close enough the the moveTo point
-        /// </summary>
-        private bool moveTargetReached;
-        /// <summary>
         /// Sprite used to display the range and firing angles of the cannons
         /// </summary>
         private Sprite fireZone;

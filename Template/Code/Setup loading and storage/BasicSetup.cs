@@ -44,12 +44,12 @@ namespace Template
         {
             ////all modes need a cursor?
             //if (cursoron) { cursor = new Cursor(GM.screenSize.Center); };
-            GM.eventM.AddEvent(evLogic = new Event(GM.eventM.MaximumRate, "container logic", Logic));
+            GM.eventM.AddEvent(evLogic = new Event(GM.eventM.MaximumRate, "container logic", Tick));
         }
         /// <summary>
         /// default logic for the container. You need to override this method
         /// </summary>
-        public virtual void Logic()
+        public virtual void Tick()
         {
             
         }

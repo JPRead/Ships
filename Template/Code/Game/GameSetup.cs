@@ -28,9 +28,13 @@ namespace Template.Game
         /// The wind direction
         /// </summary>
         private static float windDir;
-
+        /// <summary>
+        /// Sprite used to point to enemy when out of view
+        /// </summary>
         private static Sprite opponentArrow;
-
+        /// <summary>
+        /// Viewport for the player
+        /// </summary>
         private static PlayerView playerView;
 
         internal static Player Player
@@ -112,7 +116,7 @@ namespace Template.Game
         /// <summary>
         /// Check for keypresses used to end game
         /// </summary>
-        public override void Logic()
+        public override void Tick()
         {
             //display code
             //GM.textM.Draw(FontBank.gradius, "HI SCORE~" + GM.scoring.TopScore, GM.screenSize.Center.X, 30, TextAtt.Top);

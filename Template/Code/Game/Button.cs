@@ -26,18 +26,18 @@ namespace Template.Game
         /// </summary>
         private bool enabled;
 
-        public Sprite Display
-        {
-            get
-            {
-                return display;
-            }
+        //public Sprite Display
+        //{
+        //    get
+        //    {
+        //        return display;
+        //    }
 
-            set
-            {
-                display = value;
-            }
-        }
+        //    set
+        //    {
+        //        display = value;
+        //    }
+        //}
 
         /// <summary>
         /// Button is used as a UI element that can be interacted with using the mouse

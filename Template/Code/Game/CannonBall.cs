@@ -27,13 +27,13 @@ namespace Template.Game
         /// </summary>
         bool splash;
 
-        internal Sprite Owner
-        {
-            get
-            {
-                return owner;
-            }
-        }
+        //internal Sprite Owner
+        //{
+        //    get
+        //    {
+        //        return owner;
+        //    }
+        //}
 
         /// <summary>
         /// Constructor for bullet class
@@ -101,7 +101,7 @@ namespace Template.Game
             }
 
             velApplied = false;
-            UpdateCallBack += Move;
+            UpdateCallBack += Tick;
 
             splash = true;
             FuneralCallBack += Death;
@@ -145,7 +145,7 @@ namespace Template.Game
         /// <summary>
         /// Code to run each tick
         /// </summary>
-        private void Move()
+        private void Tick()
         {
             if (Visible && velApplied == false)
             {
@@ -228,7 +228,7 @@ namespace Template.Game
                         {
                             hitBox.Health -= (int)(1 * hitBox.DamageMul);
                         }
-                        if (shotType == 3 && GM.r.FloatBetween(0,1) > 0.95) //Grape
+                        if (shotType == 3 && GM.r.FloatBetween(0,1) > 0.9) //Grape
                         {
                             ship.CrewNum -= (int)GM.r.FloatBetween(1, 5);
                         }
