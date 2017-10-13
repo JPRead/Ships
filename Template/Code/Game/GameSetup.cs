@@ -118,9 +118,6 @@ namespace Template.Game
         /// </summary>
         public override void Tick()
         {
-            //display code
-            //GM.textM.Draw(FontBank.gradius, "HI SCORE~" + GM.scoring.TopScore, GM.screenSize.Center.X, 30, TextAtt.Top);
-
             //Point to opponent if off screen
             if (opponent.Position2D.X < playerView.ViewPortOutline.Left || opponent.Position2D.X > playerView.ViewPortOutline.Right || opponent.Position2D.Y < playerView.ViewPortOutline.Top || opponent.Position2D.Y > playerView.ViewPortOutline.Bottom)
             {

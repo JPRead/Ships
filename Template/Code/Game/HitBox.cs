@@ -29,7 +29,7 @@ namespace Template
         /// </summary>
         private Sprite owner;
         /// <summary>
-        /// Type of damage taken by hitbox - 0 hull, 1 sai
+        /// Type of damage taken by hitbox - 0 hull, 1 sail
         /// </summary>
         private int damageType;
         /// /// <summary>
@@ -135,7 +135,7 @@ namespace Template
             damageType = type;
             health = 100;
             owner = hitBoxOwner;
-
+            
             offsetVector = new Vector2(offsetFromOwner.X, -offsetFromOwner.Y);
             offsetMagnitude = offsetVector.Length();
             offsetVector.Normalize();
@@ -153,8 +153,8 @@ namespace Template
                 Visible = false;
 
                 //Debug
-                //CollisionBoxVisible = true;
-                //Visible = true;
+                CollisionBoxVisible = true;
+                Visible = true;
             }
             else
             {

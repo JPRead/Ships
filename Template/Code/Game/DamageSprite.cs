@@ -28,16 +28,16 @@ namespace Template
         /// <summary>
         /// Constructor for damageSprite
         /// </summary>
-        /// <param name="startPos">Coordinates of centre of sprite</param>
+        /// <param name="position">Coordinates of centre of sprite</param>
         /// <param name="dimensions">X and Y scale</param>
         /// <param name="hitbox">Hitbox to target</param>
-        public DamageSprite(Vector2 startPos, Vector2 dimensions, HitBox hitbox)
+        public DamageSprite(Vector2 position, Vector2 dimensions, HitBox hitbox)
         {
             target = hitbox;
 
             GM.engineM.AddSprite(this);
             Frame.Define(Tex.SingleWhitePixel);
-            Position2D = startPos;
+            Position2D = position;
             SX = dimensions.X;
             SY = dimensions.Y;
             Wash = new Color(0, 255, 0);
