@@ -349,7 +349,7 @@
         </member>
         <member name="F:Template.HitBox.damageType">
             <summary>
-            Type of damage taken by hitbox - 0 hull, 1 sai
+            Type of damage taken by hitbox - 0 hull, 1 sail
             </summary>
         </member>
         <member name="F:Template.HitBox.offsetVector">

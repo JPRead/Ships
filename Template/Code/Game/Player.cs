@@ -181,7 +181,7 @@ namespace Template
             UIReloadRight.Position2D = new Vector2(fireLeftButton.Position2D.X, fireLeftButton.Bottom);
             UIReloadRight.Alpha = 0.5f;
             UIReloadRight.Wash = Color.Beige;
-            UIReloadRight.Layer += 2;
+            UIReloadRight.Layer += 3;
             GM.engineM.AddSprite(UIReloadRight);
 
             UIReloadLeft = new Sprite();
@@ -193,7 +193,7 @@ namespace Template
             UIReloadLeft.Position2D = new Vector2(fireRightButton.Position2D.X, fireRightButton.Bottom);
             UIReloadLeft.Alpha = 0.5f;
             UIReloadLeft.Wash = Color.Beige;
-            UIReloadLeft.Layer += 2;
+            UIReloadLeft.Layer += 3;
             GM.engineM.AddSprite(UIReloadLeft);
             
             UIButtonsBackground = new Button(new Rectangle(GM.screenSize.Center.X, GM.screenSize.Bottom - 87, 250, 175), false);
