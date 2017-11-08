@@ -97,9 +97,9 @@ namespace Template
         /// </summary>
         internal Event tiReloadLeft;
         /// <summary>
-        /// Timer for delay between repairs
+        /// Timer for 1 second delay
         /// </summary>
-        internal Event tiRepairTimer;
+        internal Event tiOneSecond;
         /// <summary>
         /// Used to keep track of and smooth out RotationVelocity, since RotationVelocity only applies for a single tick
         /// </summary>
@@ -108,6 +108,14 @@ namespace Template
         /// Returns true if ship is close enough the the moveTo point
         /// </summary>
         internal bool moveTargetReached;
+        /// <summary>
+        /// Amount of water a ship has taken on
+        /// </summary>
+        internal int sinkAmount;
+        /// <summary>
+        /// Multiplier to speed based on sail damage
+        /// </summary>
+        private float sailDamageSpeedMul;
 
         internal int CrewNum
         {
@@ -143,7 +151,7 @@ namespace Template
 
             GM.eventM.AddTimer(tiReloadRight = new Event(10, "Reload Cooldown Left"));
             GM.eventM.AddTimer(tiReloadLeft = new Event(10, "Reload Cooldown Right"));
-            GM.eventM.AddTimer(tiRepairTimer = new Event(1, "Repair Tick"));
+            GM.eventM.AddTimer(tiOneSecond = new Event(1, "Repair Tick"));
 
             moveLocSprite = new Sprite();
             GM.engineM.AddSprite(moveLocSprite);
@@ -181,12 +189,22 @@ namespace Template
             hitBoxSailBack = new HitBox(this, new Vector2(0, -30), new Vector2(65, 5), 1, 1);
             hitBoxSailBack.Wash = Color.Violet;
             hitBoxArray[6] = hitBoxSailBack;
+
+            //DEBUG
+            hitBoxHullBack.Health = 10;
+            hitBoxHullFront.Health = 50;
         }
 
         private void Tick()
         {
+            //Run code in this function every second
+            if (GM.eventM.Elapsed(tiOneSecond))
+            {
+                OneSecond();
+            }
+
             //Stop reload timers once reload is complete or if repairing
-            if(GM.eventM.Elapsed(tiReloadRight) || isRepairing)
+            if (GM.eventM.Elapsed(tiReloadRight) || isRepairing)
             {
                 tiReloadRight.Paused = true;
                 if(!isRepairing)
@@ -197,52 +215,6 @@ namespace Template
                 tiReloadLeft.Paused = true;
                 if (!isRepairing)
                     leftLoaded = true;
-            }
-
-            //Repairing
-            if (isRepairing && GM.eventM.Elapsed(tiRepairTimer))
-            {
-                float repairAmount = (crewNum * 0.04f);
-
-                //Spread repair amount amongst each part
-                HitBox[] repairArray = new HitBox[7];
-                int repairNum = 0;
-                for(int i = 0; i <= 6; i++)
-                {
-                    if(hitBoxArray[i].Health < 100 || hitBoxArray[i].IsBurning)
-                    {
-                        repairArray[repairNum] = hitBoxArray[i];
-                        repairNum++;
-                    }
-                }
-                if(repairNum == 0)
-                {
-                    if (!rightLoaded)
-                    {
-                        tiReloadRight.Paused = false;
-                    }
-                    if (!leftLoaded)
-                    {
-                        tiReloadLeft.Paused = false;
-                    }
-
-                    isRepairing = false;
-                }
-                else
-                {
-                    float repairPerPart = repairAmount / repairNum;
-                    for(int i = 0; i < repairNum; i++)
-                    {
-                        repairArray[i].Health += ((int)repairPerPart);
-                        if (repairArray[i].Health > 100)
-                            repairArray[i].Health = 100;
-
-                        if (repairArray[i].IsBurning && GM.r.FloatBetween(0,1) > 0.9)
-                        {
-                            repairArray[i].IsBurning = false;
-                        }
-                    }
-                }
             }
 
             //Checking for collisions
@@ -267,6 +239,90 @@ namespace Template
                 Velocity2D += velVector;
                 //otherShip.Velocity2D -= (velVector * 2);
             }
+            GM.textM.Draw(FontBank.arcadePixel, Convert.ToString(sailDamageSpeedMul), 200, 200);
+        }
+
+        /// <summary>
+        /// Runs every second
+        /// </summary>
+        internal void OneSecond()
+        {
+            //Repairing
+            if (isRepairing)
+            {
+                float repairAmount = (crewNum * 0.04f);
+
+                //Spread repair amount amongst each part
+                HitBox[] repairArray = new HitBox[7];
+                int repairNum = 0;
+                for (int i = 0; i <= 6; i++)
+                {
+                    if (hitBoxArray[i].Health < 100 || hitBoxArray[i].IsBurning)
+                    {
+                        repairArray[repairNum] = hitBoxArray[i];
+                        repairNum++;
+                    }
+                }
+                if (repairNum == 0)
+                {
+                    if (!rightLoaded)
+                    {
+                        tiReloadRight.Paused = false;
+                    }
+                    if (!leftLoaded)
+                    {
+                        tiReloadLeft.Paused = false;
+                    }
+
+                    isRepairing = false;
+                }
+                else
+                {
+                    float repairPerPart = repairAmount / repairNum;
+                    for (int i = 0; i < repairNum; i++)
+                    {
+                        repairArray[i].Health += ((int)repairPerPart);
+                        if (repairArray[i].Health > 100)
+                            repairArray[i].Health = 100;
+
+                        if (repairArray[i].IsBurning && GM.r.FloatBetween(0, 1) > 0.9)
+                        {
+                            repairArray[i].IsBurning = false;
+                        }
+                    }
+                }
+            }
+
+            //Calculations for sinking
+            int hullHealthMissing = 0;
+            for (int i = 0; i <= 3; i++)
+            {
+                hullHealthMissing += (100 - hitBoxArray[i].Health);
+            }
+            sinkAmount += hullHealthMissing/10;
+            sinkAmount -= 5;
+            if(sinkAmount >= 1000)
+            {
+                //Splash
+                for (int i = 0; i <= GM.r.FloatBetween(200, 400); i++)
+                {
+                    float spawnRot = GM.r.FloatBetween(0, 360);
+                    Vector3 spawnVel = RotationHelper.Direction3DFromAngle(spawnRot, 0) * 200;
+                    FadingParticle splash = new FadingParticle(Position2D, spawnVel, spawnRot, 0.25f);
+                    splash.Wash = Color.Aqua;
+                    splash.SX = 1f;
+                    splash.SY = 5f;
+                }
+                Kill();
+            }
+
+            //Calculations for sail damage speed multiplier
+            sailDamageSpeedMul = 0;
+            for (int i = 4; i <= 6; i++)
+            {
+                sailDamageSpeedMul += hitBoxArray[i].Health;
+            }
+            sailDamageSpeedMul /= 300;
         }
 
         /// <summary>
@@ -387,11 +443,11 @@ namespace Template
                     //Add velocity
                     if (sailAmount == 1)
                     {
-                        Velocity += RotationHelper.MyDirection(this, 0) * 0.1f * velFromWindAngle;
+                        Velocity += RotationHelper.MyDirection(this, 0) * 0.1f * velFromWindAngle * sailDamageSpeedMul;
                     }
                     if (sailAmount == 2)
                     {
-                        Velocity += RotationHelper.MyDirection(this, 0) * 0.2f * velFromWindAngle;
+                        Velocity += RotationHelper.MyDirection(this, 0) * 0.2f * velFromWindAngle * sailDamageSpeedMul;//Sort this out so it doesnt divide by 0
                     }
                 }
             }

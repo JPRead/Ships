@@ -99,6 +99,14 @@ namespace Template
         /// This must be set to true if a button has been pressed during a tick, else button presses could be interpreted as movement orders
         /// </summary>
         private bool buttonPressed;
+        /// <summary>
+        /// UI element to display sinking, goes behind.
+        /// </summary>
+        private Sprite UISinkBarBot;
+        /// <summary>
+        /// UI element to display sinking, goes on top and is moves up as more water is taken on.
+        /// </summary>
+        private Sprite UISinkBarTop;
 
         internal Cursor Cursor
         {
@@ -195,7 +203,37 @@ namespace Template
             UIReloadLeft.Wash = Color.Beige;
             UIReloadLeft.Layer += 3;
             GM.engineM.AddSprite(UIReloadLeft);
-            
+
+            UISinkBarBot = new Sprite();
+            UISinkBarBot.Frame.Define(Tex.SingleWhitePixel);
+            UISinkBarBot.SX = 5;
+            UISinkBarBot.SY = 100;
+            UISinkBarBot.Align = Align.bottomLeft;
+            UISinkBarBot.WorldCoordinates = false;
+            UISinkBarBot.Position2D = new Vector2(25, GM.screenSize.Height - 25);
+            UISinkBarBot.Wash = Color.White;
+            UISinkBarBot.Layer += 2;
+            GM.engineM.AddSprite(UISinkBarBot);
+
+            UISinkBarTop = new Sprite();
+            UISinkBarTop.Frame.Define(Tex.SingleWhitePixel);
+            UISinkBarTop.SX = 5;
+            UISinkBarTop.SY = 100;
+            UISinkBarTop.Align = Align.bottomLeft;
+            UISinkBarTop.WorldCoordinates = false;
+            UISinkBarTop.Position2D = new Vector2(25, GM.screenSize.Height - 25);
+            UISinkBarTop.Wash = Color.LightSkyBlue;
+            UISinkBarTop.Layer += 3;
+            GM.engineM.AddSprite(UISinkBarTop);
+
+            Sprite UISinkText = new Sprite();
+            UISinkText.Frame.Define(GM.txSprite, new Rectangle(0, 199, 43, 7));
+            UISinkText.Align = Align.bottomLeft;
+            UISinkText.WorldCoordinates = false;
+            UISinkText.Position2D = new Vector2(6, GM.screenSize.Height - 15);
+            UISinkText.Layer += 3;
+            GM.engineM.AddSprite(UISinkText);
+
             UIButtonsBackground = new Button(new Rectangle(GM.screenSize.Center.X, GM.screenSize.Bottom - 87, 250, 175), false);
             
             UIDamageBackground = new Button(new Rectangle(GM.screenSize.Left + 75, GM.screenSize.Bottom - 75, 150, 150), false);
@@ -228,7 +266,9 @@ namespace Template
             GM.textM.Draw(FontBank.arcadePixel, "Hull Front  " + hitBoxHullFront.Health + "~Hull Back   " + hitBoxHullBack.Health +
                 "~Hull Left   " + hitBoxHullLeft.Health + "~Hull Right  " + hitBoxHullRight.Health +
                 "~Sail Front  " + hitBoxSailFront.Health + "~Sail Middle " + hitBoxSailMiddle.Health + "~Sail Back   " + hitBoxSailBack.Health, 100, 100, TextAtt.TopLeft);
-            //GM.textM.Draw(FontBank.arcadePixel, Convert.ToString(hasCollided), 200, 200);
+
+            //Sinking bar
+            UISinkBarTop.SY = sinkAmount * 0.1f;
 
             //Make camera follow player
             GameSetup.PlayerView.Position = Position - new Vector3(GM.screenSize.Center.X, GM.screenSize.Center.Y - 100, 0);

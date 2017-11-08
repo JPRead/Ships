@@ -302,6 +302,16 @@
             This must be set to true if a button has been pressed during a tick, else button presses could be interpreted as movement orders
             </summary>
         </member>
+        <member name="F:Template.Player.UISinkBarBot">
+            <summary>
+            UI element to display sinking, goes behind.
+            </summary>
+        </member>
+        <member name="F:Template.Player.UISinkBarTop">
+            <summary>
+            UI element to display sinking, goes on top and is moves up as more water is taken on.
+            </summary>
+        </member>
         <member name="M:Template.Player.#ctor(Microsoft.Xna.Framework.Vector2)">
             <summary>
             Contains functions for the player to give orders
@@ -894,9 +904,9 @@
             Timer for left cannon reload
             </summary>
         </member>
-        <member name="F:Template.Ship.tiRepairTimer">
+        <member name="F:Template.Ship.tiOneSecond">
             <summary>
-            Timer for delay between repairs
+            Timer for 1 second delay
             </summary>
         </member>
         <member name="F:Template.Ship.smoothRotationVelocity">
@@ -909,9 +919,24 @@
             Returns true if ship is close enough the the moveTo point
             </summary>
         </member>
+        <member name="F:Template.Ship.sinkAmount">
+            <summary>
+            Amount of water a ship has taken on
+            </summary>
+        </member>
+        <member name="F:Template.Ship.sailDamageSpeedMul">
+            <summary>
+            Multiplier to speed based on sail damage
+            </summary>
+        </member>
         <member name="M:Template.Ship.#ctor">
             <summary>
             Ship contains all the functions used by both the player and the AI
+            </summary>
+        </member>
+        <member name="M:Template.Ship.OneSecond">
+            <summary>
+            Runs every second
             </summary>
         </member>
         <member name="M:Template.Ship.Fire(System.Boolean,System.Int32)">
