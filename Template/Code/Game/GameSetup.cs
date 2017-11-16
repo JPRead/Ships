@@ -139,17 +139,17 @@ namespace Template.Game
 
             if (GM.inputM.KeyPressed(Keys.Escape))
             {
-                BackToTitle();
+                BackToTitle("Press 1 to start.");
             }
         }
 
         /// <summary>
         /// Resets game to title screen
         /// </summary>
-        private static void BackToTitle()
+        public static void BackToTitle(string stringText)
         {
             GM.ClearAllManagedObjects();
-            GM.active = new TitleSetup();
+            GM.active = new TitleSetup(stringText);
         }
     }
 }

@@ -44,7 +44,7 @@ namespace Template
         private void Start()
         {
             GM.ClearAllManagedObjects();
-            active = new TitleSetup();
+            active = new TitleSetup("Press 1 to start.");
         }
 
         

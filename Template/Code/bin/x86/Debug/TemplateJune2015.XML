@@ -176,7 +176,7 @@
             Check for keypresses used to end game
             </summary>
         </member>
-        <member name="M:Template.Game.GameSetup.BackToTitle">
+        <member name="M:Template.Game.GameSetup.BackToTitle(System.String)">
             <summary>
             Resets game to title screen
             </summary>
@@ -309,7 +309,7 @@
         </member>
         <member name="F:Template.Player.UISinkBarTop">
             <summary>
-            UI element to display sinking, goes on top and is moves up as more water is taken on.
+            UI element to display sinking, goes on top and moves up as more water is taken on.
             </summary>
         </member>
         <member name="M:Template.Player.#ctor(Microsoft.Xna.Framework.Vector2)">
@@ -961,7 +961,7 @@
             generates graphs for display
             </summary>
         </member>
-        <member name="M:Template.Title.TitleSetup.#ctor">
+        <member name="M:Template.Title.TitleSetup.#ctor(System.String)">
             <summary>
             constructor
             </summary>

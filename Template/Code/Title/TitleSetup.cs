@@ -24,11 +24,13 @@ namespace Template.Title
     /// </summary>
     public class TitleSetup : BasicSetup
     {
+        string text;
         /// <summary>
         /// constructor
         /// </summary>
-        public TitleSetup() : base(true)
+        public TitleSetup(string screenText) : base(true)
         {
+            text = screenText;
             GM.engineM.DebugDisplay = Debug.version;
             GM.engineM.ScreenColour = Color.Gray;
         }
@@ -38,7 +40,7 @@ namespace Template.Title
         /// </summary>
         public override void Tick()
         {
-            GM.textM.Draw(FontBank.arcadeLarge, "Press 1 to start.", GM.screenSize.Center.X, GM.screenSize.Center.Y, TextAtt.Centred);
+            GM.textM.Draw(FontBank.arcadeLarge, text, GM.screenSize.Center.X, GM.screenSize.Center.Y, TextAtt.Centred);
 
             if (GM.inputM.KeyPressed(Keys.D1))
             {

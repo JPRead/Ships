@@ -228,6 +228,14 @@ namespace Template
             Position2D = owner.Position2D + offsetVector;
             RotationAngle = owner.RotationAngle;
 
+            if (IsParent)
+            {
+                if (health < 0)
+                {
+                    health = 0;
+                }
+            }
+
             //Burn damage
             if(isParent && isBurning && GM.eventM.Elapsed(tiBurnTick))
             {

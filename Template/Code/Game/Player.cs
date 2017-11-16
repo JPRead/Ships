@@ -11,6 +11,7 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using Engine7;
 using Template.Game;
+using Template.Title;
 
 namespace Template
 {
@@ -104,7 +105,7 @@ namespace Template
         /// </summary>
         private Sprite UISinkBarBot;
         /// <summary>
-        /// UI element to display sinking, goes on top and is moves up as more water is taken on.
+        /// UI element to display sinking, goes on top and moves up as more water is taken on.
         /// </summary>
         private Sprite UISinkBarTop;
 
@@ -255,6 +256,12 @@ namespace Template
             damageSailBack.WorldCoordinates = false;
 
             UpdateCallBack += Tick;
+            FuneralCallBack += Death;
+        }
+
+        private void Death()
+        {
+            GameSetup.BackToTitle("You lose.");
         }
 
         /// <summary>

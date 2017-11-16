@@ -191,8 +191,13 @@ namespace Template
             hitBoxArray[6] = hitBoxSailBack;
 
             //DEBUG
-            hitBoxHullBack.Health = 10;
-            hitBoxHullFront.Health = 50;
+            hitBoxHullBack.Health = 100;
+            hitBoxHullFront.Health = 100;
+            hitBoxHullLeft.Health = 100;
+            hitBoxHullRight.Health = 100;
+            hitBoxSailFront.Health = 100;
+            hitBoxSailMiddle.Health = 100;
+            hitBoxSailBack.Health = 100;
         }
 
         private void Tick()
@@ -239,6 +244,7 @@ namespace Template
                 Velocity2D += velVector;
                 //otherShip.Velocity2D -= (velVector * 2);
             }
+            //DEBUG
             GM.textM.Draw(FontBank.arcadePixel, Convert.ToString(sailDamageSpeedMul), 200, 200);
         }
 

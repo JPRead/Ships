@@ -29,6 +29,12 @@ namespace Template
             RotationAngle = 45;
 
             UpdateCallBack += Tick;
+            FuneralCallBack += Death;
+        }
+
+        private void Death()
+        {
+            GameSetup.BackToTitle("You win.");
         }
 
         /// <summary>
