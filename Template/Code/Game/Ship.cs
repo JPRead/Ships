@@ -191,13 +191,14 @@ namespace Template
             hitBoxArray[6] = hitBoxSailBack;
 
             //DEBUG
-            hitBoxHullBack.Health = 100;
-            hitBoxHullFront.Health = 100;
-            hitBoxHullLeft.Health = 100;
-            hitBoxHullRight.Health = 100;
-            hitBoxSailFront.Health = 100;
-            hitBoxSailMiddle.Health = 100;
-            hitBoxSailBack.Health = 100;
+            hitBoxHullBack.Health = 50;
+            hitBoxHullFront.Health = 50;
+            hitBoxHullLeft.Health = 50;
+            hitBoxHullRight.Health = 50;
+            hitBoxSailFront.Health = 50;
+            hitBoxSailMiddle.Health = 50;
+            hitBoxSailBack.Health = 50;
+            crewNum = 10;
         }
 
         private void Tick()
@@ -256,7 +257,7 @@ namespace Template
             //Repairing
             if (isRepairing)
             {
-                float repairAmount = (crewNum * 0.04f);
+                float repairAmount = (crewNum * 0.1f);
 
                 //Spread repair amount amongst each part
                 HitBox[] repairArray = new HitBox[7];
@@ -287,7 +288,7 @@ namespace Template
                     float repairPerPart = repairAmount / repairNum;
                     for (int i = 0; i < repairNum; i++)
                     {
-                        repairArray[i].Health += ((int)repairPerPart);
+                        repairArray[i].Health += repairPerPart;
                         if (repairArray[i].Health > 100)
                             repairArray[i].Health = 100;
 
@@ -300,13 +301,13 @@ namespace Template
             }
 
             //Calculations for sinking
-            int hullHealthMissing = 0;
+            float hullHealthMissing = 0;
             for (int i = 0; i <= 3; i++)
             {
                 hullHealthMissing += (100 - hitBoxArray[i].Health);
             }
-            sinkAmount += hullHealthMissing/10;
-            sinkAmount -= 5;
+            sinkAmount += (int)(hullHealthMissing/10);
+            sinkAmount -= 6;
             if(sinkAmount >= 1000)
             {
                 //Splash
@@ -355,7 +356,7 @@ namespace Template
                 int multiply = 2;
                 if (type == 3) { multiply = 5; } //Cannons fire multiple times - for use with grape shot
 
-                for (int i = 0; i <= (crewNum * 0.2); i++)
+                for (int i = 0; i <= (crewNum); i++)
                 {
                     for (int i2 = 0; i2 <= multiply; i2++)
                     {
@@ -366,7 +367,7 @@ namespace Template
                             type);
                     }
 
-                    offsetAlongDeck += RotationHelper.MyDirection(this, 0) * 5 * (100/crewNum);
+                    offsetAlongDeck += RotationHelper.MyDirection(this, 0) * (100/crewNum);
                 }
 
                 if (right == true)

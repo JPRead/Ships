@@ -47,7 +47,7 @@ namespace Template
         /// <summary>
         /// Health of HitBox
         /// </summary>
-        private int health;
+        private float health;
         /// <summary>
         /// Value to multiply damage by when subtracting from health
         /// </summary>
@@ -66,7 +66,7 @@ namespace Template
             }
         }
 
-        internal int Health
+        internal float Health
         {
             get
             {

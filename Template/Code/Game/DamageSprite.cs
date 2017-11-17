@@ -52,7 +52,7 @@ namespace Template
         /// </summary>
         private void Tick()
         {
-            health = target.Health;
+            health = (int)target.Health;
 
             //Health can't be less than or equal to zero
             bool destroyed = false;

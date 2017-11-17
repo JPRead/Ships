@@ -239,10 +239,6 @@ namespace Template.Game
                         {
                             hitBox.Health -= (int)(10 * hitBox.DamageMul);
                         }
-                        else if(shotType == 0) //Ball
-                        {
-                            hitBox.Health -= (int)(1 * hitBox.DamageMul);
-                        }
                         else if (shotType == 2)//Carcass
                         {
                             hitBox.Health -= (int)(5 * hitBox.DamageMul);
