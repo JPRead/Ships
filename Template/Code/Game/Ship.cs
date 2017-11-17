@@ -191,14 +191,14 @@ namespace Template
             hitBoxArray[6] = hitBoxSailBack;
 
             //DEBUG
-            hitBoxHullBack.Health = 50;
-            hitBoxHullFront.Health = 50;
-            hitBoxHullLeft.Health = 50;
-            hitBoxHullRight.Health = 50;
-            hitBoxSailFront.Health = 50;
-            hitBoxSailMiddle.Health = 50;
-            hitBoxSailBack.Health = 50;
-            crewNum = 10;
+            hitBoxHullBack.Health = 100;
+            hitBoxHullFront.Health = 100;
+            hitBoxHullLeft.Health = 100;
+            hitBoxHullRight.Health = 10;
+            hitBoxSailFront.Health = 100;
+            hitBoxSailMiddle.Health = 100;
+            hitBoxSailBack.Health = 0;
+            crewNum = 1;
         }
 
         private void Tick()
@@ -257,7 +257,7 @@ namespace Template
             //Repairing
             if (isRepairing)
             {
-                float repairAmount = (crewNum * 0.1f);
+                float repairAmount = crewNum;
 
                 //Spread repair amount amongst each part
                 HitBox[] repairArray = new HitBox[7];
@@ -285,7 +285,7 @@ namespace Template
                 }
                 else
                 {
-                    float repairPerPart = repairAmount / repairNum;
+                    float repairPerPart = (repairAmount * 0.05f) / repairNum;
                     for (int i = 0; i < repairNum; i++)
                     {
                         repairArray[i].Health += repairPerPart;

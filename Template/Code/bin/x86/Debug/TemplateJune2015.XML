@@ -419,41 +419,6 @@
             Code to run each tick
             </summary>
         </member>
-        <member name="T:Template.ScoreEntry">
-            <summary>
-            generates the score entry menu and associated controls
-            </summary>
-        </member>
-        <member name="F:Template.ScoreEntry.evControl">
-            <summary>
-            event for controller
-            </summary>
-        </member>
-        <member name="F:Template.ScoreEntry.tiDelay">
-            <summary>
-            input delay timer
-            </summary>
-        </member>
-        <member name="F:Template.ScoreEntry.initials">
-            <summary>
-            storage for intials
-            </summary>
-        </member>
-        <member name="M:Template.ScoreEntry.#ctor">
-            <summary>
-            constructor
-            </summary>
-        </member>
-        <member name="M:Template.ScoreEntry.Controls">
-            <summary>
-            input controls for the menu
-            </summary>
-        </member>
-        <member name="M:Template.ScoreEntry.ChoiceMade">
-            <summary>
-            activated if selection is activated
-            </summary>
-        </member>
         <member name="T:Template.GM">
             <summary>
             holds all game assets and code to set up those assets
@@ -484,11 +449,6 @@
         <member name="F:Template.GM.screenSize">
             <summary>
             reference to screen size - smaller is better as this will be quickler
-            </summary>
-        </member>
-        <member name="F:Template.GM.scoring">
-            <summary>
-            holds scores
             </summary>
         </member>
         <member name="F:Template.GM.active">
@@ -526,12 +486,6 @@
             <summary>
             start the system now everything is loaded
             </summary>
-        </member>
-        <member name="M:Template.GM.LoadScore(Engine7.ReadHelper)">
-            <summary>
-            load score table when system retrieves file
-            </summary>
-            <param name="r">helper with file data</param>
         </member>
         <member name="M:Template.GM.ShutDown">
             <summary>
@@ -712,34 +666,6 @@
         <member name="M:Template.BasicSetup.Tick">
             <summary>
             default logic for the container. You need to override this method
-            </summary>
-        </member>
-        <member name="T:Template.ScoreSystem">
-            <summary>
-            holds highscores
-            </summary>
-        </member>
-        <member name="M:Template.ScoreSystem.#ctor">
-            <summary>
-            holds the high score table
-            </summary>
-        </member>
-        <member name="M:Template.ScoreSystem.Default">
-            <summary>
-            returns a default set of scores
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:Template.ScoreSystem.NewScore(System.Int32,System.String)">
-            <summary>
-            adds a new score to the score table
-            </summary>
-            <param name="score">time to add</param>
-            <param name="name">name of player</param>
-        </member>
-        <member name="M:Template.ScoreSystem.ShowScores">
-            <summary>
-            displays the scores using sprites
             </summary>
         </member>
         <member name="T:Template.Cursor">

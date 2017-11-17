@@ -38,10 +38,6 @@ namespace Template
         /// reference to screen size - smaller is better as this will be quickler
         /// </summary>
         public static Rectangle screenSize = new Rectangle(0, 0, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
-        /// <summary>
-        /// holds scores
-        /// </summary>
-        public static ScoreSystem scoring;
         /*************************************************
         ************   STORAGE FOR GLOBALS     ***********
         *************************************************/

@@ -121,12 +121,8 @@
     <Compile Include="Game\Player.cs" />
     <Compile Include="Game\FadingParticle.cs" />
     <Compile Include="Game\HitBox.cs" />
-    <Compile Include="Scoring\Marker.cs" />
-    <Compile Include="Scoring\MenuInitial.cs" />
-    <Compile Include="Scoring\ScoreEntry.cs" />
     <Compile Include="Setup loading and storage\Assets.cs" />
     <Compile Include="Setup loading and storage\BasicSetup.cs" />
-    <Compile Include="Scoring\ScoreSystem.cs" />
     <Compile Include="Setup loading and storage\Cursor.cs" />
     <Compile Include="Game\GameSetup.cs" />
     <Compile Include="Setup loading and storage\ExtraMessageTypes.cs" />
@@ -142,11 +138,6 @@
   <ItemGroup>
     <Content Include="Engine7\Engine7.dll" />
     <Content Include="Engine7\Engine7.XML" />
-    <Content Include="LevelData\MapOne tilemap example.txt" />
-    <Content Include="LevelData\Race3 example data file.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="LevelData\Waves example data file.txt" />
     <Content Include="Template Initialisation\Game.ico" />
     <Content Include="Template Initialisation\GameThumbnail.png" />
     <Content Include="Notes.txt" />

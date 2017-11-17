@@ -30,9 +30,6 @@ namespace Template
         /// </summary>
         private void StartSystem()
         {
-            //setup scoring system 
-            fileM.LoadXMLFile(new ScoreSystem(), "scores.xml", LoadScore);
-            
             GM.engineM.ScreenColour = Color.Black;
             //start in 1 second
             GM.eventM.DelayCall(1, Start);
@@ -47,34 +44,11 @@ namespace Template
             active = new TitleSetup("Press 1 to start.");
         }
 
-        
-        /// <summary>
-        /// load score table when system retrieves file
-        /// </summary>
-        /// <param name="r">helper with file data</param>
-        private void LoadScore(ReadHelper r)
-        {
-            //did the file exist
-            if (r.ReadPossible)
-            {
-                try
-                {
-                    scoring = (ScoreSystem)r.Deserialised;
-                    return;
-                }
-                catch { }
-            }
-            //set default score table if we failed to load or couldn't load
-            scoring = ScoreSystem.Default();
-        }
-
         /// <summary>
         /// cleanly exits the game saving data to files
         /// </summary>
         private void ShutDown()
         {
-            if (scoring != null)
-                fileM.SaveXMLFile(scoring, "scores.xml");
         }
 
         /*************************************************

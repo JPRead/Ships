@@ -1,4 +1,3 @@
-H:\GitHubVisualStudio\Ships\Template\Code\bin\x86\Debug\LevelData\Race3 example data file.txt
 H:\GitHubVisualStudio\Ships\Template\Code\bin\x86\Debug\Content\Graphics\Sprites.xnb
 H:\GitHubVisualStudio\Ships\Template\Code\bin\x86\Debug\Content\Audio\explode.xnb
 H:\GitHubVisualStudio\Ships\Template\Code\bin\x86\Debug\Content\Audio\extra man.xnb
