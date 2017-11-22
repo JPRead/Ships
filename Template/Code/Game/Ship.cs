@@ -194,11 +194,11 @@ namespace Template
             hitBoxHullBack.Health = 100;
             hitBoxHullFront.Health = 100;
             hitBoxHullLeft.Health = 100;
-            hitBoxHullRight.Health = 10;
+            hitBoxHullRight.Health = 100;
             hitBoxSailFront.Health = 100;
             hitBoxSailMiddle.Health = 100;
-            hitBoxSailBack.Health = 0;
-            crewNum = 1;
+            hitBoxSailBack.Health = 100;
+            crewNum = 100;
         }
 
         private void Tick()
@@ -353,8 +353,8 @@ namespace Template
 
                 offsetAlongDeck -= RotationHelper.MyDirection(this, 0) * 5;
 
-                int multiply = 2;
-                if (type == 3) { multiply = 5; } //Cannons fire multiple times - for use with grape shot
+                int multiply = 1;
+                if (type == 3) { multiply = 3; } //Cannons fire multiple times - for use with grape shot
 
                 for (int i = 0; i <= (crewNum); i++)
                 {

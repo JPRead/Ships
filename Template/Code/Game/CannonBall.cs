@@ -36,7 +36,7 @@ namespace Template.Game
         //}
 
         /// <summary>
-        /// Constructor for bullet class
+        /// Constructor for CannonBall clasS
         /// </summary>
         /// <param name="owner">The ship that fired the CannonBall</param>
         /// <param name="fireFrom">2D position to fire from</param>
@@ -214,7 +214,7 @@ namespace Template.Game
                         }
                         else if (shotType == 2)//Carcass
                         {
-                            hitBox.Health -= (int)(2 * hitBox.DamageMul);
+                            hitBox.Health -= (int)(2.5f * hitBox.DamageMul);
                             if (GM.r.FloatBetween(0, 1) > 0.95)
                             {
                                 hitBox.IsBurning = true;
