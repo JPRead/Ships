@@ -131,6 +131,7 @@ namespace Template
         /// <param name="type">Type of damage taken by hitbox - 0 hull, 1 sail</param>
         public HitBox(Sprite hitBoxOwner, Vector2 offsetFromOwner, Vector2 dimensions, float damageMultiplier, int type)
         {
+            //Init values
             damageMul = damageMultiplier;
             damageType = type;
             health = 100;

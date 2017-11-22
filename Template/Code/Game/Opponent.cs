@@ -20,16 +20,36 @@ namespace Template
     internal class Opponent : Ship
     {
         /// <summary>
+        /// Aggressiveness of the AI. Should be a value between o and 1.
+        /// </summary>
+        private float aggressiveness;
+        /// <summary>
+        /// Current state of the AI - 0 idle, 1 attacking, 2 retreating, 3 boarding, 4 ramming
+        /// </summary>
+        private int state;
+
+        /// <summary>
         /// Contains state machine for the AI
         /// </summary>
         /// <param name="startPos">Position to spawn at</param>
         public Opponent(Vector2 startPos)
         {
+            //Init values
             Position2D = startPos;
-            RotationAngle = 45;
+            aggressiveness = 0.5f;
+
+            if (GM.eventM.Elapsed(tiOneSecond))
+            {
+                state = StateMachine();
+            }
 
             UpdateCallBack += Tick;
             FuneralCallBack += Death;
+        }
+
+        private int StateMachine()
+        {
+            return 0;
         }
 
         private void Death()
