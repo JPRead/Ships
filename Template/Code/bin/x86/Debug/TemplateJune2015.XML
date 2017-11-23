@@ -112,7 +112,7 @@
         </member>
         <member name="M:Template.Game.CannonBall.#ctor(Engine7.Sprite,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,System.Int32)">
             <summary>
-            Constructor for bullet class
+            Constructor for CannonBall clasS
             </summary>
             <param name="owner">The ship that fired the CannonBall</param>
             <param name="fireFrom">2D position to fire from</param>
@@ -184,6 +184,16 @@
         <member name="T:Template.Opponent">
             <summary>
             Ship for the AI
+            </summary>
+        </member>
+        <member name="F:Template.Opponent.aggressiveness">
+            <summary>
+            Aggressiveness of the AI. Should be a value between o and 1.
+            </summary>
+        </member>
+        <member name="F:Template.Opponent.state">
+            <summary>
+            Current state of the AI - 0 idle, 1 attacking, 2 retreating, 3 boarding, 4 ramming
             </summary>
         </member>
         <member name="M:Template.Opponent.#ctor(Microsoft.Xna.Framework.Vector2)">

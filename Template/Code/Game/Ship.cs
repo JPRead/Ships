@@ -355,10 +355,9 @@ namespace Template
 
                 int multiply = 1;
                 if (type == 3) { multiply = 3; } //Cannons fire multiple times - for use with grape shot
-
-                for (int i = 0; i <= (crewNum); i++)
+                for (int i = 0; i < crewNum; i++)
                 {
-                    for (int i2 = 0; i2 <= multiply; i2++)
+                    for (int i2 = 0; i2 < multiply; i2++)
                     {
                         //Travelling along the deck of the ship
                         new CannonBall(this,
