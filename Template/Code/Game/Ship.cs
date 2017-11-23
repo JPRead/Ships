@@ -338,6 +338,7 @@ namespace Template
         /// <param name="right">If true fire from right side else left side</param><param name="type">Type of shot to use - 0 ball shot, 1 bar shot, 2 grape shot, 3 carcass shot</param>
         internal void Fire(bool right, int type)
         {
+            //Perhaps all this should be reworked?
             if (((right && tiReloadRight.Paused) || (!right && tiReloadLeft.Paused)) && !isRepairing)
             {
                 Vector3 fireDir;

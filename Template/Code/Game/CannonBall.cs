@@ -36,7 +36,7 @@ namespace Template.Game
         //}
 
         /// <summary>
-        /// Constructor for CannonBall clasS
+        /// Constructor for CannonBall class
         /// </summary>
         /// <param name="owner">The ship that fired the CannonBall</param>
         /// <param name="fireFrom">2D position to fire from</param>

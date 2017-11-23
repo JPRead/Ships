@@ -112,7 +112,7 @@
         </member>
         <member name="M:Template.Game.CannonBall.#ctor(Engine7.Sprite,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,System.Int32)">
             <summary>
-            Constructor for CannonBall clasS
+            Constructor for CannonBall class
             </summary>
             <param name="owner">The ship that fired the CannonBall</param>
             <param name="fireFrom">2D position to fire from</param>
