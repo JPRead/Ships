@@ -40,12 +40,12 @@ namespace Template.Game
         /// </summary>
         /// <param name="owner">The ship that fired the CannonBall</param>
         /// <param name="fireFrom">2D position to fire from</param>
-        /// <param name="fireTowards">2D position to fire towards</param>
+        /// <param name="fireDir">2D position to fire towards</param>
         /// <param name="type">Type of shot to use - 0 ball shot, 1 bar shot, 2 carcass shot, 3 grape shot</param>
-        public CannonBall(Sprite owner, Vector2 fireFrom, Vector2 fireTowards, int type)
+        public CannonBall(Sprite owner, Vector3 fireFrom, Vector3 fireDir, int type)
         {
             //Init values
-            Position2D = fireFrom;
+            Position = fireFrom;
             shotType = type;
             this.owner = owner;
 
@@ -75,11 +75,9 @@ namespace Template.Game
             }
             Friction = 0.25f;
 
-            //Face a normalised vector created from fireFrom
-            Vector2 direction = fireTowards - Position2D;
-            direction = Vector2.Normalize(direction);
-            RotationHelper.FaceDirection(this, direction, DirectionAccuracy.free, 0);
-            Position += RotationHelper.MyDirection(this, 0) * 32;
+            //Face along firDir
+            RotationHelper.FaceDirection(this, fireDir, DirectionAccuracy.free, 0);
+            Position += RotationHelper.MyDirection(this, 0) * 50;
 
             //Collision setup
             CollisionActive = true;

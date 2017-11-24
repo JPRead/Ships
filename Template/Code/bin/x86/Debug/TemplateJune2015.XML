@@ -110,13 +110,13 @@
             True if CannonBall doesnt hit anything and needs to splash as though it landed in water
             </summary>
         </member>
-        <member name="M:Template.Game.CannonBall.#ctor(Engine7.Sprite,Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,System.Int32)">
+        <member name="M:Template.Game.CannonBall.#ctor(Engine7.Sprite,Microsoft.Xna.Framework.Vector3,Microsoft.Xna.Framework.Vector3,System.Int32)">
             <summary>
             Constructor for CannonBall class
             </summary>
             <param name="owner">The ship that fired the CannonBall</param>
             <param name="fireFrom">2D position to fire from</param>
-            <param name="fireTowards">2D position to fire towards</param>
+            <param name="fireDir">2D position to fire towards</param>
             <param name="type">Type of shot to use - 0 ball shot, 1 bar shot, 2 carcass shot, 3 grape shot</param>
         </member>
         <member name="M:Template.Game.CannonBall.Death">

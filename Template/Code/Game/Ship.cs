@@ -342,33 +342,39 @@ namespace Template
             if (((right && tiReloadRight.Paused) || (!right && tiReloadLeft.Paused)) && !isRepairing)
             {
                 Vector3 fireDir;
-                float rightMul;
+                Vector3 deckDir = Vector3.Zero;
+                int rightMul;
+
                 if (right)
                     rightMul = 1;
                 else
                     rightMul = -1;
 
-                fireDir = Position + RotationHelper.MyDirection(this, rightMul * 90);
+                fireDir = RotationHelper.MyDirection(this, 90 * rightMul);
+                deckDir = RotationHelper.MyDirection(this, 0);
 
-                Vector3 offsetAlongDeck = Vector3.Zero;
-
-                offsetAlongDeck -= RotationHelper.MyDirection(this, 0) * 5;
-
-                int multiply = 1;
-                if (type == 3) { multiply = 3; } //Cannons fire multiple times - for use with grape shot
-                for (int i = 0; i < crewNum; i++)
+                for (int i = 0; i < crewNum/10; i++)
                 {
-                    for (int i2 = 0; i2 < multiply; i2++)
-                    {
-                        //Travelling along the deck of the ship
-                        new CannonBall(this,
-                            new Vector2(Position2D.X - (Width) * RotationHelper.MyDirection(this, 0).X + offsetAlongDeck.X, Position2D.Y - (Width) * RotationHelper.MyDirection(this, 0).Y + offsetAlongDeck.Y),
-                            new Vector2(fireDir.X - (Width) * RotationHelper.MyDirection(this, 0).X + offsetAlongDeck.X, fireDir.Y - (Width) * RotationHelper.MyDirection(this, 0).Y + offsetAlongDeck.Y),
-                            type);
-                    }
-
-                    offsetAlongDeck += RotationHelper.MyDirection(this, 0) * (100/crewNum);
+                    new CannonBall(this, Position + (deckDir * i * 10) - (deckDir * 48), fireDir, type);
                 }
+
+                //new CannonBall(this, Position, fireDir, 0);
+
+                //int multiply = 1;
+                //if (type == 3) { multiply = 3; } //Cannons fire multiple times - for use with grape shot
+                //for (int i = 0; i < crewNum; i++)
+                //{
+                //    for (int i2 = 0; i2 < multiply; i2++)
+                //    {
+                //        //Travelling along the deck of the ship
+                //        new CannonBall(this,
+                //            new Vector2(Position2D.X - (Width) * RotationHelper.MyDirection(this, 0).X + offsetAlongDeck.X, Position2D.Y - (Width) * RotationHelper.MyDirection(this, 0).Y + offsetAlongDeck.Y),
+                //            new Vector2(fireDir.X - (Width) * RotationHelper.MyDirection(this, 0).X + offsetAlongDeck.X, fireDir.Y - (Width) * RotationHelper.MyDirection(this, 0).Y + offsetAlongDeck.Y),
+                //            type);
+                //    }
+
+                //    offsetAlongDeck += RotationHelper.MyDirection(this, 0) * (100/crewNum);
+                //}
 
                 if (right == true)
                 {
