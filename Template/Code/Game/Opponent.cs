@@ -20,7 +20,7 @@ namespace Template
     internal class Opponent : Ship
     {
         /// <summary>
-        /// Aggressiveness of the AI. Should be a value between o and 1.
+        /// Aggressiveness of the AI. Should be a value between 0 and 1.
         /// </summary>
         private float aggressiveness;
         /// <summary>
@@ -49,6 +49,37 @@ namespace Template
 
         private int StateMachine()
         {
+            if(state == 0)
+                return 1;
+
+            if(state == 1)
+            {
+                float playerHealth = 0;
+                float totalHealth = 0;
+                for(int i = 0; i <= 6; i++)
+                {
+                    playerHealth += GameSetup.Player.hitBoxArray[i].Health;
+                    totalHealth += hitBoxArray[i].Health;
+                }
+                if (totalHealth < playerHealth - (200 * aggressiveness))
+                    return 2;
+                if(CrewNum > GameSetup.Player.CrewNum + (50 * (1 - aggressiveness)) + 10)
+                    return 3;
+            }
+            if(state == 2)
+            {
+                float totalHealth = 0;
+                for (int i = 0; i <= 6; i++)
+                {
+                    totalHealth += hitBoxArray[i].Health;
+                }
+                if (totalHealth >= 600 + 100 * aggressiveness)
+                    return 0;
+            }
+            if(state == 3)
+            {
+                //Leave this state when boarding is complete
+            }
             return 0;
         }
 
@@ -66,8 +97,9 @@ namespace Template
             GM.textM.Draw(FontBank.arcadePixel, "Hull Front  " + hitBoxHullFront.Health + "~Hull Back   " + hitBoxHullBack.Health +
                 "~Hull Left   " + hitBoxHullLeft.Health + "~Hull Right  " + hitBoxHullRight.Health +
                 "~Sail Front  " + hitBoxSailFront.Health + "~Sail Middle " + hitBoxSailMiddle.Health + "~Sail Back   " + hitBoxSailBack.Health, GM.screenSize.Width - 100, 100, TextAtt.TopRight);
-
             GM.textM.Draw(FontBank.arcadePixel, "Crew: " + CrewNum, GM.screenSize.Width - 150, 50, TextAtt.TopRight);
+
+            Fire(true, 0);
         }
     }
 }
