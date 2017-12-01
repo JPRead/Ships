@@ -20,13 +20,25 @@ namespace Template
     internal class Opponent : Ship
     {
         /// <summary>
-        /// Aggressiveness of the AI. Should be a value between 0 and 1.
+        /// Aggressiveness of the AI - 0 is minimum aggressiveness, 1 is maximum
         /// </summary>
         private float aggressiveness;
+        /// <summary>
+        /// Used to track alignment variable from the previous tick
+        /// </summary>
+        private float alignmentLastTick;
         /// <summary>
         /// Current state of the AI - 0 idle, 1 attacking, 2 retreating, 3 boarding, 4 ramming
         /// </summary>
         private int state;
+        /// <summary>
+        /// Timer for 1 second delay
+        /// </summary>
+        internal Event stateTick;
+        ///<summary>
+        /// Used to easily get attributes from GameSetup.player
+        /// </summary>
+        internal Player player;
 
         /// <summary>
         /// Contains state machine for the AI
@@ -37,12 +49,9 @@ namespace Template
             //Init values
             Position2D = startPos;
             aggressiveness = 0.5f;
-
-            if (GM.eventM.Elapsed(tiOneSecond))
-            {
-                state = StateMachine();
-            }
-
+            GM.eventM.AddTimer(stateTick = new Event(1, "State Tick"));
+            player = GameSetup.Player;
+            alignmentLastTick = 0;
             UpdateCallBack += Tick;
             FuneralCallBack += Death;
         }
@@ -58,13 +67,15 @@ namespace Template
                 float totalHealth = 0;
                 for(int i = 0; i <= 6; i++)
                 {
-                    playerHealth += GameSetup.Player.hitBoxArray[i].Health;
+                    playerHealth += player.hitBoxArray[i].Health;
                     totalHealth += hitBoxArray[i].Health;
                 }
-                if (totalHealth < playerHealth - (200 * aggressiveness))
+                if (totalHealth < playerHealth - (200 * aggressiveness) || sinkAmount > 500 - (200 * (1 - aggressiveness)))
                     return 2;
-                if(CrewNum > GameSetup.Player.CrewNum + (50 * (1 - aggressiveness)) + 10)
+                if(CrewNum > player.CrewNum + (50 * (1 - aggressiveness)) + 10)
                     return 3;
+
+                return 1;
             }
             if(state == 2)
             {
@@ -75,11 +86,16 @@ namespace Template
                 }
                 if (totalHealth >= 600 + 100 * aggressiveness)
                     return 0;
+
+                return 2;
             }
             if(state == 3)
             {
                 //Leave this state when boarding is complete
+
+                return 3;
             }
+
             return 0;
         }
 
@@ -93,13 +109,86 @@ namespace Template
         /// </summary>
         private void Tick()
         {
-            //Debug text
+            //DEBUG
             GM.textM.Draw(FontBank.arcadePixel, "Hull Front  " + hitBoxHullFront.Health + "~Hull Back   " + hitBoxHullBack.Health +
                 "~Hull Left   " + hitBoxHullLeft.Health + "~Hull Right  " + hitBoxHullRight.Health +
                 "~Sail Front  " + hitBoxSailFront.Health + "~Sail Middle " + hitBoxSailMiddle.Health + "~Sail Back   " + hitBoxSailBack.Health, GM.screenSize.Width - 100, 100, TextAtt.TopRight);
             GM.textM.Draw(FontBank.arcadePixel, "Crew: " + CrewNum, GM.screenSize.Width - 150, 50, TextAtt.TopRight);
+            GM.textM.Draw(FontBank.arcadePixel, "State: " + state, GM.screenSize.Width - 150, 75, TextAtt.TopRight);
 
-            Fire(true, 0);
+            if (GM.eventM.Elapsed(stateTick))
+            {
+                state = StateMachine();
+            }
+
+            if(state == 1) //Attacking
+            {
+                //Init values
+                sailAmount = 2;
+                Point movePoint = Point.Zero;
+
+                //Direction vectors for front and right of player
+                Vector2 playerFront = RotationHelper.Direction2DFromAngle(player.RotationAngle, 0);
+                Vector2 playerRight = RotationHelper.Direction2DFromAngle(player.RotationAngle, 90);
+
+                //1 if front of ships opposite, -1 otherwise.
+                int frontOpposite = -1;
+                float angleBetweenFront = RotationHelper.BearingTo(RotationHelper.Direction2DFromAngle(RotationAngle, 0), playerFront, DirectionAccuracy.free, 0);
+                if(angleBetweenFront > 135 || angleBetweenFront < -135)
+                {
+                    frontOpposite = 1;
+                }
+
+                //1 if side of ships not opposite, -1 otherwise.
+                int sideOpposite = 1;
+                float angleBetweenSide = RotationHelper.BearingTo(RotationHelper.Direction2DFromAngle(RotationAngle, 90), playerRight, DirectionAccuracy.free, 0);
+                if (angleBetweenFront > 135 || angleBetweenFront < -135)
+                {
+                    sideOpposite = -1;
+                }
+
+                Sprite sidewardsSprite = new Sprite();
+                sidewardsSprite.Frame.Define(Tex.SingleWhitePixel);
+                GM.engineM.AddSprite(sidewardsSprite);
+                sidewardsSprite.Position2D = Position2D;
+                sidewardsSprite.RotationAngle = RotationAngle + (-90 * sideOpposite);
+                float alignment = RotationHelper.AngularDirectionTo(sidewardsSprite, player.Position, 0, false);
+                sidewardsSprite.Kill();
+
+                bool readyToFire = false;
+                if (alignmentLastTick != alignment)
+                {
+                    readyToFire = true;
+                }
+                alignmentLastTick = alignment;
+                
+
+                if (Vector2.DistanceSquared(Position2D, player.Position2D) > 90000) //Out of range
+                {
+                    movePoint = PointHelper.PointFromVector2(player.Position2D+ (playerRight * 100 * sideOpposite));
+                }
+                else //Within range
+                {
+                    sailAmount = 1;
+                    movePoint = PointHelper.PointFromVector2(player.Position2D + (playerRight * 100) + (playerFront * 1000 * frontOpposite));
+
+                    if (readyToFire)
+                    {
+                        if(sideOpposite == 1)
+                        {
+                            Fire(true, shotTypeRight);
+                        }
+                        else
+                        {
+                            Fire(false, shotTypeLeft);
+                        }
+                    }
+
+                    //DEBUG
+                    GM.textM.Draw(FontBank.arcadePixel, "ready" + alignment, GM.screenSize.Width - 150, 25, TextAtt.TopRight);
+                }
+                MoveToPoint(movePoint);
+            }
         }
     }
 }

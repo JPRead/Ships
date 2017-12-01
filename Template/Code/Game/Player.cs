@@ -343,6 +343,10 @@ namespace Template
                         fireRightButton.SetDisplay(new Rectangle(278, 156, 28, 28));
                         break;
                     case 3:
+                        shotTypeRight = 4;
+                        fireRightButton.SetDisplay(new Rectangle(326, 160, 20, 20));
+                        break;
+                    case 4:
                         shotTypeRight = 0;
                         fireRightButton.SetDisplay(new Rectangle(150, 160, 20, 20));
                         break;
@@ -366,6 +370,10 @@ namespace Template
                         fireLeftButton.SetDisplay(new Rectangle(278, 156, 28, 28));
                         break;
                     case 3:
+                        shotTypeLeft = 4;
+                        fireLeftButton.SetDisplay(new Rectangle(326, 160, 20, 20));
+                        break;
+                    case 4:
                         shotTypeLeft = 0;
                         fireLeftButton.SetDisplay(new Rectangle(150, 160, 20, 20));
                         break;

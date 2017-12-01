@@ -353,9 +353,15 @@ namespace Template
                 fireDir = RotationHelper.MyDirection(this, 90 * rightMul);
                 deckDir = RotationHelper.MyDirection(this, 0);
 
+                int multiply = 2;
+                if (type == 3) { multiply = 4; }
+                if (type == 4) { multiply = 1; }
                 for (int i = 0; i < crewNum/10; i++)
                 {
-                    new CannonBall(this, Position + (deckDir * i * 10) - (deckDir * 48), fireDir, type);
+                    for (int i2 = 0; i2 < multiply; i2++)
+                    {
+                        new CannonBall(this, Position + (deckDir * i * 10) - (deckDir * 48), fireDir, type);
+                    }
                 }
 
                 //new CannonBall(this, Position, fireDir, 0);
@@ -403,7 +409,15 @@ namespace Template
                 if (isPlayer)
                     moveLocSprite.Visible = true;
                 moveLocSprite.Position2D = movePos;
-                
+
+                //DEBUG
+                if (!isPlayer)
+                {
+                    moveLocSprite.Visible = true;
+                    moveLocSprite.Wash = Color.Red;
+                }
+                   
+
                 if (sailAmount == 0)
                 {
                     if(smoothRotationVelocity > 0)
@@ -470,6 +484,11 @@ namespace Template
                 moveLocSprite.Visible = false;
                 RotationVelocity = 0;
             }
+        }
+
+        public void Board(Ship target)
+        {
+            //Code for boarding
         }
     }
 }

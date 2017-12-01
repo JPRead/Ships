@@ -41,7 +41,7 @@ namespace Template.Game
         /// <param name="owner">The ship that fired the CannonBall</param>
         /// <param name="fireFrom">2D position to fire from</param>
         /// <param name="fireDir">2D position to fire towards</param>
-        /// <param name="type">Type of shot to use - 0 ball shot, 1 bar shot, 2 carcass shot, 3 grape shot</param>
+        /// <param name="type">Type of shot to use - 0 ball shot, 1 bar shot, 2 carcass shot, 3 grape shot, 4 grapple shot</param>
         public CannonBall(Sprite owner, Vector3 fireFrom, Vector3 fireDir, int type)
         {
             //Init values
@@ -62,11 +62,14 @@ namespace Template.Game
                     break;
                 case 2:
                     Frame.Define(GM.txSprite, new Rectangle(133, 160, 5, 7));
-                    ScaleBoth = 1.25f;
                     break;
                 case 3:
                     Frame.Define(GM.txSprite, new Rectangle(143, 159, 2, 2));
-                    ScaleBoth = 2;
+                    ScaleBoth = 4;
+                    break;
+                case 4:
+                    Frame.Define(GM.txSprite, new Rectangle(133, 170, 5, 5));
+                    ScaleBoth = 1.5f;
                     break;
                 default:
                     Frame.Define(Tex.Circle4by4);
@@ -91,7 +94,7 @@ namespace Template.Game
             fireDelay = GM.r.FloatBetween(0, 0.5f);
             if (type != 3)
             {
-                Timer.ShowAfterKillAfter(fireDelay, GM.r.FloatBetween(0.5f, 1f));
+                Timer.ShowAfterKillAfter(fireDelay, GM.r.FloatBetween(0.5f, 0.7f));
             }
             else
             {
@@ -172,7 +175,7 @@ namespace Template.Game
         /// <param name="hit">The sprite collided with</param>
         private void Hit(Sprite hit)
         {
-            if (hit is HitBox && GM.r.FloatBetween(0, 1) > 0.75 || shotType == 1)
+            if (hit is HitBox && GM.r.FloatBetween(0, 1) > 0.75)
             {
                 HitBox hitBox = (HitBox)hit; //Get owner of hitbox
                 if (hitBox.Owner is HitBox)
@@ -222,11 +225,16 @@ namespace Template.Game
                                 ship.CrewNum -= 1;
                             }
                         }
+                        else if(shotType == 4 && GM.r.FloatBetween(0,1) > 0.5f)//Grapple
+                        {
+                            Ship firedFrom = (Ship)owner;
+                            firedFrom.Board(ship);
+                        }
                         else
                         {
                             hitBox.Health -= (int)(1 * hitBox.DamageMul);
                         }
-                        if (shotType == 3 && GM.r.FloatBetween(0,1) > 0.9) //Grape
+                        if (shotType == 3 && GM.r.FloatBetween(0,1) > 0.6f) //Grape
                         {
                             ship.CrewNum -= (int)GM.r.FloatBetween(1, 5);
                         }
