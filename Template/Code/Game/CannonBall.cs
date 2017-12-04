@@ -259,6 +259,7 @@ namespace Template.Game
                             hitBox.Health -= 1;
                         }
                     }
+                    //Kill();
                 }
             }
         }

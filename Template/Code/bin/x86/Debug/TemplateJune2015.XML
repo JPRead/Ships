@@ -211,6 +211,11 @@
              Used to easily get attributes from GameSetup.player
              </summary>
         </member>
+        <member name="F:Template.Opponent.sideFaceSprite">
+            <summary>
+            Used with RotationHelpers to check when perpendicular to objects
+            </summary>
+        </member>
         <member name="M:Template.Opponent.#ctor(Microsoft.Xna.Framework.Vector2)">
             <summary>
             Contains state machine for the AI

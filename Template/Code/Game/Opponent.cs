@@ -39,6 +39,10 @@ namespace Template
         /// Used to easily get attributes from GameSetup.player
         /// </summary>
         internal Player player;
+        /// <summary>
+        /// Used with RotationHelpers to check when perpendicular to objects
+        /// </summary>
+        Sprite sideFaceSprite;
 
         /// <summary>
         /// Contains state machine for the AI
@@ -52,6 +56,10 @@ namespace Template
             GM.eventM.AddTimer(stateTick = new Event(1, "State Tick"));
             player = GameSetup.Player;
             alignmentLastTick = 0;
+            sideFaceSprite = new Sprite();
+            sideFaceSprite.Frame.Define(Tex.SingleWhitePixel);
+            GM.engineM.AddSprite(sideFaceSprite);
+            sideFaceSprite.Visible = false;
             UpdateCallBack += Tick;
             FuneralCallBack += Death;
         }
@@ -146,14 +154,11 @@ namespace Template
                 {
                     sideOpposite = -1;
                 }
-
-                Sprite sidewardsSprite = new Sprite();
-                sidewardsSprite.Frame.Define(Tex.SingleWhitePixel);
-                GM.engineM.AddSprite(sidewardsSprite);
-                sidewardsSprite.Position2D = Position2D;
-                sidewardsSprite.RotationAngle = RotationAngle + (-90 * sideOpposite);
-                float alignment = RotationHelper.AngularDirectionTo(sidewardsSprite, player.Position, 0, false);
-                sidewardsSprite.Kill();
+                
+                sideFaceSprite.Position2D = Position2D;
+                sideFaceSprite.RotationAngle = RotationAngle + (-90 * sideOpposite);
+                float alignment = RotationHelper.AngularDirectionTo(sideFaceSprite, player.Position, 0, false);
+                sideFaceSprite.Kill();
 
                 bool readyToFire = false;
                 if (alignmentLastTick != alignment)
@@ -170,7 +175,8 @@ namespace Template
                 else //Within range
                 {
                     sailAmount = 1;
-                    movePoint = PointHelper.PointFromVector2(player.Position2D + (playerRight * 100) + (playerFront * 1000 * frontOpposite));
+                    //movePoint = PointHelper.PointFromVector2(player.Position2D + (playerRight * 100) + (playerFront * 1000 * frontOpposite));
+                    movePoint = PointHelper.PointFromVector2(Position2D + 100 * RotationHelper.Direction2DFromAngle(RotationAngle, 90 * alignment * sideOpposite));
 
                     if (readyToFire)
                     {
