@@ -180,7 +180,7 @@ namespace Template
 
                     if (readyToFire)
                     {
-                        if(sideOpposite == 1)
+                        if(frontOpposite * sideOpposite == 1)
                         {
                             Fire(true, shotTypeRight);
                         }
@@ -193,7 +193,7 @@ namespace Template
                     //DEBUG
                     GM.textM.Draw(FontBank.arcadePixel, "ready" + alignment, GM.screenSize.Width - 150, 25, TextAtt.TopRight);
                 }
-                MoveToPoint(movePoint);
+                //MoveToPoint(movePoint);
             }
         }
     }
