@@ -1,70 +1,70 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Template.Game.Button" Collapsed="true">
-    <Position X="8.75" Y="3.5" Width="1.5" />
+    <Position X="4.75" Y="4.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAQAAAAAAAAAAAIAACAAAAAAAEAAAEAgQABAAAAQAA=</HashCode>
       <FileName>Game\Button.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Template.Game.CannonBall" Collapsed="true">
-    <Position X="7" Y="3.5" Width="1.5" />
+    <Position X="7" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>BAAAAAACAAACgCAAAAIAAAAAAAAAAAAgAAAAAAAAQAA=</HashCode>
       <FileName>Game\CannonBall.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Template.Game.GameSetup" Collapsed="true">
-    <Position X="0.5" Y="1.75" Width="1.5" />
+    <Position X="0.75" Y="1.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAABAAEAAAABQAAEAEIAAAAABAAAAAUAAQAA=</HashCode>
       <FileName>Game\GameSetup.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Template.DamageSprite" Collapsed="true">
-    <Position X="10.5" Y="0.5" Width="1.5" />
+    <Position X="4.75" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAQAg=</HashCode>
       <FileName>Game\DamageSprite.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Template.FadingParticle">
-    <Position X="5.25" Y="3.5" Width="1.5" />
+  <Class Name="Template.FadingParticle" Collapsed="true">
+    <Position X="8.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAEAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Game\FadingParticle.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Template.HitBox" Collapsed="true">
-    <Position X="10.5" Y="3.5" Width="1.5" />
+    <Position X="6.5" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAICiSgAAAEgAAAAAIAgAAgAAAAAIAAIEAgAAAASAg=</HashCode>
       <FileName>Game\HitBox.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Template.Opponent">
-    <Position X="0.5" Y="5" Width="1.5" />
+  <Class Name="Template.Opponent" Collapsed="true">
+    <Position X="0.75" Y="5.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAkAAAAAAAAQAA=</HashCode>
+      <HashCode>AAAFAIAAAEAAAAAAAAAQAAAAAAAAAAAlAAAAAAAAQAA=</HashCode>
       <FileName>Game\Opponent.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Template.Player">
-    <Position X="2.75" Y="5" Width="1.5" />
+  <Class Name="Template.Player" Collapsed="true">
+    <Position X="2.75" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>gABIAAIIMUABAAEAAQAAAAQAAAACAAggCAAAgQAQQIk=</HashCode>
       <FileName>Game\Player.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Template.Ship">
-    <Position X="1.75" Y="3.5" Width="1.5" />
+  <Class Name="Template.Ship" Collapsed="true">
+    <Position X="1.75" Y="3.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EABAAEAGEAAhAAAAAASAAAQBCgBEgAAGAAAAA2AIQCo=</HashCode>
       <FileName>Game\Ship.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Template.GM" Collapsed="true">
-    <Position X="8.75" Y="1.5" Width="1.5" />
+    <Position X="0.75" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>MQYBFAAACKAIAwAoAQAFSgQBAAAECBoiAoAhJQAAIAU=</HashCode>
       <FileName>Setup loading and storage\Assets.cs</FileName>
@@ -85,7 +85,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Template.ExtraMessageTypes" Collapsed="true">
-    <Position X="5.25" Y="1.5" Width="1.5" />
+    <Position X="7" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAABCAAAAA=</HashCode>
       <FileName>Setup loading and storage\ExtraMessageTypes.cs</FileName>

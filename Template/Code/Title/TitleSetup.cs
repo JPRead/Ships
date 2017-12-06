@@ -36,7 +36,7 @@ namespace Template.Title
         }
 
         /// <summary>
-        /// 
+        /// Display title screen
         /// </summary>
         public override void Tick()
         {

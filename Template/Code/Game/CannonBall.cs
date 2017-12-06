@@ -234,7 +234,7 @@ namespace Template.Game
                         {
                             hitBox.Health -= (int)(1 * hitBox.DamageMul);
                         }
-                        if (shotType == 3 && GM.r.FloatBetween(0,1) > 0.6f) //Grape
+                        if (shotType == 3 && GM.r.FloatBetween(0,1) > 0.4f) //Grape
                         {
                             ship.CrewNum -= (int)GM.r.FloatBetween(1, 5);
                         }
@@ -255,7 +255,7 @@ namespace Template.Game
                         }
                         else
                         {
-                            CollisionAbandonResponse = true;
+                            //CollisionAbandonResponse = true;
                             hitBox.Health -= 1;
                         }
                     }

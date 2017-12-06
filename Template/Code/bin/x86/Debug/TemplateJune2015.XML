@@ -924,7 +924,7 @@
         </member>
         <member name="M:Template.Title.TitleSetup.Tick">
             <summary>
-            
+            Display title screen
             </summary>
         </member>
     </members>

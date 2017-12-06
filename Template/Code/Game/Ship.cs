@@ -455,7 +455,7 @@ namespace Template
                     {
                         velFromWindAngle = 360 - velFromWindAngle;
                     }//Create multiplier that's <1
-                    velFromWindAngle = (1/(velFromWindAngle+100)*100);
+                    velFromWindAngle = (1/(velFromWindAngle+100)*50);
 
                     //Keep from sliding to the side
                     if (velOffsetAngle > 0)
