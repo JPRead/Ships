@@ -158,10 +158,10 @@ namespace Template
                 sideFaceSprite.Position2D = Position2D;
                 sideFaceSprite.RotationAngle = RotationAngle + (90 * sideOpposite);
                 float alignment = RotationHelper.AngularDirectionTo(sideFaceSprite, player.Position, 0, false);
-                //sideFaceSprite.Kill();
 
+                float angleFromPlayer = RotationHelper.BearingTo(Position2D, player.Position2D, DirectionAccuracy.free, 0) - RotationAngle;
                 bool readyToFire = false;
-                if (alignmentLastTick != alignment)
+                if (alignmentLastTick != alignment && ((angleFromPlayer < -80 && angleFromPlayer > -100) || angleFromPlayer > 80 && angleFromPlayer <100))
                 {
                     readyToFire = true;
                 }
@@ -191,7 +191,7 @@ namespace Template
                     }
                 }
                 //DEBUG
-                GM.textM.Draw(FontBank.arcadePixel, "Side opposite" + sideOpposite + "~Front opposite" + frontOpposite + "~Angle between side" + angleBetweenSide, GM.screenSize.Width - 150, 25, TextAtt.TopRight);
+                GM.textM.Draw(FontBank.arcadePixel, "Alignment" + angleFromPlayer, GM.screenSize.Width - 150, 25, TextAtt.TopRight);
 
                 MoveToPoint(movePoint);
             }

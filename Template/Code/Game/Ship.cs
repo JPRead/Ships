@@ -209,6 +209,16 @@ namespace Template
                 OneSecond();
             }
 
+            //Keep rotation angle between -180 and 180 degrees
+            if(RotationAngle < -180)
+            {
+                RotationAngle += 360;
+            }
+            else if(RotationAngle > 180)
+            {
+                RotationAngle -= 360;
+            }
+
             //Stop reload timers once reload is complete or if repairing
             if (GM.eventM.Elapsed(tiReloadRight) || isRepairing)
             {
@@ -285,7 +295,7 @@ namespace Template
                 }
                 else
                 {
-                    float repairPerPart = (repairAmount * 0.05f) / repairNum;
+                    float repairPerPart = (repairAmount * 0.025f) / repairNum;
                     for (int i = 0; i < repairNum; i++)
                     {
                         repairArray[i].Health += repairPerPart;
