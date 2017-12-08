@@ -154,8 +154,8 @@ namespace Template
                 Visible = false;
 
                 //Debug
-                //CollisionBoxVisible = true;
-                //Visible = true;
+                CollisionBoxVisible = true;
+                Visible = true;
             }
             else
             {

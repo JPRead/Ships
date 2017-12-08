@@ -270,8 +270,8 @@ namespace Template
         private void Tick()
         {
             //DEBUG
-            GM.textM.Draw(FontBank.arcadePixel, "Hull Front  " + hitBoxHullFront.Health + "~Hull Back   " + hitBoxHullBack.Health +
-                "~Hull Left   " + hitBoxHullLeft.Health + "~Hull Right  " + hitBoxHullRight.Health +
+            GM.textM.Draw(FontBank.arcadePixel, 
+                "Hull Front  " + hitBoxHullFront.Health + "~Hull Back   " + hitBoxHullBack.Health + "~Hull Left   " + hitBoxHullLeft.Health + "~Hull Right  " + hitBoxHullRight.Health +
                 "~Sail Front  " + hitBoxSailFront.Health + "~Sail Middle " + hitBoxSailMiddle.Health + "~Sail Back   " + hitBoxSailBack.Health, 100, 100, TextAtt.TopLeft);
             GM.textM.Draw(FontBank.arcadePixel, "Crew: " + CrewNum, 150, 50, TextAtt.TopRight);
             GM.textM.Draw(FontBank.arcadePixel, "Rotation" + RotationAngle, 150, 75, TextAtt.TopRight);

@@ -95,6 +95,7 @@ namespace Template
                 if (totalHealth >= 600 + 100 * aggressiveness)
                     return 0;
 
+                isRepairing = true;
                 return 2;
             }
             if(state == 3)
@@ -118,8 +119,8 @@ namespace Template
         private void Tick()
         {
             //DEBUG
-            GM.textM.Draw(FontBank.arcadePixel, "Hull Front  " + hitBoxHullFront.Health + "~Hull Back   " + hitBoxHullBack.Health +
-                "~Hull Left   " + hitBoxHullLeft.Health + "~Hull Right  " + hitBoxHullRight.Health +
+            GM.textM.Draw(FontBank.arcadePixel, 
+                "Hull Front  " + hitBoxHullFront.Health + "~Hull Back   " + hitBoxHullBack.Health + "~Hull Left   " + hitBoxHullLeft.Health + "~Hull Right  " + hitBoxHullRight.Health +
                 "~Sail Front  " + hitBoxSailFront.Health + "~Sail Middle " + hitBoxSailMiddle.Health + "~Sail Back   " + hitBoxSailBack.Health, GM.screenSize.Width - 100, 100, TextAtt.TopRight);
             GM.textM.Draw(FontBank.arcadePixel, "Crew: " + CrewNum, GM.screenSize.Width - 150, 50, TextAtt.TopRight);
             GM.textM.Draw(FontBank.arcadePixel, "State: " + state, GM.screenSize.Width - 150, 75, TextAtt.TopRight);
@@ -138,62 +139,73 @@ namespace Template
                 //Direction vectors for front and right of player
                 Vector2 playerFront = RotationHelper.Direction2DFromAngle(player.RotationAngle, 0);
                 Vector2 playerRight = RotationHelper.Direction2DFromAngle(player.RotationAngle, 90);
+                Vector2 directionToPlayer = Vector2.Normalize(Position2D - player.Position2D);
 
-                //1 if front of ships opposite, -1 otherwise.
-                float angleBetweenFront = RotationHelper.BearingTo(RotationHelper.Direction2DFromAngle(RotationAngle, 0), playerFront, DirectionAccuracy.free, 0) - RotationAngle;
-                int frontOpposite = 1;
-                if (angleBetweenFront > 135 || angleBetweenFront < -135)
+                ////1 if front of ships opposite, -1 otherwise.
+                //float angleBetweenFront = RotationHelper.BearingTo(RotationHelper.Direction2DFromAngle(RotationAngle, 0), playerFront, DirectionAccuracy.free, 0) - RotationAngle;
+                //int frontOpposite = -1;
+                //if (angleBetweenFront > 135 || angleBetweenFront < -135)
+                //{
+                //    frontOpposite = 1;
+                //}
+
+                float angleFromPlayer = RotationHelper.BearingTo(Position2D, player.Position2D, DirectionAccuracy.free, 0) - RotationAngle;
+                if (angleFromPlayer < -180)
                 {
-                    frontOpposite = -1;
+                    angleFromPlayer += 360;
                 }
 
-                //1 if side of ships not opposite, -1 otherwise.
-                int sideOpposite = -1;
-                float angleBetweenSide = RotationHelper.BearingTo(RotationHelper.Direction2DFromAngle(RotationAngle, 0), playerRight, DirectionAccuracy.free, 0) - RotationAngle;
-                if ((angleBetweenSide > 180))
+                //1 if side of ships opposite, -1 otherwise.
+                int playerOnRight = -1;
+                float angleBetweenSide = RotationHelper.BearingTo(Vector2.Normalize(Position2D - RotationHelper.Direction2DFromAngle(RotationAngle,0 )), playerRight, DirectionAccuracy.free, 0) - RotationAngle;
+                if (angleFromPlayer > 0)
                 {
-                    sideOpposite = 1;
+                    playerOnRight = 1;
                 }
                 
                 sideFaceSprite.Position2D = Position2D;
-                sideFaceSprite.RotationAngle = RotationAngle + (90 * sideOpposite);
+                sideFaceSprite.RotationAngle = RotationAngle + (90 * playerOnRight);
                 float alignment = RotationHelper.AngularDirectionTo(sideFaceSprite, player.Position, 0, false);
 
-                float angleFromPlayer = RotationHelper.BearingTo(Position2D, player.Position2D, DirectionAccuracy.free, 0) - RotationAngle;
+
                 bool readyToFire = false;
-                if (alignmentLastTick != alignment && ((angleFromPlayer < -80 && angleFromPlayer > -100) || angleFromPlayer > 80 && angleFromPlayer <100))
+                if (alignmentLastTick != alignment/* && ((angleFromPlayer < -80 && angleFromPlayer > -100) || angleFromPlayer > 80 && angleFromPlayer < 100)*/)
                 {
                     readyToFire = true;
                 }
                 alignmentLastTick = alignment;
 
 
-                if (Vector2.DistanceSquared(Position2D, player.Position2D) > 90000) //Out of range
+                if (Vector2.DistanceSquared(Position2D, player.Position2D) > 100000) //Out of range
                 {
-                    movePoint = PointHelper.PointFromVector2(player.Position2D + (playerRight * 100 * sideOpposite));
+                    movePoint = PointHelper.PointFromVector2(player.Position2D + (playerRight * 100 * playerOnRight));
                 }
                 else //Within range
                 {
                     sailAmount = 1;
                     //movePoint = PointHelper.PointFromVector2(player.Position2D + (playerRight * 100) + (playerFront * 1000 * frontOpposite));
-                    movePoint = PointHelper.PointFromVector2(Position2D + 100 * RotationHelper.Direction2DFromAngle(RotationAngle, 90 * alignment * sideOpposite));
+                    movePoint = PointHelper.PointFromVector2(Position2D + 100 * RotationHelper.Direction2DFromAngle(RotationAngle, 90 * alignment * playerOnRight));
 
                     if (readyToFire)
                     {
-                        if (frontOpposite * sideOpposite == 1)
+                        if (angleFromPlayer > 10 && angleFromPlayer < 170)
                         {
-                            Fire(false, shotTypeRight);
+                            Fire(true, shotTypeRight);
                         }
-                        else
+                        else if (angleFromPlayer < -10 && angleFromPlayer > -170)
                         {
-                            Fire(true, shotTypeLeft);
+                            Fire(false, shotTypeLeft);
                         }
                     }
                 }
                 //DEBUG
-                GM.textM.Draw(FontBank.arcadePixel, "Alignment" + angleFromPlayer, GM.screenSize.Width - 150, 25, TextAtt.TopRight);
+                GM.textM.Draw(FontBank.arcadePixel, "Alignment" + angleFromPlayer + "~Rotation" + RotationAngle, GM.screenSize.Width - 150, 10, TextAtt.TopRight);
 
                 MoveToPoint(movePoint);
+            }
+            if(state == 2) //Retreating
+            {
+                MoveToPoint(PointHelper.PointFromVector2(Position2D + (Vector2.Normalize(Position2D - player.Position2D) * 200)));
             }
         }
     }

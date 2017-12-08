@@ -250,9 +250,9 @@ namespace Template
                 velVector.Normalize();
                 //Multiply based on angle to velVector (reduce if sideways)
                 float angleDifference = Math.Abs(RotationHelper.AngleFromDirection(velVector) - RotationAngle + 90);
-                velVector = (360*velVector) / angleDifference;
-
-                Velocity2D += velVector;
+                velVector /= angleDifference;
+            
+                Velocity2D += velVector * 30 * (Velocity2D - otherShip.Velocity2D);
                 //otherShip.Velocity2D -= (velVector * 2);
             }
             //DEBUG
@@ -316,7 +316,7 @@ namespace Template
             {
                 hullHealthMissing += (100 - hitBoxArray[i].Health);
             }
-            sinkAmount += (int)(hullHealthMissing/10);
+            sinkAmount += (int)(hullHealthMissing * 0.1);
             sinkAmount -= 6;
             if(sinkAmount >= 1000)
             {
@@ -339,16 +339,15 @@ namespace Template
             {
                 sailDamageSpeedMul += hitBoxArray[i].Health;
             }
-            sailDamageSpeedMul /= 300;
+            sailDamageSpeedMul *= 0.003f;
         }
 
         /// <summary>
         /// Fire cannons
         /// </summary>
-        /// <param name="right">If true fire from right side else left side</param><param name="type">Type of shot to use - 0 ball shot, 1 bar shot, 2 grape shot, 3 carcass shot</param>
+        /// <param name="right">If true fire from right side else left side</param><param name="type">Type of shot to use - 0 ball shot, 1 bar shot, 2 grape shot, 3 carcass shot, 4 grapple shot</param>
         internal void Fire(bool right, int type)
         {
-            //Perhaps all this should be reworked?
             if (((right && tiReloadRight.Paused) || (!right && tiReloadLeft.Paused)) && !isRepairing)
             {
                 Vector3 fireDir;
@@ -366,7 +365,7 @@ namespace Template
                 int multiply = 2;
                 if (type == 3) { multiply = 4; }
                 if (type == 4) { multiply = 1; }
-                for (int i = 0; i < crewNum/10; i++)
+                for (int i = 0; i < crewNum * 0.1f; i++)
                 {
                     for (int i2 = 0; i2 < multiply; i2++)
                     {

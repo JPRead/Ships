@@ -899,7 +899,7 @@
             <summary>
             Fire cannons
             </summary>
-            <param name="right">If true fire from right side else left side</param><param name="type">Type of shot to use - 0 ball shot, 1 bar shot, 2 grape shot, 3 carcass shot</param>
+            <param name="right">If true fire from right side else left side</param><param name="type">Type of shot to use - 0 ball shot, 1 bar shot, 2 grape shot, 3 carcass shot, 4 grapple shot</param>
         </member>
         <member name="M:Template.Ship.MoveToPoint(Microsoft.Xna.Framework.Point)">
             <summary>
