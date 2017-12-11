@@ -92,7 +92,7 @@ namespace Template.Game
             //kill after a random time and delay firing
             TimerInitialise();
             fireDelay = GM.r.FloatBetween(0, 0.5f);
-            if (type != 3)
+            if (type != 3 && type != 4)
             {
                 Timer.ShowAfterKillAfter(fireDelay, GM.r.FloatBetween(0.5f, 0.7f));
             }
@@ -228,7 +228,8 @@ namespace Template.Game
                         else if(shotType == 4 && GM.r.FloatBetween(0,1) > 0.5f)//Grapple
                         {
                             Ship firedFrom = (Ship)owner;
-                            firedFrom.Board(ship);
+                            if (!firedFrom.isBoarding && !firedFrom.isBoarded)
+                                firedFrom.Board(ship);
                         }
                         else
                         {

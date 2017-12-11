@@ -116,6 +116,14 @@ namespace Template
         /// Multiplier to speed based on sail damage
         /// </summary>
         private float sailDamageSpeedMul;
+        /// <summary>
+        /// True if boarding enemy ship
+        /// </summary>
+        internal bool isBoarding;
+        /// <summary>
+        /// True if being boarded by enemy ship
+        /// </summary>
+        internal bool isBoarded;
 
         internal int CrewNum
         {
@@ -144,6 +152,8 @@ namespace Template
             hitBoxArray = new HitBox[7];
             leftLoaded = false;
             rightLoaded = false;
+            isBoarding = false;
+            isBoarded = false;
             
 
             GM.engineM.AddSprite(this);
@@ -255,8 +265,6 @@ namespace Template
                 Velocity2D += velVector * 30 * (Velocity2D - otherShip.Velocity2D);
                 //otherShip.Velocity2D -= (velVector * 2);
             }
-            //DEBUG
-            GM.textM.Draw(FontBank.arcadePixel, Convert.ToString(sailDamageSpeedMul), 200, 200);
         }
 
         /// <summary>
@@ -412,8 +420,8 @@ namespace Template
         {
             Vector2 movePos = PointHelper.Vector2FromPoint(point);
 
-            //Stop moving once close enough to movePos
-            if(Vector2.DistanceSquared(Position2D, movePos) + 5000 > Height * Height)
+            //Stop moving once close enough to movePos, or when boarding is in progress
+            if((Vector2.DistanceSquared(Position2D, movePos) + 5000 > Height * Height) && !isBoarded && !isBoarding)
             {
                 if (isPlayer)
                     moveLocSprite.Visible = true;
@@ -487,6 +495,44 @@ namespace Template
                     }
                 }
             }
+            else if(isBoarding || isBoarded)
+            {
+                Ship target = GameSetup.Opponent;
+                if (!isPlayer)
+                {
+                    target = GameSetup.Player;
+                }
+
+                float angleBetween = RotationAngle - target.RotationAngle;
+                bool opposite = true;
+                if (angleBetween > -90 && angleBetween < 90)
+                {
+                    opposite = false;
+                }
+                
+                //Angle ships parallel to eachother.
+                if (opposite &&
+                    Vector2.DistanceSquared(hitBoxHullFront.Position2D, target.hitBoxHullBack.Position2D)
+                    > Vector2.DistanceSquared(hitBoxHullBack.Position2D, target.hitBoxHullFront.Position2D))
+                {
+                    RotationVelocity = 2;
+                }
+                else if (!opposite &&
+                    Vector2.DistanceSquared(hitBoxHullFront.Position2D, target.hitBoxHullFront.Position2D)
+                    > Vector2.DistanceSquared(hitBoxHullBack.Position2D, target.hitBoxHullBack.Position2D))
+                {
+                    RotationVelocity = 2;
+                }
+                else
+                    RotationVelocity = -2;
+
+                //Move ships towards eachother NEEDS CHECK FOR DISTANCE
+                Vector2 velDir = Vector2.Normalize(Position2D - target.Position2D);
+                Velocity2D -= 1 * velDir;
+
+                //DEBUG
+                GM.textM.Draw(FontBank.arcadePixel, Convert.ToString(opposite), 200, 200);
+            }
             else
             {
                 moveTargetReached = true;
@@ -497,7 +543,28 @@ namespace Template
 
         public void Board(Ship target)
         {
-            //Code for boarding
+            isBoarding = true;
+            target.isBoarded = true;
+
+            float angleBetween = RotationAngle - target.RotationAngle;
+            bool opposite = true;
+            if(angleBetween > -90 && angleBetween < 90)
+            {
+                opposite = false;
+            }
+
+            new Rope(this, target);
+            if (opposite)
+            {
+                new Rope(hitBoxHullBack, target.hitBoxHullFront);
+                new Rope(hitBoxHullFront, target.hitBoxHullBack);
+            }
+            else
+            {
+                new Rope(hitBoxHullFront, target.hitBoxHullFront);
+                new Rope(hitBoxHullBack, target.hitBoxHullBack);
+            }
+            MoveToPoint(new Point(0, 0));
         }
     }
 }

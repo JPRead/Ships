@@ -121,6 +121,7 @@
     <Compile Include="Game\Player.cs" />
     <Compile Include="Game\FadingParticle.cs" />
     <Compile Include="Game\HitBox.cs" />
+    <Compile Include="Game\Rope.cs" />
     <Compile Include="Setup loading and storage\Assets.cs" />
     <Compile Include="Setup loading and storage\BasicSetup.cs" />
     <Compile Include="Setup loading and storage\Cursor.cs" />

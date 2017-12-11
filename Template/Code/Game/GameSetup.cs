@@ -110,7 +110,7 @@ namespace Template.Game
             GM.engineM.viewport.Add(playerView);
 
             player = new Player(new Vector2(400, 400));
-            opponent = new Opponent(new Vector2(1600 - 400, 900 - 400));
+            opponent = new Opponent(new Vector2(1600 - 800, 900 - 450));
         }
 
         /// <summary>

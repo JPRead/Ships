@@ -449,6 +449,23 @@
             Code to run each tick
             </summary>
         </member>
+        <member name="T:Template.Rope">
+            <summary>
+            Rope sprite used for boarding
+            </summary>
+        </member>
+        <member name="M:Template.Rope.#ctor(Engine7.Sprite,Engine7.Sprite)">
+            <summary>
+            Constructor for Rope
+            </summary>
+            <param name="Origin"></param>
+            <param name="Target"></param>
+        </member>
+        <member name="M:Template.Rope.Tick">
+            <summary>
+            Code to run each tick.
+            </summary>
+        </member>
         <member name="T:Template.GM">
             <summary>
             holds all game assets and code to set up those assets
@@ -883,6 +900,16 @@
         <member name="F:Template.Ship.sailDamageSpeedMul">
             <summary>
             Multiplier to speed based on sail damage
+            </summary>
+        </member>
+        <member name="F:Template.Ship.isBoarding">
+            <summary>
+            True if boarding enemy ship
+            </summary>
+        </member>
+        <member name="F:Template.Ship.isBoarded">
+            <summary>
+            True if being boarded by enemy ship
             </summary>
         </member>
         <member name="M:Template.Ship.#ctor">
