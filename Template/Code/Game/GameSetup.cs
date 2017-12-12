@@ -36,6 +36,22 @@ namespace Template.Game
         /// Viewport for the player
         /// </summary>
         private static PlayerView playerView;
+        /// <summary>
+        /// True if boarding preparations made and crew should now be fighting
+        /// </summary>
+        private static bool boardingInProgress;
+        /// <summary>
+        /// Timer for 1 second delay
+        /// </summary>
+        private Event tiOneSecond;
+        /// <summary>
+        /// Sprite used to display the player's crew numbers in boarding
+        /// </summary>
+        private Sprite crewDisplayPlayer;
+        /// <summary>
+        /// Sprite used for background if player's crew numbers in boarding
+        /// </summary>
+        private Sprite crewDisplayBackground;
 
         internal static Player Player
         {
@@ -74,6 +90,19 @@ namespace Template.Game
             }
         }
 
+        internal static bool BoardingInProgress
+        {
+            get
+            {
+                return boardingInProgress;
+            }
+
+            set
+            {
+                boardingInProgress = value;
+            }
+        }
+
         /// <summary>
         /// Sets up all the initial values for the game
         /// </summary>
@@ -82,6 +111,8 @@ namespace Template.Game
             //Init values
             GM.engineM.DebugDisplay = Debug.fps | Debug.version;
             GM.engineM.ScreenColour = Color.LightSkyBlue;
+            boardingInProgress = false;
+            GM.eventM.AddTimer(tiOneSecond = new Event(1, "Boarding Tick"));
 
             windDir = GM.r.FloatBetween(0, 360);
             Sprite windDirSprite = new Sprite();
@@ -108,6 +139,30 @@ namespace Template.Game
             playerView.Clamp = false;
             GM.engineM.viewport.Clear();
             GM.engineM.viewport.Add(playerView);
+
+            crewDisplayPlayer = new Sprite();
+            GM.engineM.AddSprite(crewDisplayPlayer);
+            crewDisplayPlayer.Frame.Define(Tex.SingleWhitePixel);
+            crewDisplayPlayer.SY = 10;
+            crewDisplayPlayer.SX = 50;
+            crewDisplayPlayer.Wash = Color.Green;
+            crewDisplayPlayer.Layer+=2;
+            crewDisplayPlayer.WorldCoordinates = false;
+            crewDisplayPlayer.Align = Align.bottomLeft;
+            crewDisplayPlayer.Position2D = new Vector2(GM.screenSize.Center.X, GM.screenSize.Center.Y - 180);
+            crewDisplayPlayer.Visible = false;
+
+            crewDisplayBackground = new Sprite();
+            GM.engineM.AddSprite(crewDisplayBackground);
+            crewDisplayBackground.Frame.Define(Tex.SingleWhitePixel);
+            crewDisplayBackground.SY = 10;
+            crewDisplayBackground.SX = 100;
+            crewDisplayBackground.Wash = Color.Red;
+            crewDisplayBackground.Layer++;
+            crewDisplayBackground.WorldCoordinates = false;
+            crewDisplayBackground.Align = Align.bottomLeft;
+            crewDisplayBackground.Position2D = new Vector2(GM.screenSize.Center.X, GM.screenSize.Center.Y - 180);
+            crewDisplayBackground.Visible = false;
 
             player = new Player(new Vector2(400, 400));
             opponent = new Opponent(new Vector2(1600 - 800, 900 - 450));
@@ -141,6 +196,33 @@ namespace Template.Game
             {
                 BackToTitle("Press 1 to start.");
             }
+
+            //Boarding
+            if (boardingInProgress)
+            {
+                if (GM.eventM.Elapsed(tiOneSecond))
+                {
+                    OneSecond();
+                }
+                crewDisplayPlayer.Visible = true;
+                crewDisplayBackground.Visible = true;
+                GM.textM.Draw(FontBank.arcadePixel, "Boarding", GM.screenSize.Center.X, GM.screenSize.Center.Y - 200);
+                crewDisplayPlayer.SX = ((float)player.CrewNum / (player.CrewNum + opponent.CrewNum)) * 100f;
+            }
+            else
+            {
+                crewDisplayPlayer.Visible = false;
+                crewDisplayBackground.Visible = false;
+            }
+        }
+
+        /// <summary>
+        /// Code to run each second
+        /// </summary>
+        private void OneSecond()
+        {
+            player.CrewNum -= (int)GM.r.FloatBetween(1, (opponent.CrewNum * 0.02f) + 1.5f);
+            opponent.CrewNum -= (int)GM.r.FloatBetween(1, (player.CrewNum * 0.02f) + 1.5f);
         }
 
         /// <summary>

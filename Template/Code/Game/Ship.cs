@@ -124,6 +124,10 @@ namespace Template
         /// True if being boarded by enemy ship
         /// </summary>
         internal bool isBoarded;
+        /// <summary>
+        /// True if attempting to cut boarding ropes
+        /// </summary>
+        internal bool isCuttingRopes;
 
         internal int CrewNum
         {
@@ -154,6 +158,7 @@ namespace Template
             rightLoaded = false;
             isBoarding = false;
             isBoarded = false;
+            isCuttingRopes = false;
             
 
             GM.engineM.AddSprite(this);
@@ -211,12 +216,21 @@ namespace Template
             crewNum = 100;
         }
 
+        /// <summary>
+        /// Code to run each tick
+        /// </summary>
         private void Tick()
         {
             //Run code in this function every second
             if (GM.eventM.Elapsed(tiOneSecond))
             {
                 OneSecond();
+            }
+
+            //Kill if no crew
+            if(crewNum <= 0)
+            {
+                Kill();
             }
 
             //Keep rotation angle between -180 and 180 degrees
@@ -268,7 +282,7 @@ namespace Template
         }
 
         /// <summary>
-        /// Runs every second
+        /// Code to run each second
         /// </summary>
         internal void OneSecond()
         {
@@ -348,6 +362,25 @@ namespace Template
                 sailDamageSpeedMul += hitBoxArray[i].Health;
             }
             sailDamageSpeedMul *= 0.003f;
+
+            //Boarding checks
+            if (isBoarded && isCuttingRopes)
+            {
+                if(GM.r.FloatBetween(0,1) > 0.8f)
+                {
+                    isCuttingRopes = false;
+                    isBoarded = false;
+                    GameSetup.BoardingInProgress = false;
+                    if (isPlayer)
+                    {
+                        GameSetup.Opponent.isBoarding = false;
+                    }
+                    else
+                    {
+                        GameSetup.Player.isBoarding = false;
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -412,6 +445,23 @@ namespace Template
             }
         }
 
+        internal void cutBoardingRopes()
+        {
+            if (isBoarding)
+            {
+                isBoarding = false;
+                GameSetup.BoardingInProgress = false;
+                if (isPlayer)
+                    GameSetup.Opponent.isBoarded = false;
+                else
+                    GameSetup.Player.isBoarded = false;
+            }
+            else
+            {
+                isCuttingRopes = true;
+            }
+        }
+
         /// <summary>
         /// Accelerates the ship towards point and keeps the ship from sliding sideways
         /// </summary>
@@ -421,7 +471,7 @@ namespace Template
             Vector2 movePos = PointHelper.Vector2FromPoint(point);
 
             //Stop moving once close enough to movePos, or when boarding is in progress
-            if((Vector2.DistanceSquared(Position2D, movePos) + 5000 > Height * Height) && !isBoarded && !isBoarding)
+            if ((Vector2.DistanceSquared(Position2D, movePos) + 5000 > Height * Height) && !isBoarded && !isBoarding)
             {
                 if (isPlayer)
                     moveLocSprite.Visible = true;
@@ -433,16 +483,16 @@ namespace Template
                     moveLocSprite.Visible = true;
                     moveLocSprite.Wash = Color.Red;
                 }
-                   
+
 
                 if (sailAmount == 0)
                 {
-                    if(smoothRotationVelocity > 0)
+                    if (smoothRotationVelocity > 0)
                     {
                         smoothRotationVelocity -= 0.1f;
-                        RotationVelocity = smoothRotationVelocity;                        
+                        RotationVelocity = smoothRotationVelocity;
                     }
-                    if(smoothRotationVelocity < 0)
+                    if (smoothRotationVelocity < 0)
                     {
                         smoothRotationVelocity += 0.1f;
                         RotationVelocity = smoothRotationVelocity;
@@ -466,13 +516,13 @@ namespace Template
 
                     //Calculations for wind speed multiplier
                     float velFromWindAngle = (RotationAngle - GameSetup.WindDir) % 360;
-                    if(velFromWindAngle < 0) //Absolute value
+                    if (velFromWindAngle < 0) //Absolute value
                         velFromWindAngle = -velFromWindAngle;
-                    if(velFromWindAngle > 180) //Keep between 0 and 180
+                    if (velFromWindAngle > 180) //Keep between 0 and 180
                     {
                         velFromWindAngle = 360 - velFromWindAngle;
                     }//Create multiplier that's <1
-                    velFromWindAngle = (1/(velFromWindAngle+100)*50);
+                    velFromWindAngle = (1 / (velFromWindAngle + 100) * 50);
 
                     //Keep from sliding to the side
                     if (velOffsetAngle > 0)
@@ -495,7 +545,7 @@ namespace Template
                     }
                 }
             }
-            else if(isBoarding || isBoarded)
+            else if (isBoarding || isBoarded)
             {
                 Ship target = GameSetup.Opponent;
                 if (!isPlayer)
@@ -509,7 +559,7 @@ namespace Template
                 {
                     opposite = false;
                 }
-                
+
                 //Angle ships parallel to eachother.
                 if (opposite &&
                     Vector2.DistanceSquared(hitBoxHullFront.Position2D, target.hitBoxHullBack.Position2D)
@@ -526,9 +576,17 @@ namespace Template
                 else
                     RotationVelocity = -2;
 
-                //Move ships towards eachother NEEDS CHECK FOR DISTANCE
-                Vector2 velDir = Vector2.Normalize(Position2D - target.Position2D);
-                Velocity2D -= 1 * velDir;
+                //Move ships towards eachother
+                if (Vector2.DistanceSquared(this.Position2D, target.Position2D) > 10000)
+                {
+                    Vector2 velDir = Vector2.Normalize(Position2D - target.Position2D);
+                    Velocity2D -= 0.01f * velDir;
+                }
+                else
+                {
+                    GameSetup.BoardingInProgress = true;
+                    Velocity2D = Vector2.Zero;
+                }
 
                 //DEBUG
                 GM.textM.Draw(FontBank.arcadePixel, Convert.ToString(opposite), 200, 200);

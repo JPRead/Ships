@@ -25,6 +25,23 @@ namespace Template.Game
         /// True if UI element can be clicked
         /// </summary>
         private bool enabled;
+        /// <summary>
+        /// True if UI element needs to be faded out
+        /// </summary>
+        private bool faded;
+
+        public bool Faded
+        {
+            get
+            {
+                return faded;
+            }
+
+            set
+            {
+                faded = value;
+            }
+        }
 
         //public Sprite Display
         //{
@@ -77,7 +94,7 @@ namespace Template.Game
         /// </summary>
         private void Tick()
         {
-            if (enabled)
+            if (enabled && !faded)
             {
                 if (HeldLeft() || HeldRight())
                 {
@@ -87,6 +104,10 @@ namespace Template.Game
                 {
                     Wash = Color.Blue;
                 }
+            }
+            if (faded)
+            {
+                Wash = Color.Black;
             }
         }
 

@@ -29,6 +29,10 @@ namespace Template
         /// </summary>
         private Point moveTo;
         /// <summary>
+        /// Button for cutting ropes when boarding
+        /// </summary>
+        private Button cutRopeButton;
+        /// <summary>
         /// Button for setting speed
         /// </summary>
         private Button speedButton;
@@ -162,10 +166,14 @@ namespace Template
             moveTo = PointHelper.PointFromVector2(Position2D);
 
             //UI setup
+            cutRopeButton = new Button(new Rectangle(GM.screenSize.Center.X - 75, GM.screenSize.Bottom - 50, 50, 50), true);
+            cutRopeButton.SetDisplay(new Rectangle(0, 0, 10, 10));//Create sprite for this
+
             speedButton = new Button(new Rectangle(GM.screenSize.Center.X, GM.screenSize.Bottom - 125, 50, 50), true);
             speedButton.SetDisplay(new Rectangle(75, 159, 6, 40));
 
             repairButton = new Button(new Rectangle(GM.screenSize.Center.X, GM.screenSize.Bottom - 50, 50, 50), true);
+            repairButton.SetDisplay(new Rectangle(0, 0, 10, 10));//Create sprite for this
 
             fireRightButton = new Button(new Rectangle(GM.screenSize.Center.X - 75, GM.screenSize.Bottom - 125, 50, 50), true);
             fireRightButton.SetDisplay(new Rectangle(150, 160, 20, 20));
@@ -425,6 +433,26 @@ namespace Template
                     tiReloadRight.Paused = false;
                 }
             }
+            if (isRepairing)
+            {
+                fireLeftButton.Faded = true;
+                fireRightButton.Faded = true;
+            }
+            else
+            {
+                fireLeftButton.Faded = false;
+                fireRightButton.Faded = false;
+            }
+
+            //Cut boarding ropes
+            if (cutRopeButton.PressedLeft() && (isBoarded || isBoarding))
+            {
+                cutBoardingRopes();
+            }
+            if(!isBoarded && !isBoarding)
+                cutRopeButton.Faded = true;
+            else
+                cutRopeButton.Faded = false;
 
             //Movement orders
             //Check that no clicks are made on UI background

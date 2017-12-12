@@ -46,6 +46,10 @@ namespace Template
             SY = Vector2.Distance(origin.Position2D, target.Position2D);
             RotationAngle = RotationHelper.AngleFromDirection(Vector2.Normalize(target.Position2D - origin.Position2D));
             Position2D = origin.Position2D - ((origin.Position2D - target.Position2D) * 0.5f);
+            if (!(GameSetup.Player.isBoarded || GameSetup.Player.isBoarding))
+            {
+                Kill();
+            }
         }
     }
 }

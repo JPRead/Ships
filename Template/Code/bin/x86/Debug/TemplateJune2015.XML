@@ -37,6 +37,11 @@
             True if UI element can be clicked
             </summary>
         </member>
+        <member name="F:Template.Game.Button.faded">
+            <summary>
+            True if UI element needs to be faded out
+            </summary>
+        </member>
         <member name="M:Template.Game.Button.#ctor(Microsoft.Xna.Framework.Rectangle,System.Boolean)">
             <summary>
             Button is used as a UI element that can be interacted with using the mouse
@@ -166,6 +171,26 @@
             Viewport for the player
             </summary>
         </member>
+        <member name="F:Template.Game.GameSetup.boardingInProgress">
+            <summary>
+            True if boarding preparations made and crew should now be fighting
+            </summary>
+        </member>
+        <member name="F:Template.Game.GameSetup.tiOneSecond">
+            <summary>
+            Timer for 1 second delay
+            </summary>
+        </member>
+        <member name="F:Template.Game.GameSetup.crewDisplayPlayer">
+            <summary>
+            Sprite used to display the player's crew numbers in boarding
+            </summary>
+        </member>
+        <member name="F:Template.Game.GameSetup.crewDisplayBackground">
+            <summary>
+            Sprite used for background if player's crew numbers in boarding
+            </summary>
+        </member>
         <member name="M:Template.Game.GameSetup.#ctor">
             <summary>
             Sets up all the initial values for the game
@@ -174,6 +199,11 @@
         <member name="M:Template.Game.GameSetup.Tick">
             <summary>
             Check for keypresses used to end game
+            </summary>
+        </member>
+        <member name="M:Template.Game.GameSetup.OneSecond">
+            <summary>
+            Code to run each second
             </summary>
         </member>
         <member name="M:Template.Game.GameSetup.BackToTitle(System.String)">
@@ -240,6 +270,11 @@
         <member name="F:Template.Player.moveTo">
             <summary>
             Point to move towards
+            </summary>
+        </member>
+        <member name="F:Template.Player.cutRopeButton">
+            <summary>
+            Button for cutting ropes when boarding
             </summary>
         </member>
         <member name="F:Template.Player.speedButton">
@@ -912,14 +947,24 @@
             True if being boarded by enemy ship
             </summary>
         </member>
+        <member name="F:Template.Ship.isCuttingRopes">
+            <summary>
+            True if attempting to cut boarding ropes
+            </summary>
+        </member>
         <member name="M:Template.Ship.#ctor">
             <summary>
             Ship contains all the functions used by both the player and the AI
             </summary>
         </member>
+        <member name="M:Template.Ship.Tick">
+            <summary>
+            Code to run each tick
+            </summary>
+        </member>
         <member name="M:Template.Ship.OneSecond">
             <summary>
-            Runs every second
+            Code to run each second
             </summary>
         </member>
         <member name="M:Template.Ship.Fire(System.Boolean,System.Int32)">
