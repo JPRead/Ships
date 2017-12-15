@@ -11,7 +11,7 @@ namespace Template.Game
         /// </summary>
         private Sprite owner;
         /// <summary>
-        /// Type of this CannonBall - 0 ball shot, 1 bar shot, 2 carcass shot, 3 grape shot
+        /// Type of this CannonBall - 0 ball shot, 1 bar shot, 2 carcass shot, 3 grape shot, 4 grapple shot
         /// </summary>
         private int shotType;
         /// <summary>
@@ -65,7 +65,7 @@ namespace Template.Game
                     break;
                 case 3:
                     Frame.Define(GM.txSprite, new Rectangle(143, 159, 2, 2));
-                    ScaleBoth = 4;
+                    ScaleBoth = 3;
                     break;
                 case 4:
                     Frame.Define(GM.txSprite, new Rectangle(133, 170, 5, 5));
@@ -237,7 +237,7 @@ namespace Template.Game
                         }
                         if (shotType == 3 && GM.r.FloatBetween(0,1) > 0.4f) //Grape
                         {
-                            ship.CrewNum -= (int)GM.r.FloatBetween(1, 5);
+                            ship.CrewNum -= (int)GM.r.FloatBetween(1,2);
                         }
                     }
                     else if (hitBox.DamageType == 1)//Sail

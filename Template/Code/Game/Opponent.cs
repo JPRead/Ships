@@ -43,6 +43,10 @@ namespace Template
         /// Used with RotationHelpers to check when perpendicular to objects
         /// </summary>
         Sprite sideFaceSprite;
+        /// <summary>
+        /// True if boarding has begun
+        /// </summary>
+        private bool boardingStarted;
 
         /// <summary>
         /// Contains state machine for the AI
@@ -56,6 +60,7 @@ namespace Template
             GM.eventM.AddTimer(stateTick = new Event(1, "State Tick"));
             player = GameSetup.Player;
             alignmentLastTick = 0;
+            boardingStarted = false;
             sideFaceSprite = new Sprite();
             sideFaceSprite.Frame.Define(Tex.SingleWhitePixel);
             GM.engineM.AddSprite(sideFaceSprite);
@@ -67,22 +72,27 @@ namespace Template
         private int StateMachine()
         {
             if(state == 0)
+            {
+                shotTypeLeft = 0;
+                shotTypeRight = 0;
                 return 1;
+            }
 
-            if(state == 1)
+            if (state == 1)
             {
                 float playerHealth = 0;
                 float totalHealth = 0;
-                for(int i = 0; i <= 6; i++)
+                for (int i = 0; i <= 6; i++)
                 {
                     playerHealth += player.hitBoxArray[i].Health;
                     totalHealth += hitBoxArray[i].Health;
                 }
                 if (totalHealth < playerHealth - (200 * aggressiveness) || sinkAmount > 500 - (200 * (1 - aggressiveness)))
                     return 2;
-                if(CrewNum > player.CrewNum + (50 * (1 - aggressiveness)) + 10)
+                if (CrewNum > player.CrewNum + (50 * (1 - aggressiveness)) + 10)
+                {
                     return 3;
-
+                }
                 return 1;
             }
             if(state == 2)
@@ -94,17 +104,51 @@ namespace Template
                 }
                 if (totalHealth >= 600 + 100 * aggressiveness)
                     return 0;
+                    
 
                 isRepairing = true;
                 return 2;
             }
             if(state == 3)
             {
-                //Leave this state when boarding is complete
+                shotTypeLeft = 4;
+                shotTypeRight = 4;
 
+                //Leave this state when boarding is complete
+                if (!boardingStarted && (isBoarded || isBoarding))
+                {
+                    boardingStarted = true;
+                }
+                //if(boardingStarted && !(isBoarded|| isBoarding))
+                //{
+                //    boardingStarted = false;
+                //    return 0;
+                //}
+                if (boardingStarted)
+                {
+                    if (CrewNum - player.CrewNum < -20 * aggressiveness)
+                    {
+                        cutBoardingRopes();
+                        return 0;
+                    }
+                    else
+                    {
+                        shotTypeLeft = 3;
+                        shotTypeRight = 3;
+                    }
+
+                    if (!(isBoarded || isBoarding))
+                    {
+                        boardingStarted = false;
+                        return 0;
+                    }
+                }
+                else if (isBoarded || isBoarding)
+                {
+                    boardingStarted = true;
+                }
                 return 3;
             }
-
             return 0;
         }
 
@@ -130,9 +174,8 @@ namespace Template
                 state = StateMachine();
             }
 
-            if(state == 1) //Attacking
+            if(state == 1 || state == 3) //Attacking or boarding
             {
-                //Init values
                 sailAmount = 2;
                 Point movePoint = Point.Zero;
 
@@ -166,8 +209,7 @@ namespace Template
                 sideFaceSprite.Position2D = Position2D;
                 sideFaceSprite.RotationAngle = RotationAngle + (90 * playerOnRight);
                 float alignment = RotationHelper.AngularDirectionTo(sideFaceSprite, player.Position, 0, false);
-
-
+                
                 bool readyToFire = false;
                 if (alignmentLastTick != alignment/* && ((angleFromPlayer < -80 && angleFromPlayer > -100) || angleFromPlayer > 80 && angleFromPlayer < 100)*/)
                 {
@@ -175,8 +217,7 @@ namespace Template
                 }
                 alignmentLastTick = alignment;
 
-
-                if (Vector2.DistanceSquared(Position2D, player.Position2D) > 100000) //Out of range
+                if ((state == 1 && Vector2.DistanceSquared(Position2D, player.Position2D) > 100000) || (state == 3 && Vector2.DistanceSquared(Position2D, player.Position2D) > 125000)) //Out of range
                 {
                     movePoint = PointHelper.PointFromVector2(player.Position2D + (playerRight * 100 * playerOnRight));
                 }
@@ -186,15 +227,15 @@ namespace Template
                     //movePoint = PointHelper.PointFromVector2(player.Position2D + (playerRight * 100) + (playerFront * 1000 * frontOpposite));
                     movePoint = PointHelper.PointFromVector2(Position2D + 100 * RotationHelper.Direction2DFromAngle(RotationAngle, 90 * alignment * playerOnRight));
 
-                    if (readyToFire)
+                    if (readyToFire || isBoarded || isBoarding)
                     {
                         if (angleFromPlayer > 10 && angleFromPlayer < 170)
                         {
-                            Fire(true, shotTypeRight);
+                            Fire(false, shotTypeLeft);
                         }
                         else if (angleFromPlayer < -10 && angleFromPlayer > -170)
                         {
-                            Fire(false, shotTypeLeft);
+                            Fire(true, shotTypeRight);
                         }
                     }
                 }
@@ -206,6 +247,13 @@ namespace Template
             if(state == 2) //Retreating
             {
                 MoveToPoint(PointHelper.PointFromVector2(Position2D + (Vector2.Normalize(Position2D - player.Position2D) * 200)));
+            }
+            if (state == 3)//Boarding
+            {
+                //if (CrewNum - player.CrewNum < -20 * aggressiveness)
+                //{
+                //    cutBoardingRopes();
+                //}
             }
         }
     }

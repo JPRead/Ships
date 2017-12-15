@@ -97,7 +97,7 @@
         </member>
         <member name="F:Template.Game.CannonBall.shotType">
             <summary>
-            Type of this CannonBall - 0 ball shot, 1 bar shot, 2 carcass shot, 3 grape shot
+            Type of this CannonBall - 0 ball shot, 1 bar shot, 2 carcass shot, 3 grape shot, 4 grapple shot
             </summary>
         </member>
         <member name="F:Template.Game.CannonBall.fireDelay">
@@ -244,6 +244,11 @@
         <member name="F:Template.Opponent.sideFaceSprite">
             <summary>
             Used with RotationHelpers to check when perpendicular to objects
+            </summary>
+        </member>
+        <member name="F:Template.Opponent.boardingStarted">
+            <summary>
+            True if boarding has begun
             </summary>
         </member>
         <member name="M:Template.Opponent.#ctor(Microsoft.Xna.Framework.Vector2)">

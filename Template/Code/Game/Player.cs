@@ -392,11 +392,11 @@ namespace Template
             //Fire cannons
             if (fireRightButton.PressedLeft())
             {
-                Fire(false, shotTypeRight);
+                Fire(true, shotTypeRight);
             }
             if (fireLeftButton.PressedLeft())
             {
-                Fire(true, shotTypeLeft);
+                Fire(false, shotTypeLeft);
             }
 
             if (fireRightButton.Hover())
