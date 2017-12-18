@@ -244,7 +244,7 @@ namespace Template.Game
                     {
                         if (shotType == 1)//Bar
                         {
-                            hitBox.Health -= (int)(10 * hitBox.DamageMul);
+                            hitBox.Health -= (int)(25 * hitBox.DamageMul);
                         }
                         else if (shotType == 2)//Carcass
                         {

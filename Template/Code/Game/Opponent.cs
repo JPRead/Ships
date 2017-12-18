@@ -87,6 +87,29 @@ namespace Template
                     playerHealth += player.hitBoxArray[i].Health;
                     totalHealth += hitBoxArray[i].Health;
                 }
+
+                //Decide on shot type
+                if (player.isRepairing && player.hitBoxSailBack.Health + player.hitBoxSailBack.Health + player.hitBoxSailBack.Health < 50)
+                {
+                    shotTypeLeft = 1;
+                    shotTypeRight = 1;
+                }
+                if (GM.r.FloatBetween(0.9f, 1) < aggressiveness)
+                {
+                    shotTypeLeft = 2;
+                    shotTypeRight = 2;
+                }
+                if(GM.r.FloatBetween(0.7f, 1) < aggressiveness)
+                {
+                    shotTypeLeft = 3;
+                    shotTypeRight = 3;
+                }
+                else
+                {
+                    shotTypeLeft = 0;
+                    shotTypeRight = 0;
+                }
+
                 if (totalHealth < playerHealth - (200 * aggressiveness) || sinkAmount > 500 - (200 * (1 - aggressiveness)))
                     return 2;
                 if (CrewNum > player.CrewNum + (50 * (1 - aggressiveness)) + 10)

@@ -48,7 +48,6 @@ namespace Template
         /// the text manager
         /// </summary>
         public static TextManager textM;
-
         /// <summary>
         /// the audio manager
         /// </summary>
@@ -142,6 +141,7 @@ namespace Template
             Components.Add(loadM);
             Components.Add(inputM);
             Components.Add(engineM);
+            //engineM.WorldSize(65536, 65536);
             //add services for storage - disabled for now until missing component fix in place
             //Components.Add(new GamerServicesComponent(this));
 
