@@ -52,10 +52,6 @@ namespace Template.Game
         /// Sprite used for background if player's crew numbers in boarding
         /// </summary>
         private Sprite crewDisplayBackground;
-        /// <summary>
-        /// Sprite used to display boundary of world
-        /// </summary>
-        private Sprite worldEdgeDisplay;
 
         internal static Player Player
         {
@@ -137,14 +133,6 @@ namespace Template.Game
             opponentArrow.Layer++;
             opponentArrow.Visible = false;
 
-            worldEdgeDisplay = new Sprite();
-            GM.engineM.AddSprite(worldEdgeDisplay);
-            worldEdgeDisplay.Frame.Define(Tex.SingleWhitePixel);
-            worldEdgeDisplay.Wash = Color.BlueViolet;
-            worldEdgeDisplay.Alpha = 0.25f;
-            worldEdgeDisplay.Align = Align.centre;
-            worldEdgeDisplay.ScaleBoth = 1900f;
-
             Viewport viewPort = new Viewport(0, 0, 1600, 900);
             playerView = new PlayerView(viewPort, 0, 0);
             playerView.ViewerPositionManual = true;
@@ -175,9 +163,10 @@ namespace Template.Game
             crewDisplayBackground.Align = Align.bottomLeft;
             crewDisplayBackground.Position2D = new Vector2(GM.screenSize.Center.X, GM.screenSize.Center.Y - 180);
             crewDisplayBackground.Visible = false;
-
-            player = new Player(new Vector2(0, 0));
-            opponent = new Opponent(new Vector2(500, 0));
+            
+            GM.engineM.WorldSize(16368, 16368);
+            player = new Player(new Vector2(8184, 8184));
+            opponent = new Opponent(new Vector2(8684, 8184));
         }
 
         /// <summary>

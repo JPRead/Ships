@@ -131,6 +131,7 @@ namespace Template
             menuM = new MenuManager(this, textM);
             //create engine manager
             engineM = new EngineManager(this, tileMapM, eventM, textM, /*fontB,*/ audioM);
+            
             //load manager
             loadM = new Loader(this);//, textureProcessor);
             //associate components with the game
