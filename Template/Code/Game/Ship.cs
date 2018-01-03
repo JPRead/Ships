@@ -324,7 +324,7 @@ namespace Template
                         if (repairArray[i].Health > 100)
                             repairArray[i].Health = 100;
 
-                        if (repairArray[i].IsBurning && GM.r.FloatBetween(0, 1) > 0.9)
+                        if (repairArray[i].IsBurning && GM.r.FloatBetween(0, 1) > 0.9 * (0.9 - GameSetup.WeatherController.RainAmount))
                         {
                             repairArray[i].IsBurning = false;
                         }
