@@ -4,27 +4,24 @@
         <name>TemplateJune2015</name>
     </assembly>
     <members>
-        <member name="F:Template.DamageSprite.target">
+        <member name="F:Template.Game.WeatherController.rainAmount">
             <summary>
-            HitBox to represent
+            0 if not raining, 1 if full rain
             </summary>
         </member>
-        <member name="F:Template.DamageSprite.health">
+        <member name="F:Template.Game.WeatherController.windDir">
             <summary>
-            Variable used to store target's health
+            The wind direction
             </summary>
         </member>
-        <member name="M:Template.DamageSprite.#ctor(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,Template.HitBox)">
+        <member name="F:Template.Game.WeatherController.windDirSprite">
             <summary>
-            Constructor for damageSprite
+            Sprite used to display wind direction
             </summary>
-            <param name="position">Coordinates of centre of sprite</param>
-            <param name="dimensions">X and Y scale</param>
-            <param name="hitbox">Hitbox to target</param>
         </member>
-        <member name="M:Template.DamageSprite.Tick">
+        <member name="F:Template.Game.WeatherController.tiOneSecond">
             <summary>
-            Code to run each tick
+            Timer for 1 second delay
             </summary>
         </member>
         <member name="F:Template.Game.Button.display">
@@ -156,11 +153,6 @@
             The AI's ship
             </summary>
         </member>
-        <member name="F:Template.Game.GameSetup.windDir">
-            <summary>
-            The wind direction
-            </summary>
-        </member>
         <member name="F:Template.Game.GameSetup.opponentArrow">
             <summary>
             Sprite used to point to enemy when out of view
@@ -191,9 +183,9 @@
             Sprite used for background if player's crew numbers in boarding
             </summary>
         </member>
-        <member name="F:Template.Game.GameSetup.worldEdgeDisplay">
+        <member name="F:Template.Game.GameSetup.weatherController">
             <summary>
-            Sprite used to display boundary of world
+            Weather controller
             </summary>
         </member>
         <member name="M:Template.Game.GameSetup.#ctor">
@@ -214,6 +206,29 @@
         <member name="M:Template.Game.GameSetup.BackToTitle(System.String)">
             <summary>
             Resets game to title screen
+            </summary>
+        </member>
+        <member name="F:Template.DamageSprite.target">
+            <summary>
+            HitBox to represent
+            </summary>
+        </member>
+        <member name="F:Template.DamageSprite.health">
+            <summary>
+            Variable used to store target's health
+            </summary>
+        </member>
+        <member name="M:Template.DamageSprite.#ctor(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2,Template.HitBox)">
+            <summary>
+            Constructor for damageSprite
+            </summary>
+            <param name="position">Coordinates of centre of sprite</param>
+            <param name="dimensions">X and Y scale</param>
+            <param name="hitbox">Hitbox to target</param>
+        </member>
+        <member name="M:Template.DamageSprite.Tick">
+            <summary>
+            Code to run each tick
             </summary>
         </member>
         <member name="T:Template.Opponent">

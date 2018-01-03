@@ -114,6 +114,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Game\WeatherController.cs" />
     <Compile Include="Game\DamageSprite.cs" />
     <Compile Include="Game\Button.cs" />
     <Compile Include="Game\CannonBall.cs" />

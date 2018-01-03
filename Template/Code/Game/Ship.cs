@@ -516,7 +516,7 @@ namespace Template
                     float velOffsetAngle = RotationHelper.AngularDirectionTo(this, currentVel, 0, false);
 
                     //Calculations for wind speed multiplier
-                    float velFromWindAngle = (RotationAngle - GameSetup.WindDir) % 360;
+                    float velFromWindAngle = (RotationAngle - GameSetup.WeatherController.WindDir) % 360;
                     if (velFromWindAngle < 0) //Absolute value
                         velFromWindAngle = -velFromWindAngle;
                     if (velFromWindAngle > 180) //Keep between 0 and 180

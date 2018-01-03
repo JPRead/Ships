@@ -94,7 +94,7 @@ namespace Template
                     shotTypeLeft = 1;
                     shotTypeRight = 1;
                 }
-                if (GM.r.FloatBetween(0.9f, 1) < aggressiveness)
+                if (GM.r.FloatBetween(0.8f, 1) < aggressiveness && GameSetup.WeatherController.RainAmount * 2 < aggressiveness)
                 {
                     shotTypeLeft = 2;
                     shotTypeRight = 2;

@@ -25,10 +25,6 @@ namespace Template.Game
         /// </summary>
         private static Opponent opponent;
         /// <summary>
-        /// The wind direction
-        /// </summary>
-        private static float windDir;
-        /// <summary>
         /// Sprite used to point to enemy when out of view
         /// </summary>
         private static Sprite opponentArrow;
@@ -52,6 +48,10 @@ namespace Template.Game
         /// Sprite used for background if player's crew numbers in boarding
         /// </summary>
         private Sprite crewDisplayBackground;
+        /// <summary>
+        /// Weather controller
+        /// </summary>
+        private static WeatherController weatherController;
 
         internal static Player Player
         {
@@ -66,14 +66,6 @@ namespace Template.Game
             get
             {
                 return opponent;
-            }
-        }
-
-        public static float WindDir
-        {
-            get
-            {
-                return windDir;
             }
         }
 
@@ -103,6 +95,19 @@ namespace Template.Game
             }
         }
 
+        internal static WeatherController WeatherController
+        {
+            get
+            {
+                return weatherController;
+            }
+
+            set
+            {
+                weatherController = value;
+            }
+        }
+
         /// <summary>
         /// Sets up all the initial values for the game
         /// </summary>
@@ -113,16 +118,8 @@ namespace Template.Game
             GM.engineM.ScreenColour = Color.LightSkyBlue;
             boardingInProgress = false;
             GM.eventM.AddTimer(tiOneSecond = new Event(1, "Boarding Tick"));
-
-            windDir = GM.r.FloatBetween(0, 360);
-            Sprite windDirSprite = new Sprite();
-            GM.engineM.AddSprite(windDirSprite);
-            windDirSprite.Frame.Define(Tex.Triangle);
-            windDirSprite.SY = 1.5f;
-            windDirSprite.WorldCoordinates = false;
-            windDirSprite.Layer++;
-            windDirSprite.Position2D = new Vector2(GM.screenSize.Center.X, 50);
-            windDirSprite.RotationAngle = windDir;
+            weatherController = new WeatherController();
+            GM.engineM.AddSprite(weatherController);
 
             opponentArrow = new Sprite();
             GM.engineM.AddSprite(opponentArrow);
