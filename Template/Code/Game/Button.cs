@@ -43,19 +43,6 @@ namespace Template.Game
             }
         }
 
-        //public Sprite Display
-        //{
-        //    get
-        //    {
-        //        return display;
-        //    }
-
-        //    set
-        //    {
-        //        display = value;
-        //    }
-        //}
-
         /// <summary>
         /// Button is used as a UI element that can be interacted with using the mouse
         /// </summary>

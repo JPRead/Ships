@@ -27,14 +27,6 @@ namespace Template.Game
         /// </summary>
         bool splash;
 
-        //internal Sprite Owner
-        //{
-        //    get
-        //    {
-        //        return owner;
-        //    }
-        //}
-
         /// <summary>
         /// Constructor for CannonBall class
         /// </summary>

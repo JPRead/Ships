@@ -142,11 +142,6 @@ namespace Template
                 {
                     boardingStarted = true;
                 }
-                //if(boardingStarted && !(isBoarded|| isBoarding))
-                //{
-                //    boardingStarted = false;
-                //    return 0;
-                //}
                 if (boardingStarted)
                 {
                     if (CrewNum - player.CrewNum < -20 * aggressiveness)
@@ -273,10 +268,6 @@ namespace Template
             }
             if (state == 3)//Boarding
             {
-                //if (CrewNum - player.CrewNum < -20 * aggressiveness)
-                //{
-                //    cutBoardingRopes();
-                //}
             }
         }
     }

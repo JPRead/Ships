@@ -53,12 +53,14 @@ namespace Template.Game
             //}
         }
 
+        /// <summary>
+        /// Constructor for WeatherController
+        /// </summary>
         public WeatherController()
         {
+            //Init
             GM.eventM.AddTimer(tiOneSecond = new Event(1, "One Second Timer"));
-
             windDir = GM.r.FloatBetween(0, 360);
-
             windDirSprite = new Sprite();
             GM.engineM.AddSprite(windDirSprite);
             windDirSprite.Frame.Define(Tex.Triangle);
@@ -67,7 +69,6 @@ namespace Template.Game
             windDirSprite.Layer++;
             windDirSprite.Position2D = new Vector2(GM.screenSize.Center.X, 50);
             windDirSprite.RotationAngle = windDir;
-
             rainAmount = 0;
             if (GM.r.FloatBetween(0, 1) > 0.75f)
             {
@@ -77,6 +78,9 @@ namespace Template.Game
             UpdateCallBack += Tick;
         }
 
+        /// <summary>
+        /// Code to run each tick
+        /// </summary>
         private void Tick()
         {
             if (GM.eventM.Elapsed(tiOneSecond))
@@ -87,6 +91,7 @@ namespace Template.Game
 
         private void OneSecond()
         {
+            //Change wind
             if(GM.r.FloatBetween(0, 1) > 0.95f)
             {
                 windDir += GM.r.FloatBetween(-20, 20);
@@ -101,6 +106,7 @@ namespace Template.Game
                 windDirSprite.RotationAngle = windDir;
             }
 
+            //Change rain
             if (GM.r.FloatBetween(0, 1) > 0.95f)
             {
                 rainAmount += GM.r.FloatBetween(-0.15f, 0.3f);

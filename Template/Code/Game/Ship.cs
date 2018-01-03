@@ -160,7 +160,6 @@ namespace Template
             isBoarded = false;
             isCuttingRopes = false;
             
-
             GM.engineM.AddSprite(this);
             UpdateCallBack += Tick;
 
@@ -277,7 +276,6 @@ namespace Template
                 velVector /= angleDifference;
             
                 Velocity2D += velVector * 30 * (Velocity2D - otherShip.Velocity2D);
-                //otherShip.Velocity2D -= (velVector * 2);
             }
         }
 
@@ -414,24 +412,6 @@ namespace Template
                         new CannonBall(this, Position + (deckDir * i * 10) - (deckDir * 48), fireDir, type);
                     }
                 }
-
-                //new CannonBall(this, Position, fireDir, 0);
-
-                //int multiply = 1;
-                //if (type == 3) { multiply = 3; } //Cannons fire multiple times - for use with grape shot
-                //for (int i = 0; i < crewNum; i++)
-                //{
-                //    for (int i2 = 0; i2 < multiply; i2++)
-                //    {
-                //        //Travelling along the deck of the ship
-                //        new CannonBall(this,
-                //            new Vector2(Position2D.X - (Width) * RotationHelper.MyDirection(this, 0).X + offsetAlongDeck.X, Position2D.Y - (Width) * RotationHelper.MyDirection(this, 0).Y + offsetAlongDeck.Y),
-                //            new Vector2(fireDir.X - (Width) * RotationHelper.MyDirection(this, 0).X + offsetAlongDeck.X, fireDir.Y - (Width) * RotationHelper.MyDirection(this, 0).Y + offsetAlongDeck.Y),
-                //            type);
-                //    }
-
-                //    offsetAlongDeck += RotationHelper.MyDirection(this, 0) * (100/crewNum);
-                //}
 
                 if (right == true)
                 {
