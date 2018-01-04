@@ -24,6 +24,16 @@
             Timer for 1 second delay
             </summary>
         </member>
+        <member name="M:Template.Game.WeatherController.#ctor">
+            <summary>
+            Constructor for WeatherController
+            </summary>
+        </member>
+        <member name="M:Template.Game.WeatherController.Tick">
+            <summary>
+            Code to run each tick
+            </summary>
+        </member>
         <member name="F:Template.Game.Button.display">
             <summary>
             Sprite to display within the button

@@ -128,7 +128,6 @@ namespace Template
                 if (totalHealth >= 600 + 100 * aggressiveness)
                     return 0;
                     
-
                 isRepairing = true;
                 return 2;
             }
@@ -144,7 +143,7 @@ namespace Template
                 }
                 if (boardingStarted)
                 {
-                    if (CrewNum - player.CrewNum < -20 * aggressiveness)
+                    if (CrewNum - player.CrewNum < -10 * aggressiveness)
                     {
                         cutBoardingRopes();
                         return 0;
@@ -247,11 +246,11 @@ namespace Template
 
                     if (readyToFire || isBoarded || isBoarding)
                     {
-                        if (angleFromPlayer > 10 && angleFromPlayer < 170)
+                        if (angleFromPlayer > 45 && angleFromPlayer < 135)
                         {
                             Fire(false, shotTypeLeft);
                         }
-                        else if (angleFromPlayer < -10 && angleFromPlayer > -170)
+                        else if (angleFromPlayer < -45 && angleFromPlayer > -135)
                         {
                             Fire(true, shotTypeRight);
                         }
@@ -268,6 +267,7 @@ namespace Template
             }
             if (state == 3)//Boarding
             {
+
             }
         }
     }

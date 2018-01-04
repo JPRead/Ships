@@ -282,7 +282,7 @@ namespace Template
                 "Hull Front  " + hitBoxHullFront.Health + "~Hull Back   " + hitBoxHullBack.Health + "~Hull Left   " + hitBoxHullLeft.Health + "~Hull Right  " + hitBoxHullRight.Health +
                 "~Sail Front  " + hitBoxSailFront.Health + "~Sail Middle " + hitBoxSailMiddle.Health + "~Sail Back   " + hitBoxSailBack.Health, 100, 100, TextAtt.TopLeft);
             GM.textM.Draw(FontBank.arcadePixel, "Crew: " + CrewNum, 150, 50, TextAtt.TopRight);
-            GM.textM.Draw(FontBank.arcadePixel, "windDir" + GameSetup.WeatherController.WindDir, 150, 65, TextAtt.TopRight);
+            GM.textM.Draw(FontBank.arcadePixel, "Rain: " + GameSetup.WeatherController.RainAmount, 150, 65, TextAtt.TopRight);
             
 
             //Sinking bar

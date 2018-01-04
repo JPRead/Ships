@@ -87,6 +87,13 @@ namespace Template.Game
             {
                 OneSecond();
             }
+            if (GM.r.FloatBetween(-0.5f, rainAmount) > 0.25f)
+            { 
+                FadingParticle rain = new FadingParticle(GameSetup.PlayerView.Position2D += new Vector2(GM.r.FloatBetween(-2000, 2000), 0), new Vector3(450, 450, 0) * GM.r.FloatBetween(1.5f, 2), 135, 2);
+                rain.Wash = Color.Blue;
+                rain.SX = 1f;
+                rain.SY = 5f;
+            }
         }
 
         private void OneSecond()

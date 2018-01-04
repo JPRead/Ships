@@ -108,8 +108,8 @@ namespace Template.Game
             if (splash)
             {
                 //Splash
-                int maxParts = 10;
-                int minParts = 5;
+                int maxParts = 8;
+                int minParts = 4;
 
                 if(shotType == 3) { maxParts = 2; minParts = 1; }
                 
@@ -151,7 +151,7 @@ namespace Template.Game
                 GM.audioM.PlayEffect("shoot");
 
                 //Release smoke
-                int rAmount = (int)GM.r.FloatBetween(2, 4);
+                int rAmount = (int)GM.r.FloatBetween(1, 2);
                 for(int i = 0; i < rAmount; i++)
                 {
                     new FadingParticle(Position2D, Velocity * 0.01f, RotationAngle, 5);
@@ -200,7 +200,7 @@ namespace Template.Game
                         if (shotType == 0)//Ball
                         {
                             hitBox.Health -= (int)(10 * hitBox.DamageMul);
-                            if(GM.r.FloatBetween(0, 1) > 0.90)
+                            if(GM.r.FloatBetween(0, 1) > 0.5)
                             {
                                 ship.CrewNum -= 1;
                             }
@@ -208,11 +208,11 @@ namespace Template.Game
                         else if (shotType == 2)//Carcass
                         {
                             hitBox.Health -= (int)(2.5f * hitBox.DamageMul);
-                            if (GM.r.FloatBetween(0, 1) > 0.95)
+                            if (GM.r.FloatBetween(0, 1) > 0.80)
                             {
                                 hitBox.IsBurning = true;
                             }
-                            if (GM.r.FloatBetween(0, 1) > 0.90)
+                            if (GM.r.FloatBetween(0, 1) > 0.5)
                             {
                                 ship.CrewNum -= 1;
                             }
@@ -252,7 +252,6 @@ namespace Template.Game
                             hitBox.Health -= 1;
                         }
                     }
-                    //Kill();
                 }
             }
         }

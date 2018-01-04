@@ -336,7 +336,7 @@ namespace Template
             {
                 hullHealthMissing += (100 - hitBoxArray[i].Health);
             }
-            sinkAmount += (int)(hullHealthMissing * 0.1);
+            sinkAmount += (int)(hullHealthMissing * 0.15);
             sinkAmount -= 6;
             if(sinkAmount >= 1000)
             {
