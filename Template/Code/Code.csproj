@@ -131,6 +131,7 @@
     <Compile Include="Setup loading and storage\StartupAndShutdown.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Game\Ship.cs" />
+    <Compile Include="Game\Shortcut.cs" />
     <Compile Include="Template Initialisation\Program.cs" />
     <Compile Include="Template Initialisation\GM.cs" />
     <Compile Include="Title\TitleSetup.cs">

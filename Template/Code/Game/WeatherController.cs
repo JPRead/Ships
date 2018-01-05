@@ -116,7 +116,7 @@ namespace Template.Game
             //Change rain
             if (GM.r.FloatBetween(0, 1) > 0.95f)
             {
-                rainAmount += GM.r.FloatBetween(-0.15f, 0.3f);
+                rainAmount += GM.r.FloatBetween(-0.3f, 0.3f);
                 if (rainAmount < 0)
                     rainAmount = 0;
                 else if (rainAmount > 1)

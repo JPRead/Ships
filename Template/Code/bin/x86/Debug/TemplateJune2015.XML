@@ -49,12 +49,36 @@
             True if UI element needs to be faded out
             </summary>
         </member>
-        <member name="M:Template.Game.Button.#ctor(Microsoft.Xna.Framework.Rectangle,System.Boolean)">
+        <member name="F:Template.Game.Button.priTooltip">
+            <summary>
+            Description of primary function
+            </summary>
+        </member>
+        <member name="F:Template.Game.Button.secTooltip">
+            <summary>
+            Description of secondary function
+            </summary>
+        </member>
+        <member name="F:Template.Game.Button.priShortcut">
+            <summary>
+            Shortcut for primary function
+            </summary>
+        </member>
+        <member name="F:Template.Game.Button.secShortcut">
+            <summary>
+            Shortcut for secondary function
+            </summary>
+        </member>
+        <member name="M:Template.Game.Button.#ctor(Microsoft.Xna.Framework.Rectangle,System.Boolean,System.String,Template.Shortcut,System.String,Template.Shortcut)">
             <summary>
             Button is used as a UI element that can be interacted with using the mouse
             </summary>
             <param name="rect">Dimensions for button</param>
             <param name="startEnabled">Is the button enabled to begin with - set to false for UI backgrounds</param>
+            <param name="primaryTooltip">"Description of primary function"</param>
+            <param name="primaryShortcut">"Shortcut for primary function"</param>
+            <param name="secondaryTooltip">"Description of secondary function"</param>
+            <param name="secondaryShortcut">"Shortcut for secondary function"</param>
         </member>
         <member name="M:Template.Game.Button.Tick">
             <summary>
@@ -1013,6 +1037,11 @@
             Accelerates the ship towards point and keeps the ship from sliding sideways
             </summary>
             <param name="point">Point to move towards</param>
+        </member>
+        <member name="T:Template.Shortcut">
+            <summary>
+            Data structure for multiple keys
+            </summary>
         </member>
         <member name="M:Template.Program.Main(System.String[])">
             <summary>

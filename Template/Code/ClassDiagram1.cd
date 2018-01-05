@@ -1,91 +1,91 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="Template.Game.Button" Collapsed="true">
-    <Position X="5.25" Y="0.5" Width="1.5" />
+  <Class Name="Template.Game.Button">
+    <Position X="7" Y="3.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAQAAAAAAAAAAAIAACAAAAAAAEAAAEAwQABAEAAQAA=</HashCode>
+      <HashCode>AAAQAAAAAAAAAAAIAACAAAAAAAsAAEEAwQABEEAAQAA=</HashCode>
       <FileName>Game\Button.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Template.Game.CannonBall" Collapsed="true">
-    <Position X="7" Y="0.5" Width="1.5" />
+  <Class Name="Template.Game.CannonBall">
+    <Position X="10.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>BAAAAAACAAACgCAAAAIAAAAAAAAAAAAgAAAAAAAAQAA=</HashCode>
       <FileName>Game\CannonBall.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Template.Game.GameSetup" Collapsed="true">
-    <Position X="2.75" Y="1.75" Width="1.5" />
+  <Class Name="Template.Game.GameSetup">
+    <Position X="3.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AQAAAAAEAABAAEAAAABAAAEAgIAAAAAFAAAAAUECQAA=</HashCode>
+      <HashCode>AQAAAAAMAABACEAAAABAAAEAgIAAAAAFAAAAAUECQAA=</HashCode>
       <FileName>Game\GameSetup.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Template.Game.WeatherController">
-    <Position X="8.75" Y="2.5" Width="1.5" />
+    <Position X="8.75" Y="4" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAABAAAAAAAAAAQAAAAEAAAAAAAAAAAAAIAAAA=</HashCode>
+      <HashCode>AAAMAAAEBAAAAAAAAAAQAAAAEAAAAAAEAAAAAAAAQAA=</HashCode>
       <FileName>Game\WeatherController.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Template.DamageSprite" Collapsed="true">
-    <Position X="10.5" Y="0.5" Width="1.5" />
+  <Class Name="Template.DamageSprite">
+    <Position X="10.5" Y="5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAQAg=</HashCode>
       <FileName>Game\DamageSprite.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Template.FadingParticle" Collapsed="true">
+  <Class Name="Template.FadingParticle">
     <Position X="7" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAEAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Game\FadingParticle.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Template.HitBox" Collapsed="true">
-    <Position X="10.5" Y="1.5" Width="1.5" />
+  <Class Name="Template.HitBox">
+    <Position X="5.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAICiSgAAAEgAAAAAIAgAAgAAAAAIAAIEAgAAAASAg=</HashCode>
       <FileName>Game\HitBox.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Template.Opponent" Collapsed="true">
-    <Position X="0.5" Y="5" Width="1.5" />
+  <Class Name="Template.Opponent">
+    <Position X="5.25" Y="7.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAFAIAAAEAAAAAAAAAQAAAAABAAAAAlAAAAAAAAQAA=</HashCode>
       <FileName>Game\Opponent.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Template.Player" Collapsed="true">
-    <Position X="2.75" Y="5" Width="1.5" />
+  <Class Name="Template.Player">
+    <Position X="7" Y="8.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>gABIAAIIMUABAAEAAQAAAAQAAAACAAggCAEAgQAQQIk=</HashCode>
       <FileName>Game\Player.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Template.Rope" Collapsed="true">
-    <Position X="7" Y="2.5" Width="1.5" />
+  <Class Name="Template.Rope">
+    <Position X="8.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>CAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
       <FileName>Game\Rope.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Template.Ship" Collapsed="true">
-    <Position X="1.75" Y="3.5" Width="1.5" />
+  <Class Name="Template.Ship">
+    <Position X="3.5" Y="7" Width="1.5" />
     <TypeIdentifier>
       <HashCode>EABAAEIGEAAhAAAAAASAAAQBSgBEgAAGAAAAA2EIwCo=</HashCode>
       <FileName>Game\Ship.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Template.GM" Collapsed="true">
-    <Position X="8.75" Y="1.5" Width="1.5" />
+    <Position X="10.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>MQYBFAAACKAIAwAoAQAFSgQBAAAECBoiAoAhJQAAIAU=</HashCode>
       <FileName>Setup loading and storage\Assets.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Template.BasicSetup" Collapsed="true">
-    <Position X="1.75" Y="0.5" Width="1.5" />
+    <Position X="3.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAQAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAQQA=</HashCode>
       <FileName>Setup loading and storage\BasicSetup.cs</FileName>
@@ -99,24 +99,31 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Template.ExtraMessageTypes" Collapsed="true">
-    <Position X="5.25" Y="1.5" Width="1.5" />
+    <Position X="7" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAABCAAAAA=</HashCode>
       <FileName>Setup loading and storage\ExtraMessageTypes.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Template.Program" Collapsed="true">
-    <Position X="5.25" Y="2.5" Width="1.5" />
+    <Position X="5.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>Template Initialisation\Program.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Template.Title.TitleSetup" Collapsed="true">
-    <Position X="0.5" Y="1.75" Width="1.5" />
+    <Position X="1.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAIAAAAAAAAQAA=</HashCode>
       <FileName>Title\TitleSetup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Template.Shortcut">
+    <Position X="8.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Setup loading and storage\Shortcut.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

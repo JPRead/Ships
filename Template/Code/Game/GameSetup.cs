@@ -161,9 +161,9 @@ namespace Template.Game
             crewDisplayBackground.Position2D = new Vector2(GM.screenSize.Center.X, GM.screenSize.Center.Y - 180);
             crewDisplayBackground.Visible = false;
             
-            GM.engineM.WorldSize(16368, 16368);
-            player = new Player(new Vector2(8184, 8184));
-            opponent = new Opponent(new Vector2(8684, 8184));
+            GM.engineM.WorldSize(20000, 20000);
+            player = new Player(new Vector2(09800, 10000));
+            opponent = new Opponent(new Vector2(10200, 10000));
         }
 
         /// <summary>

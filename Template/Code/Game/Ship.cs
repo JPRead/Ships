@@ -337,7 +337,14 @@ namespace Template
                 hullHealthMissing += (100 - hitBoxArray[i].Health);
             }
             sinkAmount += (int)(hullHealthMissing * 0.15);
-            sinkAmount -= 6;
+            if (GameSetup.WeatherController.RainAmount > 0.75f)
+            {
+                sinkAmount -= 4;
+            }
+            else
+            {
+                sinkAmount -= 6;
+            }
             if(sinkAmount >= 1000)
             {
                 //Splash
@@ -364,7 +371,7 @@ namespace Template
             //Boarding checks
             if (isBoarded && isCuttingRopes)
             {
-                if(GM.r.FloatBetween(0,1) > 0.8f)
+                if(GM.r.FloatBetween(0,1) > 0.75f)
                 {
                     isCuttingRopes = false;
                     isBoarded = false;

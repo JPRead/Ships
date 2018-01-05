@@ -29,6 +29,23 @@ namespace Template.Game
         /// True if UI element needs to be faded out
         /// </summary>
         private bool faded;
+        /// <summary>
+        /// Description of primary function
+        /// </summary>
+        private string priTooltip;
+        /// <summary>
+        /// Description of secondary function
+        /// </summary>
+        private string secTooltip;
+        /// <summary>
+        /// Shortcut for primary function
+        /// </summary>
+        private Shortcut priShortcut;
+        /// <summary>
+        /// Shortcut for secondary function
+        /// </summary>
+        private Shortcut secShortcut;
+
 
         public bool Faded
         {
@@ -48,12 +65,20 @@ namespace Template.Game
         /// </summary>
         /// <param name="rect">Dimensions for button</param>
         /// <param name="startEnabled">Is the button enabled to begin with - set to false for UI backgrounds</param>
-        public Button(Rectangle rect, bool startEnabled)
+        /// <param name="primaryTooltip">"Description of primary function"</param>
+        /// <param name="primaryShortcut">"Shortcut for primary function"</param>
+        /// <param name="secondaryTooltip">"Description of secondary function"</param>
+        /// <param name="secondaryShortcut">"Shortcut for secondary function"</param>
+        public Button(Rectangle rect, bool startEnabled, string primaryTooltip = "", Shortcut primaryShortcut = null, string secondaryTooltip = "", Shortcut secondaryShortcut = null)
         {
             GM.engineM.AddSprite(this);
 
             //Init values
             enabled = startEnabled;
+            priTooltip = primaryTooltip;
+            secTooltip = secondaryTooltip;
+            priShortcut = primaryShortcut;
+            secShortcut = secondaryShortcut;
             WorldCoordinates = false;
             Frame.Define(Tex.SingleWhitePixel);
             CollisionBoxVisible = true;
@@ -115,6 +140,8 @@ namespace Template.Game
                     return true;
                 }
             }
+            if (priShortcut != null && priShortcut.Pressed())
+                return true;
             return false;
         }
 
@@ -155,6 +182,8 @@ namespace Template.Game
                     return true;
                 }
             }
+            if (secShortcut != null && secShortcut.Pressed())
+                return true;
             return false;
         }
 
