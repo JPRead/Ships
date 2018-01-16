@@ -39,6 +39,11 @@
             Sprite to display within the button
             </summary>
         </member>
+        <member name="F:Template.Game.Button.tooltipBackground">
+            <summary>
+            Sprite to display as the background when displaying tooltips
+            </summary>
+        </member>
         <member name="F:Template.Game.Button.enabled">
             <summary>
             True if UI element can be clicked
@@ -67,6 +72,11 @@
         <member name="F:Template.Game.Button.secShortcut">
             <summary>
             Shortcut for secondary function
+            </summary>
+        </member>
+        <member name="F:Template.Game.Button.tooltipCountdown">
+            <summary>
+            Event to countdown until a tooltip is displayed
             </summary>
         </member>
         <member name="M:Template.Game.Button.#ctor(Microsoft.Xna.Framework.Rectangle,System.Boolean,System.String,Template.Shortcut,System.String,Template.Shortcut)">
@@ -817,6 +827,11 @@
         <member name="F:Template.Cursor.evLogic">
             <summary>
             an event to control operational logic for this sprite
+            </summary>
+        </member>
+        <member name="F:Template.Cursor.lastMoveTimer">
+            <summary>
+            Event to track time since last move
             </summary>
         </member>
         <member name="F:Template.Cursor.mode">

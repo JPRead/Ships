@@ -23,6 +23,10 @@ namespace Template
         /// </summary>
         private Event evLogic;
         /// <summary>
+        /// Event to track time since last move
+        /// </summary>
+        private Event lastMoveTimer;
+        /// <summary>
         /// 0 for default, 1 for movement
         /// </summary>
         private int mode;
@@ -39,7 +43,20 @@ namespace Template
                 mode = value;
             }
         }
-        
+
+        public Event LastMoveTimer
+        {
+            get
+            {
+                return lastMoveTimer;
+            }
+
+            set
+            {
+                lastMoveTimer = value;
+            }
+        }
+
         public Cursor()
         {
             mode = 0;
@@ -53,6 +70,9 @@ namespace Template
             WorldCoordinates = false;
             //add mouse logic to fire as fast as engine is updating
             GM.eventM.AddEvent(evLogic = new Event(GM.eventM.MaximumRate, "mouse cursor", Logic));
+            //Add timer for last movement
+            GM.eventM.AddTimer(lastMoveTimer = new Event(1, "Last mouse movement"));
+            lastMoveTimer.AutoReset = false;
         }
         /// <summary>
         /// make sure the event is removed when this object is destroyed
@@ -78,6 +98,11 @@ namespace Template
         private void Logic()
         {
             //add on mouse movement to sprites position
+            if(GM.inputM.MouseDistance != Vector2.Zero)
+            {
+                GM.eventM.Reset(lastMoveTimer);
+            }
+
             Position2D += GM.inputM.MouseDistance;
         }
         /// <summary>

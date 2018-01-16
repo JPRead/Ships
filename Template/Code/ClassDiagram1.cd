@@ -50,7 +50,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Template.Opponent">
-    <Position X="5.25" Y="7.25" Width="1.5" />
+    <Position X="5.25" Y="9.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAFAIAAAEAAAAAAAAAQAAAAABAAAAAlAAAAAAAAQAA=</HashCode>
       <FileName>Game\Opponent.cs</FileName>
@@ -112,7 +112,7 @@
       <FileName>Template Initialisation\Program.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Template.Title.TitleSetup" Collapsed="true">
+  <Class Name="Template.Title.TitleSetup">
     <Position X="1.75" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAIAAAAAAAAQAA=</HashCode>
@@ -120,10 +120,10 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Template.Shortcut">
-    <Position X="8.75" Y="7.5" Width="1.5" />
+    <Position X="5.25" Y="7.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Setup loading and storage\Shortcut.cs</FileName>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Game\Shortcut.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

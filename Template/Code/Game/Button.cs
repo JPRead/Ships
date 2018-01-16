@@ -22,6 +22,10 @@ namespace Template.Game
         /// </summary>
         private Sprite display;
         /// <summary>
+        /// Sprite to display as the background when displaying tooltips
+        /// </summary>
+        private Sprite tooltipBackground;
+        /// <summary>
         /// True if UI element can be clicked
         /// </summary>
         private bool enabled;
@@ -45,7 +49,10 @@ namespace Template.Game
         /// Shortcut for secondary function
         /// </summary>
         private Shortcut secShortcut;
-
+        /// <summary>
+        /// Event to countdown until a tooltip is displayed
+        /// </summary>
+        private Event tooltipCountdown;
 
         public bool Faded
         {
@@ -75,10 +82,12 @@ namespace Template.Game
 
             //Init values
             enabled = startEnabled;
+
             priTooltip = primaryTooltip;
             secTooltip = secondaryTooltip;
             priShortcut = primaryShortcut;
             secShortcut = secondaryShortcut;
+
             WorldCoordinates = false;
             Frame.Define(Tex.SingleWhitePixel);
             CollisionBoxVisible = true;
@@ -86,11 +95,22 @@ namespace Template.Game
             SpriteHelper.ScaleToThisSize(this, rect);
             X = rect.X;
             Y = rect.Y;
+
             display = new Sprite();
             GM.engineM.AddSprite(display);
             display.Frame.Define(GM.txSprite, new Rectangle(1,1,1,1));
             display.Position2D = Centre2D;
             Layer++;
+
+            tooltipBackground = new Sprite();
+            GM.engineM.AddSprite(tooltipBackground);
+            tooltipBackground.Frame.Define(Tex.SingleWhitePixel);
+            tooltipBackground.Visible = false;
+            tooltipBackground.Align = Align.topRight;
+            tooltipBackground.Wash = Color.Black;
+            tooltipBackground.Alpha = 0.75f;
+            tooltipBackground.WorldCoordinates = false;
+            tooltipBackground.Layer = Layer + 3;
 
             if (enabled)
             {
@@ -106,20 +126,37 @@ namespace Template.Game
         /// </summary>
         private void Tick()
         {
-            if (enabled && !faded)
-            {
-                if (HeldLeft() || HeldRight())
-                {
-                    Wash = Color.Red;
-                }
-                else
-                {
-                    Wash = Color.Blue;
-                }
-            }
             if (faded)
             {
                 Wash = Color.Black;
+            }
+            if (enabled)
+            {
+                if (Hover() && GM.eventM.Elapsed(GameSetup.Player.Cursor.LastMoveTimer))
+                {
+                    //Show tooltip
+                    tooltipBackground.Visible = true;
+                    tooltipBackground.Position2D = GM.inputM.MouseLocation;
+                    tooltipBackground.SX = 200;
+                    tooltipBackground.SY = 50;
+                }
+                else
+                {
+                    //Hide tooltip
+                    tooltipBackground.Visible = false;
+                }
+
+                if (!faded)
+                {
+                    if (HeldLeft() || HeldRight())
+                    {
+                        Wash = Color.Red;
+                    }
+                    else
+                    {
+                        Wash = Color.Blue;
+                    }
+                }
             }
         }
 
