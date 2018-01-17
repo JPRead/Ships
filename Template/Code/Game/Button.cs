@@ -52,7 +52,7 @@ namespace Template.Game
         /// <summary>
         /// Event to countdown until a tooltip is displayed
         /// </summary>
-        private string tooltipText;
+        private TextStore tooltipTextStore;
 
         public bool Faded
         {
@@ -111,7 +111,8 @@ namespace Template.Game
             tooltipBackground.Alpha = 0.75f;
             tooltipBackground.WorldCoordinates = false;
             tooltipBackground.Layer = Layer + 3;
-            
+
+            string tooltipText = "";
             if (priTooltip != "")
             {
                 tooltipText += "Left click";
@@ -121,7 +122,6 @@ namespace Template.Game
 
                 tooltipText += ": " + priTooltip + "~";
             }
-
             if (secTooltip != "")
             {
                 tooltipText += "Right click";
@@ -131,6 +131,7 @@ namespace Template.Game
 
                 tooltipText += ": " + secTooltip + "~";
             }
+            tooltipTextStore = new TextStore(FontBank.arcadePixel, tooltipText, GM.inputM.MouseLocation.X + 10, GM.inputM.MouseLocation.Y + 10, TextAtt.TopRight);
 
             if (enabled)
             {
@@ -159,8 +160,12 @@ namespace Template.Game
                     tooltipBackground.Position2D = GM.inputM.MouseLocation;
                     tooltipBackground.SX = 200;
                     tooltipBackground.SY = 50;
-
-                    GM.textM.Draw(FontBank.arcadePixel, tooltipText, GM.inputM.MouseLocation.X + 10, GM.inputM.MouseLocation.Y + 10, TextAtt.TopRight);
+                    tooltipTextStore.X = GM.inputM.MouseLocation.X + 10;
+                    tooltipTextStore.Y = GM.inputM.MouseLocation.Y + 10;
+                    SpriteHelper.ScaleToThisSize(tooltipBackground, tooltipTextStore.Area);
+                    tooltipBackground.SY *= 2;
+                    tooltipBackground.X -= 20;
+                    GM.textM.Draw(tooltipTextStore);
                 }
                 else
                 {

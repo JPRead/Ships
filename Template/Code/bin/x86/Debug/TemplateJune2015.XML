@@ -74,7 +74,7 @@
             Shortcut for secondary function
             </summary>
         </member>
-        <member name="F:Template.Game.Button.tooltipText">
+        <member name="F:Template.Game.Button.tooltipTextStore">
             <summary>
             Event to countdown until a tooltip is displayed
             </summary>
