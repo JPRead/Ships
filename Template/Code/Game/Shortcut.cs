@@ -20,12 +20,42 @@ namespace Template
     /// </summary>
     internal class Shortcut
     {
+        /// <summary>
+        /// Key to use for shortcut
+        /// </summary>
         private Keys key1;
+        /// <summary>
+        /// Optional second key
+        /// </summary>
         private Keys key2;
+        /// <summary>
+        /// Text for tooltips
+        /// </summary>
+        private string displayKeys;
+
+        public string DisplayKeys
+        {
+            get
+            {
+                return displayKeys;
+            }
+
+            set
+            {
+                displayKeys = value;
+            }
+        }
+
         public Shortcut(Keys shortcutKey1, Keys shortcutKey2 = Keys.None)
         {
             key1 = shortcutKey1;
             key2 = shortcutKey2;
+
+            displayKeys = shortcutKey1.ToString();
+            if(shortcutKey2 != Keys.None)
+            {
+                displayKeys += " + " + shortcutKey2.ToString();
+            }
         }
         internal bool Pressed()
         {
@@ -35,13 +65,5 @@ namespace Template
             }
             return false;
         }
-        //internal bool Held()
-        //{
-        //    if (GM.inputM.KeyHeld(key1) && (key2 == Keys.None || GM.inputM.KeyHeld(key2)))
-        //    {
-        //        return true;
-        //    }
-        //    return false;
-        //}
     }
 }

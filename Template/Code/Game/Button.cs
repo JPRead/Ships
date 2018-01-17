@@ -52,7 +52,7 @@ namespace Template.Game
         /// <summary>
         /// Event to countdown until a tooltip is displayed
         /// </summary>
-        private Event tooltipCountdown;
+        private string tooltipText;
 
         public bool Faded
         {
@@ -72,10 +72,10 @@ namespace Template.Game
         /// </summary>
         /// <param name="rect">Dimensions for button</param>
         /// <param name="startEnabled">Is the button enabled to begin with - set to false for UI backgrounds</param>
-        /// <param name="primaryTooltip">"Description of primary function"</param>
-        /// <param name="primaryShortcut">"Shortcut for primary function"</param>
-        /// <param name="secondaryTooltip">"Description of secondary function"</param>
-        /// <param name="secondaryShortcut">"Shortcut for secondary function"</param>
+        /// <param name="primaryTooltip">"Description of left click function"</param>
+        /// <param name="primaryShortcut">"Shortcut to use as alternative to left click"</param>
+        /// <param name="secondaryTooltip">"Description of right click function"</param>
+        /// <param name="secondaryShortcut">"Shortcut to use as alternative to right click"</param>
         public Button(Rectangle rect, bool startEnabled, string primaryTooltip = "", Shortcut primaryShortcut = null, string secondaryTooltip = "", Shortcut secondaryShortcut = null)
         {
             GM.engineM.AddSprite(this);
@@ -111,6 +111,26 @@ namespace Template.Game
             tooltipBackground.Alpha = 0.75f;
             tooltipBackground.WorldCoordinates = false;
             tooltipBackground.Layer = Layer + 3;
+            
+            if (priTooltip != "")
+            {
+                tooltipText += "Left click";
+
+                if (priShortcut != null)
+                    tooltipText += ", " + priShortcut.DisplayKeys;
+
+                tooltipText += ": " + priTooltip + "~";
+            }
+
+            if (secTooltip != "")
+            {
+                tooltipText += "Right click";
+
+                if (secShortcut != null)
+                    tooltipText += ", " + secShortcut.DisplayKeys;
+
+                tooltipText += ": " + secTooltip + "~";
+            }
 
             if (enabled)
             {
@@ -139,6 +159,8 @@ namespace Template.Game
                     tooltipBackground.Position2D = GM.inputM.MouseLocation;
                     tooltipBackground.SX = 200;
                     tooltipBackground.SY = 50;
+
+                    GM.textM.Draw(FontBank.arcadePixel, tooltipText, GM.inputM.MouseLocation.X + 10, GM.inputM.MouseLocation.Y + 10, TextAtt.TopRight);
                 }
                 else
                 {

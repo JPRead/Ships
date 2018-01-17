@@ -74,7 +74,7 @@
             Shortcut for secondary function
             </summary>
         </member>
-        <member name="F:Template.Game.Button.tooltipCountdown">
+        <member name="F:Template.Game.Button.tooltipText">
             <summary>
             Event to countdown until a tooltip is displayed
             </summary>
@@ -85,10 +85,10 @@
             </summary>
             <param name="rect">Dimensions for button</param>
             <param name="startEnabled">Is the button enabled to begin with - set to false for UI backgrounds</param>
-            <param name="primaryTooltip">"Description of primary function"</param>
-            <param name="primaryShortcut">"Shortcut for primary function"</param>
-            <param name="secondaryTooltip">"Description of secondary function"</param>
-            <param name="secondaryShortcut">"Shortcut for secondary function"</param>
+            <param name="primaryTooltip">"Description of left click function"</param>
+            <param name="primaryShortcut">"Shortcut to use as alternative to left click"</param>
+            <param name="secondaryTooltip">"Description of right click function"</param>
+            <param name="secondaryShortcut">"Shortcut to use as alternative to right click"</param>
         </member>
         <member name="M:Template.Game.Button.Tick">
             <summary>
@@ -1056,6 +1056,21 @@
         <member name="T:Template.Shortcut">
             <summary>
             Data structure for multiple keys
+            </summary>
+        </member>
+        <member name="F:Template.Shortcut.key1">
+            <summary>
+            Key to use for shortcut
+            </summary>
+        </member>
+        <member name="F:Template.Shortcut.key2">
+            <summary>
+            Optional second key
+            </summary>
+        </member>
+        <member name="F:Template.Shortcut.displayKeys">
+            <summary>
+            Text for tooltips
             </summary>
         </member>
         <member name="M:Template.Program.Main(System.String[])">
