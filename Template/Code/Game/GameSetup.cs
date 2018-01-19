@@ -212,6 +212,9 @@ namespace Template.Game
                 crewDisplayPlayer.Visible = false;
                 crewDisplayBackground.Visible = false;
             }
+
+            //DEBUG
+            GM.textM.Draw(FontBank.arcadePixel, "Index:" + Convert.ToString(FontBank.arcadePixel.CharacterFrameNumber('+')), 500, 500);
         }
 
         /// <summary>

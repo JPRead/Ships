@@ -102,9 +102,17 @@ namespace Template
             form.Location = new System.Drawing.Point(10, 10);
             //add any other lifetime assets creation methods here
             CreateTracks();
+
+            ExtendFont();
         } // end Setup
 
-       
+        private void ExtendFont()
+        {
+            FontBank.arcadePixel.CharSet += "+";
+            FontBank.arcadePixel.Frame.Define(txSprite, new Rectangle(0, 206, 8, 8));
+        }
+
+
         /// <summary>
         /// create any track definitions for the game
         /// </summary>

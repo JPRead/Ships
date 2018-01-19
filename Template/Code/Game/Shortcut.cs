@@ -54,7 +54,7 @@ namespace Template
             displayKeys = shortcutKey1.ToString();
             if(shortcutKey2 != Keys.None)
             {
-                displayKeys += " + " + shortcutKey2.ToString();
+                displayKeys += "+" + shortcutKey2.ToString();
             }
         }
         internal bool Pressed()
