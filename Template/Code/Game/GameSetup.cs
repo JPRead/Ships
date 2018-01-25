@@ -8,7 +8,6 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
-//--engine import
 using Engine7;
 using Template.Title;
 
@@ -212,9 +211,6 @@ namespace Template.Game
                 crewDisplayPlayer.Visible = false;
                 crewDisplayBackground.Visible = false;
             }
-
-            //DEBUG
-            GM.textM.Draw(FontBank.arcadePixel, "Index:" + Convert.ToString(FontBank.arcadePixel.CharacterFrameNumber('+')), 500, 500);
         }
 
         /// <summary>

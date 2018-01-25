@@ -28,7 +28,7 @@ namespace Template
         /// </summary>
         private float alignmentLastTick;
         /// <summary>
-        /// Current state of the AI - 0 idle, 1 attacking, 2 retreating, 3 boarding, 4 ramming
+        /// Current state of the AI - 0 idle, 1 attacking, 2 retreating, 3 boarding
         /// </summary>
         private int state;
         /// <summary>
@@ -223,6 +223,7 @@ namespace Template
                     playerOnRight = 1;
                 }
                 
+                //See if player is aligned with the midpoint of the AI's side.
                 sideFaceSprite.Position2D = Position2D;
                 sideFaceSprite.RotationAngle = RotationAngle + (90 * playerOnRight);
                 float alignment = RotationHelper.AngularDirectionTo(sideFaceSprite, player.Position, 0, false);

@@ -131,7 +131,7 @@ namespace Template.Game
 
                 tooltipText += ": " + secTooltip + "~";
             }
-            tooltipTextStore = new TextStore(FontBank.arcadePixel, tooltipText, GM.inputM.MouseLocation.X + 10, GM.inputM.MouseLocation.Y + 10, TextAtt.TopRight);
+            tooltipTextStore = new TextStore(FontBank.arcadePixel, tooltipText, GM.inputM.MouseLocation.X + 10, GM.inputM.MouseLocation.Y + 10, TextAtt.TopLeft);
 
             if (enabled)
             {
@@ -160,11 +160,14 @@ namespace Template.Game
                     tooltipBackground.Position2D = GM.inputM.MouseLocation;
                     tooltipBackground.SX = 200;
                     tooltipBackground.SY = 50;
-                    tooltipTextStore.X = GM.inputM.MouseLocation.X + 10;
+                    tooltipTextStore.X = GM.inputM.MouseLocation.X - tooltipTextStore.Area.Width - 15;
                     tooltipTextStore.Y = GM.inputM.MouseLocation.Y + 10;
                     SpriteHelper.ScaleToThisSize(tooltipBackground, tooltipTextStore.Area);
-                    tooltipBackground.SY *= 2;
-                    tooltipBackground.X -= 20;
+                    if (priShortcut == null ^ secShortcut == null)
+                        tooltipBackground.SY *= 3;
+                    else
+                        tooltipBackground.SY *= 2;
+                    tooltipBackground.SX += 20;
                     GM.textM.Draw(tooltipTextStore);
                 }
                 else

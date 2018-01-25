@@ -3,7 +3,7 @@
   <Class Name="Template.Game.Button">
     <Position X="7" Y="3.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAQAAAAAAAAAAAIAACAAAAAAAsAAEEAwQABEEAAQAA=</HashCode>
+      <HashCode>AAAQAgAAAAAEAAAIAACAAAAAAAsAAEEAwQABEEAAQAA=</HashCode>
       <FileName>Game\Button.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -50,14 +50,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Template.Opponent">
-    <Position X="5.25" Y="9.5" Width="1.5" />
+    <Position X="5.25" Y="10" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAFAIAAAEAAAAAAAAAQAAAAABAAAAAlAAAAAAAAQAA=</HashCode>
       <FileName>Game\Opponent.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Template.Player">
-    <Position X="7" Y="8.75" Width="1.5" />
+    <Position X="7" Y="9" Width="1.5" />
     <TypeIdentifier>
       <HashCode>gABIAAIIMUABAAEAAQAAAAQAAAACAAggCAEAgQAQQIk=</HashCode>
       <FileName>Game\Player.cs</FileName>
@@ -78,9 +78,9 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Template.GM" Collapsed="true">
-    <Position X="10.5" Y="0.5" Width="1.5" />
+    <Position X="8.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>MQYBFAAACKAIAwAoAQAFSgQBAAAECBoiAoAhJQAAIAU=</HashCode>
+      <HashCode>MQYBFAAACKAIAwAoAQAFSgQBAAAECBoiCoAhJQAAIAU=</HashCode>
       <FileName>Setup loading and storage\Assets.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -91,10 +91,10 @@
       <FileName>Setup loading and storage\BasicSetup.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Template.Cursor" Collapsed="true">
-    <Position X="8.75" Y="0.5" Width="1.5" />
+  <Class Name="Template.Cursor">
+    <Position X="1.75" Y="4" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAIAABACAAAAAAAAAAAAAAAAAACAAAEAAAQA=</HashCode>
+      <HashCode>AAAgAAAAAIAABACAAAAAAAAAAAAAAAAAACAAAEAAIQA=</HashCode>
       <FileName>Setup loading and storage\Cursor.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -122,7 +122,7 @@
   <Class Name="Template.Shortcut">
     <Position X="5.25" Y="7.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAABIAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <HashCode>AAAAAAACAAAAAgAAAAAAABIAAAAAAAAAAAAAAAAEAAA=</HashCode>
       <FileName>Game\Shortcut.cs</FileName>
     </TypeIdentifier>
   </Class>

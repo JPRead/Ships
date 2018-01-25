@@ -284,7 +284,6 @@ namespace Template
             GM.textM.Draw(FontBank.arcadePixel, "Crew: " + CrewNum, 150, 50, TextAtt.TopRight);
             GM.textM.Draw(FontBank.arcadePixel, "Rain: " + GameSetup.WeatherController.RainAmount, 150, 65, TextAtt.TopRight);
             
-
             //Sinking bar
             UISinkBarTop.SY = sinkAmount * 0.1f;
 
