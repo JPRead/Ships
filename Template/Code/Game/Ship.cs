@@ -43,7 +43,7 @@ namespace Template
         /// <summary>
         /// True if ship is repairing
         /// </summary>
-        internal bool isRepairing;
+        private bool _isRepairing;
         /// <summary>
         /// True if right cannons are loaded
         /// </summary>
@@ -142,6 +142,30 @@ namespace Template
             }
         }
 
+        internal bool IsRepairing
+        {
+            get
+            {
+                return _isRepairing;
+            }
+
+            set
+            {
+                if (isPlayer)
+                {
+                    if (value == false)
+                    {
+                        GameSetup.Player.RepairButton.SetDisplay(new Rectangle(67, 200, 42, 38));
+                    }
+                    else
+                    {
+                        GameSetup.Player.RepairButton.SetDisplay(new Rectangle(110, 200, 42, 38));
+                    }
+                }
+                _isRepairing = value;
+            }
+        }
+
         /// <summary>
         /// Ship contains all the functions used by both the player and the AI
         /// </summary>
@@ -152,7 +176,7 @@ namespace Template
             shotTypeLeft = 0;
             shotTypeRight = 0;
             crewNum = 100;
-            isRepairing = false;
+            IsRepairing = false;
             hitBoxArray = new HitBox[7];
             leftLoaded = false;
             rightLoaded = false;
@@ -243,16 +267,16 @@ namespace Template
             }
 
             //Stop reload timers once reload is complete or if repairing
-            if (GM.eventM.Elapsed(tiReloadRight) || isRepairing)
+            if (GM.eventM.Elapsed(tiReloadRight) || IsRepairing)
             {
                 tiReloadRight.Paused = true;
-                if(!isRepairing)
+                if(!IsRepairing)
                     rightLoaded = true;
             }
-            if (GM.eventM.Elapsed(tiReloadLeft) || isRepairing)
+            if (GM.eventM.Elapsed(tiReloadLeft) || IsRepairing)
             {
                 tiReloadLeft.Paused = true;
-                if (!isRepairing)
+                if (!IsRepairing)
                     leftLoaded = true;
             }
 
@@ -285,7 +309,7 @@ namespace Template
         internal void OneSecond()
         {
             //Repairing
-            if (isRepairing)
+            if (IsRepairing)
             {
                 float repairAmount = crewNum;
 
@@ -310,8 +334,7 @@ namespace Template
                     {
                         tiReloadLeft.Paused = false;
                     }
-
-                    isRepairing = false;
+                    IsRepairing = false;
                 }
                 else
                 {
@@ -395,7 +418,7 @@ namespace Template
         internal void Fire(bool right, int type)
         {
             right = !right;
-            if (((right && tiReloadRight.Paused) || (!right && tiReloadLeft.Paused)) && !isRepairing)
+            if (((right && tiReloadRight.Paused) || (!right && tiReloadLeft.Paused)) && !IsRepairing)
             {
                 Vector3 fireDir;
                 Vector3 deckDir = Vector3.Zero;

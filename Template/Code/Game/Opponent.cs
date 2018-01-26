@@ -89,7 +89,7 @@ namespace Template
                 }
 
                 //Decide on shot type
-                if (player.isRepairing && player.hitBoxSailBack.Health + player.hitBoxSailBack.Health + player.hitBoxSailBack.Health < 50)
+                if (player.IsRepairing && player.hitBoxSailBack.Health + player.hitBoxSailBack.Health + player.hitBoxSailBack.Health < 50)
                 {
                     shotTypeLeft = 1;
                     shotTypeRight = 1;
@@ -128,7 +128,7 @@ namespace Template
                 if (totalHealth >= 600 + 100 * aggressiveness)
                     return 0;
                     
-                isRepairing = true;
+                IsRepairing = true;
                 return 2;
             }
             if(state == 3)

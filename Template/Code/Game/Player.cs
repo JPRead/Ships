@@ -152,6 +152,19 @@ namespace Template
             }
         }
 
+        internal Button RepairButton
+        {
+            get
+            {
+                return repairButton;
+            }
+
+            set
+            {
+                repairButton = value;
+            }
+        }
+
         /// <summary>
         /// Contains functions for the player to give orders
         /// </summary>
@@ -167,13 +180,13 @@ namespace Template
 
             //UI setup
             cutRopeButton = new Button(new Rectangle(GM.screenSize.Center.X - 75, GM.screenSize.Bottom - 50, 50, 50), true, "Cut Ropes", new Shortcut(Keys.A));
-            cutRopeButton.SetDisplay(new Rectangle(0, 0, 10, 10));//Create sprite for this
+            cutRopeButton.SetDisplay(new Rectangle(153, 200, 34, 26));
 
             speedButton = new Button(new Rectangle(GM.screenSize.Center.X, GM.screenSize.Bottom - 125, 50, 50), true, "Increase Speed", new Shortcut(Keys.W, Keys.LeftShift), "Decrease Speed", new Shortcut(Keys.W, Keys.LeftControl));
             speedButton.SetDisplay(new Rectangle(75, 159, 6, 40));
 
-            repairButton = new Button(new Rectangle(GM.screenSize.Center.X, GM.screenSize.Bottom - 50, 50, 50), true, "Start Repairing", new Shortcut(Keys.S, Keys.LeftShift), "Stop Repairing", new Shortcut(Keys.S, Keys.LeftControl));
-            repairButton.SetDisplay(new Rectangle(0, 0, 10, 10));//Create sprite for this
+            RepairButton = new Button(new Rectangle(GM.screenSize.Center.X, GM.screenSize.Bottom - 50, 50, 50), true, "Start Repairing", new Shortcut(Keys.S, Keys.LeftShift), "Stop Repairing", new Shortcut(Keys.S, Keys.LeftControl));
+            RepairButton.SetDisplay(new Rectangle(67, 200, 42, 38));
 
             fireRightButton = new Button(new Rectangle(GM.screenSize.Center.X - 75, GM.screenSize.Bottom - 125, 50, 50), true, "Fire Left Cannons", new Shortcut(Keys.Q, Keys.LeftShift), "Change Left Shot Type", new Shortcut(Keys.Q, Keys.LeftControl));
             fireRightButton.SetDisplay(new Rectangle(150, 160, 20, 20));
@@ -291,13 +304,13 @@ namespace Template
             GameSetup.PlayerView.Position = Position - new Vector3(GM.screenSize.Center.X, GM.screenSize.Center.Y - 100, 0);
 
             //UI updates
-            if (!tiReloadRight.Paused && !isRepairing)
+            if (!tiReloadRight.Paused && !IsRepairing)
             {
                 UIReloadRight.Visible = true;
                 float heightMul = (tiReloadRight.Interval - tiReloadRight.ElapsedSoFar) / tiReloadRight.Interval ;
                 UIReloadRight.SY = 50 * heightMul;
             }
-            if (!tiReloadLeft.Paused && !isRepairing)
+            if (!tiReloadLeft.Paused && !IsRepairing)
             {
                 UIReloadLeft.Visible = true;
                 float heightMul = (tiReloadLeft.Interval - tiReloadLeft.ElapsedSoFar) / tiReloadLeft.Interval ;
@@ -417,13 +430,13 @@ namespace Template
             }
 
             //Repair ship
-            if (repairButton.PressedLeft())
+            if (RepairButton.PressedLeft())
             {
-                isRepairing = true;
+                IsRepairing = true;
             }
-            if (repairButton.PressedRight())
+            if (RepairButton.PressedRight())
             {
-                isRepairing = false;
+                IsRepairing = false;
                 if (!leftLoaded)
                 {
                     tiReloadLeft.Paused = false;
@@ -433,7 +446,7 @@ namespace Template
                     tiReloadRight.Paused = false;
                 }
             }
-            if (isRepairing)
+            if (IsRepairing)
             {
                 fireLeftButton.Faded = true;
                 fireRightButton.Faded = true;
