@@ -21,6 +21,10 @@ namespace Template.Game
         private static PlayerView playerView;
         private TextButton startButton;
         private int roundShotNum;
+        private int grapeShotNum;
+        private int carcassShotNum;
+        private int barShotNum;
+        private int grappleShotNum;
 
         public static PlayerView PlayerView
         {
@@ -32,6 +36,58 @@ namespace Template.Game
             set
             {
                 playerView = value;
+            }
+        }
+
+        public int GrapeShotNum
+        {
+            get
+            {
+                return grapeShotNum;
+            }
+
+            set
+            {
+                grapeShotNum = value;
+            }
+        }
+
+        public int CarcassShotNum
+        {
+            get
+            {
+                return carcassShotNum;
+            }
+
+            set
+            {
+                carcassShotNum = value;
+            }
+        }
+
+        public int BarShotNum
+        {
+            get
+            {
+                return barShotNum;
+            }
+
+            set
+            {
+                barShotNum = value;
+            }
+        }
+
+        public int GrappleShotNum
+        {
+            get
+            {
+                return grappleShotNum;
+            }
+
+            set
+            {
+                grappleShotNum = value;
             }
         }
 
@@ -68,6 +124,14 @@ namespace Template.Game
 
             roundShotNum = 0;
             new ResourceSetter(200, 200, "RoundShotNum");
+            barShotNum = 0;
+            new ResourceSetter(200, 300, "BarShotNum");
+            carcassShotNum = 0;
+            new ResourceSetter(200, 400, "CarcassShotNum");
+            grapeShotNum = 0;
+            new ResourceSetter(200, 500, "GrapeShotNum");
+            grappleShotNum = 0;
+            new ResourceSetter(200, 600, "GrappleShotNum");
 
             GM.engineM.WorldSize(1600, 900);
         }

@@ -21,8 +21,8 @@ namespace Template.Game
         {
             ResourceName = resourceName;
             Position2D = new Vector2(x, y);
-            new IncrementButton(new Vector2(x + 20, x -20), true, ResourceName);
-            new IncrementButton(new Vector2(x + 20, x + 20), false, ResourceName);
+            new IncrementButton(new Vector2(x + 20, y -20), true, ResourceName);
+            new IncrementButton(new Vector2(x + 20, y + 20), false, ResourceName);
 
             GM.engineM.AddSprite(this);
             UpdateCallBack += Tick;
@@ -32,7 +32,7 @@ namespace Template.Game
         {
             //Get property
             System.Reflection.PropertyInfo property = GM.active.GetType().GetProperty(ResourceName);
-            GM.textM.Draw(FontBank.arcadePixel, "Round Shot: " + (int)property.GetValue(GM.active, null), X, Y, TextAtt.Right);
+            GM.textM.Draw(FontBank.arcadePixel, ResourceName + ": " + (int)property.GetValue(GM.active, null), X, Y, TextAtt.Right);
         }
     }
 }
