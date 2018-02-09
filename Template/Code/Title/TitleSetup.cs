@@ -44,7 +44,8 @@ namespace Template.Title
 
             if (GM.inputM.KeyPressed(Keys.D1))
             {
-                StartGame();
+                StartPreSetup();
+                //StartGame();
             }
             if (GM.inputM.KeyPressed(Keys.Escape))
             {
@@ -52,12 +53,11 @@ namespace Template.Title
                 GM.CloseSystem();
             }
         }
-
-        private static void StartGame()
+        private static void StartPreSetup()
         {
             //tidy up before moving to another mode
             GM.ClearAllManagedObjects();
-            GM.active = new GameSetup();
+            GM.active = new PreSetup();
         }
     }
 }

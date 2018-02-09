@@ -182,16 +182,16 @@ namespace Template
             cutRopeButton = new Button(new Rectangle(GM.screenSize.Center.X - 75, GM.screenSize.Bottom - 50, 50, 50), true, "Cut Ropes", new Shortcut(Keys.A));
             cutRopeButton.SetDisplay(new Rectangle(153, 200, 34, 26));
 
-            speedButton = new Button(new Rectangle(GM.screenSize.Center.X, GM.screenSize.Bottom - 125, 50, 50), true, "Increase Speed", new Shortcut(Keys.W, Keys.LeftShift), "Decrease Speed", new Shortcut(Keys.W, Keys.LeftControl));
+            speedButton = new Button(new Rectangle(GM.screenSize.Center.X, GM.screenSize.Bottom - 125, 50, 50), true, "Increase Speed", new Shortcut(Keys.LeftShift, Keys.W), "Decrease Speed", new Shortcut(Keys.LeftControl, Keys.W));
             speedButton.SetDisplay(new Rectangle(75, 159, 6, 40));
 
-            RepairButton = new Button(new Rectangle(GM.screenSize.Center.X, GM.screenSize.Bottom - 50, 50, 50), true, "Start Repairing", new Shortcut(Keys.S, Keys.LeftShift), "Stop Repairing", new Shortcut(Keys.S, Keys.LeftControl));
+            RepairButton = new Button(new Rectangle(GM.screenSize.Center.X, GM.screenSize.Bottom - 50, 50, 50), true, "Start Repairing", new Shortcut(Keys.LeftShift, Keys.S), "Stop Repairing", new Shortcut(Keys.LeftControl, Keys.S));
             RepairButton.SetDisplay(new Rectangle(67, 200, 42, 38));
 
-            fireRightButton = new Button(new Rectangle(GM.screenSize.Center.X - 75, GM.screenSize.Bottom - 125, 50, 50), true, "Fire Left Cannons", new Shortcut(Keys.Q, Keys.LeftShift), "Change Left Shot Type", new Shortcut(Keys.Q, Keys.LeftControl));
+            fireRightButton = new Button(new Rectangle(GM.screenSize.Center.X - 75, GM.screenSize.Bottom - 125, 50, 50), true, "Fire Left Cannons", new Shortcut(Keys.LeftShift, Keys.Q), "Change Left Shot Type", new Shortcut(Keys.LeftControl, Keys.Q));
             fireRightButton.SetDisplay(new Rectangle(150, 160, 20, 20));
 
-            fireLeftButton = new Button(new Rectangle(GM.screenSize.Center.X + 75, GM.screenSize.Bottom - 125, 50, 50), true, "Fire Right Cannons", new Shortcut(Keys.E, Keys.LeftShift), "Change Right Shot Type", new Shortcut(Keys.E, Keys.LeftControl));
+            fireLeftButton = new Button(new Rectangle(GM.screenSize.Center.X + 75, GM.screenSize.Bottom - 125, 50, 50), true, "Fire Right Cannons", new Shortcut(Keys.LeftShift, Keys.E), "Change Right Shot Type", new Shortcut(Keys.LeftControl, Keys.E));
             fireLeftButton.SetDisplay(new Rectangle(150, 160, 20, 20));
 
             fireZone = new Sprite();

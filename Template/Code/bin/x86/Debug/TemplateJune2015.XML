@@ -4,6 +4,26 @@
         <name>TemplateJune2015</name>
     </assembly>
     <members>
+        <member name="F:Template.Game.PreSetup.playerView">
+            <summary>
+            Viewport for the player
+            </summary>
+        </member>
+        <member name="M:Template.Game.PreSetup.#ctor">
+            <summary>
+            Sets up all the initial values for the game
+            </summary>
+        </member>
+        <member name="M:Template.Game.PreSetup.Tick">
+            <summary>
+            Check for keypresses used to end game
+            </summary>
+        </member>
+        <member name="M:Template.Game.PreSetup.BackToTitle(System.String)">
+            <summary>
+            Resets game to title screen
+            </summary>
+        </member>
         <member name="F:Template.Game.WeatherController.rainAmount">
             <summary>
             0 if not raining, 1 if full rain
@@ -570,6 +590,14 @@
             Code to run each tick.
             </summary>
         </member>
+        <member name="M:Template.IncrementButton.#ctor(Microsoft.Xna.Framework.Vector2,System.Boolean,System.Int32@)">
+            <summary>
+            TextButton inherits from Button and is used to display text rather than a sprite
+            </summary>
+            <param name="position">Position for button</param>
+            <param name="inc">True if used to increment, false if used to decrement</param>
+            <param name="variable">Variable to increment/decrement</param>
+        </member>
         <member name="T:Template.GM">
             <summary>
             holds all game assets and code to set up those assets
@@ -918,7 +946,7 @@
         </member>
         <member name="F:Template.Ship._isRepairing">
             <summary>
-            True if ship is repairing
+            True if ship is repairing - USE IsRepairing PROPERTY INSTEAD OF THIS
             </summary>
         </member>
         <member name="F:Template.Ship.rightLoaded">
@@ -938,7 +966,7 @@
         </member>
         <member name="F:Template.Ship.hitBoxArray">
             <summary>
-            Array of the ship's HitBoxes, maximum index is 7.
+            Array of the ship's HitBoxes, maximum index is 7
             </summary>
         </member>
         <member name="F:Template.Ship.hitBoxHullLeft">
@@ -1077,6 +1105,24 @@
             <summary>
             The main entry point for the application.
             </summary>
+        </member>
+        <member name="M:Template.TextButton.#ctor(Microsoft.Xna.Framework.Rectangle,System.String)">
+            <summary>
+            TextButton inherits from Button and is used to display text rather than a sprite
+            </summary>
+            <param name="rect">Dimensions for button</param>
+            <param name="text">Text to display within the button</param>
+        </member>
+        <member name="M:Template.TextButton.display">
+            <summary>
+            Code to run each tick
+            </summary>
+        </member>
+        <member name="M:Template.TextButton.SetText(System.String)">
+            <summary>
+            Changes the text displayed
+            </summary>
+            <param name="text">Text to display</param>
         </member>
         <member name="T:Template.Title.TitleSetup">
             <summary>

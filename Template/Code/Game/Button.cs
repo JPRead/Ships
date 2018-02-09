@@ -153,7 +153,7 @@ namespace Template.Game
             }
             if (enabled)
             {
-                if (Hover() && GM.eventM.Elapsed(GameSetup.Player.Cursor.LastMoveTimer))
+                if (GM.active is GameSetup && Hover() && GM.eventM.Elapsed(GameSetup.Player.Cursor.LastMoveTimer))
                 {
                     //Show tooltip
                     tooltipBackground.Visible = true;
@@ -203,7 +203,7 @@ namespace Template.Game
                 if(mouseLoc.X > Sides.X && mouseLoc.X < Sides.Y &&
                     mouseLoc.Y > Sides.Z && mouseLoc.Y < Sides.W)
                 {
-                    GameSetup.Player.ButtonPressed = true;
+                    if (GM.active is GameSetup) GameSetup.Player.ButtonPressed = true;
                     return true;
                 }
             }
@@ -225,7 +225,7 @@ namespace Template.Game
                 if (mouseLoc.X > Sides.X && mouseLoc.X < Sides.Y &&
                     mouseLoc.Y > Sides.Z && mouseLoc.Y < Sides.W)
                 {
-                    GameSetup.Player.ButtonPressed = true;
+                    if(GM.active is GameSetup) GameSetup.Player.ButtonPressed = true;
                     return true;
                 }
             }
@@ -245,7 +245,7 @@ namespace Template.Game
                 if (mouseLoc.X > Sides.X && mouseLoc.X < Sides.Y &&
                     mouseLoc.Y > Sides.Z && mouseLoc.Y < Sides.W)
                 {
-                    GameSetup.Player.ButtonPressed = true;
+                    if (GM.active is GameSetup) GameSetup.Player.ButtonPressed = true;
                     return true;
                 }
             }
@@ -267,7 +267,7 @@ namespace Template.Game
                 if (mouseLoc.X > Sides.X && mouseLoc.X < Sides.Y &&
                     mouseLoc.Y > Sides.Z && mouseLoc.Y < Sides.W)
                 {
-                    GameSetup.Player.ButtonPressed = true;
+                    if(GM.active is GameSetup) GameSetup.Player.ButtonPressed = true;
                     return true;
                 }
             }

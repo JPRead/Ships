@@ -41,7 +41,7 @@ namespace Template
         /// </summary>
         internal bool isPlayer;
         /// <summary>
-        /// True if ship is repairing
+        /// True if ship is repairing - USE IsRepairing PROPERTY INSTEAD OF THIS
         /// </summary>
         private bool _isRepairing;
         /// <summary>
@@ -57,7 +57,7 @@ namespace Template
         /// </summary>
         private Sprite moveLocSprite;
         /// <summary>
-        /// Array of the ship's HitBoxes, maximum index is 7.
+        /// Array of the ship's HitBoxes, maximum index is 7
         /// </summary>
         internal HitBox[] hitBoxArray;
         /// <summary>

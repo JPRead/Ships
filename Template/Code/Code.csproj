@@ -114,6 +114,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Game\PreSetup.cs" />
     <Compile Include="Game\WeatherController.cs" />
     <Compile Include="Game\DamageSprite.cs" />
     <Compile Include="Game\Button.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="Game\FadingParticle.cs" />
     <Compile Include="Game\HitBox.cs" />
     <Compile Include="Game\Rope.cs" />
+    <Compile Include="Game\IncrementButton.cs" />
     <Compile Include="Setup loading and storage\Assets.cs" />
     <Compile Include="Setup loading and storage\BasicSetup.cs" />
     <Compile Include="Setup loading and storage\Cursor.cs" />
@@ -134,6 +136,7 @@
     <Compile Include="Game\Shortcut.cs" />
     <Compile Include="Template Initialisation\Program.cs" />
     <Compile Include="Template Initialisation\GM.cs" />
+    <Compile Include="Game\TextButton.cs" />
     <Compile Include="Title\TitleSetup.cs">
       <SubType>Code</SubType>
     </Compile>
