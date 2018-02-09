@@ -35,6 +35,19 @@ namespace Template.Game
             }
         }
 
+        public int RoundShotNum
+        {
+            get
+            {
+                return roundShotNum;
+            }
+
+            set
+            {
+                roundShotNum = value;
+            }
+        }
+
         /// <summary>
         /// Sets up all the initial values for the game
         /// </summary>
@@ -54,8 +67,8 @@ namespace Template.Game
             startButton = new TextButton(new Rectangle(1500, 800, 100, 100), "Start");
 
             roundShotNum = 0;
-            new IncrementButton(new Vector2(100, 100), true, ref roundShotNum);
-            
+            new ResourceSetter(200, 200, "RoundShotNum");
+
             GM.engineM.WorldSize(1600, 900);
         }
 
@@ -64,7 +77,6 @@ namespace Template.Game
         /// </summary>
         public override void Tick()
         {
-            GM.textM.Draw(FontBank.arcadePixel, "Round Shot: " + roundShotNum, 150, 100);
             if (GM.inputM.KeyPressed(Keys.Escape))
             {
                 BackToTitle("Press 1 to start.");

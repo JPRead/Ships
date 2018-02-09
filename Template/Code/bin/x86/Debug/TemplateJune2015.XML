@@ -590,13 +590,13 @@
             Code to run each tick.
             </summary>
         </member>
-        <member name="M:Template.IncrementButton.#ctor(Microsoft.Xna.Framework.Vector2,System.Boolean,System.Int32@)">
+        <member name="M:Template.IncrementButton.#ctor(Microsoft.Xna.Framework.Vector2,System.Boolean,System.String)">
             <summary>
             TextButton inherits from Button and is used to display text rather than a sprite
             </summary>
             <param name="position">Position for button</param>
             <param name="inc">True if used to increment, false if used to decrement</param>
-            <param name="variable">Variable to increment/decrement</param>
+            <param name="PropertyName">Name of property to increment/decrement</param>
         </member>
         <member name="T:Template.GM">
             <summary>

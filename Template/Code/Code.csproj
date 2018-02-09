@@ -115,6 +115,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Game\PreSetup.cs" />
+    <Compile Include="Game\ResourceSetter.cs" />
     <Compile Include="Game\WeatherController.cs" />
     <Compile Include="Game\DamageSprite.cs" />
     <Compile Include="Game\Button.cs" />
