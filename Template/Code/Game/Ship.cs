@@ -657,7 +657,14 @@ namespace Template
             }
             else
             {
-                moveTargetReached = true;
+                if (!isPlayer)
+                {
+                    moveTargetReached = true;
+                }
+                else
+                {
+                    GameSetup.Player.MovePath.Dequeue();
+                }
                 moveLocSprite.Visible = false;
                 RotationVelocity = 0;
             }

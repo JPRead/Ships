@@ -112,6 +112,14 @@ namespace Template
         /// UI element to display sinking, goes on top and moves up as more water is taken on.
         /// </summary>
         private Sprite UISinkBarTop;
+        /// <summary>
+        /// Queue of points to move to.
+        /// </summary>
+        private Queue<Point> movePath;
+        ///// <summary>
+        ///// True if right mouse button was held in the previous tick
+        ///// </summary>
+        //private bool rmbHeldLastTick;
 
         internal Cursor Cursor
         {
@@ -165,6 +173,19 @@ namespace Template
             }
         }
 
+        public Queue<Point> MovePath
+        {
+            get
+            {
+                return movePath;
+            }
+
+            set
+            {
+                movePath = value;
+            }
+        }
+
         /// <summary>
         /// Contains functions for the player to give orders
         /// </summary>
@@ -175,8 +196,8 @@ namespace Template
             isPlayer = true;
             Position2D = startPos;
             cursor = new Cursor(GM.screenSize.Center);
-            //cursor.WorldCoordinates = false;
             moveTo = PointHelper.PointFromVector2(Position2D);
+            movePath = new Queue<Point>(100);
 
             //UI setup
             cutRopeButton = new Button(new Rectangle(GM.screenSize.Center.X - 75, GM.screenSize.Bottom - 50, 50, 50), true, "Cut Ropes", new Shortcut(Keys.A));
@@ -483,10 +504,21 @@ namespace Template
                 if (GM.inputM.MouseRightButtonPressed())
                 {
                     cursor.Mode = 1;
+                    movePath = new Queue<Point>(100);
                     moveTo = PointHelper.PointFromVector2(cursor.Position2D + Position2D + new Vector2(-800, -350));
+                    movePath.Enqueue(moveTo);
                     moveTargetReached = false;
                 }
-                //Default
+                else if (GM.inputM.MouseRightButtonHeld() && 
+                    PointHelper.DistanceSquared(
+                        new Point((int)(GameSetup.PlayerView.ViewPortOutline.Left + GM.inputM.MouseLocation.X), (int)(GameSetup.PlayerView.ViewPortOutline.Top + GM.inputM.MouseLocation.Y)), 
+                        moveTo) 
+                        > 1000)
+                {
+                    cursor.Mode = 2;
+                    moveTo = PointHelper.PointFromVector2(cursor.Position2D + Position2D + new Vector2(-800, -350));
+                    movePath.Enqueue(moveTo);
+                }
                 else
                 {
                     cursor.Mode = 0;
@@ -495,7 +527,16 @@ namespace Template
             else buttonPressed = false;
 
             if (moveTargetReached == false)
-                MoveToPoint(moveTo);
+            {
+                if (movePath.Count > 0)
+                {
+                    MoveToPoint(movePath.Peek());
+                }
+                else
+                {
+                    moveTargetReached = true;
+                }
+            }
         }
     }
 }

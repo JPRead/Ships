@@ -466,6 +466,11 @@
             UI element to display sinking, goes on top and moves up as more water is taken on.
             </summary>
         </member>
+        <member name="F:Template.Player.movePath">
+            <summary>
+            Queue of points to move to.
+            </summary>
+        </member>
         <member name="M:Template.Player.#ctor(Microsoft.Xna.Framework.Vector2)">
             <summary>
             Contains functions for the player to give orders
