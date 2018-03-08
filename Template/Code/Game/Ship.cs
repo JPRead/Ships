@@ -128,6 +128,26 @@ namespace Template
         /// True if attempting to cut boarding ropes
         /// </summary>
         internal bool isCuttingRopes;
+        /// <summary>
+        /// Round shot remaining
+        /// </summary>
+        internal int roundShotNum;
+        /// <summary>
+        /// Grape shot remaining
+        /// </summary>
+        internal int grapeShotNum;
+        /// <summary>
+        /// Carcass shot remaining
+        /// </summary>
+        internal int carcassShotNum;
+        /// <summary>
+        /// Bar shot remaining
+        /// </summary>
+        internal int barShotNum;
+        /// <summary>
+        /// Grapple shot remaining
+        /// </summary>
+        internal int grappleShotNum;
 
         internal int CrewNum
         {
@@ -418,7 +438,39 @@ namespace Template
         internal void Fire(bool right, int type)
         {
             right = !right;
-            if (((right && tiReloadRight.Paused) || (!right && tiReloadLeft.Paused)) && !IsRepairing)
+            bool hasAmmo = true;
+            if ((right && rightLoaded) || (!right && leftLoaded) && !IsRepairing)
+            {
+                if (type == 0 && roundShotNum > 0)
+                {
+                    roundShotNum--;
+                }
+                else if (type == 1 && barShotNum > 0)
+                {
+                    barShotNum--;
+                }
+                else if (type == 2 && grapeShotNum > 0)
+                {
+                    grapeShotNum--;
+                }
+                else if (type == 3 && carcassShotNum > 0)
+                {
+                    carcassShotNum--;
+                }
+                else if (type == 4 && grappleShotNum > 0)
+                {
+                    grappleShotNum--;
+                }
+                else
+                {
+                    hasAmmo = false;
+                }
+            }
+            else
+            {
+                hasAmmo = false;
+            }
+            if (hasAmmo)
             {
                 Vector3 fireDir;
                 Vector3 deckDir = Vector3.Zero;
@@ -453,6 +505,7 @@ namespace Template
                     tiReloadLeft.Paused = false;
                     leftLoaded = false;
                 }
+                
             }
         }
 

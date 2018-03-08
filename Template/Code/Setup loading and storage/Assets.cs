@@ -95,7 +95,7 @@ namespace Template
         {
             //show mouse cursor or not - not in this case
             IsMouseVisible = false;
-            //GM.engineM.ToggleFullScreen();
+            GM.engineM.ToggleFullScreen();
 
             //position window for game
             var form = (System.Windows.Forms.Form)System.Windows.Forms.Control.FromHandle(Window.Handle);

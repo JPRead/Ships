@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.GamerServices;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
 using Engine7;
 using Template.Title;
 
@@ -20,11 +13,12 @@ namespace Template.Game
         /// </summary>
         private static PlayerView playerView;
         private TextButton startButton;
-        private int roundShotNum;
-        private int grapeShotNum;
-        private int carcassShotNum;
-        private int barShotNum;
-        private int grappleShotNum;
+        private int playerRoundShotNum;
+        private int playerGrapeShotNum;
+        private int playerCarcassShotNum;
+        private int playerBarShotNum;
+        private int playerGrappleShotNum;
+        private int playerMoney;
 
         public static PlayerView PlayerView
         {
@@ -39,68 +33,68 @@ namespace Template.Game
             }
         }
 
-        public int GrapeShotNum
+        public int PlayerRoundShotNum
         {
             get
             {
-                return grapeShotNum;
+                return playerRoundShotNum;
             }
 
             set
             {
-                grapeShotNum = value;
+                playerRoundShotNum = value;
             }
         }
 
-        public int CarcassShotNum
+        public int PlayerGrapeShotNum
         {
             get
             {
-                return carcassShotNum;
+                return playerGrapeShotNum;
             }
 
             set
             {
-                carcassShotNum = value;
+                playerGrapeShotNum = value;
             }
         }
 
-        public int BarShotNum
+        public int PlayerCarcassShotNum
         {
             get
             {
-                return barShotNum;
+                return playerCarcassShotNum;
             }
 
             set
             {
-                barShotNum = value;
+                playerCarcassShotNum = value;
             }
         }
 
-        public int GrappleShotNum
+        public int PlayerBarShotNum
         {
             get
             {
-                return grappleShotNum;
+                return playerBarShotNum;
             }
 
             set
             {
-                grappleShotNum = value;
+                playerBarShotNum = value;
             }
         }
 
-        public int RoundShotNum
+        public int PlayerGrappleShotNum
         {
             get
             {
-                return roundShotNum;
+                return playerGrappleShotNum;
             }
 
             set
             {
-                roundShotNum = value;
+                playerGrappleShotNum = value;
             }
         }
 
@@ -122,16 +116,17 @@ namespace Template.Game
 
             startButton = new TextButton(new Rectangle(1500, 800, 100, 100), "Start");
 
-            roundShotNum = 0;
-            new ResourceSetter(200, 200, "RoundShotNum");
-            barShotNum = 0;
-            new ResourceSetter(200, 300, "BarShotNum");
-            carcassShotNum = 0;
-            new ResourceSetter(200, 400, "CarcassShotNum");
-            grapeShotNum = 0;
-            new ResourceSetter(200, 500, "GrapeShotNum");
-            grappleShotNum = 0;
-            new ResourceSetter(200, 600, "GrappleShotNum");
+            playerMoney = 1000;
+            playerRoundShotNum = 100;
+            new ResourceSetter(200, 200, "PlayerRoundShotNum");
+            playerBarShotNum = 100;
+            new ResourceSetter(200, 300, "PlayerBarShotNum");
+            playerCarcassShotNum = 100;
+            new ResourceSetter(200, 400, "PlayerCarcassShotNum");
+            playerGrapeShotNum = 100;
+            new ResourceSetter(200, 500, "PlayerGrapeShotNum");
+            playerGrappleShotNum = 100;
+            new ResourceSetter(200, 600, "PlayerGrappleShotNum");
 
             GM.engineM.WorldSize(1600, 900);
         }
@@ -141,6 +136,9 @@ namespace Template.Game
         /// </summary>
         public override void Tick()
         {
+            playerMoney = 1000 - playerRoundShotNum - playerBarShotNum - playerCarcassShotNum - playerGrapeShotNum - playerGrapeShotNum;
+            GM.textM.Draw(FontBank.arcadePixel, "Unspent resources: " + playerMoney, 200, 100);
+
             if (GM.inputM.KeyPressed(Keys.Escape))
             {
                 BackToTitle("Press 1 to start.");
@@ -160,11 +158,16 @@ namespace Template.Game
             GM.active = new TitleSetup(stringText);
         }
 
-        private static void StartGame()
+        private void StartGame()
         {
             //tidy up before moving to another mode
             GM.ClearAllManagedObjects();
             GM.active = new GameSetup();
+            GameSetup.Player.roundShotNum = playerRoundShotNum;
+            GameSetup.Player.barShotNum = playerBarShotNum;
+            GameSetup.Player.grapeShotNum = playerGrapeShotNum;
+            GameSetup.Player.carcassShotNum = playerCarcassShotNum;
+            GameSetup.Player.grappleShotNum = playerGrappleShotNum;
         }
     }
 }

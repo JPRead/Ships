@@ -1054,6 +1054,31 @@
             True if attempting to cut boarding ropes
             </summary>
         </member>
+        <member name="F:Template.Ship.roundShotNum">
+            <summary>
+            Round shot remaining
+            </summary>
+        </member>
+        <member name="F:Template.Ship.grapeShotNum">
+            <summary>
+            Grape shot remaining
+            </summary>
+        </member>
+        <member name="F:Template.Ship.carcassShotNum">
+            <summary>
+            Carcass shot remaining
+            </summary>
+        </member>
+        <member name="F:Template.Ship.barShotNum">
+            <summary>
+            Bar shot remaining
+            </summary>
+        </member>
+        <member name="F:Template.Ship.grappleShotNum">
+            <summary>
+            Grapple shot remaining
+            </summary>
+        </member>
         <member name="M:Template.Ship.#ctor">
             <summary>
             Ship contains all the functions used by both the player and the AI

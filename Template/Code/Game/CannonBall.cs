@@ -1,5 +1,4 @@
-﻿using System;
-using Engine7;
+﻿using Engine7;
 using Microsoft.Xna.Framework;
 
 namespace Template.Game

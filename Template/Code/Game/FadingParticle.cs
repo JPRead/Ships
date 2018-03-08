@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Engine7;
+﻿using Engine7;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
-using Template.Game;
 
 namespace Template
 {
