@@ -116,6 +116,7 @@
   <ItemGroup>
     <Compile Include="Game\PreSetup.cs" />
     <Compile Include="Game\ResourceSetter.cs" />
+    <Compile Include="Game\Arrow.cs" />
     <Compile Include="Game\WeatherController.cs" />
     <Compile Include="Game\DamageSprite.cs" />
     <Compile Include="Game\Button.cs" />
@@ -135,6 +136,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Game\Ship.cs" />
     <Compile Include="Game\Shortcut.cs" />
+    <Compile Include="Game\ArrowQueue.cs" />
     <Compile Include="Template Initialisation\Program.cs" />
     <Compile Include="Template Initialisation\GM.cs" />
     <Compile Include="Game\TextButton.cs" />

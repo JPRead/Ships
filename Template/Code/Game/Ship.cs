@@ -664,6 +664,7 @@ namespace Template
                 else
                 {
                     GameSetup.Player.MovePath.Dequeue();
+                    GameSetup.Player.ArrowQueue.Dequeue();
                 }
                 moveLocSprite.Visible = false;
                 RotationVelocity = 0;

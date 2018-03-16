@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram MajorVersion="1" MinorVersion="1">
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
   <Class Name="Template.Game.Button">
-    <Position X="3" Y="8.75" Width="1.5" />
+    <Position X="4.5" Y="8.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAQAgAAAAAEAAAIAACAAAAAAAsAAEEAwQABEEAAQAA=</HashCode>
       <FileName>Game\Button.cs</FileName>
@@ -24,7 +24,7 @@
   <Class Name="Template.Game.PreSetup">
     <Position X="2.75" Y="3.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAABAAAAAgAAAAAEgAAAAAAAAAAAAAEAAQAA=</HashCode>
+      <HashCode>CAAABSAAAABgAQACgAAAQAEgACAAAAAAgAAAAEQAQAA=</HashCode>
       <FileName>Game\PreSetup.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -57,16 +57,16 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Template.Opponent">
-    <Position X="1" Y="17.75" Width="1.5" />
+    <Position X="2.5" Y="17" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAFAIAAAEAAAAAAAAAQAAAAABAAAAAlAAAAAAAAQAA=</HashCode>
       <FileName>Game\Opponent.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Template.Player">
-    <Position X="2.75" Y="17.75" Width="1.5" />
+    <Position X="2.5" Y="8.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gABIAAIIMUABAAEAAQAAgAQAAAACAAggCAEAgQAQQIk=</HashCode>
+      <HashCode>gBBIAAIYMUABAAEAAQAAgAQAAAACAAggCAEIgQAQQIk=</HashCode>
       <FileName>Game\Player.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -75,12 +75,13 @@
     <TypeIdentifier>
       <HashCode>CAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
       <FileName>Game\Rope.cs</FileName>
+      <NewMemberFileName>Game\Arrow.cs</NewMemberFileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Template.Ship">
-    <Position X="1" Y="8.75" Width="1.5" />
+    <Position X="0.75" Y="8.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>UABAAEIGEAAhAAAAAASAAAQBSgBEgAgGAAAAA2EIwCo=</HashCode>
+      <HashCode>UABAAEIGEAAhAAAQAASAAAQDygBEwAgGAAAAA2kIwCo=</HashCode>
       <FileName>Game\Ship.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -92,7 +93,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Template.TextButton">
-    <Position X="3" Y="14" Width="1.5" />
+    <Position X="4.5" Y="14" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAQAAAAAAAIAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Game\TextButton.cs</FileName>
@@ -141,10 +142,17 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Template.IncrementButton">
-    <Position X="3" Y="16.5" Width="1.5" />
+    <Position X="4.5" Y="16.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>IncrementButton.cs</FileName>
+      <HashCode>AEBAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Game\IncrementButton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Template.ArrowQueue">
+    <Position X="6.5" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAABBAABABAAAAAAAAABAASAAAAAAAAAAA=</HashCode>
+      <FileName>Game\ArrowQueue.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

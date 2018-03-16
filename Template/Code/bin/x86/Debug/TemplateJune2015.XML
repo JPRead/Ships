@@ -272,6 +272,23 @@
             Resets game to title screen
             </summary>
         </member>
+        <member name="T:Template.Arrow">
+            <summary>
+            Sprite used to display a path.
+            </summary>
+        </member>
+        <member name="F:Template.Arrow.target">
+            <summary>
+            Location to point to
+            </summary>
+        </member>
+        <member name="M:Template.Arrow.#ctor(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Constructor for Rope
+            </summary>
+            <param name="origin"></param>
+            <param name="Target"></param>
+        </member>
         <member name="F:Template.DamageSprite.target">
             <summary>
             HitBox to represent
@@ -463,7 +480,7 @@
         </member>
         <member name="F:Template.Player.UISinkBarTop">
             <summary>
-            UI element to display sinking, goes on top and moves up as more water is taken on.
+            UI element to display sinking, goes on top and scales as more water is taken on.
             </summary>
         </member>
         <member name="F:Template.Player.movePath">
@@ -1129,6 +1146,31 @@
         <member name="F:Template.Shortcut.displayKeys">
             <summary>
             Text for tooltips
+            </summary>
+        </member>
+        <member name="F:Template.ArrowQueue.count">
+            <summary>
+            Number of items in the queue 
+            </summary>
+        </member>
+        <member name="F:Template.ArrowQueue.f">
+            <summary>
+            Index of the front of the queue
+            </summary>
+        </member>
+        <member name="F:Template.ArrowQueue.e">
+            <summary>
+            Index of the end of the queue
+            </summary>
+        </member>
+        <member name="F:Template.ArrowQueue.queue">
+            <summary>
+            The queue itself
+            </summary>
+        </member>
+        <member name="F:Template.ArrowQueue.endArrow">
+            <summary>
+            Extra arrow sprite at the end of queue
             </summary>
         </member>
         <member name="M:Template.Program.Main(System.String[])">

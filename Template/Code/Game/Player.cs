@@ -109,7 +109,7 @@ namespace Template
         /// </summary>
         private Sprite UISinkBarBot;
         /// <summary>
-        /// UI element to display sinking, goes on top and moves up as more water is taken on.
+        /// UI element to display sinking, goes on top and scales as more water is taken on.
         /// </summary>
         private Sprite UISinkBarTop;
         /// <summary>
@@ -119,7 +119,7 @@ namespace Template
         ///// <summary>
         ///// True if right mouse button was held in the previous tick
         ///// </summary>
-        //private bool rmbHeldLastTick;
+        private ArrowQueue arrowQueue;
 
         internal Cursor Cursor
         {
@@ -186,6 +186,19 @@ namespace Template
             }
         }
 
+        internal ArrowQueue ArrowQueue
+        {
+            get
+            {
+                return arrowQueue;
+            }
+
+            set
+            {
+                arrowQueue = value;
+            }
+        }
+
         /// <summary>
         /// Contains functions for the player to give orders
         /// </summary>
@@ -198,6 +211,8 @@ namespace Template
             cursor = new Cursor(GM.screenSize.Center);
             moveTo = PointHelper.PointFromVector2(Position2D);
             movePath = new Queue<Point>(100);
+            arrowQueue = new ArrowQueue(Vector2.Zero, Vector2.Zero);
+            arrowQueue.Reset();
 
             //UI setup
             cutRopeButton = new Button(new Rectangle(GM.screenSize.Center.X - 75, GM.screenSize.Bottom - 50, 50, 50), true, "Cut Ropes", new Shortcut(Keys.A));
@@ -508,6 +523,7 @@ namespace Template
                     moveTo = PointHelper.PointFromVector2(cursor.Position2D + Position2D + new Vector2(-800, -350));
                     movePath.Enqueue(moveTo);
                     moveTargetReached = false;
+                    arrowQueue.Reset();
                 }
                 else if (GM.inputM.MouseRightButtonHeld() && 
                     PointHelper.DistanceSquared(
@@ -516,7 +532,16 @@ namespace Template
                         > 1000)
                 {
                     cursor.Mode = 2;
-                    moveTo = PointHelper.PointFromVector2(cursor.Position2D + Position2D + new Vector2(-800, -350));
+                    Vector2 newMoveTo = cursor.Position2D + Position2D + new Vector2(-800, -350);
+                    if (movePath.Count == 1)
+                    {
+                        arrowQueue = new ArrowQueue(PointHelper.Vector2FromPoint(moveTo), newMoveTo);
+                    }
+                    else
+                    {
+                        arrowQueue.Enqueue(newMoveTo);
+                    }
+                    moveTo = PointHelper.PointFromVector2(newMoveTo);
                     movePath.Enqueue(moveTo);
                 }
                 else
