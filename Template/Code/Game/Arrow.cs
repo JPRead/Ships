@@ -38,7 +38,7 @@ namespace Template
         }
 
         /// <summary>
-        /// Constructor for Rope
+        /// Constructor for Arrow
         /// </summary>
         /// <param name="origin"></param>
         /// <param name="Target"></param>

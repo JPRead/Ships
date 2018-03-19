@@ -37,6 +37,11 @@ namespace Template
         /// </summary>
         private Sprite endArrow;
 
+        /// <summary>
+        /// Circular queue specifically made to display the player's path.
+        /// </summary>
+        /// <param name="origin">Origin for first arrow</param>
+        /// <param name="target">Target for first arrow</param>
         public ArrowQueue(Vector2 origin, Vector2 target)
         {
             queue = new Arrow[99];
@@ -53,6 +58,10 @@ namespace Template
             endArrow.Alpha = 0.75f;
         }
 
+        /// <summary>
+        /// Add a sprite to the queue
+        /// </summary>
+        /// <param name="next"></param>
         public void Enqueue(Vector2 next)
         {
             if (count < queue.Length)
@@ -65,6 +74,9 @@ namespace Template
             }
         }
 
+        /// <summary>
+        /// Remove a sprite from the queue - DOES NOT RETURN
+        /// </summary>
         public void Dequeue()
         {
             if(count > 0)
@@ -75,6 +87,9 @@ namespace Template
             }
         }
 
+        /// <summary>
+        /// Empty queue
+        /// </summary>
         public void Reset()
         {
             for(int i = 0; i < queue.Length; i++)

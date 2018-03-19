@@ -284,7 +284,7 @@
         </member>
         <member name="M:Template.Arrow.#ctor(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2)">
             <summary>
-            Constructor for Rope
+            Constructor for Arrow
             </summary>
             <param name="origin"></param>
             <param name="Target"></param>
@@ -1171,6 +1171,29 @@
         <member name="F:Template.ArrowQueue.endArrow">
             <summary>
             Extra arrow sprite at the end of queue
+            </summary>
+        </member>
+        <member name="M:Template.ArrowQueue.#ctor(Microsoft.Xna.Framework.Vector2,Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Circular queue specifically made to display the player's path.
+            </summary>
+            <param name="origin">Origin for first arrow</param>
+            <param name="target">Target for first arrow</param>
+        </member>
+        <member name="M:Template.ArrowQueue.Enqueue(Microsoft.Xna.Framework.Vector2)">
+            <summary>
+            Add a sprite to the queue
+            </summary>
+            <param name="next"></param>
+        </member>
+        <member name="M:Template.ArrowQueue.Dequeue">
+            <summary>
+            Remove a sprite from the queue - DOES NOT RETURN
+            </summary>
+        </member>
+        <member name="M:Template.ArrowQueue.Reset">
+            <summary>
+            Empty queue
             </summary>
         </member>
         <member name="M:Template.Program.Main(System.String[])">
