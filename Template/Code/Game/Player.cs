@@ -314,9 +314,6 @@ namespace Template
 
             UpdateCallBack += Tick;
             FuneralCallBack += Death;
-
-            //DEBUG
-            roundShotNum = 100;
         }
 
         private void Death()
@@ -334,6 +331,8 @@ namespace Template
                 "Hull Front  " + hitBoxHullFront.Health + "~Hull Back   " + hitBoxHullBack.Health + "~Hull Left   " + hitBoxHullLeft.Health + "~Hull Right  " + hitBoxHullRight.Health +
                 "~Sail Front  " + hitBoxSailFront.Health + "~Sail Middle " + hitBoxSailMiddle.Health + "~Sail Back   " + hitBoxSailBack.Health, 100, 100, TextAtt.TopLeft);
             GM.textM.Draw(FontBank.arcadePixel, "Crew: " + CrewNum, 150, 50, TextAtt.TopRight);
+            GM.textM.Draw(FontBank.arcadePixel, "Hull Repair: " + hullRepMats, 700, 100, TextAtt.TopRight);
+            GM.textM.Draw(FontBank.arcadePixel, "Sail Repair: " + sailRepMats, 700, 110, TextAtt.TopRight);
             GM.textM.Draw(FontBank.arcadePixel, "Rain: " + GameSetup.WeatherController.RainAmount, 150, 65, TextAtt.TopRight);
             GM.textM.Draw(FontBank.arcadePixel, "Round shot remaining: " + roundShotNum, 150, 80);
             

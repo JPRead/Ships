@@ -39,6 +39,10 @@ namespace Template
                 //Set property
                 System.Reflection.PropertyInfo property = GM.active.GetType().GetProperty(propertyName);
                 property.SetValue(GM.active, (int)property.GetValue(GM.active, null) + (pos * mul), null);
+                if((int)property.GetValue(GM.active, null) < 0)
+                {
+                    property.SetValue(GM.active, 0, null);
+                }
             }
         }
     }

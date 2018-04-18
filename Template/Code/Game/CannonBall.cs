@@ -39,9 +39,9 @@ namespace Template.Game
             Position = fireFrom;
             shotType = type;
             this.owner = owner;
-
-            //Find sprite to render
             GM.engineM.AddSprite(this);
+            Friction = 0.25f;
+
             switch (type)
             {
                 case 0:
@@ -67,9 +67,7 @@ namespace Template.Game
                     Wash = Color.DarkGray;
                     break;
             }
-            Friction = 0.25f;
-
-            //Face along firDir
+            
             RotationHelper.FaceDirection(this, fireDir, DirectionAccuracy.free, 0);
             Position += RotationHelper.MyDirection(this, 0) * 50;
 
@@ -106,7 +104,6 @@ namespace Template.Game
         {
             if (splash)
             {
-                //Splash
                 int maxParts = 8;
                 int minParts = 4;
 
@@ -141,12 +138,10 @@ namespace Template.Game
         {
             if (Visible && velApplied == false)
             {
-                //Add velocity
                 RotationHelper.VelocityInCurrentDirection(this, 750, 0);
 
                 Velocity += new Vector3(GM.r.FloatBetween(-20, 20), GM.r.FloatBetween(-20, 20), 0);
-
-                //Play sound effect
+                
                 GM.audioM.PlayEffect("shoot");
 
                 //Release smoke
@@ -168,12 +163,13 @@ namespace Template.Game
         {
             if (hit is HitBox && GM.r.FloatBetween(0, 1) > 0.75)
             {
-                HitBox hitBox = (HitBox)hit; //Get owner of hitbox
+                HitBox hitBox = (HitBox)hit;
+                //If the HitBox is a child, get its owner
                 if (hitBox.Owner is HitBox)
                 {
                     hitBox = (HitBox)hitBox.Owner;
                 }
-
+                //Check if the HitBox's ship is the ship that fired this CannonBall
                 if (hitBox.Owner == owner)
                 {
                     CollisionAbandonResponse = true;

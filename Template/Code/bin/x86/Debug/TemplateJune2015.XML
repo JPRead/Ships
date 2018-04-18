@@ -9,6 +9,91 @@
             Viewport for the player
             </summary>
         </member>
+        <member name="F:Template.Game.PreSetup.startButton">
+            <summary>
+            Button used to start the game
+            </summary>
+        </member>
+        <member name="F:Template.Game.PreSetup.playerMoney">
+            <summary>
+            Remaining money for the player
+            </summary>
+        </member>
+        <member name="F:Template.Game.PreSetup.playerRoundShotNum">
+            <summary>
+            How much round shot the player will have
+            </summary>
+        </member>
+        <member name="F:Template.Game.PreSetup.playerGrapeShotNum">
+            <summary>
+            How much grape shot the player will have
+            </summary>
+        </member>
+        <member name="F:Template.Game.PreSetup.playerCarcassShotNum">
+            <summary>
+            How much carcass shot the player will have
+            </summary>
+        </member>
+        <member name="F:Template.Game.PreSetup.playerBarShotNum">
+            <summary>
+            How much bar shot the player will have
+            </summary>
+        </member>
+        <member name="F:Template.Game.PreSetup.playerGrappleShotNum">
+            <summary>
+            How much grapple shot the player will have
+            </summary>
+        </member>
+        <member name="F:Template.Game.PreSetup.playerHullRepairMats">
+            <summary>
+            How much hull repair materials the player will have
+            </summary>
+        </member>
+        <member name="F:Template.Game.PreSetup.playerSailRepairMats">
+            <summary>
+            How much sail repair materials the player will have
+            </summary>
+        </member>
+        <member name="F:Template.Game.PreSetup.opponentMoney">
+            <summary>
+            Remaining money for the opponent
+            </summary>
+        </member>
+        <member name="F:Template.Game.PreSetup.opponentRoundShotNum">
+            <summary>
+            How much round shot the opponent will have
+            </summary>
+        </member>
+        <member name="F:Template.Game.PreSetup.opponentGrapeShotNum">
+            <summary>
+            How much grape shot the opponent will have
+            </summary>
+        </member>
+        <member name="F:Template.Game.PreSetup.opponentCarcassShotNum">
+            <summary>
+            How much carcass shot the opponent will have
+            </summary>
+        </member>
+        <member name="F:Template.Game.PreSetup.opponentBarShotNum">
+            <summary>
+            How much bar shot the opponent will have
+            </summary>
+        </member>
+        <member name="F:Template.Game.PreSetup.opponentGrappleShotNum">
+            <summary>
+            How much grapple shot the opponent will have
+            </summary>
+        </member>
+        <member name="F:Template.Game.PreSetup.opponentHullRepairMats">
+            <summary>
+            How much hull repair materials the opponent will have
+            </summary>
+        </member>
+        <member name="F:Template.Game.PreSetup.opponentSailRepairMats">
+            <summary>
+            How much sail repair materials the opponent will have
+            </summary>
+        </member>
         <member name="M:Template.Game.PreSetup.#ctor">
             <summary>
             Sets up all the initial values for the game
@@ -1099,6 +1184,16 @@
         <member name="F:Template.Ship.grappleShotNum">
             <summary>
             Grapple shot remaining
+            </summary>
+        </member>
+        <member name="F:Template.Ship.hullRepMats">
+            <summary>
+            Materials remaining to repair the hull
+            </summary>
+        </member>
+        <member name="F:Template.Ship.sailRepMats">
+            <summary>
+            Materials remaining to repair the sails
             </summary>
         </member>
         <member name="M:Template.Ship.#ctor">

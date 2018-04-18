@@ -70,7 +70,6 @@ namespace Template.Game
 
             //Init values
             enabled = startEnabled;
-
             priTooltip = primaryTooltip;
             secTooltip = secondaryTooltip;
             priShortcut = primaryShortcut;

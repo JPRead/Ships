@@ -148,6 +148,14 @@ namespace Template
         /// Grapple shot remaining
         /// </summary>
         internal int grappleShotNum;
+        /// <summary>
+        /// Materials remaining to repair the hull
+        /// </summary>
+        internal float hullRepMats;
+        /// <summary>
+        /// Materials remaining to repair the sails
+        /// </summary>
+        internal float sailRepMats;
 
         internal int CrewNum
         {
@@ -338,7 +346,7 @@ namespace Template
                 int repairNum = 0;
                 for (int i = 0; i <= 6; i++)
                 {
-                    if (hitBoxArray[i].Health < 100 || hitBoxArray[i].IsBurning)
+                    if (hitBoxArray[i].Health < 100 && ((hitBoxArray[i].DamageType == 0 && hullRepMats > 0) || (hitBoxArray[i].DamageType == 1 && sailRepMats > 0)) || hitBoxArray[i].IsBurning)
                     {
                         repairArray[repairNum] = hitBoxArray[i];
                         repairNum++;
@@ -369,6 +377,11 @@ namespace Template
                         {
                             repairArray[i].IsBurning = false;
                         }
+
+                        if(repairArray[i].DamageType == 0)
+                            hullRepMats -= (repairPerPart*0.5f);
+                        else
+                            sailRepMats -= (repairPerPart*(3/2));
                     }
                 }
             }
