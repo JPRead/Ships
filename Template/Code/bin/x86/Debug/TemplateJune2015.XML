@@ -573,6 +573,11 @@
             Queue of points to move to.
             </summary>
         </member>
+        <member name="F:Template.Player.arrowQueue">
+            <summary>
+            Queue for displaying the path
+            </summary>
+        </member>
         <member name="M:Template.Player.#ctor(Microsoft.Xna.Framework.Vector2)">
             <summary>
             Contains functions for the player to give orders
@@ -1303,7 +1308,7 @@
             <param name="rect">Dimensions for button</param>
             <param name="text">Text to display within the button</param>
         </member>
-        <member name="M:Template.TextButton.display">
+        <member name="M:Template.TextButton.Display">
             <summary>
             Code to run each tick
             </summary>

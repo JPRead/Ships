@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.GamerServices;
-using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
 using Engine7;
 using Template.Game;
-using Template.Title;
 
 namespace Template
 {
@@ -116,9 +107,9 @@ namespace Template
         /// Queue of points to move to.
         /// </summary>
         private Queue<Point> movePath;
-        ///// <summary>
-        ///// True if right mouse button was held in the previous tick
-        ///// </summary>
+        /// <summary>
+        /// Queue for displaying the path
+        /// </summary>
         private ArrowQueue arrowQueue;
 
         internal Cursor Cursor
@@ -327,14 +318,13 @@ namespace Template
         private void Tick()
         {
             //DEBUG
-            GM.textM.Draw(FontBank.arcadePixel, 
-                "Hull Front  " + hitBoxHullFront.Health + "~Hull Back   " + hitBoxHullBack.Health + "~Hull Left   " + hitBoxHullLeft.Health + "~Hull Right  " + hitBoxHullRight.Health +
-                "~Sail Front  " + hitBoxSailFront.Health + "~Sail Middle " + hitBoxSailMiddle.Health + "~Sail Back   " + hitBoxSailBack.Health, 100, 100, TextAtt.TopLeft);
-            GM.textM.Draw(FontBank.arcadePixel, "Crew: " + CrewNum, 150, 50, TextAtt.TopRight);
-            GM.textM.Draw(FontBank.arcadePixel, "Hull Repair: " + hullRepMats, 700, 100, TextAtt.TopRight);
-            GM.textM.Draw(FontBank.arcadePixel, "Sail Repair: " + sailRepMats, 700, 110, TextAtt.TopRight);
-            GM.textM.Draw(FontBank.arcadePixel, "Rain: " + GameSetup.WeatherController.RainAmount, 150, 65, TextAtt.TopRight);
-            GM.textM.Draw(FontBank.arcadePixel, "Round shot remaining: " + roundShotNum, 150, 80);
+            //GM.textM.Draw(FontBank.arcadePixel, 
+            //    "Hull Front  " + hitBoxHullFront.Health + "~Hull Back   " + hitBoxHullBack.Health + "~Hull Left   " + hitBoxHullLeft.Health + "~Hull Right  " + hitBoxHullRight.Health +
+            //    "~Sail Front  " + hitBoxSailFront.Health + "~Sail Middle " + hitBoxSailMiddle.Health + "~Sail Back   " + hitBoxSailBack.Health, 100, 100, TextAtt.TopLeft);
+            GM.textM.Draw(FontBank.arcadePixel, "Crew: " + CrewNum + 
+                "~~Ammunition:~    Round: " + roundShotNum + "~    Bar: " + barShotNum + "~    Carcass: " + carcassShotNum + "~    Grape: " + grapeShotNum + "~    Grapple: " + grappleShotNum +
+                "~~Repair Materials:~    Hull: " + (int)hullRepMats + "~    Sail: " + (int)sailRepMats, 
+                100, 50, TextAtt.TopLeft);
             
             //Sinking bar
             UISinkBarTop.SY = sinkAmount * 0.1f;

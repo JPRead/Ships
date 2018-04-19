@@ -23,10 +23,10 @@ namespace Template
                 pos = 1;
                 SetText("+");
             }
-            UpdateCallBack += tick;
+            UpdateCallBack += Tick;
         }
 
-        private void tick()
+        private void Tick()
         {
             if (PressedLeft())
             {

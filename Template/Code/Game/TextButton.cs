@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.GamerServices;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
+﻿using Microsoft.Xna.Framework;
 using Engine7;
 using Template.Game;
 
@@ -25,13 +15,13 @@ namespace Template
         public TextButton(Rectangle rect, string text) : base(rect, true)
         {
             displayText = text;
-            UpdateCallBack += display;
+            UpdateCallBack += Display;
         }
 
         /// <summary>
         /// Code to run each tick
         /// </summary>
-        private void display()
+        private void Display()
         {
             GM.textM.Draw(FontBank.arcadePixel, displayText, Centre2D.X, Centre2D.Y, TextAtt.Centred);
         }

@@ -1,15 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Content;
-using Microsoft.Xna.Framework.GamerServices;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
+﻿using Microsoft.Xna.Framework;
 using Engine7;
-using Template.Title;
 
 namespace Template.Game
 {
@@ -25,9 +15,7 @@ namespace Template.Game
             Position2D = new Vector2(x, y);
             new IncrementButton(new Vector2(x + 20, y -20), true, ResourceName);
             new IncrementButton(new Vector2(x + 20, y + 20), false, ResourceName);
-
             
-
             GM.engineM.AddSprite(this);
             UpdateCallBack += Tick;
         }
