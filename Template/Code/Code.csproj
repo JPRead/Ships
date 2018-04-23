@@ -131,7 +131,6 @@
     <Compile Include="Setup loading and storage\BasicSetup.cs" />
     <Compile Include="Setup loading and storage\Cursor.cs" />
     <Compile Include="Game\GameSetup.cs" />
-    <Compile Include="Setup loading and storage\ExtraMessageTypes.cs" />
     <Compile Include="Setup loading and storage\StartupAndShutdown.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Game\Ship.cs" />

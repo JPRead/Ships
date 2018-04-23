@@ -1001,31 +1001,6 @@
             </summary>
             <param name="newPosition">position to set cursor</param>
         </member>
-        <member name="T:Template.ExtraMessageTypes">
-            <summary>
-            defines a message types
-            </summary>
-        </member>
-        <member name="F:Template.ExtraMessageTypes.BulletDestroyed">
-            <summary>
-            no message data sent when a player bullet is destroyed
-            </summary>
-        </member>
-        <member name="F:Template.ExtraMessageTypes.PlayerDestroyed">
-            <summary>
-            no message data sent when player is destroyed
-            </summary>
-        </member>
-        <member name="F:Template.ExtraMessageTypes.EnemyDestroyed">
-            <summary>
-            object value contains an integer for score value of enemy
-            </summary>
-        </member>
-        <member name="F:Template.ExtraMessageTypes.NameEntryComplete">
-            <summary>
-            when score is finished, initials are stored in Object which needs casting to (string)
-            </summary>
-        </member>
         <member name="F:Template.Ship.sailAmount">
             <summary>
             0 stopped, 1 half speed, 2 full speed
